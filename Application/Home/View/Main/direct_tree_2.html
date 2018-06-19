@@ -1,0 +1,241 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7 ie6 ie" lang="en" xml:lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js not-ready lt-ie10 lt-ie9 lt-ie8 ie7 ie" lang="en" xml:lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js not-ready lt-ie10 lt-ie9 ie8 ie" lang="en" xml:lang="en"><![endif]-->
+<!--[if IE 9 ]><html class="no-js lt-ie10 ie9 ie" lang="en" xml:lang="en"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="no-js" lang="en" xml:lang="en"><!--<![endif]-->
+
+
+    <head>
+    <include file="Public/head"/>
+</head>
+
+<body >
+    <!--===header start===-->
+    <!-- HEADER -->
+    <header style="background:#000;">
+        <include file="Public/header"/>
+    </header>
+    <!--=== End Header ===-->
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+
+
+        
+        <!-- END RIBBON -->
+        <!-- MAIN CONTENT -->
+        <div id="content">
+            <!-- MAIN top -->  
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <h1 class="page-title" style="color:#F8C84E"><i class="fa-fw fa fa-sitemap"></i>人脉明细</h1>
+                </div>
+            </div>
+            <!--END MAIN top --> 
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="well well-light">              
+                        <div id="TREE_TAB" class="btn-group btn-group-sm">
+                            <button id="OPEN_T" type="button" class="btn btn-default"><i class="fa fa-plus margin-right-10"></i>{$Think.lang.all-open}</button>
+                            <button id="CLOSE_T" type="button" class="btn btn-default"><i class="fa fa-minus margin-right-10"></i>{$Think.lang.all-close}</button>
+<!--                            <span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_0.png" width="35" class="margin-right-10">{$Think.lang.tree-sponsor-member}</span>
+                            <span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_1.png" width="35" class="margin-right-10">{$Think.lang.upgrage-package-1}</span>
+                            <span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_2.png" width="35" class="margin-right-10">{$Think.lang.upgrage-package-2}</span>
+                            <span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_3.png" width="35" class="margin-right-10">{$Think.lang.upgrage-package-3}</span>
+                            <span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_4.png" width="35" class="margin-right-10">{$Think.lang.upgrage-package-4}</span>
+                            <span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_5.png" width="35" class="margin-right-10">{$Think.lang.upgrage-package-5}</span>
+                            <span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_6.png" width="35" class="margin-right-10">{$Think.lang.upgrage-package-6}</span>-->
+                        </div>
+
+
+
+
+                        <div class="tree">
+                            <ul role='tree'>
+
+                                <li class='parent_li' role='treeitem' id="rc_{$Member['id']}">
+                                    <span>
+                                        <!--<img src="__PUBLIC__/Home/Images/C_0.png" class="margin-right-10" width="50px">-->
+                                        <!--<img src="__PUBLIC__/Home/Images/C_{$Member['daili']}.png" class='mr10' width='50px'>-->
+                                        <a onclick="javascript:tree_onoff('{$Member['id']}');">{$Member['email']}-{$Member['username']} <i class='fa fa-lg fa-minus-circle margin-left-20'></i></a></span>
+                                    <ul role='group'></ul>
+                                </li>
+
+                            </ul>
+                        </div><!--.tree-->
+                    </div>             
+                </div>
+            </div>  
+
+        </div><!--END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN PANEL -->
+
+    <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+    Note: These tiles are completely responsive,
+    you can add as many as you like
+    -->
+<include file="Public/top"/>
+
+<!-- END SHORTCUT AREA -->
+<!-- JavaScript -->
+
+<!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+
+<script>
+            $(function(){
+            //nav active setting
+
+            $("nav > ul > li.active").removeClass("active");
+                    $("nav > ul > li.open").removeClass("open");
+                    $("nav > ul > li:eq(3) > ul > li:eq(1)").addClass("active");
+            });</script>
+<!-- MAIN APP JS FILE -->
+
+<!--common-->
+<script>
+            $(function(){
+            //all page common code!!!!! import  
+            pageSetUp();
+            });   </script>        
+
+
+<!--[if IE 7]>
+<script>ie_error('IE7');</script>     
+        <![endif]-->
+<!--[if IE 8]>
+<script>ie_error('IE8');</script>     
+        <![endif]-->
+
+
+
+<script>
+//page script
+            tree_view({$Member['id']});
+            $("#OPEN_T").addClass("active");
+            function tree_view(id) {
+            var parameters = "id=" + id;
+                    //ajax
+                    $.ajax({
+                    type : "POST",
+                            dataType : "JSON",
+                            data : parameters,
+                            url : "{:U('Home/Ajax/leglist_select')}",
+                            success : function(data) {
+                            FuncCallback(data);
+                            },
+                            error : function() {
+                            alert("ERROR!");
+                            }
+                    });
+                    }
+    function FuncCallback(data) {
+    var jsonArr = [];
+            var k = 0;
+            var result;
+            var d_uid;
+            var arrlist;
+            if (!!data){
+    result = data.result;
+            d_uid = data.d_uid;
+            arrlist = data.appay;
+    }
+    if (result == 0)
+    {
+
+
+    for (var i = 0; i < arrlist.length; i++) {
+    var COUNTRY_IMG_PATH = "";
+            if (arrlist[i].d_country != "")
+    {
+    COUNTRY_IMG_PATH = "";
+    }
+
+
+    if (arrlist[i].member_yn == "y") {
+    jsonArr[k++] = "<li class='parent_li' role='treeitem' id='rc_" + arrlist[i].d_id + "'>"
+            jsonArr[k++] = "<span><a onclick='javascript:tree_onoff(\"" + arrlist[i].d_id + "\");'>" + arrlist[i].email +"-"+ arrlist[i].username + "<i class='fa fa-lg fa-minus-circle margin-left-20'></i></a></span>"
+            jsonArr[k++] = "<ul role='group'></ul>"
+            jsonArr[k++] = "</li>"
+    } else {
+    jsonArr[k++] = "<li>"
+            jsonArr[k++] = "<span>" + arrlist[i].email + "-"+ arrlist[i].username + "</span>"
+            jsonArr[k++] = "</li>"
+    }
+    }
+
+    }
+    $("#rc_" + d_uid + " > ul").empty().append(jsonArr.join(''));
+            //open
+            //$("#rc_"+d_uid+" > ul > li").show("fast");
+            //$("#rc_"+d_uid+" > span").find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle ml20');
+            nav_page_height();
+            }
+    $(function(){
+
+    $("#OPEN_T").click(function(){
+    $("button").removeClass("active");
+            $(this).addClass("active");
+            $(".tree ul li").show("fast");
+            $(".tree ul li:has(ul) span").find('i').removeClass().addClass('fa fa-lg fa-minus-circle margin-left-20');
+            });
+            $("#CLOSE_T").click(function(){
+    $("button").removeClass("active");
+            $(this).addClass("active");
+            $(".tree > ul ul li").hide("fast");
+            $(".tree ul li:has(ul) span").find('i').removeClass().addClass('fa fa-lg fa-plus-circle margin-left-20');
+            });
+            });
+            function tree_onoff(id) {
+
+            var d_id = id;
+                    var children = $("#rc_" + d_id).find(' > ul > li');
+                    if (children.is(':visible')) {
+            children.hide('fast');
+                    $("#rc_" + d_id + " span a").find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle margin-left-20');
+            }
+            else {
+            tree_view(d_id);
+                    children.show('fast');
+                    $("#rc_" + d_id + " span a").find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle margin-left-20');
+            }
+            }
+</script>
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div><!-- /.modal-content:e -->
+    </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e --> 
+
+
+<script>
+    $(document).ready(function() {
+
+
+    //popup show
+    $('[data-load-remote]').on('click', function(e) {
+    e.preventDefault();
+            var $this = $(this);
+            var remote = $this.data('load-remote');
+            var remote_value = $this.data('load-remote-value');
+            if (remote) {
+    $($this.data('remote-target')).load(remote, remote_value);
+    }
+
+    });
+            //reload detected
+            $('body').on('hidden.bs.modal', '.modal', function () {
+    $(this).removeData('bs.modal');
+            });
+            });
+</script>   
+</body>
+</html>

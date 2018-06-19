@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+<head>
+	<include file="Public/head"/>
+</head>
+<body class="smart-style-1 desktop-detected" style="min-height: 871px;">
+<!--===header start===-->
+		<!-- HEADER -->
+		<header id="header" style="background:#000;">
+			<include file="Public/header"/>
+		</header>
+<!--=== End Header ===-->
+
+		<!-- Left panel : Navigation area -->
+		<aside id="left-panel" style="min-height: 1414px; background: rgb(228, 238, 245);">
+		   <include file="Public/left"/>
+
+		</aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+        
+
+<!-- RIBBON -->
+<div id="ribbon">
+                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="&lt;i class=&#39;text-warning fa fa-warning&#39;&gt;&lt;/i&gt; Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+					<li><i class="fa fa-md fa-fw fa-home"></i>{$Think.lang.public-main}</li><li class="active">{$Think.lang.menu-upgrade}</li>
+				</ol>
+				<!-- end breadcrumb -->
+</div>
+<hr>
+<!-- END RIBBON -->
+
+<!-- MAIN CONTENT -->
+<div id="content">
+<!-- MAIN top -->  
+              <div class="row" style="margin-top:-37px;">
+					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+						<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-shopping-cart"></i>{$Think.lang.menu-upgrade}</h1>
+					</div>
+					
+				</div>
+<!--END MAIN top -->
+<!--top alert 
+                <div class="row">
+                    <div class="col-sm-12">
+                       <div class="well well-light">
+								<a class="close" data-dismiss="alert" href="">×</a>
+								<h4 class="alert-heading"><i class="fa-fw fa  fa-exclamation-triangle"></i>注意</h4>
+								<p>--</p>
+					    </div>
+                    </div>
+                </div>  
+<!--end top alert--> 
+               <div class="row">
+					
+					<div class="col-sm-12">
+					    <div class="well well-light">
+						    <h1>{$Think.lang.upgrage-package-current} :
+								<b>
+									<if condition="$Member['package_type']">
+										<volist name="PackageList" id="ptl" empty="empty">
+											<if condition="$ptl['id'] eq $Member['package_type']"><if condition="$language neq 'zh-cn'">{$ptl['en_title']}<else/>{$ptl['title']}</if></if>
+										</volist>
+										<else/>
+										empty
+									</if>
+								</b>
+							</h1>
+							<h1>{$Think.lang.upgrage-package-price} : <b>{$PriceSub?$PriceSub:0}</b></h1>
+						</div>
+						
+						<div class="well well-light">
+							
+							<h1>{$Think.lang.public-upgrade}, <small>6{$Think.lang.public-package}</small></h1>
+							<div class="row">
+								<volist name="PackageList" id="pl">
+						        <div class="col-xs-12 col-sm-6 col-md-4">
+									<switch name="key">
+										<case value="0"><div class="panel panel-darken pricing-big"></case>
+										<case value="1"><div class="panel panel-purple pricing-big"></case>
+										<case value="2"><div class="panel panel-greenLight pricing-big"></case>
+										<case value="3"><div class="panel panel-primary pricing-big"></case>
+										<case value="4"><div class="panel panel-red pricing-big"></case>
+										<case value="5"><div class="panel panel-orange pricing-big"></case>
+										<default /><div class="panel panel-orange pricing-big">
+									</switch>
+						                <div class="panel-heading">
+						                    <h3 class="panel-title"><if condition="$language neq 'zh-cn'">{$pl['en_title']}<else/>{$pl['title']}</if></h3>
+						                </div>
+						                <div class="panel-body no-padding text-align-center">
+						                    <div class="coin_bg" style="margin-top:-10px;">
+						                        <h1 style="color:#333;">
+						                            <strong>${$pl['price']}</strong></h1>
+						                    </div>
+											<div class="price-features" style="background:#fff;">
+												<ul class="list-unstyled text-align-center">
+										          <li><i class="fa fa-check text-success"></i> {$Think.lang.public-price} <strong> ${$pl['price']}</strong></li>
+												  <li><i class="fa fa-check text-success"></i> LMC <strong> L{$pl['dgc_price']}</strong></li>
+												  <li><i class="fa fa-check text-success"></i> BV <strong> {$pl['bv_price']}</strong></li>
+										        </ul>
+											</div>
+						                </div>
+						                <div class="panel-footer text-align-center">
+										    <a href="#popup" data-toggle="modal" data-load-remote="{:U('Home/Main/pop_upgrade',array('id'=>$pl['id'],'language'=>$language))}" data-load-remote-value="P_TYPE=A" data-remote-target="#popup .modal-content" class="btn btn-primary btn-block" style="width:50%; margin:0 auto; background:#333;">{$Think.lang.public-upgrade} <span> now!</span></a>
+						                </div>
+						            </div>
+						        </div>
+								</volist>
+				    		</div>
+						</div>
+						
+					</div>
+					
+				</div>
+
+
+</div><!--END MAIN CONTENT -->
+</div>
+		<!-- END MAIN PANEL -->
+
+		<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+		Note: These tiles are completely responsive,
+		you can add as many as you like
+		-->
+<include file="Public/top"/>
+        
+<!-- END SHORTCUT AREA -->
+    <!-- JavaScript -->
+    
+    <!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+
+<script>
+   $(function(){
+	 //nav active setting
+	 
+	 $("nav > ul > li.active").removeClass("active");
+	 $("nav > ul > li.open").removeClass("open");
+     $("nav > ul > li:eq(6) > ul > li:eq(0)").addClass("active");
+	 
+	   
+    });
+</script>
+		<!-- MAIN APP JS FILE -->
+        <!--common-->
+   <script>
+   $(function(){
+	 //all page common code!!!!! import  
+	 pageSetUp();
+	   
+    });
+   </script>
+	<!--[if IE 7]>
+	<script>ie_error('IE7');</script>
+	<![endif]-->
+	<!--[if IE 8]>
+	<script>ie_error('IE8');</script>
+	<![endif]-->
+<script>
+
+</script>
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div><!-- /.modal-content:e -->
+  </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e -->
+
+
+
+<script>
+$(document).ready(function() {
+
+
+        //popup show
+          $('[data-load-remote]').on('click',function(e) {
+          e.preventDefault();
+          var $this = $(this);
+          var remote = $this.data('load-remote');
+	      var remote_value = $this.data('load-remote-value');
+          if(remote) {
+            $($this.data('remote-target')).load(remote,remote_value);
+          }
+
+          });
+
+ //reload detected
+ $('body').on('hidden.bs.modal', '.modal', function () {
+  $(this).removeData('bs.modal');
+});
+
+});
+</script>
+
+
+<div id="divSmallBoxes"></div><div id="divMiniIcons"></div><div id="divbigBoxes"></div>
+</body>
+</html>

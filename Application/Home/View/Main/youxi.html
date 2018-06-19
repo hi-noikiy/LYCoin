@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+    <head>
+    <include file="Public/head"/>
+</head>
+<body>
+    <!--===header start===-->
+    <!-- HEADER -->
+    <header style="background:#000;">
+        <include file="Public/header"/>
+    </header>
+    <div id="main" role="main">
+
+        <div id="content">
+       
+            <div class="row">
+                
+                <div class="col-sm-12"  >
+                    <div class="well well-light" style='background:goldenrod;border:1px solid gold'>
+                        <h2 >
+                            <b>
+                                {$settings.name} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  class="btn btn-primary" href="{:U('Home/Main/tzpan1')}" style="font-size: 18px;">我要投资/复投</a>
+
+                             
+                            </b>
+                        </h2>
+                        <h3>本人投资金额 :<b>{$member.pan1}</b> 本盘资金池 : <b>{$sumtz}</b>
+                        </h3>
+<!--                        <h2>当日分红比例 : <b>{$settings.todayfh}</b></h2>-->
+                    </div>
+                    
+                    
+                     <script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+
+                    
+                </div>
+
+
+            </div>
+
+        </div>
+<include file="Public/foot"/>
+
+    </div>
+    
+</div>
+<!--<include file="Public/top"/>-->
+
+<!-- END SHORTCUT AREA -->
+<!-- JavaScript -->
+
+<!-- JQUERY SCRIPT -->
+<!--<include file="Public/script"/>-->
+
+
+<script>
+    $(function() {
+        //nav active setting
+
+        $("nav > ul > li.active").removeClass("active");
+        $("nav > ul > li.open").removeClass("open");
+        $("nav > ul > li:eq(6) > ul > li:eq(0)").addClass("active");
+
+
+    });
+</script>
+<script>
+
+</script>
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div><!-- /.modal-content:e -->
+    </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e -->
+
+
+
+</body>
+</html>

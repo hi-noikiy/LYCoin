@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<head>
+<include file="Public/head"/>
+
+</head>
+
+<body >
+    <header style="background:#000;">
+        <include file="Public/header"/>
+    </header>
+    <link href="__PUBLIC__/Home/tree/jquery.treemenu.css" rel="stylesheet" type="text/css">
+    <style>
+*{list-style:none;border:none;}
+body{font-family:Arial;}
+.tree {  color:#46CFB0;width:100%;}
+.tree li,
+.tree li > a,
+.tree li > span {
+    padding: 4pt;
+    border-radius: 4px;
+}
+
+.tree li a {
+   color:#46CFB0;
+    text-decoration: none;
+    line-height: 20pt;
+    border-radius: 4px;
+}
+
+.tree li a:hover {
+    background-color: #34BC9D;
+    color: #fff;
+}
+
+.active {
+    background-color: #34495E;
+    color: white;
+}
+
+.active a {
+    color: #fff;
+}
+
+.tree li a.active:hover {
+    background-color: #34BC9D;
+}
+</style>
+    <div id="main" role="main">
+
+        <div id="content">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <h1 class="page-title" style="color:#F8C84E"><i class="fa-fw fa fa-sitemap"></i>人脉明细</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="well well-light">              
+
+                        <ul class="tree">
+                            <li><span>Category</span>
+                                {$shuxingjiegou}
+<!--                                <ul>
+                                   
+                                                <li><a href="#">{$shuxingjiegou}</a></li>-->
+<!--                                    <li><a href="#">jQuery</a>
+                                        <ul>
+                                            <li><a href="#">jQuery</a></li>
+                                            <li><a href="#">jQuery UI</a></li>
+                                            <li><a href="#">jQuery Mobile</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">JavaScript</a>
+                                        <ul>
+                                            <li><a href="#">AngularJS</a></li>
+                                            <li><a href="#">React</a></li>
+                                            <li><a href="#">Backbone</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#suits">Golang</a></li>-->
+<!--                                </ul>
+                            </li>-->
+                        </ul>
+
+
+
+                    </div>             
+                </div>
+            </div>  
+
+        </div><!--END MAIN CONTENT -->
+    </div>
+</div>
+<script src="__PUBLIC__/Home/tree/jquery-1.11.2.min.js"></script> 
+<script src="__PUBLIC__/Home/tree/jquery.treemenu.js"></script> 
+<script>
+    $(function () {
+        $(".tree").treemenu({delay: 300}).openActive();
+    });
+</script>
+</body>
+</html>

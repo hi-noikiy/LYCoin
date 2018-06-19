@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en"><!--<![endif]-->
+
+<head>
+    <title>{$Think.config.DEFAULT_WEB_TITLE}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    
+    
+		<link rel="shortcut icon" href="__PUBLIC__/Public/images/favicon.ico">
+		<link rel="icon" href="__PUBLIC__/Public/images/favicon.ico" type="image/x-icon">
+
+    <!-- Basic CSS -->
+	<link rel="stylesheet" href="__PUBLIC__/Home/Css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/Css/font-awesome.min.css">
+
+    <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+	<link rel="stylesheet" type="text/css" media="screen" href="__PUBLIC__/Home/Css/backoffice_css.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="__PUBLIC__/Home/Css/lockscreen.css">
+    <!--[if lt IE 9]>
+	<script src="__PUBLIC__/Home/Js/html5shiv.js"></script>
+	<script src="__PUBLIC__/Home/Js/respond.min.js"></script>
+	<![endif]-->
+    
+</head>
+
+<body>
+<div id="main" role="main">
+
+			<!-- MAIN CONTENT -->
+
+			<form class="lockscreen animated flipInY" name="trpassForm" action="{:U('Home/Lock/lock')}" method="post">
+				<div class="logo">
+					<a href="{:U('Home/Main/index')}">LIMIN COIN</a>
+				</div>
+				<div>
+					<div>
+						<h1>{$Member['username']} <small><i class="fa fa-lock text-muted"></i> &nbsp; {$Think.lang.pop-user-pass}</small></h1>
+						<p class="text-muted">
+							{$Think.lang.user-new-pay}
+						</p>
+
+						<div class="input-group">
+							<input class="form-control" type="password" name="paypass" id="password" placeholder=" {$Think.lang.pop-user-pass}" required itemname='Transaction Password'>
+							<span class="input-group-addon">
+									<i class="fa fa-lock"></i>
+							</span>
+						</div>
+                        <div class="input-group margin-top-10">
+							<input class="form-control" type="password" name="repaypass" id="passwordConfirm" placeholder="{$Think.lang.user-re-pay}" required itemname='Confirm Transaction Password'>
+							<div class="input-group-btn">
+								<input type="hidden" name="language" value="{$language}">
+								<input class="btn btn-primary" type="submit" id="submit" value="{$Think.lang.user-save}">
+							</div>
+                            
+						</div>
+					</div>
+
+				</div>
+				<p class="font-xs margin-top-5">
+					2015 © LIMIN COIN. All Rights Reserved.
+
+				</p>
+			</form>
+
+</div>
+
+   
+</body>
+</html>

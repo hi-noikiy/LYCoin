@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+        <head>
+        <include file="Public/head1"/>
+</head>
+<body>
+        <!--top-->
+        <div class="projectd_f">
+                <div class="projectd_f_in">
+                        <a href="javascript:;" onClick="javascript :history.back(-1);"><img src="__PUBLIC__/Home/shouji/images/jian.png"/></a>
+                        {$Think.lang.fankuijilu}
+                </div>
+        </div>
+        <!--<div class="occupy_f2"></div>-->
+        <div class="not">
+                <div class="box">
+                        <ul>
+                                <volist name="touzi_list" id="nl">
+                                        <a href="{:U('Home/Main/kefudetail',array('id'=>$nl['id']))}"><li>{$nl['title']}</li></a>
+
+
+                                </volist>
+
+                        </ul>
+                </div>
+        </div>
+
+        <div class="pagination pull-right page">
+                {$page}
+        </div>
+
+<include file="Public/footer"/>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$Think.lang.a1}</title>
+<meta name="keywords" content="{$Think.lang.a1}" />
+<meta name="description" content="{$Think.lang.a1}" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link href="__PUBLIC__/Home/index/head.css"  rel="stylesheet" media="screen" type="text/css" />
+<link href="__PUBLIC__/Home/index/main.css"  rel="stylesheet" media="screen" type="text/css" />
+<link href="__PUBLIC__/Home/index/foot.css"  rel="stylesheet" media="screen" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Home/index/jquery.js" ></script>
+<!--[if IE 6]>
+<script type="text/javascript" src="DD_belatedPNG.js" ></script>
+<script type="text/javascript">
+	DD_belatedPNG.fix('*');
+</script>
+<![endif]-->
+
+
+<script src="__PUBLIC__/Home/index/banner.js"  type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+<body>
+<div class="loading"> <img src="__PUBLIC__/Home/index/loading.gif"  width="32" height="32"> </div>
+﻿<script language="javascript" type="text/javascript" src="__PUBLIC__/Home/index/cmsajax2.js" ></script>
+
+<!--top-->
+<div class="header w1213 wrap">
+<div class="col_1 logo w425" style="width:370px;">
+	<a href="{:U('Home/Index/index',array('language'=>$language))}" ><img src="__PUBLIC__/Home/index/enlogo.png"  /></a>
+	<!--<p><img src="/templets/enimg/top.jpg" style="width: 140px;"></p>-->
+</div>
+<div class="col_2 header-main w788" style="width:830px;">
+<!--版本选择-->
+<div class="header_website"><b class="header_mfdy">
+                <if condition="$msg eq 1">
+                        <a href="{:U('Home/Main/index',array('language'=>$language))}" >{$Think.lang.a41}</a>
+                        <a href="{:U('Home/Index/out',array('language'=>$language))}" >{$Think.lang.tuichu}</a>
+                        
+                        <else/>
+                        <a href="{:U('Home/Index/login',array('language'=>$language))}" >{$Think.lang.a2}</a>
+                </if>
+                
+        </b><a href="{:U('Home/Index/index',array('language'=>'zh-cn'))}" >{$Think.lang.ch}</a><span>|</span><a href="{:U('Home/Index/index',array('language'=>'en-us'))}" > {$Think.lang.en} </a></div>
+<!--版本选择-->
+
+<!--导航栏目-->
+<div class="nav">
+<ul>
+
+
+<li><a href="{:U('Home/Index/index',array('language'=>$language))}" >{$Think.lang.shouye}</a>
+	
+</li>
+<li><a href="{:U('Home/Index/index4',array('language'=>$language))}" >{$Think.lang.a3}</a>
+	
+</li>
+<li><a href="{:U('Home/Index/index2',array('language'=>$language))}" >{$Think.lang.a4}</a>
+	
+</li>
+<li><a href="{:U('Home/Index/news',array('language'=>$language))}" >{$Think.lang.han139}</a>
+	
+</li>
+<li><a href="{:U('Home/Index/index6',array('language'=>$language))}" >{$Think.lang.a6}</a>
+	
+</li>
+        <li><a href="{:U('Home/Index/index5',array('language'=>$language))}" >{$Think.lang.a5}</a>
+	
+</li>
+<li><a href="{:U('Home/Index/index7',array('language'=>$language))}" >{$Think.lang.a7}</a>
+	
+</li>	
+
+	
+
+
+</ul>
+
+	
+
+<div class="clear"></div>
+</div>
+<!--导航栏目-->
+
+
+<style>
+.nav li{ position: relative;}
+.nav ul.navN{display:none; border-top:1px solid #81603b; width: 110px;  }
+.nav ul.navN em{ background: url("__PUBLIC__/Home/index/sj_icon2.png") no-repeat top center ; width: 20px; height: 20px; position: absolute; top: -4px; left: 38%;}
+.nav li:hover ul.navN{display:block; position:absolute; z-index:999999;  text-align: left; line-height: 36px; top:20px;  background: #333; margin-left: -24px;width: 134px;}
+.nav li:hover ul.navN li{ border-right:none; font-size: 14px; padding:0px; margin:0px;width: 100%;text-indent: 1.5rem;}
+.nav li:hover ul.navN li:hover{background: #996e43;}
+.nav li:hover ul.navN li a{color: #fff; display: block;height: 100%;width: 100%;}
+.nav li:hover ul.navN li a:hover{color: #fff;background: #996e43;}
+
+</style>
+</div>
+<div class="clear"></div>
+</div>
+<!--top-->

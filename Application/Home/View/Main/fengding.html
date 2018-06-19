@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+    <head>
+    <include file="Public/head"/>
+</head>
+<body>
+    <!--===header start===-->
+    <!-- HEADER -->
+        <include file="Public/header"/>
+    <div id="main" role="main">
+
+
+        <!-- MAIN CONTENT -->
+        <div id="content">
+            <div class="row">
+                <div class="col-sm-12 col-md-1"></div>
+                <div class="col-xs-12 col-sm-12 col-md-10">
+                    <h1 class="page-title txt-color-black bold" style='color:#518BD5'>   {$Think.lang.han126}</h1>
+                </div>
+                <div class="col-sm-12 col-md-1"></div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-sm-12 col-md-1"></div>
+                <div class="table-responsive mt20 col-sm-12 col-md-10 ">
+
+                    <table id="dt_basic" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr   class="danger">
+                                <th class="text-center" style="background:#518BD5">{$Think.lang.bianhao}</th>
+                                <th class="text-center" style="background:#518BD5">{$Think.lang.public-date}</th>
+                                <th class="text-center" style="background:#518BD5">{$Think.lang.han41}</th>
+                                <th class="text-center" style="background:#518BD5">{$Think.lang.han37}</th>
+                                <!--<th class="text-center" style="background:#518BD5">{$Think.lang.han67}</th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="touzi_list" id="oil" >
+                            <tr   class="active">
+                                <td class="text-center">{$count-$indexpage-$key}</td>
+                                
+                                <td class="text-center" >{$oil['ctime']}</td>
+                                <td class="text-center" >{$oil['email']}</td>
+                                <td class="text-center">{$oil['money']}</td>
+                                <!--<td class="text-center">{$oil['dengji']}-->
+                            
+
+                            <!--</td>-->
+                            <!--<td class="text-center">{$oil['utime']}</td>-->
+
+                            </tr>
+                        </volist>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                        <notempty name="count_status">
+                            <div class="pagination pull-right page">
+                                {$page}
+                            </div>
+                            <else/>
+                            <ul class="pagination pull-right">
+                                <li class="first disabled"><a href="#">{$Think.lang.public-index-page}</a></li>
+                                <li class="prev disabled"><a href="#">{$Think.lang.public-pre-page}</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li class="next disabled"><a href="#">{$Think.lang.public-next-page}</a></li>
+                                <li class="last disabled"><a href="#">{$Think.lang.public-last-page}</a></li>
+                            </ul>
+                        </notempty>
+
+                        </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div> 
+                <div class="col-sm-12 col-md-1"></div>
+            </div>
+
+
+        </div>
+
+    </div>
+<include file="Public/foot"/>
+
+</div>
+
+</div>
+
+<script>
+    $(function () {
+        //nav active setting
+
+        $("nav > ul > li.active").removeClass("active");
+        $("nav > ul > li.open").removeClass("open");
+        $("nav > ul > li:eq(6) > ul > li:eq(0)").addClass("active");
+
+
+    });
+</script>
+<!-- MAIN APP JS FILE -->
+<!--common-->
+<script>
+    $(function () {
+        //all page common code!!!!! import  
+        pageSetUp();
+
+    });
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+
+
+        //popup show
+        $('[data-load-remote]').on('click', function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            var remote = $this.data('load-remote');
+            var remote_value = $this.data('load-remote-value');
+            if (remote) {
+                $($this.data('remote-target')).load(remote, remote_value);
+            }
+
+        });
+
+        //reload detected
+        $('body').on('hidden.bs.modal', '.modal', function () {
+            $(this).removeData('bs.modal');
+        });
+
+    });
+</script>
+
+
+<div id="divSmallBoxes"></div><div id="divMiniIcons"></div><div id="divbigBoxes"></div>
+<script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+<script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+<script src="https://img.hcharts.cn/highcharts/themes/grid-light.js"></script>  
+
+</body>
+</html>

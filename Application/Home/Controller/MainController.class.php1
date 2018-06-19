@@ -1,0 +1,2341 @@
+<?php
+namespace Home\Controller;
+use Think\Controller;
+class MainController extends CommonController {
+	
+	public function index(){
+		$Member = session("MemberID");
+		$this->Member = $Member;
+		$where = array("delete"=>0,"member_id"=>$Member['id']);
+		$where["_string"] = "type in (5,6,8,9)";
+		$this->OrderInfoRelation = D("OrderInfoRelation")->where($where)->order('id desc')->relation(true)->limit(5)->select();
+		$this->MemberList = D("MemberCountryRelation")->where(array("delete"=>0))->order("id desc")->relation(true)->limit(20)->select();
+		$this->PMemberList = M("Member")->where(array("delete"=>0,"r_id"=>$Member['id']))->order("id desc")->limit(5)->select();
+		$DigitCoinInfo = M("DigitCoinInfo")->where(array("member_id"=>$Member['id']))->limit(1)->order("id desc")->select();
+		$this->sub_digit = number_format(($DigitCoinInfo[0]['cold_digit_coin'] + $DigitCoinInfo[0]['free_digit_coin']), 2, '.', '');
+		$this->cold_digit_coin = number_format($DigitCoinInfo[0]['cold_digit_coin'], 2, '.', '');
+		$this->free_digit_coin = number_format($DigitCoinInfo[0]['free_digit_coin'], 2, '.', '');
+		$PriceInfo = M("PriceInfo")->where(array("delete"=>0,"member_id"=>$Member['id']))->order("id desc")->limit(1)->select();
+		$PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$Member['id']))->order("id desc")->limit(1)->select();
+		$this->sub_price = number_format(($PriceInfo[0]['s_price'] + $PriceBInfo[0]['b_price']), 2, '.', '');
+		$this->s_price = number_format($PriceInfo[0]['s_price'], 2, '.', '');
+		$this->b_price = number_format($PriceBInfo[0]['b_price'], 2, '.', '');
+		$this->CountMember = M("Member")->where(array("r_id"=>$Member['id']))->count();
+		$this->PackageList = M("PackageType")->where(array("delete"=>0,"status"=>1))->select();
+		$PriceGInfo = M("PriceGInfo")->where(array("delete"=>0,"member_id"=>$Member['id']))->order("id desc")->limit(1)->select();
+		$PriceRInfo = M("PriceRInfo")->where(array("delete"=>0,"member_id"=>$Member['id']))->order("id desc")->limit(1)->select();
+		$this->g_price = number_format($PriceGInfo[0]['stake_price'], 2, '.', '');
+		$this->r_price = number_format($PriceRInfo[0]['new_price'], 2, '.', '');
+		$MemberBv = M("BvInfo")->where(array("member_id"=>$Member['id']))->limit(1)->order("id desc")->select();
+		$this->MemberBv_R = number_format($MemberBv[0]['new_right_price'], 2, '.', '');
+		$this->MemberBv_L = number_format($MemberBv[0]['new_left_price'], 2, '.', '');
+		$LeftBvPriceInfo = M("BvPriceInfo")->where(array("delete"=>0,"member_id"=>$Member['id'],"position"=>0))->order("id desc")->find();
+		$this->LeftBvPriceInfo = number_format($LeftBvPriceInfo['bv_price'], 2, '.', '');
+
+		$NewBvInfo = M("BvInfo")->where(array("member_id"=>$Member['id'],"adddate"=>date('Y-m-d',time())))->sum('dv_price');
+		$NewRecomBonus = M("RecomBonus")->where(array("member_id"=>$Member['id'],"adddate"=>date('Y-m-d',time())))->sum('price');
+		$NewPricePInfo = M("PricePInfo")->where(array("member_id"=>$Member['id'],"adddate"=>date('Y-m-d',time())))->sum('p_price');
+		$this->NewInfo = number_format(($NewBvInfo+$NewRecomBonus+$NewPricePInfo), 2, '.', '');
+
+		$AllBvInfo = M("BvInfo")->where(array("member_id"=>$Member['id']))->sum('dv_price');
+		$AllRecomBonus = M("RecomBonus")->where(array("member_id"=>$Member['id']))->sum('price');
+		$AllPricePInfo = M("PricePInfo")->where(array("member_id"=>$Member['id']))->sum('p_price');
+		$this->AllInfo = number_format(($AllBvInfo+$AllRecomBonus+$AllPricePInfo), 2, '.', '');
+		$RightBvPriceInfo = M("BvPriceInfo")->where(array("delete"=>0,"member_id"=>$Member['id'],"position"=>1))->order("id desc")->find();
+		$this->RightBvPriceInfo = number_format($RightBvPriceInfo['bv_price'], 2, '.', '');
+		if($Member['price_level']!=""){
+			$PriceLevel = M("PriceLevel")->where(array("delete"=>0,"id"=>$Member['price_level']))->find();
+			if($PriceLevel){
+				$PackageType = M("PackageType")->where(array("id"=>$PriceLevel['package_id']))->find();
+				$PackageType['price'] = $PriceLevel["price"];
+				$PriceRInfo = M("PriceRInfo")->where(array("delete"=>0,"member_id"=>$Member['id']))->limit(1)->order("id desc")->select();
+				if($PriceRInfo[0]['new_price']>$PackageType['price']){
+					//重购奖金 重构钱包
+					$DEFAULT_WEB_SET_R_RETURN = (float)C("DEFAULT_WEB_SET_R_RETURN");
+					$PriceRInfo2 = array(
+							"member_id"=>$Member['id'],
+							"title"=>"UPGRADE",
+							"type"=>3,
+							"new_price"=>$PriceRInfo[0]['new_price']-$PackageType['price'],
+							"price"=>$PackageType['price'],
+							"admin_id"=>$Member['id'],
+							"adddate"=>date("Y-m-d",time()),
+							"addtime"=>date("Y-m-d H:i:s",time()),
+					);
+					M("PriceRInfo")->data($PriceRInfo2)->add();
+					/*支付完成 */
+					/*查询bigit价格*/
+					if($DigitPriceResult = M("DigitPrice")->where(array("date"=>date("Y-m-d",time())))->find()){
+						$DigitPrice = $DigitPriceResult["price"];
+					}else{
+						$DigitPrice = C("DEFAULT_WEB_SET_DIGIT")?C("DEFAULT_WEB_SET_DIGIT"):0;
+					}
+					/*下订单，声场Digit币*/
+					$data = array(
+							"price_info_id"=>0,
+							"member_username"=>$Member["username"],
+							"type"=>9,
+							"member_id"=>$Member["id"],
+							"user_id"=>$Member["id"],
+							"title"=>"UPGRADE",
+							"digit_price"=>$PackageType['dgc_price'],
+							"admin_id"=>$Member["id"],
+							"position"=>$Member['position'],
+							"package_id"=>$PackageType['id'],
+							"price"=>$PackageType['price'],
+							"bv_price"=>$PackageType['bv_price'],
+							"adddate"=>date("Y-m-d",time()),
+							"addtime"=>date("Y-m-d H:i:s",time()),
+					);
+					M("OrderInfo")->data($data)->add();
+					$DigitCoinInfo = M("DigitCoinInfo")->where(array("member_id"=>$Member['id']))->limit(1)->order("id desc")->select();
+					if(count($DigitCoinInfo)>=1){
+						$map = array(
+								"type"=>1,
+								"title"=>"Order coin",
+								"price_info_id"=>0,
+								"member_username"=>$Member['username'],
+								"member_id"=>$Member["id"],
+								"user_id"=>$Member["id"],
+								"cold_digit_coin"=>$PackageType['price']*$PackageType['percent']/$DigitPrice+$DigitCoinInfo[0]['cold_digit_coin'],
+								"cold_in_digit_coin"=>$PackageType['price']*$PackageType['percent']/$DigitPrice,
+								"cold_out_digit_coin"=>0,
+								"free_digit_coin"=>$DigitCoinInfo[0]['free_digit_coin'],
+								"free_in_digit_coin"=>0,
+								"free_out_digit_coin"=>0,
+								"digit_price"=>$DigitPrice,
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						if(M("DigitCoinInfo")->data($map)->add()){
+							$Digit = M("DigitCoinInfo")->where(array("type"=>2,"member_id"=>$Member['id']))->limit(1)->order("id desc")->select();
+							if(count($Digit)>0){
+								$Digit[0]["cold_digit_coin"] = $PackageType['price']*$PackageType['percent']/$DigitPrice+$Digit[0]['cold_digit_coin'];
+								M("DigitCoinInfo")->data($Digit)->save();
+							}
+						}
+					}else{
+						$map = array(
+								"type"=>1,
+								"title"=>"Order coin",
+								"price_info_id"=>0,
+								"member_username"=>$Member['username'],
+								"member_id"=>$Member["id"],
+								"user_id"=>$Member["id"],
+								"cold_digit_coin"=>$PackageType['price']*$PackageType['percent']/$DigitPrice,
+								"digit_price"=>$DigitPrice,
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						M("DigitCoinInfo")->data($map)->add();
+					}
+					$find = array("delete"=>0,"member_id"=>$Member['id']);
+					$find["_string"] = "type in (5,6,8,9)";
+					$PriceSub = M("OrderInfo")->where($find)->sum('price');
+					$PackageTypeList = M("PackageType")->where(array("delete"=>0))->order("id desc")->select();
+					foreach($PackageTypeList as $key=>$value){
+						if($value['price']<=$PriceSub){
+							$result = M("Member")->where(array("id"=>$Member['id']))->data(array("package_type"=>$value['id']))->save();
+							if($result||$result==0){
+								if($Member['r_id']!=0){
+									//推荐奖金 直推
+									$DEFAULT_WEB_SET_T_RETURN = (float)C("DEFAULT_WEB_SET_T_RETURN");
+									$data_recom = array(
+											"member_id"=>$Member['r_id'],
+											"member_username"=>$Member['r_name'],
+											"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_T_RETURN,
+											"package"=>$PackageType['bv_price'],
+											"register_id"=>$Member['id'],
+											"position"=>$Member['position'],
+											"register_username"=>"*".$Member['username'],
+											"adddate"=>date("Y-m-d",time()),
+											"addtime"=>date("Y-m-d H:i:s",time()),
+									);
+									M("RecomBonus")->data($data_recom)->add();
+									$PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$Member['r_id']))->order("id desc")->limit(1)->select();
+									if(count($PriceBInfo)>0){
+										//B币奖金  B币钱包
+										$DEFAULT_WEB_SET_B_RETURN = (float)C("DEFAULT_WEB_SET_B_RETURN");
+										$PriceBInfo2 = array(
+												"member_id"=>$Member['r_id'],
+												"title"=>"Direct Sales Bonus",
+												"type"=>1,
+												"b_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_B_RETURN/10+$PriceBInfo[0]['b_price'],
+												"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_B_RETURN/10,
+												"admin_id"=>$Member['id'],
+												"adddate"=>date("Y-m-d",time()),
+												"addtime"=>date("Y-m-d H:i:s",time()),
+										);
+										M("PriceBInfo")->data($PriceBInfo2)->add();
+									}else{
+										//B币奖金  B币钱包
+										$DEFAULT_WEB_SET_B_RETURN = (float)C("DEFAULT_WEB_SET_B_RETURN");
+										$PriceBInfo2 = array(
+												"member_id"=>$Member['r_id'],
+												"title"=>"Direct Sales Bonus",
+												"type"=>1,
+												"b_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_B_RETURN/10,
+												"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_B_RETURN/10,
+												"admin_id"=>$Member['id'],
+												"adddate"=>date("Y-m-d",time()),
+												"addtime"=>date("Y-m-d H:i:s",time()),
+										);
+										M("PriceBInfo")->data($PriceBInfo2)->add();
+									}
+
+									$PriceRInfo = M("PriceRInfo")->where(array("delete"=>0,"member_id"=>$Member['r_id']))->order("id desc")->limit(1)->select();
+									if(count($PriceRInfo)>0){
+										//重购奖金 重构钱包
+										$DEFAULT_WEB_SET_R_RETURN = (float)C("DEFAULT_WEB_SET_R_RETURN");
+										$PriceRInfo2 = array(
+												"member_id"=>$Member['r_id'],
+												"title"=>"Direct Sales Bonus",
+												"type"=>1,
+												"new_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_R_RETURN/10+$PriceRInfo[0]['new_price'],
+												"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_R_RETURN/10,
+												"admin_id"=>$Member['id'],
+												"adddate"=>date("Y-m-d",time()),
+												"addtime"=>date("Y-m-d H:i:s",time()),
+										);
+										M("PriceRInfo")->data($PriceRInfo2)->add();
+									}else{
+										//重购奖金 重构钱包
+										$DEFAULT_WEB_SET_R_RETURN = (float)C("DEFAULT_WEB_SET_R_RETURN");
+										$PriceRInfo2 = array(
+												"member_id"=>$Member['r_id'],
+												"title"=>"Direct Sales Bonus",
+												"type"=>1,
+												"new_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_R_RETURN/10,
+												"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_R_RETURN/10,
+												"admin_id"=>$Member['id'],
+												"adddate"=>date("Y-m-d",time()),
+												"addtime"=>date("Y-m-d H:i:s",time()),
+										);
+										M("PriceRInfo")->data($PriceRInfo2)->add();
+									}
+									$PriceGInfo = M("PriceGInfo")->where(array("delete"=>0,"member_id"=>$Member['r_id']))->order("id desc")->limit(1)->select();
+									if(count($PriceGInfo)>0){
+										//股份奖金 股份钱包
+										$DEFAULT_WEB_SET_G_RETURN = (float)C("DEFAULT_WEB_SET_G_RETURN");
+										$PriceGInfo2 = array(
+												"member_id"=>$Member['r_id'],
+												"title"=>"Direct Sales Bonus",
+												"type"=>1,
+												"stake_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_G_RETURN/10+$PriceGInfo[0]['stake_price'],
+												"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_G_RETURN/10,
+												"admin_id"=>$Member['id'],
+												"adddate"=>date("Y-m-d",time()),
+												"addtime"=>date("Y-m-d H:i:s",time()),
+										);
+										M("PriceGInfo")->data($PriceGInfo2)->add();
+									}else{
+										//股份奖金 股份钱包
+										$DEFAULT_WEB_SET_G_RETURN = (float)C("DEFAULT_WEB_SET_G_RETURN");
+										$PriceGInfo2 = array(
+												"member_id"=>$Member['r_id'],
+												"title"=>"Direct Sales Bonus",
+												"type"=>1,
+												"stake_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_G_RETURN/10,
+												"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_G_RETURN/10,
+												"admin_id"=>$Member['id'],
+												"adddate"=>date("Y-m-d",time()),
+												"addtime"=>date("Y-m-d H:i:s",time()),
+										);
+										M("PriceGInfo")->data($PriceGInfo2)->add();
+									}
+								}
+								if($Member['p_id']!=0){
+									$this->member_add_bv($Member['id'],$PackageType['bv_price']);
+								}
+							}
+							break;
+						}
+					}
+				}			
+			}
+
+		}
+		$this->display();
+	}
+	public function register(){
+		$this->redirect('Home/Main/downline_tree',array("language"=>I("language")),0,"");
+	}
+	public function notice(){
+		Session("Notice",1);
+		$this->AjaxReturn(true);
+	}
+	public function upgrade_package(){
+		$this->PackageList = M("PackageType")->where(array("delete"=>0,"status"=>1))->select();
+		$User = session("MemberID");
+		$this->Member = $User;
+		$this->language = I("language");
+		$where = array("delete"=>0,"member_id"=>$User['id']);
+		$where["_string"] = "type in (5,6,8,9)";
+		$this->PriceSub = M("OrderInfo")->where($where)->sum('price');
+		$this->display();
+	}
+	public function pop_upgrade(){
+		$User = session("MemberID");
+		$this->language = I("language");
+		if(IS_POST){
+			$package_type = I("package_id");
+			$pay_type = I("pay_type");
+			$type = 0;
+			$paypass = I("paypass");
+			$PriceInfoResult = 0;
+			if($paypass!=$User['paypass']){
+				$this->error("交易密码错误");
+			}
+			$PackageType = M("PackageType")->where(array("id"=>$package_type,"delete"=>0))->find();
+			if($pay_type==1){
+				$PriceInfo = M("PriceInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->order("id desc")->limit(1)->select();
+				if($PriceInfo[0]["s_price"]>=$PackageType['price']){
+					$PriceInfo[0]["s_price"] = $PriceInfo[0]["s_price"] - $PackageType['price'];
+					$PriceInfo[0]['price'] = $PackageType['price'];
+					$PriceInfo[0]['title'] = "UPGRADE";
+					$PriceInfo[0]['remark'] = "";
+					$PriceInfo[0]['type']=5;
+					$PriceInfo[0]['id']=null;
+					if(!$PriceInfoResult = M("PriceInfo")->data($PriceInfo[0])->add()){
+						$this->error(L('public-system-error'));
+					}
+					$type = 5;
+				}else{
+					$this->error("S".L("money-error"));
+				}
+			}else if($pay_type==2){
+				$PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->order("id desc")->limit(1)->select();
+				if($PriceBInfo[0]["b_price"]>=$PackageType['price']){
+					$PriceBInfo[0]["b_price"] = $PriceBInfo[0]["b_price"] - $PackageType['price'];
+					$PriceBInfo[0]['price'] = $PackageType['price'];
+					$PriceBInfo[0]['title'] = "UPGRADE";
+					$PriceBInfo[0]['remark'] = "";
+					$PriceBInfo[0]['type']=5;
+					$PriceBInfo[0]['id']=null;
+					if(!$PriceInfoResult = M("PriceBInfo")->data($PriceBInfo[0])->add()){
+						$this->error(L('public-system-error'));
+					}
+					$type = 6;
+				}else{
+					$this->error("B".L("money-error"));
+				}
+			}else if($pay_type==3){
+				$PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->order("id desc")->limit(1)->select();
+				$PriceInfo = M("PriceInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->order("id desc")->limit(1)->select();
+				if($PriceInfo[0]["s_price"]>=$PackageType['price']){
+					if($PriceInfo[0]["s_price"]>=$PackageType['price']){
+						$PriceInfo[0]["s_price"] = $PriceInfo[0]["s_price"] - $PackageType['price'];
+						$PriceInfo[0]['price'] = $PackageType['price'];
+						$PriceInfo[0]['title'] = "UPGRADE";
+						$PriceInfo[0]['remark'] = "";
+						$PriceInfo[0]['type']=5;
+						$PriceInfo[0]['id']=null;
+						if(!$PriceInfoResult = M("PriceInfo")->data($PriceInfo[0])->add()){
+							$this->error(L('public-system-error'));
+						}
+						$type = 5;
+					}else{
+						$this->error("S".L("money-error"));
+					}
+				}else if($PriceInfo[0]["s_price"]<$PackageType['price']&&($PriceBInfo[0]["b_price"]+$PriceInfo[0]["s_price"])>$PackageType['price']){
+					$s_sav_price = $PriceInfo[0]["s_price"];
+					$PriceInfo[0]["s_price"] = 0;
+					$PriceInfo[0]['price'] = $s_sav_price;
+					$PriceInfo[0]['title'] = "UPGRADE";
+					$PriceInfo[0]['remark'] = "";
+					$PriceInfo[0]['type']=8;
+					$PriceInfo[0]['id']=null;
+					if(!$PriceInfoResult = M("PriceInfo")->data($PriceInfo[0])->add()){
+						$this->error(L('public-system-error'));
+					}else{
+						$PriceBInfo[0]["b_price"] = $PriceBInfo[0]["b_price"] - ($PackageType['price']-$s_sav_price);
+						$PriceBInfo[0]['price'] = ($PackageType['price']-$s_sav_price);
+						$PriceBInfo[0]['title'] = "UPGRADE";
+						$PriceBInfo[0]['remark'] = "";
+						$PriceBInfo[0]['type']=8;
+						$PriceBInfo[0]['id']=null;
+						$PriceInfoResult = M("PriceBInfo")->data($PriceBInfo[0])->add();
+					}
+					$type = 8;
+				}else{
+					$this->error("S+B".L("money-error"));
+				}
+			}else{
+				$this->error("数据错误");
+			}
+			/*支付完成 */
+			/*查询bigit价格*/
+			if($DigitPriceResult = M("DigitPrice")->where(array("date"=>date("Y-m-d",time())))->find()){
+				$DigitPrice = $DigitPriceResult["price"];
+			}else{
+				$DigitPrice = C("DEFAULT_WEB_SET_DIGIT")?C("DEFAULT_WEB_SET_DIGIT"):0;
+			}
+			/*下订单，声场Digit币*/
+			$data = array(
+					"price_info_id"=>$PriceInfoResult,
+					"member_username"=>$User["username"],
+					"type"=>$type,
+					"member_id"=>$User["id"],
+					"user_id"=>$User["id"],
+					"title"=>"UPGRADE",
+					"digit_price"=>$PackageType['dgc_price'],
+					"admin_id"=>$User["id"],
+					"position"=>$User['position'],
+					"package_id"=>$PackageType['id'],
+					"price"=>$PackageType['price'],
+					"bv_price"=>$PackageType['bv_price'],
+					"adddate"=>date("Y-m-d",time()),
+					"addtime"=>date("Y-m-d H:i:s",time()),
+			);
+			M("OrderInfo")->data($data)->add();
+			$DigitCoinInfo = M("DigitCoinInfo")->where(array("member_id"=>$User['id']))->limit(1)->order("id desc")->select();
+			if(count($DigitCoinInfo)>=1){
+				$map = array(
+						"type"=>1,
+						"title"=>"Order coin",
+						"price_info_id"=>$PriceInfoResult,
+						"member_username"=>I("username"),
+						"member_id"=>$User["id"],
+						"user_id"=>$User["id"],
+						"cold_digit_coin"=>$PackageType['price']*$PackageType['percent']/$DigitPrice+$DigitCoinInfo[0]['cold_digit_coin'],
+						"cold_in_digit_coin"=>$PackageType['price']*$PackageType['percent']/$DigitPrice,
+						"cold_out_digit_coin"=>0,
+						"free_digit_coin"=>$DigitCoinInfo[0]['free_digit_coin'],
+						"free_in_digit_coin"=>0,
+						"free_out_digit_coin"=>0,
+						"digit_price"=>$DigitPrice,
+						"adddate"=>date("Y-m-d",time()),
+						"addtime"=>date("Y-m-d H:i:s",time()),
+				);
+				if(M("DigitCoinInfo")->data($map)->add()){
+					$Digit = M("DigitCoinInfo")->where(array("type"=>2,"member_id"=>$User['id']))->limit(1)->order("id desc")->select();
+					if(count($Digit)>0){
+						$Digit[0]["cold_digit_coin"] = $PackageType['price']*$PackageType['percent']/$DigitPrice+$Digit[0]['cold_digit_coin'];
+						M("DigitCoinInfo")->data($Digit)->save();
+					}
+				}
+			}else{
+				$map = array(
+						"type"=>1,
+						"title"=>"Order coin",
+						"price_info_id"=>$PriceInfoResult,
+						"member_username"=>I("username"),
+						"member_id"=>$User["id"],
+						"user_id"=>$User["id"],
+						"cold_digit_coin"=>$PackageType['price']*$PackageType['percent']/$DigitPrice,
+						"digit_price"=>$DigitPrice,
+						"adddate"=>date("Y-m-d",time()),
+						"addtime"=>date("Y-m-d H:i:s",time()),
+				);
+				M("DigitCoinInfo")->data($map)->add();
+			}
+			$find = array("delete"=>0,"member_id"=>$User['id']);
+			$find["_string"] = "type in (5,6,8,9)";
+			$PriceSub = M("OrderInfo")->where($find)->sum('price');
+			$PackageTypeList = M("PackageType")->where(array("delete"=>0))->order("id desc")->select();
+			foreach($PackageTypeList as $key=>$value){
+				if($value['price']<=$PriceSub){
+					$result = M("Member")->where(array("id"=>$User['id']))->data(array("package_type"=>$value['id']))->save();
+					if($result||$result==0){
+						if($User['r_id']!=0){
+							//推荐奖金 直推
+							$DEFAULT_WEB_SET_T_RETURN = (float)C("DEFAULT_WEB_SET_T_RETURN");
+							$data_recom = array(
+									"member_id"=>$User['r_id'],
+									"member_username"=>$User['r_name'],
+									"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_T_RETURN,
+									"package"=>$PackageType['bv_price'],
+									"register_id"=>$User['id'],
+									"position"=>$User['position'],
+									"register_username"=>"*".$User['username'],
+									"adddate"=>date("Y-m-d",time()),
+									"addtime"=>date("Y-m-d H:i:s",time()),
+							);
+							M("RecomBonus")->data($data_recom)->add();
+							$PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$User['r_id']))->order("id desc")->limit(1)->select();
+							if(count($PriceBInfo)>0){
+								//B币奖金  B币钱包
+								$DEFAULT_WEB_SET_B_RETURN = (float)C("DEFAULT_WEB_SET_B_RETURN");
+								$PriceBInfo2 = array(
+										"member_id"=>$User['r_id'],
+										"title"=>"Direct Sales Bonus",
+										"type"=>1,
+										"b_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_B_RETURN/10+$PriceBInfo[0]['b_price'],
+										"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_B_RETURN/10,
+										"admin_id"=>$User['id'],
+										"adddate"=>date("Y-m-d",time()),
+										"addtime"=>date("Y-m-d H:i:s",time()),
+								);
+								M("PriceBInfo")->data($PriceBInfo2)->add();
+							}else{
+								//B币奖金  B币钱包
+								$DEFAULT_WEB_SET_B_RETURN = (float)C("DEFAULT_WEB_SET_B_RETURN");
+								$PriceBInfo2 = array(
+										"member_id"=>$User['r_id'],
+										"title"=>"Direct Sales Bonus",
+										"type"=>1,
+										"b_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_B_RETURN/10,
+										"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_B_RETURN/10,
+										"admin_id"=>$User['id'],
+										"adddate"=>date("Y-m-d",time()),
+										"addtime"=>date("Y-m-d H:i:s",time()),
+								);
+								M("PriceBInfo")->data($PriceBInfo2)->add();
+							}
+
+							$PriceRInfo = M("PriceRInfo")->where(array("delete"=>0,"member_id"=>$User['r_id']))->order("id desc")->limit(1)->select();
+							if(count($PriceRInfo)>0){
+								//重购奖金 重构钱包
+								$DEFAULT_WEB_SET_R_RETURN = (float)C("DEFAULT_WEB_SET_R_RETURN");
+								$PriceRInfo2 = array(
+										"member_id"=>$User['r_id'],
+										"title"=>"Direct Sales Bonus",
+										"type"=>1,
+										"new_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_R_RETURN/10+$PriceRInfo[0]['new_price'],
+										"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_R_RETURN/10,
+										"admin_id"=>$User['id'],
+										"adddate"=>date("Y-m-d",time()),
+										"addtime"=>date("Y-m-d H:i:s",time()),
+								);
+								M("PriceRInfo")->data($PriceRInfo2)->add();
+							}else{
+								//重购奖金 重构钱包
+								$DEFAULT_WEB_SET_R_RETURN = (float)C("DEFAULT_WEB_SET_R_RETURN");
+								$PriceRInfo2 = array(
+										"member_id"=>$User['r_id'],
+										"title"=>"Direct Sales Bonus",
+										"type"=>1,
+										"new_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_R_RETURN/10,
+										"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_R_RETURN/10,
+										"admin_id"=>$User['id'],
+										"adddate"=>date("Y-m-d",time()),
+										"addtime"=>date("Y-m-d H:i:s",time()),
+								);
+								M("PriceRInfo")->data($PriceRInfo2)->add();
+							}
+							$PriceGInfo = M("PriceGInfo")->where(array("delete"=>0,"member_id"=>$User['r_id']))->order("id desc")->limit(1)->select();
+							if(count($PriceGInfo)>0){
+								//股份奖金 股份钱包
+								$DEFAULT_WEB_SET_G_RETURN = (float)C("DEFAULT_WEB_SET_G_RETURN");
+								$PriceGInfo2 = array(
+										"member_id"=>$User['r_id'],
+										"title"=>"Direct Sales Bonus",
+										"type"=>1,
+										"stake_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_G_RETURN/10+$PriceGInfo[0]['stake_price'],
+										"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_G_RETURN/10,
+										"admin_id"=>$User['id'],
+										"adddate"=>date("Y-m-d",time()),
+										"addtime"=>date("Y-m-d H:i:s",time()),
+								);
+								M("PriceGInfo")->data($PriceGInfo2)->add();
+							}else{
+								//股份奖金 股份钱包
+								$DEFAULT_WEB_SET_G_RETURN = (float)C("DEFAULT_WEB_SET_G_RETURN");
+								$PriceGInfo2 = array(
+										"member_id"=>$User['r_id'],
+										"title"=>"Direct Sales Bonus",
+										"type"=>1,
+										"stake_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_G_RETURN/10,
+										"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_G_RETURN/10,
+										"admin_id"=>$User['id'],
+										"adddate"=>date("Y-m-d",time()),
+										"addtime"=>date("Y-m-d H:i:s",time()),
+								);
+								M("PriceGInfo")->data($PriceGInfo2)->add();
+							}
+						}
+						if($User['p_id']!=0){
+							$this->member_add_bv($User['id'],$PackageType['bv_price']);
+						}
+						$this->success(L("upgrade-success"));
+					}
+					break;
+				}
+			}
+		}else{
+			if($PackageType = M("PackageType")->where(array("delete"=>0,"status"=>1,"id"=>I('id')))->find()){
+				$this->PackageType = $PackageType;
+			}else{
+				$this->error("未找到该套餐");
+			}
+			$PriceInfo = M("PriceInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->order("id desc")->limit(1)->select();
+			$PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->order("id desc")->limit(1)->select();
+			$this->PriceBInfo = $PriceBInfo;
+			$this->PriceInfo = $PriceInfo;
+			$this->display();
+		}
+	}
+    public function upgrade_search(){
+		$User = session("MemberID");
+		$where = array("delete"=>0,"member_id"=>$User['id']);
+		$where["_string"] = "type in (5,6,8,9)";
+		$starttime = I("starttime");
+		$endtime = I("endtime");
+		if($starttime!=""&&$endtime!=""){
+			if($starttime>$endtime){
+				$this->error(L('time-error'));
+			}
+			if($starttime==$endtime){
+				$where["_string"] = "adddate = '".$starttime."'";
+			}else{
+				$where["_string"] = "adddate between '".$starttime."' and '".$endtime."'";
+			}
+			$this->starttime = $starttime;
+			$this->endtime = $endtime;
+		}
+		$page_set = I("page_set",10);
+		$count = M("OrderInfo")->where($where)->order("id desc")->count();
+		$Page = new \Think\Page($count,$page_set);
+		foreach($where as $key=>$val) {
+			$Page->parameter[$key] = urlencode($val);
+		}
+		if($starttime!=""){
+			$Page->parameter["starttime"] = urlencode($starttime);
+		}
+		if($endtime!=""){
+			$Page->parameter["endtime"] = urlencode($endtime);
+		}
+		$show = $Page->show();
+		$list = D("OrderInfoRelation")->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->relation(true)->select();
+		$this->assign('OrderInfoList',$list);
+		$this->assign('page',$show);
+		$this->p = I("p",0);
+		$this->page_set = I("page_set",10);
+		$this->PackageList = M("PackageType")->where(array("delete"=>0,"status"=>1))->select();
+		$this->price = D("OrderInfoRelation")->where($where)->sum('price');
+		$this->bv_price = D("OrderInfoRelation")->where($where)->sum('bv_price');
+		$this->Member = $User;
+		$this->count = $count;
+		if($count>$page_set){
+			$this->count_status = 1;
+		}
+		$this->display();
+	}
+	public function news(){
+		$title = I("title");
+		$text = I("text");
+		$where = array("delete"=>0,"status"=>1);
+		if($title!=""&&$text!=""){
+			$where[$title] = array("like","%".$text."%");
+			$this->text = $text;
+			$this->title = $title;
+		}
+		if($title==""&&$text!=""){
+			$map['title']  = array("like","%".$text."%");
+			$map['content']  = array("like","%".$text."%");
+			$map['_logic'] = 'or';
+			$where['_complex'] = $map;
+			$this->text = $text;
+		}
+		$page_set = I("page_set",10);
+		$count = M("News")->where($where)->order("sort,recom desc")->count();
+		$Page = new \Think\Page($count,$page_set);
+		foreach($where as $key=>$val) {
+			$Page->parameter[$key] = urlencode($val);
+		}
+		if($title!=""){
+			$Page->parameter["title"] = urlencode($title);
+		}
+		if($text!=""){
+			$Page->parameter["text"] = urlencode($text);
+		}
+		$show = $Page->show();
+		$list = M("News")->where($where)->order('sort,recom desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$this->assign('NewsList',$list);
+		$this->assign('page',$show);
+		$this->p = I("p",0);
+		$this->page_set = $page_set;
+		if($count>$page_set){
+			$this->count_status = 1;
+		}
+		$this->display();
+	}
+	public function information(){
+		$title = I("title");
+		$text = I("text");
+		$where = array("delete"=>0,"status"=>1);
+		if($title!=""&&$text!=""){
+			$where[$title] = array("like","%".$text."%");
+			$this->text = $text;
+			$this->title = $title;
+		}
+		if($title==""&&$text!=""){
+			$map['title']  = array("like","%".$text."%");
+			$map['content']  = array("like","%".$text."%");
+			$map['_logic'] = 'or';
+			$where['_complex'] = $map;
+			$this->text = $text;
+		}
+		$page_set = I("page_set",10);
+		$count = M("Information")->where($where)->order("sort,recom desc")->count();
+		$Page = new \Think\Page($count,$page_set);
+		foreach($where as $key=>$val) {
+			$Page->parameter[$key] = urlencode($val);
+		}
+		if($title!=""){
+			$Page->parameter["title"] = urlencode($title);
+		}
+		if($text!=""){
+			$Page->parameter["text"] = urlencode($text);
+		}
+		$show = $Page->show();
+		$list = M("Information")->where($where)->order('sort,recom desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$this->assign('InformationList',$list);
+		$this->assign('page',$show);
+		$this->p = I("p",0);
+		$this->page_set = $page_set;
+		if($count>$page_set){
+			$this->count_status = 1;
+		}
+		$this->display();
+	}
+	public function editprofile(){
+		$this->Member = session("MemberID");
+		$this->CountryList = M("Country")->where(array("delete"=>0,"status"=>1))->select();
+		$this->PriceLevelList = M("PriceLevel")->where(array("delete"=>0,"status"=>1))->select();
+		$this->display();
+	}
+	public function saveEditprofile(){
+		$Member = session("MemberID");
+		$Verify = M("Verify")->where(array("delete"=>0,"member_id"=>$Member['id'],"type"=>3))->order("id desc")->limit(1)->select();
+		$time = date("Y-m-d H:i:s",time()-15*60);
+		if($Verify[0]['addtime']<$time){
+			$this->error("认证码已过期 15分钟有效");
+		}
+		if(I("code")!=$Verify[0]['number']){
+			$this->error("认证码不正确");
+		}
+		$SaveMember = D("SaveMember");
+		if (!$SaveMember->create()){
+			$this->error($SaveMember->getError(),U('Home/Main/editprofile'));
+		}else{
+			$result = $SaveMember->save();
+			if($result||$result==0){
+				M("Verify")->where(array("id"=>$Verify[0]['id']))->data(array("delete"=>1))->save();
+				$this->success(L("public-success"),U('Home/Main/editprofile'));
+			}else{
+				$this->error(L("public-error"),U('Home/Main/editprofile'));
+			}
+		}
+	}
+	public function passEditprofile(){
+		$Member = session("MemberID");
+		$Verify = M("Verify")->where(array("delete"=>0,"member_id"=>$Member['id'],"type"=>2))->order("id desc")->limit(1)->select();
+		$time = date("Y-m-d H:i:s",time()-15*60);
+		if($Verify[0]['addtime']<$time){
+			$this->error("认证码已过期 15分钟有效");
+		}
+		if($Member['userpass']!=I("userpass",0,"md5")){
+			$this->error("原密码不正确！");
+		}
+		if(I("code")!=$Verify[0]['number']){
+			$this->error("认证码不正确");
+		}
+		$PassMember = D("PassMember");
+		if (!$PassMember->create()){
+			$this->error($PassMember->getError(),U('Home/Main/editprofile'));
+		}else{
+			$result = $PassMember->save();
+			if($result||$result==0){
+				M("Verify")->where(array("id"=>$Verify[0]['id']))->data(array("delete"=>1))->save();
+				$this->success(L("public-success"),U('Home/Main/editprofile',array('language'=>I("language"))));
+			}else{
+				$this->error(L("public-error"),U('Home/Main/editprofile',array('language'=>I("language"))));
+			}
+		}
+	}
+	public function payMember(){
+		$Member = session("MemberID");
+		$Verify = M("Verify")->where(array("delete"=>0,"member_id"=>$Member['id'],"type"=>1))->order("id desc")->limit(1)->select();
+		$time = date("Y-m-d H:i:s",time()-15*60);
+		if($Verify[0]['addtime']<$time){
+			$this->error("认证码已过期 15分钟有效");
+		}
+		if($Member['paypass']!=I("paypass",0)){
+			$this->error("原交易密码不正确！");
+		}
+		//if($Member['paypass']!=I("paypass",0,"md5")){
+		//	$this->error("原交易密码不正确！");
+		//}
+		if(I("code")!=$Verify[0]['number']){
+			$this->error("认证码不正确");
+		}
+		$PayMember = D("PayMember");
+		if (!$PayMember->create()){
+			$this->error($PayMember->getError(),U('Home/Main/editprofile'));
+		}else{
+			$result = $PayMember->save();
+			if($result||$result==0){
+				M("Verify")->where(array("id"=>$Verify[0]['id']))->data(array("delete"=>1))->save();
+				$this->success(L("public-success"),U('Home/Main/editprofile',array('language'=>I('language'))));
+			}else{
+				$this->error(L("public-error"),U('Home/Main/editprofile',array('language'=>I('language'))));
+			}
+		}
+	}
+	public function pictureMember(){
+		if(IS_POST){
+			$Member = session("MemberID");
+			$picture = UploadImg('picture',"Member",$Member["id"]);
+			if(M("Member")->where(array("id"=>$Member['id']))->data(array("picture"=>$picture))->save()){
+				$this->success(L("public-success"));
+			}else{
+				$this->error(L("public-error"));
+			}
+		}else{
+			$this->error(L("public-system-error"));
+		}
+	}
+	public function setPriceLevel(){
+		if(IS_POST){
+			$price = I("price",0,"int");
+			$PackageType = M("PackageType")->where(array("price"=>$price))->find();
+			if($PackageType){
+				$Member = session("MemberID");
+				$result = M("Member")->where(array("id"=>$Member['id']))->data(array("price_level"=>$PackageType['id']))->save();
+				if($result||$result==0){
+					$this->success(L("public-success"));
+				}else{
+					$this->error(L("public-error"));
+				}			
+			}else{
+				$this->error(L("public-error"));
+			}
+		}else{
+			$this->error(L("public-system-error"));
+		}
+	}
+	public function downline_tree(){
+		$user_id = I("user_id");
+		$top_id = I("top_id");
+		$User = session("MemberID");
+		$UserBv = M("BvInfo")->where(array("member_id"=>$User['id']))->limit(1)->order("id desc")->select();
+		$Country = M("Country")->where(array("id"=>$User['country']))->find();
+		$User['country_picture'] = $Country['picture'];
+		if(count($UserBv)==1){
+			$User["left_bv"] = $UserBv[0]['new_left_price'];
+			$User["right_bv"] = $UserBv[0]['new_right_price'];
+		}else{
+			$User["left_bv"] = 0;
+			$User["right_bv"] = 0;
+		}
+
+		$this->Member = $User;
+		$text = I("text");
+		if($text!=""){
+			if($Member = M("Member")->where(array("delete"=>0,"username"=>$text))->find()){
+				$user_id = $Member["id"];
+				$this->text = $text;
+			}else{
+				$this->error("未找到该用户！");
+			}
+		}
+		$result = D("MemberCountryRelation")->where(array("delete"=>0))->order("position")->relation(true)->select();
+		foreach($result as $key=>$val){
+			$BvInfo = M("BvInfo")->where(array("member_id"=>$val['id']))->limit(1)->order("id desc")->select();
+			if(count($BvInfo)==1){
+				$result[$key]["left_bv"] = $BvInfo[0]['new_left_price'];
+				$result[$key]["right_bv"] = $BvInfo[0]['new_right_price'];
+			}else{
+				$result[$key]["left_bv"] = 0;
+				$result[$key]["right_bv"] = 0;
+			}
+
+		}
+		if($user_id!=""){
+			$MemberUser = M("Member")->where(array("delete"=>0,"id"=>$user_id,"admin_id"=>$User['id']))->find();
+			$MemberBv = M("BvInfo")->where(array("member_id"=>$User['id']))->limit(1)->order("id desc")->select();
+			if(count($MemberBv)==1){
+				$MemberUser["left_bv"] = $MemberBv[0]['new_left_price'];
+				$MemberUser["right_bv"] = $MemberBv[0]['new_right_price'];
+			}else{
+				$MemberUser["left_bv"] = 0;
+				$MemberUser["right_bv"] = 0;
+			}
+			$CountryMember = M("Country")->where(array("id"=>$MemberUser['country']))->find();
+			$MemberUser['country_picture'] = $CountryMember['picture'];
+			$this->Member = $MemberUser;
+		}
+		if($top_id!=""){
+			$m = M("Member")->where(array("delete"=>0,"id"=>$top_id,"admin_id"=>$User['id']))->find();
+			if($m['p_id']!=""&&$m['p_id']!=0&&$top_id!=$User['id']){
+				$this->redirect(U("Home/Main/downline_tree"),array('language'=>I('language'),"user_id"=>$m['p_id']),0,"");
+			}
+		}
+		$list = member_merge($result,$user_id?$user_id:$User['id']);
+		$this->MemberList = $list;
+
+		$this->PackageTypeList = M("PackageType")->where(array("delete"=>0,"status"=>1))->select();
+		
+		$this->display();
+	}
+	public function addMember(){
+		if(IS_POST){
+			$r_id = I("r_id");
+			if(!$rm = M("Member")->where(array("id"=>$r_id))->find()){
+				$this->error("未找到该推荐人");
+			}
+			$User = session("MemberID");
+			$pay_type = I("pay_type");
+			$package_type = I("package_type");
+			$PriceInfoResult = 0;
+			$PackageType = M("PackageType")->where(array("id"=>$package_type,"delete"=>0))->find();
+			if(!$PackageType){
+				$this->error("未找到套餐!");
+			}
+			if($pay_type==1){
+				$PriceInfo = M("PriceInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->order("id desc")->limit(1)->select();
+				if($PriceInfo[0]["s_price"]>=$PackageType['price']){
+					$PriceInfo[0]["s_price"] = $PriceInfo[0]["s_price"] - $PackageType['price'];
+					$PriceInfo[0]["price"] = $PackageType['price'];
+					$PriceInfo[0]['type']=3;
+					$PriceInfo[0]['title']="Package order amount To <span class='margin-left-20 label bg-color-blueDark txt-color-white'>".I('username')."</span>";
+					$PriceInfo[0]['remark']="Account Order";
+					$PriceInfo[0]['id']=null;
+					if(!$PriceInfoResult = M("PriceInfo")->data($PriceInfo[0])->add()){
+						$this->error(L('public-system-error'));
+					}
+				}else{
+					$this->error("S".L("money-error"));
+				}
+			}else if($pay_type==2){
+				$PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->order("id desc")->limit(1)->select();
+				if($PriceBInfo[0]["b_price"]>=$PackageType['price']){
+					$PriceBInfo[0]["b_price"] = $PriceBInfo[0]["b_price"] - $PackageType['price'];
+					$PriceBInfo[0]["price"] = $PackageType['price'];
+					$PriceBInfo[0]['type']=3;
+					$PriceBInfo[0]['title']="Package order amount To <span class='margin-left-20 label bg-color-blueDark txt-color-white'>".I('username')."</span>";
+					$PriceBInfo[0]['remark']="Account Order";
+					$PriceBInfo[0]['id']=null;
+					if(!$PriceInfoResult = M("PriceBInfo")->data($PriceBInfo[0])->add()){
+						$this->error(L('public-system-error'));
+					}
+				}else{
+					$this->error("B".L("money-error"));
+				}
+			}else if($pay_type==3){
+				$PriceInfo = M("PriceInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->order("id desc")->limit(1)->select();
+				$PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->order("id desc")->limit(1)->select();
+				if($PriceInfo[0]["s_price"]>=$PackageType['price']){
+					if($PriceInfo[0]["s_price"]>=$PackageType['price']){
+						$PriceInfo[0]["s_price"] = $PriceInfo[0]["s_price"] - $PackageType['price'];
+						$PriceInfo[0]["price"] = $PackageType['price'];
+						$PriceInfo[0]['type']=3;
+						$PriceInfo[0]['title']="Package order amount To <span class='margin-left-20 label bg-color-blueDark txt-color-white'>".I('username')."</span>";
+						$PriceInfo[0]['remark']="Account Order";
+						$PriceInfo[0]['id']=null;
+						if(!$PriceInfoResult = M("PriceInfo")->data($PriceInfo[0])->add()){
+							$this->error(L('public-system-error'));
+						}
+					}else{
+						$this->error("S".L("money-error"));
+					}
+				}else if($PriceInfo[0]["s_price"]<$PackageType['price']&&($PriceBInfo[0]["b_price"]+$PriceInfo[0]["s_price"])>$PackageType['price']){
+					$s_sva_price = $PriceInfo[0]["s_price"];
+					$PriceInfo[0]["price"] = $s_sva_price;
+					$PriceInfo[0]["s_price"] = 0;
+					$PriceInfo[0]['type']=7;
+					$PriceInfo[0]['title']="Package order amount To <span class='margin-left-20 label bg-color-blueDark txt-color-white'>".I('username')."</span>";
+					$PriceInfo[0]['remark']="Account Order";
+					$PriceInfo[0]['id']=null;
+					if(!$PriceInfoResult = M("PriceInfo")->data($PriceInfo[0])->add()){
+						$this->error(L('public-system-error'));
+					}else{
+						$PriceBInfo[0]["b_price"] = $PriceBInfo[0]["b_price"] - ($PackageType['price']-$s_sva_price);
+						$PriceBInfo[0]['price'] = ($PackageType['price']-$s_sva_price);
+						$PriceBInfo[0]['title']="Package order amount To <span class='margin-left-20 label bg-color-blueDark txt-color-white'>".I('username')."</span>";
+						$PriceBInfo[0]['remark'] = "";
+						$PriceBInfo[0]['type']=7;
+						$PriceBInfo[0]['id']=null;
+						$PriceInfoResult = M("PriceBInfo")->data($PriceBInfo[0])->add();
+					}
+				}else{
+					$this->error("S+B".L("money-error"));
+				}
+			}else{
+				$this->error("暂无该支付方式");
+			}
+			if(I("position")=="R"){
+				$_POST["position"] = 1;
+			}else{
+				$_POST["position"] = 0;
+			}
+			if(C("DEFAULT_WEB_REGISTER")==1){
+				$_POST["status"] = 1;
+			}else{
+				$_POST["status"] = 0;
+			}
+			$position_sit = I("position_sit");
+			$_POST["admin_id"] = $User['id'];
+			$Member = D("Member");
+			if (!$Member->create()){
+				$this->error($Member->getError(),U('Home/Main/downline_tree',array('language'=>I('language'))));
+			}else{
+				$result = $Member->add();
+				if($result){
+					/*digit 价格*/
+					if($DigitPriceResult = M("DigitPrice")->where(array("date"=>date("Y-m-d",time())))->find()){
+						$DigitPrice = $DigitPriceResult["price"];
+					}else{
+						$DigitPrice = C("DEFAULT_WEB_SET_DIGIT")?C("DEFAULT_WEB_SET_DIGIT"):0;
+					}
+					$data = array(
+							"member_username"=>I("username"),
+							"type"=>9,
+							"member_id"=>$result,
+							"user_id"=>$User['id'],
+							"admin_id"=>$User['id'],
+							"position"=>$_POST["position"],
+							"title"=>"UPGRADE",
+							"digit_price"=>$PackageType['dgc_price'],
+							"remark"=>"",
+							"package_id"=>$PackageType['id'],
+							"price"=>$PackageType['price'],
+							"bv_price"=>$PackageType['bv_price'],
+							"adddate"=>date("Y-m-d",time()),
+							"addtime"=>date("Y-m-d H:i:s",time()),
+					);
+					M("OrderInfo")->data($data)->add();
+					$map = array(
+							"type"=>1,
+							"price_info_id"=>$PriceInfoResult,
+							"member_username"=>I("username"),
+							"member_id"=>$result,
+							"user_id"=>$User["id"],
+							"cold_digit_coin"=>$PackageType['price']*$PackageType['percent']/$DigitPrice,
+							"cold_in_digit_coin"=>$PackageType['price']*$PackageType['percent']/$DigitPrice,
+							"title"=>"Order coin",
+							"digit_price"=>$DigitPrice,
+							"adddate"=>date("Y-m-d",time()),
+							"addtime"=>date("Y-m-d H:i:s",time()),
+					);
+					M("DigitCoinInfo")->data($map)->add();
+					//推荐奖金 直推
+					$DEFAULT_WEB_SET_T_RETURN = (float)C("DEFAULT_WEB_SET_T_RETURN");
+					$data_recom = array(
+							"member_id"=>$rm['id'],
+							"member_username"=>$rm['username'],
+							"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_T_RETURN,
+							"package"=>$PackageType['bv_price'],
+							"register_id"=>$result,
+							"position"=>$position_sit,
+							"register_username"=>I("username"),
+							"adddate"=>date("Y-m-d",time()),
+							"addtime"=>date("Y-m-d H:i:s",time()),
+					);
+					M("RecomBonus")->data($data_recom)->add();
+
+					$PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$rm['id']))->order("id desc")->limit(1)->select();
+					if(count($PriceBInfo)>0){
+						//B币奖金  B币钱包
+						$DEFAULT_WEB_SET_B_RETURN = (float)C("DEFAULT_WEB_SET_B_RETURN");
+						$PriceBInfo2 = array(
+								"member_id"=>$rm['id'],
+								"title"=>"Direct Sales Bonus",
+								"type"=>1,
+								"b_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_B_RETURN/10+$PriceBInfo[0]['b_price'],
+								"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_B_RETURN/10,
+								"admin_id"=>$User['id'],
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						M("PriceBInfo")->data($PriceBInfo2)->add();
+					}else{
+						//B币奖金  B币钱包
+						$DEFAULT_WEB_SET_B_RETURN = (float)C("DEFAULT_WEB_SET_B_RETURN");
+						$PriceBInfo2 = array(
+								"member_id"=>$rm['id'],
+								"title"=>"Direct Sales Bonus",
+								"type"=>1,
+								"b_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_B_RETURN/10,
+								"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_B_RETURN/10,
+								"admin_id"=>$User['id'],
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						M("PriceBInfo")->data($PriceBInfo2)->add();
+					}
+
+					$PriceRInfo = M("PriceRInfo")->where(array("delete"=>0,"member_id"=>$rm['id']))->order("id desc")->limit(1)->select();
+					if(count($PriceRInfo)>0){
+						//重购奖金 重构钱包
+						$DEFAULT_WEB_SET_R_RETURN = (float)C("DEFAULT_WEB_SET_R_RETURN");
+						$PriceRInfo2 = array(
+								"member_id"=>$rm['id'],
+								"title"=>"Direct Sales Bonus",
+								"type"=>1,
+								"new_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_R_RETURN/10+$PriceRInfo[0]['new_price'],
+								"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_R_RETURN/10,
+								"admin_id"=>$User['id'],
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						M("PriceRInfo")->data($PriceRInfo2)->add();
+					}else{
+						//重购奖金 重构钱包
+						$DEFAULT_WEB_SET_R_RETURN = (float)C("DEFAULT_WEB_SET_R_RETURN");
+						$PriceRInfo2 = array(
+								"member_id"=>$rm['id'],
+								"title"=>"Direct Sales Bonus",
+								"type"=>1,
+								"new_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_R_RETURN/10,
+								"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_R_RETURN/10,
+								"admin_id"=>$User['id'],
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						M("PriceRInfo")->data($PriceRInfo2)->add();
+					}
+					$PriceGInfo = M("PriceGInfo")->where(array("delete"=>0,"member_id"=>$rm['id']))->order("id desc")->limit(1)->select();
+					if(count($PriceGInfo)>0){
+						//股份奖金 股份钱包
+						$DEFAULT_WEB_SET_G_RETURN = (float)C("DEFAULT_WEB_SET_G_RETURN");
+						$PriceGInfo2 = array(
+								"member_id"=>$rm['id'],
+								"title"=>"Direct Sales Bonus",
+								"type"=>1,
+								"stake_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_G_RETURN/10+$PriceGInfo[0]['stake_price'],
+								"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_G_RETURN/10,
+								"admin_id"=>$User['id'],
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						M("PriceGInfo")->data($PriceGInfo2)->add();
+					}else{
+						//股份奖金 股份钱包
+						$DEFAULT_WEB_SET_G_RETURN = (float)C("DEFAULT_WEB_SET_G_RETURN");
+						$PriceGInfo2 = array(
+								"member_id"=>$rm['id'],
+								"title"=>"Direct Sales Bonus",
+								"type"=>1,
+								"stake_price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_G_RETURN/10,
+								"price"=>$PackageType['bv_price']*$DEFAULT_WEB_SET_G_RETURN/10,
+								"admin_id"=>$User['id'],
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						M("PriceGInfo")->data($PriceGInfo2)->add();
+					}
+					if($bv_member = M("Member")->where(array("id"=>I("p_id")))->find()){
+						if($bv_member['username']!=I("p_name")){
+							$this->success(L("reg-success"),U('Home/Main/downline_tree'));
+						}
+					}
+					if($bv_member['id']!=0){
+						$this->member_add_bv($result,$PackageType['bv_price']);
+					}
+					$this->success(L("reg-success"),U('Home/Main/downline_tree',array('language'=>I('language'))));
+				}else{
+					$this->error(L("public-error"),U('Home/Main/downline_tree',array('language'=>I('language'))));
+				}
+			}
+		}else{
+			$id = I("id");
+			$this->language = I('language');
+			$position = I("position");
+			$User = session("MemberID");
+			if($id==""){
+				echo "<div style='width:100%;height:50px;text-align: center;line-height: 50px;'>无上级用户，无法注册</div>";
+				die;
+			}
+			$this->PriceInfo = M("PriceInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->limit(1)->order("id desc")->select();
+			$this->PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->limit(1)->order("id desc")->select();
+			$this->PackageTypeList = M("PackageType")->where(array("delete"=>0,"status"=>1))->select();
+			$this->Member = M("Member")->where(array("delete"=>0,"id"=>I("id")))->find();
+			$this->CountryList = M("Country")->where(array("delete"=>0,"status"=>1))->select();
+			$this->Position = $position;
+			$this->position_sit = I("position_sit");
+			$this->User = $User;
+			$this->display();
+		}
+	}
+	public function direct_tree(){
+		$User = session("MemberID");
+		$this->Member = $User;
+		$this->display();
+	}
+	public function digitcoin_wallet(){
+		$User = session("MemberID");
+		$where = array("delete"=>0,"member_id"=>$User['id']);
+		//$where["_string"] = "type in (2,1)";
+		$starttime = I("starttime");
+		$endtime = I("endtime");
+		if($starttime!=""&&$endtime!=""){
+			if($starttime>$endtime){
+				$this->error(L('time-error'));
+			}
+			if($starttime==$endtime){
+				$where["_string"] = "adddate = '".$starttime."'";
+			}else{
+				$where["_string"] = "adddate between '".$starttime."' and '".$endtime."'";
+			}
+			$this->starttime = $starttime;
+			$this->endtime = $endtime;
+		}
+		$page_set = I("page_set",10);
+		$count = M("DigitCoinInfo")->where($where)->order("id desc")->count();
+		$Page = new \Think\Page($count,$page_set);
+		foreach($where as $key=>$val) {
+			$Page->parameter[$key] = urlencode($val);
+		}
+		if($starttime!=""){
+			$Page->parameter["starttime"] = urlencode($starttime);
+		}
+		if($endtime!=""){
+			$Page->parameter["endtime"] = urlencode($endtime);
+		}
+		$show = $Page->show();
+		$list = M("DigitCoinInfo")->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$this->assign('DigitCoinInfoList',$list);
+		$this->assign('page',$show);
+		$this->p = I("p",1);
+		$this->count = $count;
+		$this->page_set = $page_set;
+		$this->Member = $User;
+		if($count>$page_set){
+			$this->count_status = 1;
+		}
+		$this->display();
+	}
+	public function digitcoin_wallet_over(){
+		$User = session("MemberID");
+		$where = array("delete"=>0,"member_id"=>$User['id']);
+		$where["_string"] = "type in (2)";
+		$starttime = I("starttime");
+		$endtime = I("endtime");
+		if($starttime!=""&&$endtime!=""){
+			if($starttime>$endtime){
+				$this->error(L('time-error'));
+			}
+			if($starttime==$endtime){
+				$where["_string"] = "adddate = '".$starttime."'";
+			}else{
+				$where["_string"] = "adddate between '".$starttime."' and '".$endtime."'";
+			}
+			$this->starttime = $starttime;
+			$this->endtime = $endtime;
+		}
+		$page_set = I("page_set",10);
+		$count = M("DigitCoinInfo")->where($where)->order("id desc")->count();
+		$Page = new \Think\Page($count,$page_set);
+		foreach($where as $key=>$val) {
+			$Page->parameter[$key] = urlencode($val);
+		}
+		if($starttime!=""){
+			$Page->parameter["starttime"] = urlencode($starttime);
+		}
+		if($endtime!=""){
+			$Page->parameter["endtime"] = urlencode($endtime);
+		}
+		$show = $Page->show();
+		$list = M("DigitCoinInfo")->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$this->assign('DigitCoinInfoList',$list);
+		$this->assign('page',$show);
+		$this->p = I("p",1);
+		$this->count = $count;
+		$this->page_set = $page_set;
+		if($count>$page_set){
+			$this->count_status = 1;
+		}
+		$this->Member = $User;
+		$this->display();
+	}
+	public function cash_wallet(){
+		$User = session("MemberID");
+		$where = array("delete"=>0,"member_id"=>$User['id']);
+		$where["_string"] = "type in (1,3,5,7,9,10)";
+		$starttime = I("starttime");
+		$endtime = I("endtime");
+		if($starttime!=""&&$endtime!=""){
+			if($starttime>$endtime){
+				$this->error(L('time-error'));
+			}
+			if($starttime==$endtime){
+				$where["_string"] = "adddate = '".$starttime."'";
+			}else{
+				$where["_string"] = "adddate between '".$starttime."' and '".$endtime."'";
+			}
+			$this->starttime = $starttime;
+			$this->endtime = $endtime;
+		}
+		$page_set = I("page_set",10);
+		$count = M("PriceInfo")->where($where)->order("id desc")->count();
+		$Page = new \Think\Page($count,$page_set);
+		foreach($where as $key=>$val) {
+			$Page->parameter[$key] = urlencode($val);
+		}
+		if($starttime!=""){
+			$Page->parameter["starttime"] = urlencode($starttime);
+		}
+		if($endtime!=""){
+			$Page->parameter["endtime"] = urlencode($endtime);
+		}
+		$show = $Page->show();
+		$list = M("PriceInfo")->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$this->assign('PriceInfoList',$list);
+		$this->assign('page',$show);
+		$this->p = I("p",1);
+		$this->count = $count;
+		$this->page_set = $page_set;
+		if($count>$page_set){
+			$this->count_status = 1;
+		}
+		$this->Member = $User;
+		$this->display();
+	}
+	public function bcash_wallet(){
+		$User = session("MemberID");
+		$where = array("delete"=>0,"member_id"=>$User['id']);
+		$where["_string"] = "type in (1,3,5,7,9,10)";
+		$starttime = I("starttime");
+		$endtime = I("endtime");
+		if($starttime!=""&&$endtime!=""){
+			if($starttime>$endtime){
+				$this->error(L('time-error'));
+			}
+			if($starttime==$endtime){
+				$where["_string"] = "adddate = '".$starttime."'";
+			}else{
+				$where["_string"] = "adddate between '".$starttime."' and '".$endtime."'";
+			}
+			$this->starttime = $starttime;
+			$this->endtime = $endtime;
+		}
+		$page_set = I("page_set",10);
+		$count = M("PriceBInfo")->where($where)->order("id desc")->count();
+		$Page = new \Think\Page($count,$page_set);
+		foreach($where as $key=>$val) {
+			$Page->parameter[$key] = urlencode($val);
+		}
+		if($starttime!=""){
+			$Page->parameter["starttime"] = urlencode($starttime);
+		}
+		if($endtime!=""){
+			$Page->parameter["endtime"] = urlencode($endtime);
+		}
+		$show = $Page->show();
+		$list = M("PriceBInfo")->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$this->assign('PriceBInfoList',$list);
+		$this->assign('page',$show);
+		$this->p = I("p",1);
+		$this->count = $count;
+		$this->page_set = $page_set;
+		if($count>$page_set){
+			$this->count_status = 1;
+		}
+		$this->Member = $User;
+		$this->display();
+	}
+	public function mandatory_wallet(){
+		$User = session("MemberID");
+		$where = array("delete"=>0,"member_id"=>$User['id']);
+		$where["_string"] = "type in (1,3,5,7,9,10)";
+		$starttime = I("starttime");
+		$endtime = I("endtime");
+		if($starttime!=""&&$endtime!=""){
+			if($starttime>$endtime){
+				$this->error(L('time-error'));
+			}
+			if($starttime==$endtime){
+				$where["_string"] = "adddate = '".$starttime."'";
+			}else{
+				$where["_string"] = "adddate between '".$starttime."' and '".$endtime."'";
+			}
+			$this->starttime = $starttime;
+			$this->endtime = $endtime;
+		}
+		$page_set = I("page_set",10);
+		$count = M("PriceRInfo")->where($where)->order("id desc")->count();
+		$Page = new \Think\Page($count,$page_set);
+		foreach($where as $key=>$val) {
+			$Page->parameter[$key] = urlencode($val);
+		}
+		if($starttime!=""){
+			$Page->parameter["starttime"] = urlencode($starttime);
+		}
+		if($endtime!=""){
+			$Page->parameter["endtime"] = urlencode($endtime);
+		}
+		$show = $Page->show();
+		$list = M("PriceRInfo")->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$this->assign('MandatoryWalletList',$list);
+		$this->assign('page',$show);
+		$this->p = I("p",1);
+		$this->count = $count;
+		$this->page_set = $page_set;
+		if($count>$page_set){
+			$this->count_status = 1;
+		}
+		$this->Member = $User;
+		$this->display();
+	}
+	public function stock_wallet(){
+		$User = session("MemberID");
+		$where = array("delete"=>0,"member_id"=>$User['id']);
+		$where["_string"] = "type in (1,3,5,7,9,10)";
+		$starttime = I("starttime");
+		$endtime = I("endtime");
+		if($starttime!=""&&$endtime!=""){
+			if($starttime>$endtime){
+				$this->error(L('time-error'));
+			}
+			if($starttime==$endtime){
+				$where["_string"] = "adddate = '".$starttime."'";
+			}else{
+				$where["_string"] = "adddate between '".$starttime."' and '".$endtime."'";
+			}
+			$this->starttime = $starttime;
+			$this->endtime = $endtime;
+		}
+		$page_set = I("page_set",10);
+		$count = M("PriceGInfo")->where($where)->order("id desc")->count();
+		$Page = new \Think\Page($count,$page_set);
+		foreach($where as $key=>$val) {
+			$Page->parameter[$key] = urlencode($val);
+		}
+		if($starttime!=""){
+			$Page->parameter["starttime"] = urlencode($starttime);
+		}
+		if($endtime!=""){
+			$Page->parameter["endtime"] = urlencode($endtime);
+		}
+		$show = $Page->show();
+		$list = M("PriceGInfo")->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$this->assign('StockWalletList',$list);
+		$this->assign('page',$show);
+		$this->p = I("p",1);
+		$this->count = $count;
+		$this->page_set = $page_set;
+		if($count>$page_set){
+			$this->count_status = 1;
+		}
+		$this->Member = $User;
+		$this->display();
+	}
+	public function pop_transfer(){
+		$User = session("MemberID");
+		if(IS_POST){
+			$paypass = I("paypass");
+			$out_s_price = I("out_s_price",0,"float");
+			$out_b_price = I("out_b_price",0,"float");
+			if($paypass!=$User['paypass']){
+				$this->error("交易密码错误！");
+			}
+			//查询会员
+			if(!$Member = M("Member")->Where(array("username"=>I("username"),"delete"=>0))->find()){
+				$this->error("未找到转移用户");
+			}
+			if($Member['id']==$User['id']){
+				$this->error("转移用户不能为自己!");
+			}
+			$results = 1;
+			if($out_s_price>0){
+				//查询 转出用户 金额
+				$PriceInfo = M("PriceInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->order("id desc")->limit(1)->select();
+				if(count($PriceInfo)<=0){
+					$this->error("用户余额不足!");
+				}
+				if($out_s_price>$PriceInfo[0]['s_price']){
+					$this->error("用户余额不足！");
+				}
+				//查询 接收用户 金额
+				$MemberPriceInfo = M("PriceInfo")->where(array("delete"=>0,"member_id"=>$Member['id']))->order("id desc")->limit(1)->select();
+				if(count($MemberPriceInfo)>0){
+					$PriceInfo[0]['id']=null;
+					$PriceInfo[0]['type'] = 9;//类型 9  s币转移出
+					$PriceInfo[0]['s_price'] = $PriceInfo[0]['s_price'] - $out_s_price;
+					$PriceInfo[0]['title'] = "Seng to <span class='margin-left-20 label bg-color-blueDark txt-color-white'>".I('username')."</span>";
+					$PriceInfo[0]['remark'] = "";
+					$PriceInfo[0]['price'] = $out_s_price;
+					if ($resultNum = M("PriceInfo")->data($PriceInfo[0])->add()){
+						$MemberPriceInfo[0]['id'] = null;
+						$MemberPriceInfo[0]['type'] = 10;//类型 9  s币接收
+						$MemberPriceInfo[0]['s_price'] = $MemberPriceInfo[0]['s_price'] + $out_s_price;
+						$MemberPriceInfo[0]['title'] = "Send to Cash";
+						$MemberPriceInfo[0]['remark'] = "";
+						$MemberPriceInfo[0]['price'] = $out_s_price;
+						if (!$results = M("PriceInfo")->data($MemberPriceInfo[0])->add()){
+							$this->error(L("public-error"));
+						}
+					}else{
+						$this->error(L("public-error"));
+					}
+				}else{
+					$PriceInfo[0]['id']=null;
+					$PriceInfo[0]['type'] = 9;//类型 9  s币转移
+					$PriceInfo[0]['s_price'] = $PriceInfo[0]['s_price'] - $out_s_price;
+					$PriceInfo[0]['title'] = "Seng to <span class='margin-left-20 label bg-color-blueDark txt-color-white'>".I('username')."</span>";
+					$PriceInfo[0]['remark'] = "";
+					$PriceInfo[0]['price'] = $out_s_price;
+					if ($resultNum = M("PriceInfo")->data($PriceInfo[0])->add()){
+						$data = array(
+								"type"=>10,
+								"s_price"=>$out_s_price,
+								"price"=>$out_s_price,
+								"title"=>"Send to Cash",
+								"remark"=>"",
+								"member_id"=>$Member['id'],
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time())
+						);
+						if (!$results = M("PriceInfo")->data($data)->add()){
+							$this->error(L("public-error"));//"转移S币失败"
+						}
+					}else{
+						$this->error(L("public-error"));//"转出S币失败"
+					}
+				}
+			}
+			$result = 1;
+			if($out_b_price>0){
+				//查询 转出用户 金额
+				$PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->order("id desc")->limit(1)->select();
+				if(count($PriceBInfo)<=0){
+					$this->error(L("money-error"));//"用户余额不足!"
+				}
+				if($out_b_price>$PriceBInfo[0]['b_price']){
+					$this->error(L("money-error"));//"用户余额不足！"
+				}
+				//查询 转移到用户 金额
+				$MemberPriceInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$Member['id']))->order("id desc")->limit(1)->select();
+				if(count($MemberPriceInfo)>0){
+					$PriceBInfo[0]['id']=null;
+					$PriceBInfo[0]['type'] = 9;//类型 11  B币转出
+					$PriceBInfo[0]['b_price'] = $PriceBInfo[0]['b_price'] - $out_b_price;
+					$PriceBInfo[0]['title'] = "Seng to <span class='margin-left-20 label bg-color-blueDark txt-color-white'>".I('username')."</span>";
+					$PriceBInfo[0]['remark'] = "";
+					$PriceBInfo[0]['price'] = $out_b_price;
+					if ($resultNum = M("PriceBInfo")->data($PriceBInfo[0])->add()){
+						$MemberPriceInfo[0]['id'] = null;
+						$MemberPriceInfo[0]['type'] = 10;//类型 12  b币转入
+						$MemberPriceInfo[0]['b_price'] = $MemberPriceInfo[0]['b_price'] + $out_b_price;
+						$MemberPriceInfo[0]['title'] = "Send to Cash";
+						$MemberPriceInfo[0]['remark'] = "";
+						$MemberPriceInfo[0]['price'] = $out_b_price;
+						if (!$result = M("PriceBInfo")->data($MemberPriceInfo[0])->add()){
+							$this->error(L("public-error"));//"转移B币失败"
+						}
+					}else{
+						$this->error(L("public-error"));//"转出B币失败"
+					}
+				}else{
+					$PriceBInfo[0]['id']=null;
+					$PriceBInfo[0]['type'] = 9;//类型 11  B币转出
+					$PriceBInfo[0]['b_price'] = $PriceBInfo[0]['b_price'] - $out_b_price;
+					$PriceBInfo[0]['title'] = "Seng to <span class='margin-left-20 label bg-color-blueDark txt-color-white'>".I('username')."</span>";
+					$PriceBInfo[0]['remark'] = "";
+					$PriceBInfo[0]['price'] = $out_b_price;
+					if ($resultNum = M("PriceBInfo")->data($PriceBInfo[0])->add()){
+						$data = array(
+								"type"=>10,//类型 12  b币转入
+								"b_price"=>$out_b_price,
+								"price"=>$out_b_price,
+								"title"=>"Send to Cash",
+								"remark"=>"",
+								"member_id"=>$Member['id'],
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time())
+						);
+						if (!$result = M("PriceBInfo")->data($data)->add()){
+							$this->error(L("public-error"));//"转移B币失败"
+						}
+					}else{
+						$this->error(L("public-error"));//"转出B币失败"
+					}
+				}
+			}
+			if($results&&$result){
+				$this->success(L("public-success"));
+			}else{
+				$this->error(L("public-error"));//"转移失败"
+			}
+		}else{
+			$PriceInfo = M("PriceInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->order("id desc")->limit(1)->select();
+			$PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$User['id']))->order("id desc")->limit(1)->select();
+			$this->PriceBInfo = $PriceBInfo;
+			$this->PriceInfo = $PriceInfo;
+			$this->display();
+		}
+	}
+	public function deposit_bitcoin(){
+		$User = session("MemberID");
+		$Member = M("Member")->where(array("member_id"=>$User['id']))->find();
+		if($Member['dgcpass']!=""){
+			$this->Member = $Member;
+			$this->display();			
+		}else{
+			$this->error("您还没有生成电子钱包",U("Home/Main/register_coinAccount"));		
+		}	
+	}
+	public function deposit_cash(){
+		$User = session("MemberID");
+		if(IS_POST){
+			$Cash = D("Cash");
+			if (!$Cash->create()){
+				$this->error($Cash->getError(),U('Home/Main/deposit_cash',array('language'=>I('language'))));
+			}else{
+				$result = $Cash->add();
+				if($result||$result==0){
+					$this->success(L("public-success"),U('Home/Main/deposit_cash',array('language'=>I('language'))));
+				}else{
+					$this->error(L("public-error"),U('Home/Main/deposit_cash',array('language'=>I('language'))));
+				}
+			}
+		}else{
+			$where = array("member_id"=>$User['id'],"delete"=>0);
+			$count = M("Cash")->where($where)->count();
+			$Page = new \Think\Page($count,10);
+			$show = $Page->show();
+			$list = M("Cash")->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+			$this->assign('CashList',$list);
+			$this->assign('page',$show);
+			$this->p = I("p",0);
+			if($count>10){
+				$this->count_status = 1;
+			}
+			$this->Member = $User;
+			$this->display();
+		}
+	}
+	public function pop_cash(){
+		$User = session("MemberID");
+		$id = I("id");
+		if($id==""){
+			$this->error("系统错误！");
+		}
+		$this->Cash = M("Cash")->where(array("member_id"=>$User['id'],"delete"=>0,"id"=>$id))->find();
+		$this->display();
+	}
+	public function register_coinAccount(){
+		$User = session("MemberID");
+		$Member = M("Member")->where(array("id"=>$User['id']))->find();
+		if($Member['dgcpass']!=""){
+			$User = $Member;
+		}
+		$this->Member = $User;
+		$this->display();
+	}
+	public function commission1(){
+		$User = session("MemberID");
+		$where = array("delete"=>0,"member_id"=>$User['id']);
+		$page_set = I("page_set",10);
+		$count = M("RecomBonus")->where($where)->order("id desc")->count();
+		$Page = new \Think\Page($count,$page_set);
+		foreach($where as $key=>$val) {
+			$Page->parameter[$key] = urlencode($val);
+		}
+		$show = $Page->show();
+		$list = M("RecomBonus")->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$this->assign('RecomBonusList',$list);
+		$this->assign('page',$show);
+		$this->p = I("p",1);
+		$this->count = $count;
+		$this->page_set = $page_set;
+		if($count>$page_set){
+			$this->count_status = 1;
+		}
+		$this->Member = $User;
+		$this->display();
+	}
+	public function pop_detail_bonus2(){
+		$User = session("MemberID");
+		$where = array("delete"=>0,"member_id"=>$User['id'],"id"=>I("id"));
+		if($RecomBonus = M("RecomBonus")->where($where)->find()){
+			//$Member = M("Member")->where(array("id"=>$RecomBonus['register_id']))->find();
+			//$RecomBonus['register_username'] = $Member['username'];
+			$this->RecomBonus = $RecomBonus;
+			$this->display();
+		}else{
+			$this->error("未找到该用户");
+		}
+	}
+	public function commission(){
+		$Member = session("MemberID");
+		$Left = M("Member")->where(array("p_id"=>$Member['id'],"position"=>0))->find();
+		$LeftBvPriceInfo = M("BvPriceInfo")->where(array("delete"=>0,"member_id"=>$Member['id'],"position"=>0))->order("id desc")->find();
+		$this->LeftBvPriceInfo = number_format($LeftBvPriceInfo['bv_price'], 2, '.', '');
+		$Right = M("Member")->where(array("p_id"=>$Member['id'],"position"=>1))->find();
+		$RightBvPriceInfo = M("BvPriceInfo")->where(array("delete"=>0,"member_id"=>$Member['id'],"position"=>1))->order("id desc")->find();
+		$this->RightBvPriceInfo = number_format($RightBvPriceInfo['bv_price'], 2, '.', '');
+		$this->CountMember = M("Member")->where(array("r_id"=>$Member['id']))->count();
+		$MemberList = M("Member")->field("id,p_id")->select();
+		$CountR = member_number($MemberList,$Right['id']);
+		$arrayR = array_multi2single($CountR);
+		if($Right){
+			$this->CountR = count($arrayR)+1;
+		}else{
+			$this->CountR = 0;
+		}
+		$CountL = member_number($MemberList,$Left['id']);
+		$arrayL = array_multi2single($CountL);
+		if($Left){
+			$this->CountL = count($arrayL)+1;
+		}else{
+			$this->CountL = 0;
+		}
+		$where = array("delete"=>0,"member_id"=>$Member['id']);
+		$page_set = I("page_set",10);
+		$count = M("BvInfo")->where($where)->order("id desc")->count();
+		$Page = new \Think\Page($count,$page_set);
+		foreach($where as $key=>$val) {
+			$Page->parameter[$key] = urlencode($val);
+		}
+		$show = $Page->show();
+		$list = M("BvInfo")->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$this->assign('BvInfoList',$list);
+		$this->assign('page',$show);
+		$this->p = I("p",1);
+		$this->count = $count;
+		$this->page_set = $page_set;
+		if($count>$page_set){
+			$this->count_status = 1;
+		}
+		$this->display();
+	}
+	public function member_add_bv($pid = 0,$bv_price){
+		$Member = session("MemberID");
+		$MemberList = M("Member")->field("r_id,p_id,id")->where(array("delete"=>0))->select();
+		$list = member_bv($MemberList,$pid);
+		$array=array_multi2single($list);
+		foreach($array as $val){
+			if($val['id']==0){
+				break;
+			}
+			$m = M("Member")->where(array("id"=>$val['id']))->find();
+			$BvPriceInfo = M("BvPriceInfo")->where(array("delete"=>0,"member_id"=>$m['p_id'],"position"=>$m['position']))->find();
+			if($BvPriceInfo){
+				//BV奖金
+				$BvPriceInfo2 = array(
+						"id"=>$BvPriceInfo["id"],
+						"member_id"=>$m['p_id'],
+						"member_username"=>$m['p_name'],
+						"bv_price"=>($bv_price+$BvPriceInfo['bv_price']),
+						"bv_change_price"=>($bv_price+$BvPriceInfo['bv_change_price']),
+						"position"=>$m['position'],
+						"adddate"=>date("Y-m-d",time()),
+						"addtime"=>date("Y-m-d H:i:s",time()),
+				);
+				M("BvPriceInfo")->data($BvPriceInfo2)->save();
+			}else{
+				//BV奖金
+				$BvPriceInfo2 = array(
+						"member_id"=>$m['p_id'],
+						"member_username"=>$m['p_name'],
+						"bv_price"=>$bv_price,
+						"bv_change_price"=>$bv_price,
+						"position"=>$m['position'],
+						"adddate"=>date("Y-m-d",time()),
+						"addtime"=>date("Y-m-d H:i:s",time()),
+				);
+				M("BvPriceInfo")->data($BvPriceInfo2)->add();
+			}
+			if($m['p_id']!=0){
+				$BvP = M("BvInfo")->where(array("delete"=>0,"member_id"=>$m['p_id']))->order("id desc")->limit(1)->select();
+				$bv_info = array(
+						"member_id"=>$m['p_id'],
+						"member_username"=>$m['p_name'],
+						"admin_id"=>$pid,
+						"adddate"=>date("Y-m-d",time()),
+						"addtime"=>date("Y-m-d H:i:s",time()),
+				);
+				if(count($BvP)==1){
+					if($m['position']==0){
+						$bv_info["left_price"] = $bv_price;
+						$bv_info["new_left_price"]=($bv_price+$BvPriceInfo['bv_change_price']);
+						$bv_info["over_left_price"]=$BvP[0]['new_left_price'];
+					}else{
+						$bv_info["right_price"] = $bv_price;
+						$bv_info["new_right_price"]=($bv_price+$BvPriceInfo['bv_change_price']);
+						$bv_info["over_right_price"]=$BvP[0]['new_right_price'];
+					}
+				}else{
+					if($m['position']==0){
+						$bv_info["left_price"] = $bv_price;
+						$bv_info["new_left_price"] = $bv_price;
+					}else{
+						$bv_info["right_price"] = $bv_price;
+						$bv_info["new_right_price"] = $bv_price;
+					}
+				}
+				M("BvInfo")->data($bv_info)->add();
+
+			}
+			$DEFAULT_WEB_SET_SPONSOR = (float)C("DEFAULT_WEB_SET_SPONSOR");
+
+			$BvPrice = M("BvPriceInfo")->where(array("delete"=>0,"member_id"=>$m['p_id']))->order("position")->select();
+			if(count($BvPrice)==2){
+				$BvChangePrice = 0;
+				if($BvPrice[0]["bv_change_price"]!=0&&$BvPrice[1]["bv_change_price"]!=0){
+					if($BvPrice[0]["bv_change_price"]==$BvPrice[1]["bv_change_price"]){
+						M("BvPriceInfo")->where(array("delete"=>0,"member_id"=>$m['p_id'],"position"=>0))->data(array("bv_change_price"=>0))->save();
+						M("BvPriceInfo")->where(array("delete"=>0,"member_id"=>$m['p_id'],"position"=>1))->data(array("bv_change_price"=>0))->save();
+						$bv_info = array(
+							"member_id"=>$m['p_id'],
+							"member_username"=>$m['p_name'],
+							"dv_price"=>$BvPrice[0]["bv_change_price"]*$DEFAULT_WEB_SET_SPONSOR,
+							"over_left_price"=>$BvPrice[0]["bv_change_price"],
+							"over_right_price"=>$BvPrice[1]["bv_change_price"],
+							"admin_id"=>$pid,
+							"adddate"=>date("Y-m-d",time()),
+							"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						$BvChangePrice = $BvPrice[0]["bv_change_price"];
+						M("BvInfo")->data($bv_info)->add();
+					}else{
+						if($BvPrice[0]["bv_change_price"]>$BvPrice[1]["bv_change_price"]){
+							M("BvPriceInfo")->where(array("delete"=>0,"member_id"=>$m['p_id'],"position"=>0))->data(array("bv_change_price"=>($BvPrice[0]["bv_change_price"]-$BvPrice[1]["bv_change_price"])))->save();
+							M("BvPriceInfo")->where(array("delete"=>0,"member_id"=>$m['p_id'],"position"=>1))->data(array("bv_change_price"=>0))->save();
+							$bv_info = array(
+									"member_id"=>$m['p_id'],
+									"member_username"=>$m['p_name'],
+									"dv_price"=>$BvPrice[1]["bv_change_price"]*$DEFAULT_WEB_SET_SPONSOR,
+									"new_left_price"=>$BvPrice[0]["bv_change_price"]-$BvPrice[1]["bv_change_price"],
+									"over_left_price"=>$BvPrice[0]["bv_change_price"],
+									"over_right_price"=>$BvPrice[1]["bv_change_price"],
+									"admin_id"=>$pid,
+									"adddate"=>date("Y-m-d",time()),
+									"addtime"=>date("Y-m-d H:i:s",time()),
+							);
+							$BvChangePrice = $BvPrice[1]["bv_change_price"];
+							M("BvInfo")->data($bv_info)->add();
+						}else{
+							M("BvPriceInfo")->where(array("delete"=>0,"member_id"=>$m['p_id'],"position"=>0))->data(array("bv_change_price"=>0))->save();
+							M("BvPriceInfo")->where(array("delete"=>0,"member_id"=>$m['p_id'],"position"=>1))->data(array("bv_change_price"=>($BvPrice[1]["bv_change_price"]-$BvPrice[0]["bv_change_price"])))->save();
+							$bv_info = array(
+									"member_id"=>$m['p_id'],
+									"member_username"=>$m['p_name'],
+									"dv_price"=>$BvPrice[0]["bv_change_price"]*$DEFAULT_WEB_SET_SPONSOR,
+									"new_left_price"=>0,
+									"new_right_price"=>$BvPrice[1]["bv_change_price"]-$BvPrice[0]["bv_change_price"],
+									"over_left_price"=>$BvPrice[0]["bv_change_price"],
+									"over_right_price"=>$BvPrice[1]["bv_change_price"],
+									"admin_id"=>session("PiID"),
+									"adddate"=>date("Y-m-d",time()),
+									"addtime"=>date("Y-m-d H:i:s",time()),
+							);
+							$BvChangePrice = $BvPrice[0]["bv_change_price"];
+							M("BvInfo")->data($bv_info)->add();
+						}
+					}
+					//奖金分配
+					$PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$m['p_id']))->order("id desc")->limit(1)->select();
+					if(count($PriceBInfo)>0){
+						//B币奖金  B币钱包
+						$DEFAULT_WEB_SET_B_RETURN = (float)C("DEFAULT_WEB_SET_B_RETURN");
+						$PriceBInfo2 = array(
+								"member_id"=>$m['p_id'],
+								"title"=>"Network Bonus",
+								"type"=>1,
+								"b_price"=>$BvChangePrice*$DEFAULT_WEB_SET_B_RETURN/10+$PriceBInfo[0]['b_price'],
+								"price"=>$BvChangePrice*$DEFAULT_WEB_SET_B_RETURN/10,
+								"admin_id"=>$Member['id'],
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						M("PriceBInfo")->data($PriceBInfo2)->add();
+					}else{
+						//B币奖金  B币钱包
+						$DEFAULT_WEB_SET_B_RETURN = (float)C("DEFAULT_WEB_SET_B_RETURN");
+						$PriceBInfo2 = array(
+								"member_id"=>$m['p_id'],
+								"title"=>"Network Bonus",
+								"type"=>1,
+								"b_price"=>$BvChangePrice*$DEFAULT_WEB_SET_B_RETURN/10,
+								"price"=>$BvChangePrice*$DEFAULT_WEB_SET_B_RETURN/10,
+								"admin_id"=>$Member['id'],
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						M("PriceBInfo")->data($PriceBInfo2)->add();
+					}
+
+					$PriceRInfo = M("PriceRInfo")->where(array("delete"=>0,"member_id"=>$m['p_id']))->order("id desc")->limit(1)->select();
+					if(count($PriceRInfo)>0){
+						//重购奖金 重构钱包
+						$DEFAULT_WEB_SET_R_RETURN = (float)C("DEFAULT_WEB_SET_R_RETURN");
+						$PriceRInfo2 = array(
+								"member_id"=>$m['p_id'],
+								"title"=>"Network Bonus",
+								"type"=>1,
+								"new_price"=>$BvChangePrice*$DEFAULT_WEB_SET_R_RETURN/10+$PriceRInfo[0]['new_price'],
+								"price"=>$BvChangePrice*$DEFAULT_WEB_SET_R_RETURN/10,
+								"admin_id"=>$Member['id'],
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						M("PriceRInfo")->data($PriceRInfo2)->add();
+					}else{
+						//重购奖金 重构钱包
+						$DEFAULT_WEB_SET_R_RETURN = (float)C("DEFAULT_WEB_SET_R_RETURN");
+						$PriceRInfo2 = array(
+								"member_id"=>$m['p_id'],
+								"title"=>"Network Bonus",
+								"type"=>1,
+								"new_price"=>$BvChangePrice*$DEFAULT_WEB_SET_R_RETURN/10,
+								"price"=>$BvChangePrice*$DEFAULT_WEB_SET_R_RETURN/10,
+								"admin_id"=>$Member['id'],
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						M("PriceRInfo")->data($PriceRInfo2)->add();
+					}
+					$PriceGInfo = M("PriceGInfo")->where(array("delete"=>0,"member_id"=>$m['p_id']))->order("id desc")->limit(1)->select();
+					if(count($PriceGInfo)>0){
+						//股份奖金 股份钱包
+						$DEFAULT_WEB_SET_G_RETURN = (float)C("DEFAULT_WEB_SET_G_RETURN");
+						$PriceGInfo2 = array(
+								"member_id"=>$m['p_id'],
+								"title"=>"Network Bonus",
+								"type"=>1,
+								"stake_price"=>$BvChangePrice*$DEFAULT_WEB_SET_G_RETURN/10+$PriceGInfo[0]['stake_price'],
+								"price"=>$BvChangePrice*$DEFAULT_WEB_SET_G_RETURN/10,
+								"admin_id"=>$Member['id'],
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						M("PriceGInfo")->data($PriceGInfo2)->add();
+					}else{
+						//股份奖金 股份钱包
+						$DEFAULT_WEB_SET_G_RETURN = (float)C("DEFAULT_WEB_SET_G_RETURN");
+						$PriceGInfo2 = array(
+								"member_id"=>$m['p_id'],
+								"title"=>"Network Bonus",
+								"type"=>1,
+								"stake_price"=>$BvChangePrice*$DEFAULT_WEB_SET_G_RETURN/10,
+								"price"=>$BvChangePrice*$DEFAULT_WEB_SET_G_RETURN/10,
+								"admin_id"=>$Member['id'],
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						M("PriceGInfo")->data($PriceGInfo2)->add();
+					}
+					//匹配奖金
+					$pp = M("Member")->where(array("id"=>$m['p_id']))->find();
+					$DEFAULT_WEB_SET_MATCH = (float)C("DEFAULT_WEB_SET_MATCH");
+					$Member_o_list = array();
+					$list1 = M("Member")->field("id,r_id,package_type,1 as dai")->where(array('delete'=>0,"id"=>$pp['r_id']))->select();
+					$list2 = M("Member")->field("id,r_id,package_type,2 as dai")->where(array('delete'=>0,"id"=>$list1[0]['r_id']))->select();
+					$list3 = M("Member")->field("id,r_id,package_type,3 as dai")->where(array('delete'=>0,"id"=>$list2[0]['r_id']))->select();
+					$list4 = M("Member")->field("id,r_id,package_type,4 as dai")->where(array('delete'=>0,"id"=>$list3[0]['r_id']))->select();
+					$list5 = M("Member")->field("id,r_id,package_type,5 as dai")->where(array('delete'=>0,"id"=>$list4[0]['r_id']))->select();
+					$list6 = M("Member")->field("id,r_id,package_type,6 as dai")->where(array('delete'=>0,"id"=>$list5[0]['r_id']))->select();
+
+					if(count($list1)>0){
+						$Member_o_list = $list1;
+						if($list2[0]['package_type']>=2&&count($list2)==1){
+							$Member_o_list = array_merge($Member_o_list,$list2);
+						}
+						if($list3[0]['package_type']>=3&&count($list3)==1){
+							$Member_o_list = array_merge($Member_o_list,$list3);
+						}
+						if($list4[0]['package_type']>=4&&count($list4)==1){
+							$Member_o_list = array_merge($Member_o_list,$list4);
+						}
+						if($list5[0]['package_type']>=5&&count($list5)==1){
+							$Member_o_list = array_merge($Member_o_list,$list5);
+						}
+						if($list6[0]['package_type']>=6&&count($list6)==1){
+							$Member_o_list = array_merge($Member_o_list,$list6);
+						}
+						foreach($Member_o_list as $item){
+							//奖金分配
+							$PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$item['id']))->order("id desc")->limit(1)->select();
+							if(count($PriceBInfo)>0){
+								//B币奖金  B币钱包
+								$DEFAULT_WEB_SET_B_RETURN = (float)C("DEFAULT_WEB_SET_B_RETURN");
+								$PriceBInfo2 = array(
+										"member_id"=>$item['id'],
+										"title"=>"Matching Bonus",
+										"type"=>1,
+										"b_price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice*$DEFAULT_WEB_SET_B_RETURN/10+$PriceBInfo[0]['b_price'],
+										"price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice*$DEFAULT_WEB_SET_B_RETURN/10,
+										"admin_id"=>$Member['id'],
+										"adddate"=>date("Y-m-d",time()),
+										"addtime"=>date("Y-m-d H:i:s",time()),
+								);
+								M("PriceBInfo")->data($PriceBInfo2)->add();
+							}else{
+								//B币奖金  B币钱包
+								$DEFAULT_WEB_SET_B_RETURN = (float)C("DEFAULT_WEB_SET_B_RETURN");
+								$PriceBInfo2 = array(
+										"member_id"=>$item['id'],
+										"title"=>"Matching Bonus",
+										"type"=>1,
+										"b_price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice*$DEFAULT_WEB_SET_B_RETURN/10,
+										"price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice*$DEFAULT_WEB_SET_B_RETURN/10,
+										"admin_id"=>$Member['id'],
+										"adddate"=>date("Y-m-d",time()),
+										"addtime"=>date("Y-m-d H:i:s",time()),
+								);
+								M("PriceBInfo")->data($PriceBInfo2)->add();
+							}
+
+							$PriceRInfo = M("PriceRInfo")->where(array("delete"=>0,"member_id"=>$item['id']))->order("id desc")->limit(1)->select();
+							if(count($PriceRInfo)>0){
+								//重购奖金 重构钱包
+								$DEFAULT_WEB_SET_R_RETURN = (float)C("DEFAULT_WEB_SET_R_RETURN");
+								$PriceRInfo2 = array(
+										"member_id"=>$item['id'],
+										"title"=>"Matching Bonus",
+										"type"=>1,
+										"new_price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice*$DEFAULT_WEB_SET_R_RETURN/10+$PriceRInfo[0]['new_price'],
+										"price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice*$DEFAULT_WEB_SET_R_RETURN/10,
+										"admin_id"=>$Member['id'],
+										"adddate"=>date("Y-m-d",time()),
+										"addtime"=>date("Y-m-d H:i:s",time()),
+								);
+								M("PriceRInfo")->data($PriceRInfo2)->add();
+							}else{
+								//重购奖金 重构钱包
+								$DEFAULT_WEB_SET_R_RETURN = (float)C("DEFAULT_WEB_SET_R_RETURN");
+								$PriceRInfo2 = array(
+										"member_id"=>$item['id'],
+										"title"=>"Matching Bonus",
+										"type"=>1,
+										"new_price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice*$DEFAULT_WEB_SET_R_RETURN/10,
+										"price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice*$DEFAULT_WEB_SET_R_RETURN/10,
+										"admin_id"=>$Member['id'],
+										"adddate"=>date("Y-m-d",time()),
+										"addtime"=>date("Y-m-d H:i:s",time()),
+								);
+								M("PriceRInfo")->data($PriceRInfo2)->add();
+							}
+							$PriceGInfo = M("PriceGInfo")->where(array("delete"=>0,"member_id"=>$item['id']))->order("id desc")->limit(1)->select();
+							if(count($PriceGInfo)>0){
+								//股份奖金 股份钱包
+								$DEFAULT_WEB_SET_G_RETURN = (float)C("DEFAULT_WEB_SET_G_RETURN");
+								$PriceGInfo2 = array(
+										"member_id"=>$item['id'],
+										"title"=>"Matching Bonus",
+										"type"=>1,
+										"stake_price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice*$DEFAULT_WEB_SET_G_RETURN/10+$PriceGInfo[0]['stake_price'],
+										"price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice*$DEFAULT_WEB_SET_G_RETURN/10,
+										"admin_id"=>$Member['id'],
+										"adddate"=>date("Y-m-d",time()),
+										"addtime"=>date("Y-m-d H:i:s",time()),
+								);
+								M("PriceGInfo")->data($PriceGInfo2)->add();
+							}else{
+								//股份奖金 股份钱包
+								$DEFAULT_WEB_SET_G_RETURN = (float)C("DEFAULT_WEB_SET_G_RETURN");
+								$PriceGInfo2 = array(
+										"member_id"=>$item['id'],
+										"title"=>"Matching Bonus",
+										"type"=>1,
+										"stake_price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice*$DEFAULT_WEB_SET_G_RETURN/10,
+										"price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice*$DEFAULT_WEB_SET_G_RETURN/10,
+										"admin_id"=>$Member['id'],
+										"adddate"=>date("Y-m-d",time()),
+										"addtime"=>date("Y-m-d H:i:s",time()),
+								);
+								M("PriceGInfo")->data($PriceGInfo2)->add();
+							}
+
+
+							$PricePInfo = M("PricePInfo")->where(array("delete"=>0,"member_id"=>$item['id']))->limit(1)->select();
+							if(count($PricePInfo)>0){
+								//股份奖金 股份钱包
+								$DEFAULT_WEB_SET_MATCH = (float)C("DEFAULT_WEB_SET_MATCH");
+								//匹配钱包
+								$PricePInfo2 = array(
+										"member_id"=>$item['id'],
+										"title"=>"Matching Bonus",
+										"type"=>$item['dai'],
+										"p_price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice/10+$PriceGInfo[0]['p_price'],
+										"price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice/10,
+										"admin_id"=>$pp['id'],
+										"adddate"=>date("Y-m-d",time()),
+										"addtime"=>date("Y-m-d H:i:s",time()),
+								);
+								M("PricePInfo")->data($PricePInfo2)->add();
+							}else{
+								//股份奖金 股份钱包
+								$DEFAULT_WEB_SET_MATCH = (float)C("DEFAULT_WEB_SET_MATCH");
+								//匹配钱包
+								$PricePInfo2 = array(
+										"member_id"=>$item['id'],
+										"title"=>"Matching Bonus",
+										"type"=>$item['dai'],
+										"p_price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice/10,
+										"price"=>$DEFAULT_WEB_SET_MATCH*$BvChangePrice/10,
+										"admin_id"=>$pp['id'],
+										"adddate"=>date("Y-m-d",time()),
+										"addtime"=>date("Y-m-d H:i:s",time()),
+								);
+								M("PricePInfo")->data($PricePInfo2)->add();
+							}
+
+						}
+					}
+				}
+			}
+
+		}
+	}
+	public function commission2(){
+		$User = session("MemberID");
+		$Price1 = M("PricePInfo")->where(array("delete"=>0,"type"=>1,"member_id"=>$User['id']))->sum('p_price');
+		$this->Price1 = number_format($Price1, 2, '.', '');
+		$Price2 = M("PricePInfo")->where(array("delete"=>0,"type"=>2,"member_id"=>$User['id']))->sum('p_price');
+		$this->Price2 = number_format($Price2, 2, '.', '');
+		$Price3 = M("PricePInfo")->where(array("delete"=>0,"type"=>3,"member_id"=>$User['id']))->sum('p_price');
+		$this->Price3 = number_format($Price3, 2, '.', '');
+		$Price4 = M("PricePInfo")->where(array("delete"=>0,"type"=>4,"member_id"=>$User['id']))->sum('p_price');
+		$this->Price4 = number_format($Price4, 2, '.', '');
+		$Price5 = M("PricePInfo")->where(array("delete"=>0,"type"=>5,"member_id"=>$User['id']))->sum('p_price');
+		$this->Price5 = number_format($Price5, 2, '.', '');
+		$Price6 = M("PricePInfo")->where(array("delete"=>0,"type"=>6,"member_id"=>$User['id']))->sum('p_price');
+		$this->Price6 = number_format($Price6, 2, '.', '');
+		$this->SumPrice = number_format(($Price1+$Price2+$Price3+$Price4+$Price5+$Price6), 2, '.', '');
+		$this->NewTime = date("Y-m-d H:i:s",time());
+		$this->display();
+	}
+	public function pop_detail_bonus3(){
+		$User = session("MemberID");
+		$where = array("delete"=>0,"member_id"=>$User['id']);
+		$page_set = I("page_set",5);
+		$count = M("PricePInfo")->where($where)->order("id desc")->count();
+		$Page = new \Think\Page($count,$page_set);
+		foreach($where as $key=>$val) {
+			$Page->parameter[$key] = urlencode($val);
+		}
+		$show = $Page->show();
+		$list = D("MemberPRelation")->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->relation(true)->select();
+		$this->assign('PricePInfoList',$list);
+		$this->assign('page',$show);
+		$this->p = I("p",0);
+		$this->page_set = $page_set;
+		if($count>$page_set){
+			$this->count_status = 1;
+		}
+		$this->display();
+	}
+	public function pop_detail_bonus1(){
+		$User = session("MemberID");
+		$where = array("delete"=>0,"member_id"=>$User['id'],"id"=>I("id"));
+		if($BvInfo = M("BvInfo")->where($where)->find()){
+			if($Member = M("Member")->where(array("id"=>$BvInfo['admin_id']))->find()){
+				$this->Member = $Member;
+				$this->BvInfo = $BvInfo;
+				$this->display();
+			}else{
+				echo "<div style='width:100%;height:50px;text-align: center;line-height: 50px;'>暂未找到用户</div>";
+				die;
+			}
+		}else{
+			echo "<div style='width:100%;height:50px;text-align: center;line-height: 50px;'>暂未找到用户</div>";
+			die;
+		}
+	}
+	public function team_sales_volume(){
+		$User = session("MemberID");
+		$where = array("delete"=>0,"member_id"=>$User['id']);
+		$starttime = I("starttime");
+		$endtime = I("endtime");
+		if($starttime!=""&&$endtime!=""){
+			if($starttime>$endtime){
+				$this->error(L('time-error'));
+			}
+			if($starttime==$endtime){
+				$where["_string"] = "adddate = '".$starttime."'";
+			}else{
+				$where["_string"] = "adddate between '".$starttime."' and '".$endtime."'";
+			}
+			$this->starttime = $starttime;
+			$this->endtime = $endtime;
+		}
+		$list = M("RecomBonus")->where($where)->field("position,adddate,sum(price) as price")->order("id desc")->group("position,adddate")->select();
+		$newList = array();
+		$l_price = 0;
+		$r_price = 0;
+		foreach($list as $val){
+			foreach($list as $vl){
+				if($val['adddate']==$vl['adddate']){
+					if($vl['position']==1){
+						$newList[$vl['adddate']]['adddate'] = $vl['adddate'];
+						$newList[$vl['adddate']]['r_price'] = $vl['price']*100/8;
+					}else if($vl['position']==0){
+						$newList[$vl['adddate']]['adddate'] = $vl['adddate'];
+						$newList[$vl['adddate']]['l_price'] = $vl['price']*100/8;
+					}
+
+				}
+			}
+		}
+		foreach($newList as $value){
+			$r_price += $value['r_price'];
+			$l_price += $value['l_price'];
+		}
+		$this->l_price = $l_price;
+		$this->r_price = $r_price;
+		$newList = array_values($newList);
+		$count = count($newList);
+		$Page = new \Think\Page($count,10);
+		$show = $Page->show();
+		$lists = array_slice($newList,$Page->firstRow,$Page->listRows);
+		$this->OrderList = $lists;
+		$this->page = $show;
+		$this->count = $count;
+		$this->display();
+	}
+	public function bonusStatistics(){
+		$User = session("MemberID");
+		$where = array("delete"=>0,"member_id"=>$User['id']);
+		$this->subRecom = M("RecomBonus")->where($where)->sum("price");
+		$this->subDvInfo= M("BvInfo")->where($where)->sum("dv_price");
+		$Price1 = M("PricePInfo")->where(array("delete"=>0,"type"=>1,"member_id"=>$User['id']))->sum('p_price');
+		$Price2 = M("PricePInfo")->where(array("delete"=>0,"type"=>2,"member_id"=>$User['id']))->sum('p_price');
+		$Price3 = M("PricePInfo")->where(array("delete"=>0,"type"=>3,"member_id"=>$User['id']))->sum('p_price');
+		$Price4 = M("PricePInfo")->where(array("delete"=>0,"type"=>4,"member_id"=>$User['id']))->sum('p_price');
+		$Price5 = M("PricePInfo")->where(array("delete"=>0,"type"=>5,"member_id"=>$User['id']))->sum('p_price');
+		$Price6 = M("PricePInfo")->where(array("delete"=>0,"type"=>6,"member_id"=>$User['id']))->sum('p_price');
+		$subPrice = $Price1+$Price2+$Price3+$Price4+$Price5+$Price6;
+		$this->subPrice = number_format($subPrice, 2, '.', '');
+		$this->display();
+	}
+	public function register_coin(){
+		$Member = session("MemberID");
+		$Verify = M("Verify")->where(array("delete"=>0,"member_id"=>$Member['id'],"type"=>6))->order("id desc")->limit(1)->select();
+		$time = date("Y-m-d H:i:s",time()-15*60);
+		if($Verify[0]['addtime']<$time){
+			$this->error("认证码已过期 15分钟有效");
+		}
+		if(I("code")!=$Verify[0]['number']){
+			$this->error("认证码不正确");
+		}
+		$DgcMember = D("DgcMember");
+		if (!$DgcMember->create()){
+			$this->error($DgcMember->getError(),U('Home/Main/register_coinAccount'));
+		}else{
+			$result = $DgcMember->save();
+			if($result||$result==0){
+				M("Verify")->where(array("id"=>$Verify[0]['id']))->data(array("delete"=>1))->save();
+				$this->success(L("public-success"),U('Home/Main/register_coinAccount',array("language"=>I("language"))));
+			}else{
+				$this->error(L("public-error"),U('Home/Main/register_coinAccount',array("language"=>I("language"))));
+			}
+		}		
+	}
+	public function pop_transfer_exchange(){
+		$Member = session("MemberID");
+		$PriceBInfo = M("PriceBInfo")->where(array("delete"=>0,"member_id"=>$Member['id']))->order("id desc")->limit(1)->select();
+		$this->PriceBInfo = $PriceBInfo;
+		if(IS_POST){	
+			$price = I("price",0,"int");
+			$paypass = I("paypass");
+			if($Member['paypass']==$paypass){
+				if($price<$PriceBInfo[0]['b_price']&&$price>0){
+					$map = array(
+							"type"=>3,
+							"member_username"=>$Member["username"],
+							"member_id"=>$Member["id"],
+							"user_id"=>$Member["id"],
+							"price"=>$price,
+							"b_price"=>$PriceBInfo[0]['b_price']-$price,
+							"title"=>"Transferred to Exchange(DGC)",
+							"adddate"=>date("Y-m-d",time()),
+							"addtime"=>date("Y-m-d H:i:s",time()),
+					);
+					if($result = M("PriceBInfo")->data($map)->add()){
+						$ServerPriceInfo = M("ServerPriceInfo")->where(array("member_id"=>$Member['id']))->limit(1)->order("id desc")->select();
+						$data = array(
+								"type"=>1,//1转入,2,转出
+								"member_username"=>$Member["username"],
+								"member_id"=>$Member["id"],
+								"usd_price"=>$ServerPriceInfo[0]['usd_price']+$price,
+								"price"=>$price,
+								"title"=>"Received from Backoffice(DGC)",
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						if(M("ServerPriceInfo")->data($data)->add()){
+							$arr = array(
+								"member_id"=>$Member['id'],
+								"member_username"=>$Member['username'],
+								"price"=>$price,
+								"number"=>0,
+								"dgc_price"=>0,
+								"new_number"=>0,
+								"dgc_number"=>0,
+								"type"=>5,
+								"title"=>"Received from Backoffice(B-Cash)",
+								"last_price"=>$ServerPriceInfo[0]['usd_price']+$price,
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+							);
+							M("ServerOrderInfo")->data($arr)->add();
+							$this->success(L("public-success"));
+						}else{
+							M("PriceBInfo")->where(array("id"=>$result))->delete();
+							$this->error(L("public-error"));
+						}						
+					}else{
+						$this->error(L("public-error"));
+					}
+										
+				}else{
+					$this->error(L("public-error"));
+				}
+			}else{
+				$this->error(L("public-error"));
+			}
+		}else{
+			$this->display();
+		}	
+	}
+	public function pop_transfer_free(){
+		$Member = session("MemberID");
+		$DigitCoinInfo = M("DigitCoinInfo")->where(array("member_id"=>$Member['id']))->limit(1)->order("id desc")->select();
+		$this->DigitCoinInfo = $DigitCoinInfo;
+		if(IS_POST){	
+			$price = I("price",0,"int");
+			$paypass = I("paypass");
+			if($Member['paypass']==$paypass){
+				if($price<$DigitCoinInfo[0]['free_digit_coin']&&$price>0){
+					$map = array(
+							"type"=>3,//1,充值，2解冻,3转出,4,转入
+							"member_username"=>$Member["username"],
+							"member_id"=>$Member["id"],
+							"user_id"=>$Member["id"],
+							"cold_digit_coin"=>$DigitCoinInfo[0]['cold_digit_coin'],
+							"free_digit_coin"=>$DigitCoinInfo[0]['free_digit_coin']-$price,
+							"free_out_digit_coin"=>$price,
+							"title"=>"Transferred to Exchange(DGC)",
+							"adddate"=>date("Y-m-d",time()),
+							"addtime"=>date("Y-m-d H:i:s",time()),
+					);
+					if($result = M("DigitCoinInfo")->data($map)->add()){
+						$ServerDigitCoinInfo = M("ServerDigitCoinInfo")->where(array("member_id"=>$Member['id']))->limit(1)->order("id desc")->select();
+						$data = array(
+								"digitcoininfo_id"=>$result,
+								"type"=>2,//1转出,2,转入
+								"member_username"=>$Member["username"],
+								"member_id"=>$Member["id"],
+								"user_id"=>$Member["id"],
+								"free_digit_coin"=>$ServerDigitCoinInfo[0]['free_digit_coin']+$price,
+								"free_in_digit_coin"=>$price,
+								"title"=>"Received from Backoffice(DGC)",
+								"adddate"=>date("Y-m-d",time()),
+								"addtime"=>date("Y-m-d H:i:s",time()),
+						);
+						if(M("ServerDigitCoinInfo")->data($data)->add()){
+							$this->success(L("public-success"));
+						}else{
+							M("DigitCoinInfo")->where(array("id"=>$result))->delete();
+							$this->error(L("public-error"));
+						}						
+					}else{
+						$this->error(L("public-error"));
+					}
+										
+				}else{
+					$this->error(L("public-error"));
+				}
+			}else{
+				$this->error(L("public-error"));
+			}
+		}else{
+			$this->display();
+		}
+	}
+}

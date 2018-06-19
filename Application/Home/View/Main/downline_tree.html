@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+<head>
+	<include file="Public/head"/>
+</head>
+<body class="smart-style-1 desktop-detected" style="min-height: 871px;">
+<!--===header start===-->
+			<include file="Public/header"/>dd
+<!--=== End Header ===-->
+
+		<!-- Left panel : Navigation area -->
+		<aside id="left-panel" style="min-height: 1012px; background: rgb(228, 238, 245);">
+		    <include file="Public/left"/>
+
+		</aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+        
+
+<!-- RIBBON -->
+<div id="ribbon">
+                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="&lt;i class=&#39;text-warning fa fa-warning&#39;&gt;&lt;/i&gt; Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+					<li><i class="fa fa-md fa-fw fa-home"></i>{$Think.lang.public-main}</li><li>{$Think.lang.menu-tree}</li><li class="active">{$Think.lang.menu-downline_tree}</li>
+				</ol>
+				<!-- end breadcrumb -->
+</div>
+<!-- END RIBBON -->
+
+<!-- MAIN CONTENT -->
+<div id="content">
+<!-- MAIN top -->  
+              <div class="row">
+					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+						<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-sitemap"></i>{$Think.lang.menu-downline_tree}</h1>
+					</div>
+			  </div>
+<!--END MAIN top --> 
+
+                <div class="row">
+                    <div class="col-sm-12">
+									<div class="well well-light no-padding" style="overflow:hidden;">
+				                          <div class="widget-body-toolbar bg-color-white smart-form" >
+													<div id="TREE_TAB" class="btn-group btn-group-sm">
+														<a href="{:U('Home/Main/downline_tree',array('language'=>$language,'user_id'=>$User['id']))}" type="button" class="btn btn-default"><i class="glyphicon glyphicon-arrow-up margin-right-10"></i>{$Think.lang.tree-top}</a>
+														<a id="left_down" type="button" class="btn btn-default"><i class="glyphicon glyphicon-arrow-left margin-right-10"></i><span class="hidden-mobile">{$Think.lang.tree-left}</span></a>
+														<button id="top_id" type="button" class="btn btn-default"><span class="hidden-mobile">{$Think.lang.tree-up}</span><i class="glyphicon glyphicon-arrow-up margin-left-10"></i></button>
+														<a id="right_down" type="button" class="btn btn-default"><span class="hidden-mobile">{$Think.lang.tree-right}</span><i class="glyphicon glyphicon-arrow-right margin-left-10"></i></a>
+													</div>
+													<div class="display-inline pull-right">
+														<form class="header-search" action="" method="post" name="search">
+															<input type="text" placeholder="{$Think.lang.public-search}" id="text" name="text" value="{$text}">
+															<button type="button" id="search">
+																   <i class="fa fa-search"></i>
+															</button>
+														</form>
+													</div>
+										  </div>
+										  <div class="widget-body-toolbar bg-color-white smart-form hidden-mobile" id="rev-toggles">
+										                
+															<span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_0.png" width="35" class="margin-right-10">{$Think.lang.tree-sponsor-member}</span>
+															<span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_1.png" width="35" class="margin-right-10">{$Think.lang.upgrage-package-1}</span>
+															<span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_2.png" width="35" class="margin-right-10">{$Think.lang.upgrage-package-2}</span>
+															<span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_3.png" width="35" class="margin-right-10">{$Think.lang.upgrage-package-3}</span>
+															<span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_4.png" width="35" class="margin-right-10">{$Think.lang.upgrage-package-4}</span>
+															<span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_5.png" width="35" class="margin-right-10">{$Think.lang.upgrage-package-5}</span>
+															<span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_6.png" width="35" class="margin-right-10">{$Think.lang.upgrage-package-6}</span>
+															<span class="margin-left-10"><i class="fa fa-bookmark txt-color-red margin-right-10"></i>{$Think.lang.tree-root-member}</span>
+															<span class="margin-left-10"><i class="fa fa-circle txt-color-green"></i>{$Think.lang.tree-standby-member}</span>
+
+										  </div>
+										  <div class="downline_wrap">
+                                              <table>
+											      <tbody>
+														<tr>
+														
+														 <td colspan="8">
+															 <div  class="downline-item">
+																 <a href="{:U('Home/Main/downline_tree',array('language'=>$language,'user_id'=>$Member['id']))}">
+																	 <span class="chu_icon fa fa-bookmark txt-color-red"></span>
+																	 <div class="avatar">
+																		 <if condition="$Member['package_type'] eq 0">
+																			 <img src="__PUBLIC__/Home/Images/C_0.png" class="img-responsive">
+																			 <else/>
+																			 <volist name="PackageTypeList" id="ptl" empty="无套餐数据">
+																				 <if condition="$ptl['id'] eq $Member['package_type']"><img src="__PUBLIC__/Home/Images/C_{$ptl['id']}.png" class="img-responsive"></if>
+																			 </volist>
+																		 </if>
+
+																	 </div>
+																	 <div  class="info">
+																		 <p class="id">
+																			 <notempty name="Member['country_picture']"><img src="{$Member['country_picture']}" width="20px" class="margin-right-10"><else/><img src="__PUBLIC__/Public/Images/loading.gif" width="20px" class="margin-right-10"></notempty>
+																			 <span class="root_id">{$Member["username"]}</span>
+																		 </p>
+																		 <p>L = {$Member['left_bv']}</p>
+																		 <p>R = {$Member['right_bv']}</p>
+																	 </div>
+																	 <if condition="$MemberList[0]['id'] and $MemberList[1]['id']"><div class="line"></div><else/>
+																		<if condition="$MemberList[0]['id']"><div class="line_left"></div></if>
+																		<if condition="$MemberList[1]['id']"><div class="line_right"></div></if>																	 
+																	 </if>
+
+																 </a>
+															 </div>
+														 </td>
+
+														</tr>
+														<tr>
+														<volist name="MemberList" id="ml">
+														
+														<td colspan="4">
+															 <div  class="downline-item">
+																<if condition="$ml['id']">			 
+																	 <a href="{:U('Home/Main/downline_tree',array('language'=>$language,'user_id'=>$ml['id'],'position_sit'=>$key))}" id="tree_2_{$ml['position']}">
+																		 <if condition="$Member['id'] eq $ml['r_id']"><span class="chu_icon fa fa-circle txt-color-green"></span></if>
+																		 <div class="avatar">
+																			 <volist name="PackageTypeList" id="ptl" empty="无套餐数据">
+																					<if condition="$ptl['id'] eq $ml['package_type']"><img src="__PUBLIC__/Home/Images/C_{$ptl['id']}.png" class="img-responsive"></if>
+																			 </volist>
+																		 </div>
+																		 <div  class="info">
+																			 <p class="id">
+																				 <notempty name="ml['country_picture']"><img src="{$ml['country_picture']}" width="20px" class="margin-right-10"><else/><img src="__PUBLIC__/Public/Images/loading.gif" width="20px" class="margin-right-10"></notempty>
+																				 <span class="root_id">{$ml["username"]}</span>
+																			 </p>
+																			 <p>L = {$ml['left_bv']}</p>
+																			 <p>R = {$ml['right_bv']}</p>
+																		 </div>
+																		 <if condition="$ml['child'][0]['id'] and $ml['child'][1]['id']"><div class="line"></div><else/>
+																			  <if condition="$ml['child'][0]['id']"><div class="line_left"></div></if>
+																				<if condition="$ml['child'][1]['id']"><div class="line_right"></div></if>																	 
+																		 </if>
+																	 </a>
+																 </div>
+																 <else/>
+
+																	<div class="avatar">
+																		<img src="__PUBLIC__/Home/Images/C_NA.png" class="img-responsive">
+																	</div>
+																	<div class="info">
+																		<p class="id"><a  href="#popup" data-toggle="modal" data-load-remote="{:U('Home/Main/addMember',array('language'=>$language,'id'=>$ml['pid'],'position'=>$key,'position_sit'=>$key))}" data-load-remote-value="{:U('Home/Main/addMember')}" data-remote-target="#popup .modal-content">[EMPTY]</a></p>
+																	</div>
+																 </if>
+																 </div>
+															</td>															
+															</volist>
+														 											
+															 </tr>
+															 <!--2222222222222222222222222222-->
+															<tr>
+																<volist name="MemberList[0]['child']" id="ml">
+																 <td colspan="2">
+																	 <div  class="downline-item">
+																	 <if condition="$ml['id']">
+																		 <a href="{:U('Home/Main/downline_tree',array('language'=>$language,'user_id'=>$ml['id'],'position_sit'=>0))}">
+																			 <if condition="$Member['id'] eq $ml['r_id']"><span class="chu_icon fa fa-circle txt-color-green"></span></if>
+																			 <div class="avatar">
+																				 <volist name="PackageTypeList" id="ptl" empty="无套餐数据">
+																						<if condition="$ptl['id'] eq $ml['package_type']"><img src="__PUBLIC__/Home/Images/C_{$ptl['id']}.png" class="img-responsive"></if>
+																				 </volist>
+																			 </div>
+																			 <div  class="info">
+																				 <p class="id">
+																					 <notempty name="ml['country_picture']"><img src="{$ml['country_picture']}" width="20px" class="margin-right-10"><else/><img src="__PUBLIC__/Public/Images/loading.gif" width="20px" class="margin-right-10"></notempty>
+																					 <span class="root_id">{$ml["username"]}</span>
+																				 </p>
+																				 <p>L = {$ml['left_bv']}</p>
+																				 <p>R = {$ml['right_bv']}</p>
+																			 </div>
+																			<if condition="$ml['child'][0]['id'] and $ml['child'][1]['id']"><div class="line"></div><else/>
+																				<if condition="$ml['child'][0]['id']"><div class="line_left"></div></if>
+																				<if condition="$ml['child'][1]['id']"><div class="line_right"></div></if>																			
+																			</if>
+
+																		 </a>
+																		 <else/>
+																		 <div class="avatar">
+																			<img src="__PUBLIC__/Home/Images/C_NA.png" class="img-responsive">
+																		</div>
+																		<div class="info">
+																			<p class="id"><a  href="#popup" data-toggle="modal" title='{$ml["username"]}{$ml["pid"]}' data-load-remote="{:U('Home/Main/addMember',array('language'=>$language,'id'=>$ml['pid'],'position'=>$key,'position_sit'=>0))}" data-load-remote-value="{:U('Home/Main/addMember')}" data-remote-target="#popup .modal-content">[EMPTY]</a></p>
+																		</div>																			
+																		 </if>
+																	 </div>
+																 </td>
+																 </volist>
+																 <volist name="MemberList[1]['child']" id="ml">
+																 <td colspan="2">
+																	 <div  class="downline-item">
+																	 <if condition="$ml['id']">
+																		 <a href="{:U('Home/Main/downline_tree',array('language'=>$language,'user_id'=>$ml['id'],'position_sit'=>1))}">
+																			 <if condition="$Member['id'] eq $ml['r_id']"><span class="chu_icon fa fa-circle txt-color-green"></span></if>
+																			 <div class="avatar">
+																				 <volist name="PackageTypeList" id="ptl" empty="无套餐数据">
+																						<if condition="$ptl['id'] eq $ml['package_type']"><img src="__PUBLIC__/Home/Images/C_{$ptl['id']}.png" class="img-responsive"></if>
+																				 </volist>
+																			 </div>
+																			 <div  class="info">
+																				 <p class="id">
+																					 <notempty name="ml['country_picture']"><img src="{$ml['country_picture']}" width="20px" class="margin-right-10"><else/><img src="__PUBLIC__/Public/Images/loading.gif" width="20px" class="margin-right-10"></notempty>
+																					 <span class="root_id">{$ml["username"]}</span>
+																				 </p>
+																				 <p>L = {$ml['left_bv']}</p>
+																				 <p>R = {$ml['right_bv']}</p>
+																			 </div>
+																			<if condition="$ml['child'][0]['id'] and $ml['child'][1]['id']"><div class="line"></div><else/>
+																		    <if condition="$ml['child'][0]['id']"><div class="line_left"></div></if>
+																		    <if condition="$ml['child'][1]['id']"><div class="line_right"></div></if>																			
+																			</if>
+
+																		 </a>
+																		 <else/>
+																		 <div class="avatar">
+																			<img src="__PUBLIC__/Home/Images/C_NA.png" class="img-responsive">
+																		</div>
+																		<div class="info">
+																			<p class="id"><a  href="#popup" data-toggle="modal" data-load-remote="{:U('Home/Main/addMember',array('language'=>$language,'id'=>$ml['pid'],'position'=>$key,'position_sit'=>1))}" data-load-remote-value="{:U('Home/Main/addMember')}" data-remote-target="#popup .modal-content">[EMPTY]</a></p>
+																		</div>																	
+																		 </if>
+																	 </div>
+																 </td>
+																 </volist>			 
+															</tr>	
+															<!--3333333333333333333333-->
+															<tr> 
+																<volist name="MemberList[0]['child'][0]['child']" id="ml">
+																 <td>
+																	 <div  class="downline-item">
+																	 <if condition="$ml['id']">
+																		 <a href="{:U('Home/Main/downline_tree',array('language'=>$language,'user_id'=>$ml['id'],'position_sit'=>0))}">
+																			 <if condition="$Member['id'] eq $ml['r_id']"><span class="chu_icon fa fa-circle txt-color-green"></span></if>
+																			 <div class="avatar">
+																				 <volist name="PackageTypeList" id="ptl" empty="无套餐数据">
+																						<if condition="$ptl['id'] eq $ml['package_type']"><img src="__PUBLIC__/Home/Images/C_{$ptl['id']}.png" class="img-responsive"></if>
+																				 </volist>
+																			 </div>
+																			 <div  class="info">
+																				 <p class="id">
+																					 <notempty name="ml['country_picture']"><img src="{$ml['country_picture']}" width="20px" class="margin-right-10"><else/><img src="__PUBLIC__/Public/Images/loading.gif" width="20px" class="margin-right-10"></notempty>
+																					 <span class="root_id">{$ml["username"]}</span>
+																				 </p>
+																				 <p>L = {$ml['left_bv']}</p>
+																				 <p>R = {$ml['right_bv']}</p>
+																			 </div>
+																			<if condition="$ml['child'][0]['id'] and $ml['child'][1]['id']"><div class="line"></div><else/>
+																		    <if condition="$ml['child'][0]['id']"><div class="line_left"></div></if>
+																		    <if condition="$ml['child'][1]['id']"><div class="line_right"></div></if>																			
+																			</if>
+
+																		 </a>
+																		 <else/>
+																		 <div class="avatar">
+																			<img src="__PUBLIC__/Home/Images/C_NA.png" class="img-responsive">
+																		</div>
+																		<div class="info">
+																			<p class="id"><a  href="#popup" data-toggle="modal" data-load-remote="{:U('Home/Main/addMember',array('language'=>$language,'id'=>$ml['pid'],'position'=>$key,'position_sit'=>0))}" data-load-remote-value="{:U('Home/Main/addMember')}" data-remote-target="#popup .modal-content">[EMPTY]</a></p>
+																		</div>																		
+																		 </if>
+																	 </div>
+																 </td>
+																</volist>
+																<volist name="MemberList[0]['child'][1]['child']" id="ml">
+																 <td>
+																	 <div  class="downline-item">
+																	 <if condition="$ml['id']">
+																		 <a href="{:U('Home/Main/downline_tree',array('language'=>$language,'user_id'=>$ml['id'],'position_sit'=>0))}">
+																			 <if condition="$Member['id'] eq $ml['r_id']"><span class="chu_icon fa fa-circle txt-color-green"></span></if>
+																			 <div class="avatar">
+																				 <volist name="PackageTypeList" id="ptl" empty="无套餐数据">
+																						<if condition="$ptl['id'] eq $ml['package_type']"><img src="__PUBLIC__/Home/Images/C_{$ptl['id']}.png" class="img-responsive"></if>
+																				 </volist>
+																			 </div>
+																			 <div  class="info">
+																				 <p class="id">
+																					 <notempty name="ml['country_picture']"><img src="{$ml['country_picture']}" width="20px" class="margin-right-10"><else/><img src="__PUBLIC__/Public/Images/loading.gif" width="20px" class="margin-right-10"></notempty>
+																					 <span class="root_id">{$ml["username"]}</span>
+																				 </p>
+																				 <p>L = {$ml['left_bv']}</p>
+																				 <p>R = {$ml['right_bv']}</p>
+																			 </div>
+																			<if condition="$ml['child'][0]['id'] and $ml['child'][1]['id']"><div class="line"></div><else/>
+																		    <if condition="$ml['child'][0]['id']"><div class="line_left"></div></if>
+																		    <if condition="$ml['child'][1]['id']"><div class="line_right"></div></if>																			
+																			</if>
+
+																		 </a>
+																		 <else/>
+																		 <div class="avatar">
+																			<img src="__PUBLIC__/Home/Images/C_NA.png" class="img-responsive">
+																		</div>
+																		<div class="info">
+																			<p class="id"><a  href="#popup" data-toggle="modal" data-load-remote="{:U('Home/Main/addMember',array('language'=>$language,'id'=>$ml['pid'],'position'=>$key,'position_sit'=>0))}" data-load-remote-value="{:U('Home/Main/addMember')}" data-remote-target="#popup .modal-content">[EMPTY]</a></p>
+																		</div>																		
+																		 </if>
+																	 </div>
+																 </td>
+																</volist>
+																<volist name="MemberList[1]['child'][0]['child']" id="ml">
+																 <td>
+																	 <div  class="downline-item">
+																	 <if condition="$ml['id']">
+																		 <a href="{:U('Home/Main/downline_tree',array('language'=>$language,'user_id'=>$ml['id'],'position_sit'=>1))}">
+																			 <if condition="$Member['id'] eq $ml['r_id']"><span class="chu_icon fa fa-circle txt-color-green"></span></if>
+																			 <div class="avatar">
+																				 <volist name="PackageTypeList" id="ptl" empty="无套餐数据">
+																						<if condition="$ptl['id'] eq $ml['package_type']"><img src="__PUBLIC__/Home/Images/C_{$ptl['id']}.png" class="img-responsive"></if>
+																				 </volist>
+																			 </div>
+																			 <div  class="info">
+																				 <p class="id">
+																					 <notempty name="ml['country_picture']"><img src="{$ml['country_picture']}" width="20px" class="margin-right-10"><else/><img src="__PUBLIC__/Public/Images/loading.gif" width="20px" class="margin-right-10"></notempty>
+																					 <span class="root_id">{$ml["username"]}</span>
+																				 </p>
+																				 <p>L = {$ml['left_bv']}</p>
+																				 <p>R = {$ml['right_bv']}</p>
+																			 </div>
+																			<if condition="$ml['child'][0]['id'] and $ml['child'][1]['id']"><div class="line"></div><else/>
+																			<if condition="$ml['child'][0]['id']"><div class="line_left"></div></if>
+																		    <if condition="$ml['child'][1]['id']"><div class="line_right"></div></if>																			
+																			</if>
+	
+																		 </a>
+																		 <else/>
+																		 <div class="avatar">
+																			<img src="__PUBLIC__/Home/Images/C_NA.png" class="img-responsive">
+																		</div>
+																		<div class="info">
+																			<p class="id"><a  href="#popup" data-toggle="modal" data-load-remote="{:U('Home/Main/addMember',array('language'=>$language,'id'=>$ml['pid'],'position'=>$key,'position_sit'=>1))}" data-load-remote-value="{:U('Home/Main/addMember')}" data-remote-target="#popup .modal-content">[EMPTY]</a></p>
+																		</div>																		
+																		 </if>
+																	 </div>
+																 </td>
+																</volist>
+																<volist name="MemberList[1]['child'][1]['child']" id="ml">
+																 <td>
+																	 <div  class="downline-item">
+																	 <if condition="$ml['id']">
+																		 <a href="{:U('Home/Main/downline_tree',array('language'=>$language,'user_id'=>$ml['id'],'position_sit'=>1))}">
+																			 <if condition="$Member['id'] eq $ml['r_id']"><span class="chu_icon fa fa-circle txt-color-green"></span></if>
+																			 <div class="avatar">
+																				 <volist name="PackageTypeList" id="ptl" empty="无套餐数据">
+																						<if condition="$ptl['id'] eq $ml['package_type']"><img src="__PUBLIC__/Home/Images/C_{$ptl['id']}.png" class="img-responsive"></if>
+																				 </volist>
+																			 </div>
+																			 <div  class="info">
+																				 <p class="id">
+																					 <notempty name="ml['country_picture']"><img src="{$ml['country_picture']}" width="20px" class="margin-right-10"><else/><img src="__PUBLIC__/Public/Images/loading.gif" width="20px" class="margin-right-10"></notempty>
+																					 <span class="root_id">{$ml["username"]}</span>
+																				 </p>
+																				 <p>L = {$ml['left_bv']}</p>
+																				 <p>R = {$ml['right_bv']}</p>
+																			 </div>
+																			<if condition="$ml['child'][0]['id'] and $ml['child'][1]['id']"><div class="line"></div><else/>
+																		    <if condition="$ml['child'][0]['id']"><div class="line_left"></div></if>
+																		    <if condition="$ml['child'][1]['id']"><div class="line_right"></div></if>																			
+																			</if>
+
+																		 </a>
+																		 <else/>
+																		 <div class="avatar">
+																			<img src="__PUBLIC__/Home/Images/C_NA.png" class="img-responsive">
+																		</div>
+																		<div class="info">
+																			<p class="id"><a  href="#popup" data-toggle="modal" data-load-remote="{:U('Home/Main/addMember',array('language'=>$language,'id'=>$ml['pid'],'position'=>$key,'position_sit'=>1))}" data-load-remote-value="{:U('Home/Main/addMember')}" data-remote-target="#popup .modal-content">[EMPTY]</a></p>
+																		</div>																			
+																		 </if>
+																	 </div>
+																 </td>
+																</volist>
+															
+															</tr>																	 
+
+
+													 <tr><td colspan="8" height="30px;"></td></tr>
+												  </tbody>
+										      </table>
+										  </div>				
+									</div>
+									<!-- end well -->                     
+                    </div>
+                </div>  
+
+
+</div><!--END MAIN CONTENT -->
+</div>
+		<!-- END MAIN PANEL -->
+
+		<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+		Note: These tiles are completely responsive,
+		you can add as many as you like
+		-->
+<include file="Public/top"/>
+        
+<!-- END SHORTCUT AREA -->
+    <!-- JavaScript -->
+    
+    <!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+
+<script>
+   $(function(){
+	 //nav active setting
+	 
+	 $("nav > ul > li.active").removeClass("active");
+	 $("nav > ul > li.open").removeClass("open");
+     $("nav > ul > li:eq(3) > ul > li:eq(0)").addClass("active");
+	 
+	   
+    });
+</script>
+		<!-- MAIN APP JS FILE -->
+        <!--common-->
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div><!-- /.modal-content:e -->
+  </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e -->
+
+
+<script>
+$(document).ready(function() {
+        //popup show
+          $('[data-load-remote]').on('click',function(e) {
+			  $(".modal-content").html("");
+			  e.preventDefault();
+			  var $this = $(this);
+			  var remote = $this.data('load-remote');
+			  var remote_value = $this.data('load-remote-value');
+			  if(remote) {
+				$($this.data('remote-target')).load(remote,remote_value);
+			  }
+          });
+
+		$("#left_down").click(function(){
+			if($("#tree_2_0").size()>0){
+				var url = $("#tree_2_0").attr("href");
+				window.location.href=url;					
+			}else{
+				alert("左侧已无下级会员");
+			}
+		});
+		$("#right_down").click(function(){
+			if($("#tree_2_1").size()>0){
+				var url = $("#tree_2_1").attr("href");
+				window.location.href=url;					
+			}else{
+				alert("右侧已无下级会员");
+			}
+		});
+		$("#top_id").click(function(){
+
+				window.location.href="{:U('Home/Main/downline_tree',array('language'=>$language,'top_id'=>$Member['id']))}";					
+
+		});
+		$("#search").click(function(){
+			if($("#text").val()!=""){
+				$("form").submit();
+			}	
+		});
+});
+</script>
+
+
+<div id="divSmallBoxes"></div><div id="divMiniIcons"></div><div id="divbigBoxes"></div>
+</body>
+</html>

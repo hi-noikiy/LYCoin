@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+    <head>
+    <include file="Public/head"/>
+</head>
+<body>
+    <!--===header start===-->
+    <!-- HEADER -->
+    <header style="background:#000;">
+        <include file="Public/header"/>
+    </header>
+    <!--=== End Header ===-->
+
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+
+
+        <!-- RIBBON -->
+        <!--        <div id="ribbon">
+                    <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="&lt;i class=&#39;text-warning fa fa-warning&#39;&gt;&lt;/i&gt; Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+                     breadcrumb 
+                    <ol class="breadcrumb">
+                        <li><i class="fa fa-md fa-fw fa-home"></i>{$Think.lang.public-main}</li><li class="active">{$Think.lang.menu-main}</li>
+                    </ol>
+                     end breadcrumb 
+                </div>-->
+        <!-- END RIBBON -->
+
+        <!-- MAIN CONTENT -->
+        <div id="content" class="bg_dash">
+
+            <div class="row">
+                <div class="col-sm-12 col-md-1"></div>
+                <div class="col-xs-12 col-sm-7 col-md-10">
+                    <h1 class="page-title txt-color-black bold" style='color:#F8C84E'>    复投钱包明细</h1>
+                </div>
+                <div class="col-sm-12 col-md-1"></div>
+
+            </div>
+            <!-- begin row -->
+            
+                
+            <div class="row">
+                <div class="col-sm-12 col-md-1"></div>
+            <div class="table-responsive mt20 col-sm-12 col-md-10">
+
+                        <table id="dt_basic" class="table table-striped table-bordered table-hover">
+<!--                             <caption style="font-size: 20px;color:white;text-align: left;">投资记录</caption>-->
+                            <thead>
+                                <tr   class="danger">
+                                    <th class="text-center"  style="background: #F8C84E">{$Think.lang.bianhao}</th>
+                                    <th class="text-center"  style="background: #F8C84E">{$Think.lang.public-date}</th>
+                                    <th class="text-center"  style="background: #F8C84E">元宝</th>
+                                    <th class="text-center"  style="background: #F8C84E">钱包</th>
+                                    <!--<th class="text-center"  style="background: #F8C84E">{$Think.lang.jiedongshijian}</th>-->
+                                    <th class="text-center"  style="background: #F8C84E">{$Think.lang.beizhu}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="touzi_list" id="oil">
+                                <tr   class="active">
+                                    <td class="text-center">{$count-$indexpage-$key}</td>
+                                    <td class="text-center" >{$oil['ctime']}</td>
+                                    <td class="text-center">{$oil['money']}</td>
+                                    <td class="text-center">
+                                        <if condition="$oil.qianbao eq 1">
+                                    本金钱包
+                                        <elseif condition="$oil.qianbao eq 2" />
+                                    利息钱包
+                                        <elseif condition="$oil.qianbao eq 3" />
+                                       奖金钱包
+                                       
+                                        </if>
+                                    
+                                    </td>
+                                        <td class="text-center">
+                                            提现转入5%
+                                    </td>
+                                    
+
+                                </tr>
+                            </volist>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="9">
+                                       <notempty name="count_status">
+                                        <div class="pagination pull-right page">
+                                            {$page}
+                                        </div>
+                                        <else/>
+                                        <ul class="pagination pull-right">
+                                            <li class="first disabled"><a href="#">{$Think.lang.public-index-page}</a></li>
+                                            <li class="prev disabled"><a href="#">{$Think.lang.public-pre-page}</a></li>
+                                            <li class="active"><a href="#">1</a></li>
+                                            <li class="next disabled"><a href="#">{$Think.lang.public-next-page}</a></li>
+                                            <li class="last disabled"><a href="#">{$Think.lang.public-last-page}</a></li>
+                                        </ul>
+                                    </notempty>
+
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div> 
+                <div class="col-sm-12 col-md-1"></div>
+                
+<include file="Public/foot"/>
+            </div><!--END MAIN CONTENT -->
+
+        </div>
+        <!-- END MAIN PANEL -->
+
+        <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+        Note: These tiles are completely responsive,
+        you can add as many as you like
+        -->
+        <include file="Public/top"/>
+
+        <!-- END SHORTCUT AREA -->
+        <!-- JavaScript -->
+
+        <!-- JQUERY SCRIPT -->
+        <include file="Public/script"/>
+
+        <SCRIPT LANGUAGE=javascript> 
+function quchu() { 
+ var msg = "您确定要取出投资吗？"; 
+ if (confirm(msg)==true){ 
+  return true; 
+ }else{ 
+  return false; 
+ } 
+} 
+</SCRIPT> 
+
+        <script>
+            $(function() {
+                //nav active setting
+
+                $("nav > ul > li").removeClass("active");
+                $("nav > ul > li:eq(0)").addClass("active");
+
+
+            });
+        </script>
+        <!-- MAIN APP JS FILE -->
+        <!--common-->
+        <script>
+            $(function() {
+                //all page common code!!!!! import  
+                pageSetUp();
+
+            });
+        </script>        
+
+
+        <!--[if IE 7]>
+        <script>ie_error('IE7');</script>     
+                <![endif]-->
+        <!--[if IE 8]>
+        <script>ie_error('IE8');</script>     
+                <![endif]-->
+
+
+
+
+        <!-- Flot Chart Plugin: Flot Engine, Flot Resizer, Flot Tooltip -->
+        <script src="__PUBLIC__/Home/Js/jquery.simplyscroll.js"></script>
+        <script type="text/javascript">
+            <!--
+            function setCookie(name, value, expiredays) {
+                var todayDate = new Date();
+                todayDate.setDate(todayDate.getDate() + expiredays);
+                document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+            }
+            function closeWin(div, chk, cookname) {
+                if (document.getElementById(chk).checked) {
+                    setCookie(cookname, "done", 1);
+                }
+                $('#popup_dashboard').modal('hide');
+
+            }
+
+            window.onload = function() {
+                cookiedata = document.cookie
+                D_POPUP = 1;
+                /* popup1 */
+                if (cookiedata.indexOf("maindiv=done") < 0 && D_POPUP > 0) {
+                    /*show*/
+                    $('#popup_dashboard').modal('show');
+                } else {
+                    /*hidden*/
+                    $('#popup_dashboard').modal('hide');
+                }
+
+                $("#popup_dashboard").find("img").addClass("img-responsive");
+
+            }
+            //-->
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $("#scroller").simplyScroll({
+                    pauseOnHover: false,
+                    speed: 1
+                });
+            });
+
+
+        </script>
+        <script type="text/javascript">
+
+            var date;
+            date = new Date();
+            date.setHours(0);
+            date.setMinutes(0);
+            date.setSeconds(0);
+
+            date.setDate(date.getDate() + 1);
+            var time2 = date.getTime(); // 내일 0시 0분 으로 설정
+
+            // 오늘과 내일을 미리 구하기 때문에 자정을 넘어갈 경우 이 소스는 오작동 할 수 있습니다.
+            // 위 날짜 구하는 부분이 계속 호출되도록 하면됩니다.
+
+
+            // 남은 시간 카운터
+            function remain() {
+                var now = new Date();
+                var gap = Math.round((time2 - now.getTime()) / 1000);
+
+                var D = Math.floor(gap / 86400);
+                var H = Math.floor((gap - D * 86400) / 3600 % 3600);
+                var M = Math.floor((gap - H * 3600) / 60 % 60);
+                var S = Math.floor((gap - M * 60) % 60);
+
+                $("#time-set").text(H + 1);
+                $("#min-set").text(M);
+                $("#sec-set").text(S);
+            }
+
+            remain();
+            setInterval(remain, 1000);
+
+        </script>
+
+
+
+        <!--COMMON POPUP--> 
+        <div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                </div><!-- /.modal-content:e -->
+            </div><!-- /.modal-dialog:e -->
+        </div><!-- /.modal:e --> 
+
+
+        <script>
+            $(document).ready(function() {
+
+                $("#chkbox").click(function() {
+                    $.post("./index.php?m=Home&c=Main&a=notice", function(data) {
+                    });
+                });
+                //popup show
+                $('[data-load-remote]').on('click', function(e) {
+                    e.preventDefault();
+                    var $this = $(this);
+                    var remote = $this.data('load-remote');
+                    var remote_value = $this.data('load-remote-value');
+                    if (remote) {
+                        $($this.data('remote-target')).load(remote, remote_value);
+                    }
+
+                });
+
+                //reload detected
+                $('body').on('hidden.bs.modal', '.modal', function() {
+                    $(this).removeData('bs.modal');
+                });
+
+
+
+            });
+        </script>   
+
+
+        <div id="divSmallBoxes"></div><div id="divMiniIcons"></div><div id="divbigBoxes"></div>
+</body>
+</html>

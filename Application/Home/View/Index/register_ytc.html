@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en"><!--<![endif]-->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="description" content="{$Think.config.DEFAULT_WEB_DESCRIPTION}">
+        <meta name="keywords" content="{$Think.config.DEFAULT_WEB_KEYWORDS}" />
+        <link rel="shortcut icon" href="__PUBLIC__/Public/images/favicon.ico">
+        <link rel="icon" href="__PUBLIC__/Public/images/favicon.ico" type="image/x-icon">
+        <title>{$Think.config.DEFAULT_WEB_TITLE}</title>
+        <!-- Main styles -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/bootstrap.min.css">
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/backoffice_css.css">
+        <!-- Font Awesome icons -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/font-awesome.min.css">
+        <script type="text/javascript" src="__PUBLIC__/Home/Js/jquery-1.10.2-min.js"></script>
+        <script src="__PUBLIC__/Home/Js/bootstrap.min.js"></script>
+        <script src="__PUBLIC__/Home/Js/jquery.validate.min.js"></script>
+        <!--        <script src="__PUBLIC__/js/hm.js">
+                    
+            </script>-->
+        <script type="text/javascript" src="__PUBLIC__/js/layer/layer.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/jquery-1.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/downList.js"></script>
+
+
+
+
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+                <script src="__PUBLIC__/Home/Js/html5shiv.js"></script>
+                <script src="__PUBLIC__/Home/Js/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body data-spy="scroll" data-target=".navbar" data-offset="50" onkeydown="keyLogin();" style="overflow: visible;">
+        <!-- HEADER -->
+        <header style="background:#000;">
+            <include file="Public/header"/>
+        </header>
+        <!--=== End Header ===-->
+
+
+        <!--                            <script type="text/javascript" src="__PUBLIC__/Home/Js/getcode.js"></script>
+                                    <script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.2.js"></script>-->
+
+        <!-- MAIN CONTENT -->
+        <div class="container" style="margin-top:50px;">
+            <div class="row col-sm-3">
+
+            </div>
+            <div class="row col-sm-6">
+                <div>
+                    <div class="well no-padding text-left" style='border:1px solid #ccc'>
+
+                        <!--<form name="login-form" class="smart-form client-form" action="{:U('Home/Index/login')}" method="post" >-->
+                        <form role="form" action="{:U('Home/Index/register')}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-12 control-label  text-center"  style="font-size:20px;color:#F8C84E;font-weight: 700">{$Think.lang.huiyuanzhuce}</label>
+
+
+                            </div>
+                                <div class="form-group">
+                                <label class="col-sm-3 control-label" style="color:#F8C84E;" >{$Think.lang.youxiang}</label>
+
+                                <div class="col-sm-8">
+                                    <input type="text" name="email" id="email" class="form-control" placeholder="{$Think.lang.youxiang}" >
+                                </div>
+                                
+                            </div>
+                            <!--  <div class="form-group">
+                                <label class="col-sm-3 control-label"  style="color:#F8C84E;">{$Think.lang.han24}</label>
+
+                                <div class="col-sm-8">
+                                    <input name="emailcode" id="emailcode" value="" type="text">
+                                    <input type="button" class="btn btn-success btn-small" value="{$Think.lang.han25}" id="msgt" data-key='on' onclick="sandPhone()">
+                                </div>
+                            </div> -->
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"  style="color:#F8C84E;" >{$Think.lang.mima}</label>
+
+                                <div class="col-sm-8">
+                                    <input type="password" name="userpass" class="form-control" placeholder="{$Think.lang.mima}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"  style="color:#F8C84E;">{$Think.lang.mimaqueren}</label>
+
+                                <div class="col-sm-8">
+                                    <input type="password" name="repass" class="form-control" placeholder="{$Think.lang.mimaqueren}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"  style="color:#F8C84E;">{$Think.lang.shoujihaoma}</label>
+
+                                <div class="col-sm-8">
+                                    <input type="text" id="mo" name="telephone" class="form-control" placeholder="{$Think.lang.shoujihaoma}">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group-separator"></div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"  style="color:#F8C84E;" >{$Think.lang.jiaoyimima}</label>
+                                <div class="col-sm-8">
+                                    <input type="password" name="paypass" class="form-control" placeholder="{$Think.lang.jiaoyimima}" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"  style="color:#F8C84E;" >{$Think.lang.querenjiaoyimima}</label>
+                                <div class="col-sm-8">
+                                    <input type="password" name="repaypass" class="form-control" placeholder="{$Think.lang.querenjiaoyimima}" >
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+<!--                            <div class="form-group">
+                                <label class="col-sm-3 control-label"  style="color:#F8C84E;" >{$Think.lang.han26}</label>
+                                <div class="col-sm-8">
+                                    <input type="password" name="pass3" class="form-control" placeholder="{$Think.lang.han26}" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"  style="color:#F8C84E;" >{$Think.lang.han27}</label>
+                                <div class="col-sm-8">
+                                    <input type="password" name="repass3" class="form-control" placeholder="{$Think.lang.han27}" >
+                                </div>
+                            </div>-->
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"  style="color:#F8C84E;" >{$Think.lang.zhenshixingming}</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="username" id="name" class="form-control" placeholder="{$Think.lang.zhenshixingming}" value="{$Member['username']}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"  style="color:#F8C84E;"  >{$Think.lang.han28}</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="passport" id="idcard" class="form-control" placeholder="{$Think.lang.han28}"  >
+                                </div>
+                            </div>
+<div class="form-group">
+                                <label class="col-sm-3 control-label"  style="color:#F8C84E;"  >{$Think.lang.user-country}</label>
+                                <div class="col-sm-8">
+                                        <select name="country" id="country" class="form-control" >
+                                <option value="">{$Think.lang.public-select}</option>
+                                <volist name="CountryList" id="cl">
+                                    <option value="{$cl['country_id']}">{$cl['name_chinese']}({$cl['name_english']})</option>
+                                </volist>
+
+                            </select>
+                                   
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"  style="color:#F8C84E;"  >{$Think.lang.tuijianrenyouxiang}</label>
+
+                                <div class="col-sm-8">
+                                    <input type="text" name="femail" class="form-control" readonly value='{$femail}' placeholder="{$Think.lang.tuijianrenyouxiang}" >
+                                </div>
+                            </div>
+                            
+                            <div class="form-group-separator"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"></label>
+                                <div class="col-sm-6">
+                                    <input type="hidden" name="p" value="{$p}"/>
+                                    <input type="hidden" name="id" value="{$Member['id']}"/>
+                                    <input type="submit" class="btn btn-success" value="&nbsp;&nbsp;&nbsp;&nbsp;{$Think.lang.tijiao}&nbsp;&nbsp;&nbsp;&nbsp;"   style="background: #F8C84E;color:white;border-radius: 3px;border:1px solid white">
+                                    <input type="button" onclick="javascript:location='{:U('Home/Index/login',array('language'=>$language))}'" class="btn btn-default" value="&nbsp;&nbsp;&nbsp;&nbsp;登录&nbsp;&nbsp;&nbsp;&nbsp;" style="background: #F8C84E;color:white;border-radius: 3px;border:1px solid white">
+                                    <!--<button type="reset" class="btn btn-white">登录</button>-->
+                                </div>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                    <p class="font-xs margin-top-5">
+                        {$Think.lang.yuenan}
+                    </p>
+                </div>					
+            </div><!--.row-->                            
+        </div>
+        <!-- main VIEW -->
+
+        <script>
+            vali = {name: 0, nick: 0, idcard: 0, phone: 0};
+            $('#name').bind('blur', function () {
+                if ($(this).val().length < 2)
+                    return validateMsg('name', '{$Think.lang.han29}', 0);
+                return validateMsg('name', '', vali.name = 1);
+            });
+            $('#mo').bind('blur', function () {
+                if ($(this).val().length != 11) {
+                    vali.phone = 0;
+                    return validateMsg('mo', '{$Think.lang.han30}', 0);
+                }
+                $.get("{:U('Home/Ajax/ajaxCheckPhone')}", {phone: encodeURIComponent($(this).val())}, function (d) {
+                   var d=eval('('+d+')')
+                    validateMsg('mo', d['msg'], d['status']);
+                    vali.phone = d['status'];
+                }, 'json');
+            });
+//            $('#idcard').bind('blur', function () {
+//                if ($('#cardtype').val() == 1) {
+//                    if ($(this).val().length < 15)
+//                        return validateMsg('idcard', '请输入正确的身份证', 0);
+//                } else {
+//                    if ($(this).val().length < 7)
+//                        return validateMsg('idcard', '请输入正确的护照号', 0);
+//                }
+//                return validateMsg('idcard', '', vali.idcard = 1);
+//            });
+
+            function validateMsg(id, msg, status) {
+                $('#' + id + 'msg').html('<font style="color:red">' + msg + '</font>');
+//$('#' + id + 'msg').attr('class', status? 'loginB1': 'false');
+            }
+            function valiForm() {
+                for (var i in vali) {
+                    $('#' + i).focus();
+                    $('#' + i).blur();
+                    if (!vali[i]) {
+                        event.preventDefault();
+                    }
+                }
+                return true;
+            }
+            function sandPhone() {
+
+//        alert(111);exit;
+                var i = 150;
+                var tid2;
+
+                var phone = $("#mo").val();
+
+//                alert(phone);exit;
+//        if(phone && /^1[3|4|5|8]\d{9}$/.test(phone)){
+//            layer.msg("请填写正确的手机号码");
+//        }else{
+                $.post("{:U('Home/Ajax/send_email')}", {email: $("#email").val()},
+                function (d) {
+                    var d=eval('('+d+')');
+                    layer.msg(d.info);
+                    if (d.status == 1) {
+                        i =150;
+                        $("#msgt").attr("data-key", "off");
+                        tid2 = setInterval(function () {
+                            if ($("#msgt").attr("data-key") == 'off') {
+                                $("#msgt").attr("disabled", true);
+                                // $("#msgt").removeClass("class");
+                                // $("#msgt").addClass("button again");
+                                i--;
+                                $("#msgt").val(i + "{$Think.lang.han31}");
+                                if (i <= 0) {
+                                    //	$("#msgt").removeClass("class");
+                                    //	$("#msgt").addClass("button");
+                                    $("#msgt").removeAttr("disabled").val("{$Think.lang.han32}");
+                                    $("#msgt").attr("data-key", "on");
+                                }
+                            }
+                        }, 1000);
+                    }
+                });
+//        }
+            }
+            function valiForms() {
+                if (vali.nick == 0) {
+                    $('#nick').focus();
+                    return false;
+                }
+                if (vali.name == 0) {
+                    $('#name').focus();
+                    return false;
+                }
+                if (vali.idcard == 0) {
+                    $('#idcard').focus();
+                    return false;
+                }
+                if (vali.phone == 0) {
+                    $('#mo').focus();
+                    return false;
+                }
+                else {
+                    $('#form').submit();
+                }
+            }
+            $("#form").validate({
+                rules: {
+                },
+                messages: {
+                },
+                submitHandler: function (form) {
+                    ajax_submit_form(form)
+                    return false;
+                },
+                invalidHandler: function () {  //不通过回调
+                    return false;
+                }
+            });
+            //kind editor
+            var editor;
+            KindEditor.ready(function (K) {
+                editor = K.create('textarea[name="description"]', {
+                    resizeType: 1,
+                    allowPreviewEmoticons: false,
+                    allowImageUpload: false,
+                    items: [
+                        'source', 'fontname', 'fontsize', 'forecolor', '|', 'bold', 'link', '|', 'justifyleft', 'justifycenter', 'justifyright'],
+                    colorTable: [
+                        ['#FF0000', '#E56600', '#FF9900', '#64451D', '#DFC5A4', '#FFE500'],
+                        ['#009900', '#006600', '#99BB00', '#B8D100', '#60D978', '#00D5FF'],
+                        ['#337FE5', '#003399', '#4C33E5', '#9933E5', '#CC33E5', '#EE33EE'],
+                        ['#FFFFFF', '#CCCCCC', '#999999', '#666666', '#333333', '#000000']
+                    ]
+                });
+            });
+        </script>
+        <!--<script src="__PUBLIC__/Home/Js/jquery-1.10.2-min.js"></script>-->
+
+
+    </body>
+</html>

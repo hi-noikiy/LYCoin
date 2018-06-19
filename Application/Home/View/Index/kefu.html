@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en"><!--<![endif]-->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="description" content="{$Think.config.DEFAULT_WEB_DESCRIPTION}">
+        <meta name="keywords" content="{$Think.config.DEFAULT_WEB_KEYWORDS}" />
+        <meta name="author" content="">
+        <title>{$Think.config.DEFAULT_WEB_TITLE}</title>
+
+        <!-- Main styles -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/bootstrap.min.css">
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/style.css">
+        <!-- Animations -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/animate.css">
+        <!-- Font Awesome icons -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/font-awesome.min.css">
+        <!-- Video -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/video-js.min.css">
+        <!-- Magnific Popup core CSS file -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/magnific-popup.min.css">
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/typicons.min.css">
+        <link href="__PUBLIC__/Home/Css/googlefont.css" rel="stylesheet" type="text/css">
+        <!-- pop -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/pop.css">
+        <link rel="shortcut icon" href="__PUBLIC__/Public/images/favicon.ico">
+        <link rel="icon" href="__PUBLIC__/Public/images/favicon.ico" type="image/x-icon">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>-->
+        <script src="__PUBLIC__/Home/Js/jquery-1.10.2-min.js"></script>
+        <!--<script src="__PUBLIC__/Home/Js/respond.min.js"></script>-->
+        <!--<![endif]-->
+    </head>
+
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+        <header style="background:#000;">
+            <include file="Public/headerindex"/>
+        </header>
+        <header style='padding: 0px;'>
+
+            <img class='lunbo img-responsive' src="/Public/Home/Images/banner.jpg" >
+
+            <!-- end .introContent -->
+        </header>
+        
+
+
+        <section class="work" id="work"   style="background:url(__PUBLIC__/Home/Images/timg.jpg);">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="section-headings" style="margin-bottom: 1em">
+                            <h2>{$Think.lang.kefuzhongxin}</h2>
+                            
+                        </div>
+                        <p style="text-align: left;">
+                            {$Think.lang.kfzx}
+                            </p>
+                    </div>
+                </div><!-- end .row -->
+                
+            </div><!-- end .container -->
+        </section><!-- end section.work -->
+
+        <!-- Javascript -->
+        <script src="__PUBLIC__/Home/Js/jquery-1.10.2-min.js"></script>
+        <script src="__PUBLIC__/Home/Js/bootstrap.min.js"></script>
+        <script src="__PUBLIC__/Home/Js/smooth-scroll.min.js"></script>
+        <script src="__PUBLIC__/Home/Js/waypoints.min.js"></script>
+        <script src="__PUBLIC__/Home/Js/waypoints-sticky.min.js"></script>
+        <script src="__PUBLIC__/Home/Js/wow.min.js"></script>
+        <script src="__PUBLIC__/Home/Js/placeholders.min.js"></script>
+        <script src="__PUBLIC__/Home/Js/jquery.magnific-popup.min.js"></script>
+        <script src="__PUBLIC__/Home/Js/custom.min.js"></script>
+        <script src="__PUBLIC__/Home/Js/jquery.validate.min.js"></script>
+        <script src="__PUBLIC__/Home/Js/jquery.backstretch.min.js"></script>
+    <if condition="$Think.config.DEFAULT_WEB_SET_NOTICE eq 1">
+        <script>
+            $(function() {
+                $('#noticePopup').modal({
+                    backdrop: 'static',
+                    show: true
+                });
+
+
+            });
+        </script>
+
+    </if>
+    <include file="Public/foot"/>
+</body>
+</html>

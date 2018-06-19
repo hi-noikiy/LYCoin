@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+<head>
+	<include file="Public/head"/>
+	<script language="javascript" type="text/javascript" src="__PUBLIC__/My97DatePicker/WdatePicker.js"></script>
+</head>
+<body class="smart-style-1 desktop-detected" style="min-height: 871px;">
+<!--===header start===-->
+		<!-- HEADER -->
+		<header id="header" style="background:#000;">
+			<include file="Public/header"/>
+		</header>
+<!--=== End Header ===-->
+
+		<!-- Left panel : Navigation area -->
+		<aside id="left-panel" style="min-height: 871px; background: rgb(228, 238, 245);">
+		    <include file="Public/left"/>
+
+		</aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+        
+
+<!-- RIBBON -->
+<div id="ribbon">
+                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="&lt;i class=&#39;text-warning fa fa-warning&#39;&gt;&lt;/i&gt; Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+					<li><i class="fa fa-md fa-fw fa-home"></i>{$Think.lang.public-main}</li><li class="active">{$Think.lang.menu-upgrade_search}</li>
+				</ol>
+				<!-- end breadcrumb -->
+</div>
+<hr>
+<!-- END RIBBON -->
+
+<!-- MAIN CONTENT -->
+<div id="content">
+<!-- MAIN top -->  
+              <div class="row" style="margin-top:-37px;">
+					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+						<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-shopping-cart"></i>{$Think.lang.menu-upgrade_search}</h1>
+					</div>
+					
+				</div>
+<!--END MAIN top -->
+<!--top alert 
+                <div class="row">
+                    <div class="col-sm-12">
+                       <div class="well well-light">
+								<a class="close" data-dismiss="alert" href="">×</a>
+								<h4 class="alert-heading"><i class="fa-fw fa  fa-exclamation-triangle"></i>注意</h4>
+								<p>--</p>
+					    </div>
+                    </div>
+                </div>  
+<!--end top alert-->
+
+                    <!-- START ROW -->
+					<div class="row margin-top-20">
+                        <!-- NEW COL START -->
+						<article class="col-sm-12 col-md-12 col-lg-12">
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget jarviswidget-color-blue" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-shopping-cart"></i> </span>
+									<h2>{$Think.lang.menu-upgrade_search}</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+                                        <div class="widget-body-toolbar">
+            <!--search-->
+               <div class="row">
+			      <div class="col-sm-12">
+				    <form name="searchForm" id="searchForm" method="post" action="" class="form-inline">
+										<fieldset>
+                                        <table style="width:100%;" border="0" cellspacing="0" cellpadding="2">
+										<colgroup><col width="90%"><col width="10%"></colgroup>
+										  <tbody><tr>
+										    <td>
+											<div class="form-group">
+											            <label class="sr-only">{$Think.lang.public-start-time}</label>
+												        <input class="form-control datepicker hasDatepicker Wdate" onclick="WdatePicker()" name="starttime" type="text" placeholder="{$Think.lang.public-start-time}" data-dateformat="yy-mm-dd" value="{$starttime}" style="height:31px;">
+										       </div>
+												~
+											   <div class="form-group">
+											            <label class="sr-only">{$Think.lang.public-end-time}</label>
+												        <input class="form-control datepicker hasDatepicker Wdate" onclick="WdatePicker()" name="endtime" type="text" placeholder="{$Think.lang.public-end-time}" data-dateformat="yy-mm-dd" value="{$endtime}" style="height:31px;">
+										       </div>
+
+
+                                            <div class="form-group">
+											    <button type="submit" class="btn bg-color-red txt-color-white btn-sm">{$Think.lang.public-search}</button>
+											    <a class="btn btn-default btn-sm" href=""><i class="fa fa-refresh"></i></a>
+											</div>
+											</td>
+											<td></td>
+											<td align="right">
+											<div class="form-group">
+												<select class="form-control input-sm" name="page_set" onchange="javascript:document.searchForm.submit(this);">
+													<option value="10" <eq name="page_set" value="10">selected="selected"</eq>>10</option>
+													<option value="30" <eq name="page_set" value="30">selected="selected"</eq>>30</option>
+													<option value="50" <eq name="page_set" value="50">selected="selected"</eq>>50</option>
+													<option value="100" <eq name="page_set" value="100">selected="selected"</eq>>100</option>
+												</select>
+											 </div>
+											</td>
+										  </tr>
+										</tbody></table>
+
+										</fieldset>
+					 </form>
+				  </div>
+			   </div>
+<!--search end-->
+<div class="table-responsive mt20">
+										
+										<table id="dt_basic" class="table table-striped table-bordered table-hover">
+											<thead>
+												<tr>
+													<th class="text-center">No.</th>
+													<th class="text-center">{$Think.lang.public-date}</th>
+													<th class="text-center">{$Think.lang.public-type}</th>
+													<th class="text-center">{$Think.lang.public-user}</th>
+                                                    <!--<th class="text-center">姓名</th>-->
+													<th class="text-center">{$Think.lang.public-package}</th>
+													<th class="text-center">{$Think.lang.public-price}</th>
+													<th class="text-center">BV</th>
+													<!--<th>DGC</th>-->
+												</tr>
+											</thead>
+											<tbody>
+                                            <volist name="OrderInfoList" id="oil">
+												<tr>
+                                                <td class="text-center" width="5%">{$count-$key}</td>
+                                                <td class="text-center" width="10%">{$oil['addtime']}</td>
+                                                <td class="text-center">{$oil['title']}</td>
+                                                <td class="text-center">{$oil['member_username']}</td>
+                                                <!--<td class="text-center">陆 飞</td>-->
+                                                <td class="text-center">
+													<if condition="$language neq 'zh-cn'">{$oil['package_title_en']}<else/>{$oil['package_title']}</if>
+												</td>
+                                                <td class="text-right">
+													{$oil['package_price']}
+												</td>
+												<td class="text-right">
+													{$oil['package_bv_price']}
+												</td>
+												<!--<td>35</td>-->
+                                             </tr>
+											</volist>
+											</tbody>
+                                            <tfoot>
+                                                <tr>
+                                                  <td colspan="5" class="text-center"><b>{$Think.lang.public-all-price}</b></td>
+                                                  <td class="text-right"><b>{$price}</b></td>
+												   <td class="text-right"><b>{$bv_price}</b></td>
+												    <!--<td class="text-right">105</td>-->
+                                                </tr>
+												<tr>
+			                                     <td colspan="9">
+													 	<notempty name="count_status">
+															<div class="pagination pull-right page">
+																{$page}
+															</div>
+															<else/>
+															<ul class="pagination pull-right">
+																<li class="first disabled"><a href="#">{$Think.lang.public-index-page}</a></li>
+																<li class="prev disabled"><a href="#">{$Think.lang.public-pre-page}</a></li>
+																<li class="active"><a href="#">1</a></li>
+																<li class="next disabled"><a href="#">{$Think.lang.public-next-page}</a></li>
+																<li class="last disabled"><a href="#">{$Think.lang.public-last-page}</a></li>
+															</ul>
+														</notempty>
+
+												 </td>
+		                                       </tr>
+                                            </tfoot>
+										</table>
+				              </div> 
+					                </div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+							<!-- end widget -->
+				
+						</div></article>
+						<!-- END COL -->
+
+					</div>
+
+					<!-- END ROW -->
+
+
+
+</div><!--END MAIN CONTENT -->
+</div>
+		<!-- END MAIN PANEL -->
+
+		<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+		Note: These tiles are completely responsive,
+		you can add as many as you like
+		-->
+<include file="Public/top"/>
+        
+<!-- END SHORTCUT AREA -->
+    <!-- JavaScript -->
+    
+    <!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+
+<script>
+   $(function(){
+	 //nav active setting
+	 
+	 $("nav > ul > li.active").removeClass("active");
+	 $("nav > ul > li.open").removeClass("open");
+     $("nav > ul > li:eq(6) > ul > li:eq(1)").addClass("active");
+	 
+	   
+    });
+</script>
+
+   <script>
+   $(function(){
+	 //all page common code!!!!! import  
+	 pageSetUp();
+	   
+    });
+   </script>        
+        
+        
+        <!--[if IE 7]>
+        <script>ie_error('IE7');</script>     
+		<![endif]-->
+        <!--[if IE 8]>
+        <script>ie_error('IE8');</script>     
+		<![endif]-->
+ 
+        
+        <!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div><!-- /.modal-content:e -->
+  </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e --> 
+
+
+<script>
+$(document).ready(function() {
+
+
+        //popup show
+          $('[data-load-remote]').on('click',function(e) {
+          e.preventDefault();
+          var $this = $(this);
+          var remote = $this.data('load-remote');
+	      var remote_value = $this.data('load-remote-value');
+          if(remote) {
+            $($this.data('remote-target')).load(remote,remote_value);
+          }
+
+          });
+
+ //reload detected
+ $('body').on('hidden.bs.modal', '.modal', function () {
+  $(this).removeData('bs.modal');
+});
+
+});
+</script>   
+
+
+<div id="divSmallBoxes"></div><div id="divMiniIcons"></div><div id="divbigBoxes"></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div></body></html>

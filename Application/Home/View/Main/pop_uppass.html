@@ -1,0 +1,51 @@
+<div class="modal-content">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title">{$Think.lang.pop-find-pay}</h3>
+    </div>
+    <!-- /modal-header -->
+    <div class="modal-body">
+        <form name="addForm" action="{:U('Home/Main/pop_uppass')}" class="smart-form client-form" novalidate="novalidate">
+            <header style="background:none; display:none;">
+                <h4 id="result_pass"></h4>
+            </header>
+            <fieldset>
+                <section>
+                    <label class="label">{$Think.lang.pop-username}</label>
+                    <label class="input"><i class="icon-prepend fa fa-user"></i><i class="icon-append fa fa-check"></i>
+                        <input type="text" name="username" value="">
+                    </label>
+                </section>
+                <section>
+                    <label class="label">{$Think.lang.pop-username-email}</label>
+                    <label class="input"><i class="icon-prepend fa fa-envelope-o"></i><i class="icon-append fa fa-check"></i>
+                        <input type="text" name="email" value="">
+                    </label>
+                </section>
+
+                <div class="row">
+                    <section class="col col-9">
+                        <label class="label">{$Think.lang.user-code}</label>
+                        <label class="input">
+                            <input type="text" class="input-sm" name="code" value="">
+                        </label>
+                    </section>
+
+                    <section class="col col-3">
+                        <label class="label">{$Think.lang.user-code-email}</label>
+                        <label class="input">
+                            <button class="btn btn-default btn-sm" type="button" onclick="javascript:location.href='__ROOT__/index.php?m=Home&c=Mail&a=index&type=1'" style="width:50px;">{$Think.lang.user-send}</button>
+                        </label>
+                    </section>
+                </div>
+            </fieldset>
+            <footer style="background:none;">
+                <button type="submit" id="submit" class="btn btn-primary">{$Think.lang.login-find-in}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{$Think.lang.login-out}</button>
+
+            </footer>
+        </form>
+    </div><!-- /modal-body -->
+
+</div>

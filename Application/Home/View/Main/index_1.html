@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en"><!--<![endif]-->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="description" content="{$Think.config.DEFAULT_WEB_DESCRIPTION}">
+        <meta name="keywords" content="{$Think.config.DEFAULT_WEB_KEYWORDS}" />
+        <meta name="author" content="">
+        <title>{$Think.config.DEFAULT_WEB_TITLE}</title>
+
+        <!-- Main styles -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/bootstrap.min.css">
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/style.css">
+        <!-- Animations -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/animate.css">
+        <!-- Font Awesome icons -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/font-awesome.min.css">
+        <!-- Video -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/video-js.min.css">
+        <!-- Magnific Popup core CSS file -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/magnific-popup.min.css">
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/typicons.min.css">
+        <link href="__PUBLIC__/Home/Css/googlefont.css" rel="stylesheet" type="text/css">
+        <!-- pop -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/pop.css">
+        <link rel="shortcut icon" href="__PUBLIC__/Public/images/favicon.ico">
+        <link rel="icon" href="__PUBLIC__/Public/images/favicon.ico" type="image/x-icon">
+        
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>-->
+            <script src="__PUBLIC__/Home/Js/jquery-1.10.2-min.js"></script>
+            <!--<script src="__PUBLIC__/Home/Js/respond.min.js"></script>-->
+        <!--<![endif]-->
+    </head>
+
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+        <header style="background:#000;">
+            <include file="Public/header"/>
+        </header>
+        <header style='padding: 0px;'>
+           
+            <img class='lunbo img-responsive' src="/Public/Home/Images/banner.jpg" >
+            <!--<img class='lunbo img-responsive' src="/Public/Home/Images/main_bg01.jpg" >-->
+            
+            <!-- end .introContent -->
+        </header>
+<!--        <script>
+            $(function() {
+                function show() {
+                   var back = $('.lunbo').attr('src'); 
+                   var num=back.substr(-5,1);
+                   if(num==1){
+                       $('.lunbo').attr('src','/Public/Home/Images/main_bg02.jpg'); 
+                   }
+                   if(num==2){
+                       $('.lunbo').attr('src','/Public/Home/Images/main_bg03.jpg'); 
+                   }
+                   if(num==3){
+                       $('.lunbo').attr('src','/Public/Home/Images/main_bg01.jpg'); 
+                   }
+                }
+                setInterval(show, 3000);
+            });
+        </script>-->
+        
+
+        <section class="work" id="work"   style="background:url(__PUBLIC__/Home/Images/timg.jpg)">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-md-12">
+                            <img class="img-responsive" src="__PUBLIC__/Home/Images/liu.png">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="section-headings">
+                            <h2>{$Think.lang.jituanjianjie}</h2>
+                        </div><!--end section-headings -->
+                    </div>
+                </div><!-- end .row -->
+                <div class="row">
+                    <div class="col-sm-4 features-box features-box-gray wow fadeInUp animated" style="visibility: visible;">
+                        <div class="features-box-icon">
+                            <!-- <span aria-hidden="true" class="typcn typcn-eye-outline"></span> -->
+                            <span aria-hidden="true"><img src="__PUBLIC__/Home/Images/icon_1_1.png" alt="" style="height:81px;"></span>
+                        </div>
+                        <h3>{$Think.lang.zichanzhengquehua}</h3>
+                        <p style="text-align: left;">
+                       {$Think.lang.gywm}</p>
+                    </div>
+                    <div class="col-sm-4 features-box wow fadeInDown animated" style="visibility: visible;">
+                        <div class="features-box-icon">
+                            <!-- <span aria-hidden="true" class="typcn typcn-eye-outline"></span> -->
+                            <span aria-hidden="true"><img src="__PUBLIC__/Home/Images/icon_1_2.png" alt=""></span>
+                        </div>
+                        <h3>{$Think.lang.chengxinwenben}</h3>
+                        <p  style="text-align: left;">{$Think.lang.cxwb}</p>
+                    </div>
+                    <div class="col-sm-4 features-box features-box-gray wow fadeInUp animated" style="visibility: visible;">
+                        <div class="features-box-icon">
+                            <!-- <span aria-hidden="true" class="typcn typcn-eye-outline"></span> -->
+                            <span aria-hidden="true"><img src="__PUBLIC__/Home/Images/icon_1_3.png" alt=""></span>
+                        </div>
+                        <h3>{$Think.lang.kehufuwu}</h3>
+                        <p  style="text-align: left;">{$Think.lang.khfw}</p>
+                    </div>
+                </div>
+                
+            </div><!-- end .container -->
+        </section><!-- end section.work -->
+
+    <if condition="$Think.config.DEFAULT_WEB_SET_NOTICE eq 1">
+        <!-- Modal -->
+        <style>
+            .modal .modal-dialog {
+                width: 50%;
+            }
+            .modal-dialog .modal-body {
+                overflow-y: auto;
+            }
+        </style>
+        <div class="modal fade" id="noticePopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">{$Think.config.DEFAULT_WEB_NOTICE_TITLE}</h4>
+                    </div>
+                    <div class="modal-body">
+                        {$Think.config.DEFAULT_WEB_NOTICE}
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </if>
+    
+
+    <!-- Javascript -->
+    <script src="__PUBLIC__/Home/Js/jquery-1.10.2-min.js"></script>
+    <script src="__PUBLIC__/Home/Js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/smooth-scroll.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/waypoints.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/waypoints-sticky.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/wow.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/placeholders.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/jquery.magnific-popup.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/custom.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/jquery.backstretch.min.js"></script>
+    <if condition="$Think.config.DEFAULT_WEB_SET_NOTICE eq 1">
+        <script>
+            $(function() {
+                $('#noticePopup').modal({
+                    backdrop: 'static',
+                    show: true
+                });
+
+
+            });
+        </script>
+
+    </if>
+    <include file="Public/foot"/>
+	
+	 <style>
+    /*浮动客服*/
+#floatDivBoxs{width:170px;background:#fff;position:fixed;top:200px;right:0px;z-index:999;}
+#floatDivBoxs .floatDtt{width:100%;height:45px;line-height:45px; background:#f08326;color:#fff;font-size:18px;text-indent:22px;position:relative;}
+#floatDivBoxs .floatDqq{padding:0 14px;}
+#floatDivBoxs .floatDqq li{height:45px;line-height:45px;font-size:15px;border-bottom:1px solid #e3e3e3; text-align:right}
+#floatDivBoxs .floatDqq li img{ float:left; margin-top:7px;}
+#floatDivBoxs .floatDtxt{font-size:18px;color:#333;padding:12px 14px;}
+#floatDivBoxs .floatDtel{padding:0 0 15px 10px;}
+#floatDivBoxs .floatImg{text-align:center;padding:10px;background:#EBEBEB;}
+#floatDivBoxs .floatImg img{ margin-bottom:5px;}
+#floatDivBoxs .floatDtel img{display:block;}
+#floatDivBoxs .floatDbg{width:100%;height:20px;background:url(__PUBLIC__/Home/kefu/online_botbg.jpg) no-repeat;box-shadow:-2px 0 3px rgba(0,0,0,0.25);}
+.floatShadow{ background:#fff;box-shadow:-2px 0 3px rgba(0,0,0,0.25);}
+#rightArrow{width:50px;height:45px;background:url(__PUBLIC__/Home/kefu/online_arrow.jpg) no-repeat;position:fixed;top:200px;right:0;z-index:999;}
+#rightArrow a{display:block;height:45px;}
+</style>
+<div id="rightArrow"><a href="javascript:;" title="在线客户"></a></div>
+<div id="floatDivBoxs">
+  <div class="floatDtt">在线客服</div>
+  <div class="floatShadow">
+    <ul class="floatDqq" style="margin-bottom:0px;">
+      <li><a target="_blank" href="tencent://message/?uin=1176900613&Site=www.yuanjinjituan.com&Menu=yes"><img src="__PUBLIC__/Home/kefu/qq.png" align="absmiddle">电脑客服</a></li>
+      <li><a target="_blank" href="mqqwpa://im/chat?chat_type=wpa&uin=1176900613&version=1&src_type=web&web_src=yuanjinjituan.com"><img src="__PUBLIC__/Home/kefu/qq.png" align="absmiddle">手机客服</a></li>
+<!--      <li><a target="_blank" href="tencent://message/?uin=1234567890&Site=sc.chinaz.com&Menu=yes"><img src="images/qq.png" align="absmiddle">在线客服2号</a></li>
+      <li><a target="_blank" href="tencent://message/?uin=1234567890&Site=sc.chinaz.com&Menu=yes"><img src="images/qq.png" align="absmiddle">在线客服3号</a></li>-->
+    </ul>
+  </div>
+  <div class="floatDbg"></div>
+</div>
+<script>
+$(function(){
+	var flag=0;
+	$('#rightArrow').on("click",function(){
+		if(flag==1){
+			$("#floatDivBoxs").animate({right: '-175px'},300);
+			$(this).animate({right: '-5px'},300);
+			$(this).css('background-position','-50px 0');
+			flag=0;
+		}else{
+			$("#floatDivBoxs").animate({right: '0'},300);
+			$(this).animate({right: '170px'},300);
+			$(this).css('background-position','0px 0');
+			flag=1;
+		}
+	});
+});
+</script>
+</body>
+</html>

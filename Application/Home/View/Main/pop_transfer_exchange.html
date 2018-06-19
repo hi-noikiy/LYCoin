@@ -1,0 +1,72 @@
+<div class="modal-content">
+	<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					 <h3 class="modal-title">{$Think.lang.cash-move-bank}</h3>
+	</div><!--modal-header:e-->
+	<div class="modal-body">
+					<div class="row">
+								<div class="col-sm-12">
+								<div class="well well-light">
+									<a class="close" data-dismiss="alert" href="#">×</a>
+									<h4 class="alert-heading"><i class="fa-fw fa  fa-exclamation-triangle"></i>Notice!</h4>
+									<p>Exchange transfer can not be canceled upon completion.</p>
+								</div>
+							   </div>
+							</div> 
+	<form name="transferForm" action="{:U('Home/Main/pop_transfer_exchange')}" method="post" class="smart-form" novalidate="novalidate">
+	<fieldset>
+
+                        
+                        <!--
+						<section class="col col-6">
+						                <label class="label">现持有的S现金</label>
+										<label class="input"><i class="icon-append fa fa-check"></i>
+											<input type="text" name="D_CASH" id="D_CASH" value="0.00" readonly>
+										</label>
+						</section>
+                        -->
+						<section>
+						                <label class="label">{$Think.lang.pop-new-b}</label>
+										<label class="input"><i class="icon-append fa fa-check"></i>
+											<input type="text" name="B_CASH" id="B_CASH" value="{$PriceBInfo[0]['b_price']?$PriceBInfo[0]['b_price']:0}" readonly="">
+										</label>
+						</section>
+                        <!--
+						<section class="col col-6">
+						                <label class="label">要转出的S现金</label>
+										<label class="input"><i class="icon-append fa fa-check"></i>
+											<input type="text" name="D_AMOUNT" id="D_AMOUNT" value="0">
+										</label>
+						</section>
+						-->
+						<section>
+						                <label class="label">{$Think.lang.pop-out-b}</label>
+										<label class="input"><i class="icon-append fa fa-check"></i>
+											<input type="text" name="price" id="B_AMOUNT" value="0">
+										</label>
+						</section>
+
+						<section>
+						                <label class="label">{$Think.lang.pop-user-pass}</label>
+										<label class="input"><i class="icon-append fa fa-check"></i>
+											<input type="password" name="paypass" id="D_PASS2" value="">
+										</label>
+						</section>
+
+
+
+</fieldset>  
+
+						
+						<footer>
+									<button type="button" class="btn btn-default" data-dismiss="modal">{$Think.lang.login-out}</button>
+                                    <button type="submit" id="submit" class="btn bg-color-red txt-color-white">{$Think.lang.index-send-price}</button>
+                                    
+						</footer>
+                 </form>
+
+</div><!--modal-body:e-->
+
+
+
+</div>

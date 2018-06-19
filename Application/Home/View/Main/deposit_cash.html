@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+    <head>
+    <include file="Public/head"/>
+</head>
+<body class="smart-style-1 desktop-detected" style="min-height: 871px;">
+    <!--===header start===-->
+    <!-- HEADER -->
+    <header id="header" style="background:#000;">
+        <include file="Public/header"/>
+    </header>
+    <!--=== End Header ===-->
+
+    <!-- Left panel : Navigation area -->
+    <aside id="left-panel" style="min-height: 871px; background: rgb(228, 238, 245);">
+        <include file="Public/left"/>
+
+    </aside>
+    <!-- END NAVIGATION -->
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+
+
+        <!-- RIBBON -->
+        <div id="ribbon">
+            <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="&lt;i class=&#39;text-warning fa fa-warning&#39;&gt;&lt;/i&gt; Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+            <!-- breadcrumb -->
+            <ol class="breadcrumb">
+                <li><i class="fa fa-md fa-fw fa-home"></i>{$Think.lang.public-main}</li><li>{$Think.lang.menu-deposit}</li><li class="active">{$Think.lang.menu-deposit_cash}</li>
+            </ol>
+            <!-- end breadcrumb -->
+        </div>
+        <hr>
+        <!-- END RIBBON -->
+
+        <!-- MAIN CONTENT -->
+        <div id="content">
+            <!-- MAIN top -->  
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-sign-in"></i>{$Think.lang.menu-deposit_cash}</h1>
+                </div>
+            </div>
+            <!--END MAIN top -->
+            <!--top alert 
+                            <div class="row">
+                                <div class="col-sm-12">
+                                   <div class="well well-light">
+                                                                            <a class="close" data-dismiss="alert" href="">×</a>
+                                                                            <h4 class="alert-heading"><i class="fa-fw fa  fa-exclamation-triangle"></i>注意</h4>
+                                                                            <p>--</p>
+            
+                                                        </div>
+                                </div>
+                            </div>  
+            <!--end top alert-->
+
+            <!-- START ROW -->
+            <div class="row">
+                <!-- NEW COL START -->
+                <article class="col-sm-12 col-md-6 col-lg-6">
+
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-color-blue" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+                        <!-- widget options:
+                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
+
+                        -->
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-user"></i> </span>
+                            <h2>{$Think.lang.menu-deposit_cash}</h2>
+
+                        </header>
+
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+                            <!-- end widget edit box -->
+                            <!-- widget content -->
+                            <div class="widget-body no-padding">
+                                <form class="smart-form" name="depositForm" action="{:U('Home/Main/deposit_cash')}" method="post" novalidate="novalidate">
+                                    <fieldset>
+                                        <section>
+                                            <label class="label">姓名</label>
+                                            <label class="input">
+                                                <input type="text" class="input-sm" id="username" name="username" value="{$Member['surname']}{$Member['name']}">
+                                            </label>
+                                        </section>
+
+                                        <section>
+                                            <label class="label">银行名称</label>
+                                            <label class="input">
+                                                <input type="text" class="input-sm" id="bank" name="bank" value="">
+                                            </label>
+                                        </section>
+
+                                        <section>
+                                            <label class="label">数量</label>
+                                            <label class="input">
+                                                <input type="text" class="input-sm" id="price" name="price" value="" >
+                                            </label>
+                                        </section>
+
+                                        <section>
+                                            <label class="label">选择货币</label>
+                                            <label class="select">
+                                                <select id="type" name="type">
+                                                    <option value="USD">USD</option>
+                                                    <option value="KRW">KRW</option>
+                                                    <option value="CNY">CNY</option>
+                                                    <option value="JPY">JPY</option>
+                                                </select> <i></i> </label>
+                                        </section>
+
+                                        <section>
+                                            <label class="label">留言</label>
+                                            <label class="input">
+                                                <input type="text" class="input-sm" id="D_REM" name="remark" value="">
+                                            </label>
+                                        </section>
+                                    </fieldset>
+                                    <footer>
+                                        <button type="submit" id="submit" class="btn btn-primary">
+                                            {$Think.lang.public-reg}
+                                        </button>
+                                    </footer>
+                                </form>
+
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
+                    <!-- end widget -->
+
+                </article>
+                <!-- END COL -->
+
+                <!-- NEW COL START -->
+                <article class="col-sm-12 col-md-6 col-lg-6">
+
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-color-blue" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+                        <!-- widget options:
+                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
+
+                        -->
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-user"></i> </span>
+                            <h2>存款记录</h2>
+
+                        </header>
+
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+                            <!-- end widget edit box -->
+                            <!-- widget content -->
+                            <div class="widget-body no-padding">
+
+                                <div class="table-responsive mt20">
+
+                                    <table id="dt_basic" class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>日期</th>
+                                                <th>汇款人姓名</th>
+                                                <th>银行名称</th>
+                                                <th>数量</th>
+                                                <th>货币类型</th>
+                                                <th>status</th>
+                                                <th>存款日期</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <notempty name="CashList">
+                                            <volist name="CashList" id="cl">
+                                                <tr>
+                                                    <td>{$cl['addtime']}</td>
+                                                    <td>{$cl['username']}</td>
+                                                    <td>{$cl['bank']}</td>
+                                                    <td>{$cl['price']}</td>
+                                                    <td>{$cl['type']}</td>
+                                                    <td><if condition="$cl['status']"><font color="green">SUCCESS</font><else/><if condition="$cl['recom']"><font color="green">FAIL</font><else/><font color="orange">WAIT</font></if></if></td>
+                                                <td class="text-center"><a href="#popup" data-toggle="modal" data-load-remote="{:U('Home/Main/pop_cash',array('id'=>$cl['id']))}" data-load-remote-value="{:U('Home/Main/pop_cash',array('id'=>$cl['id']))}" data-remote-target="#popup .modal-content" class="label bg-color-blueDark txt-color-white">详细</a></td>
+                                                </tr>
+                                            </volist>
+                                            <else/>
+                                            <tr><td colspan="7" class="text-center padding-20">{$Think.lang.public-content}</td></tr>
+                                        </notempty>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="7">
+                                        <notempty name="count_status">
+                                            <div class="pagination pull-right page">
+                                                {$page}
+                                            </div>
+                                            <else/>
+                                            <ul class="pagination pull-right">
+                                                <li class="first disabled"><a href="#">{$Think.lang.public-index-page}</a></li>
+                                                <li class="prev disabled"><a href="#">{$Think.lang.public-pre-page}</a></li>
+                                                <li class="active"><a href="#">1</a></li>
+                                                <li class="next disabled"><a href="#">{$Think.lang.public-next-page}</a></li>
+                                                <li class="last disabled"><a href="#">{$Think.lang.public-last-page}</a></li>
+                                            </ul>
+                                        </notempty>
+                                        </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+
+
+
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
+                    <!-- end widget -->
+
+                </article>
+                <!-- END COL -->
+
+            </div>
+
+            <!-- END ROW -->
+
+
+
+
+
+        </div><!--END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN PANEL -->
+
+    <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+    Note: These tiles are completely responsive,
+    you can add as many as you like
+    -->
+<include file="Public/top"/>
+
+<!-- END SHORTCUT AREA -->
+<!-- JavaScript -->
+
+<!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+
+<script>
+    $(function() {
+        //nav active setting
+
+        $("nav > ul > li.active").removeClass("active");
+        $("nav > ul > li.open").removeClass("open");
+        $("nav > ul > li:eq(2) > ul > li:eq(2)").addClass("active");
+
+
+    });
+</script>
+<!-- MAIN APP JS FILE -->
+<!--common-->
+<script>
+    $(function() {
+        //all page common code!!!!! import  
+        pageSetUp();
+
+    });
+</script>        
+
+
+<!--[if IE 7]>
+<script>ie_error('IE7');</script>     
+        <![endif]-->
+<!--[if IE 8]>
+<script>ie_error('IE8');</script>     
+        <![endif]-->
+
+
+
+
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div><!-- /.modal-content:e -->
+    </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e --> 
+
+
+<script>
+    $(document).ready(function() {
+
+
+        //popup show
+        $('[data-load-remote]').on('click', function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            var remote = $this.data('load-remote');
+            var remote_value = $this.data('load-remote-value');
+            if (remote) {
+                $($this.data('remote-target')).load(remote, remote_value);
+            }
+
+        });
+        $("#price").blur(function() {
+            if ($(this).val() != "") {
+                $(".msg").remove();
+                $(this).parent().parent().find("label").removeClass("state-error");
+                var t = $(this).val();
+                var z = /^[0-9]*$/;
+                if (!z.test(t)) {
+                    $(this).parent().parent().find("label").addClass("state-error");
+                    $(this).parent().after("<em  class='msg'>请输入数字.</em>");
+                }
+            } else {
+                $(this).val("1");
+            }
+
+        });
+
+        //reload detected
+        $('body').on('hidden.bs.modal', '.modal', function() {
+            $(this).removeData('bs.modal');
+        });
+
+    });
+</script>   
+
+
+<div id="divSmallBoxes"></div><div id="divMiniIcons"></div><div id="divbigBoxes"></div></body></html>

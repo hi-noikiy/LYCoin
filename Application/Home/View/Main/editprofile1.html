@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+<head>
+	<include file="Public/head"/>
+	<script language="javascript" type="text/javascript" src="__PUBLIC__/My97DatePicker/WdatePicker.js"></script>
+</head>
+<body class="smart-style-1 desktop-detected" style="min-height: 871px;">
+<!--===header start===-->
+		<!-- HEADER -->
+		<header id="header" style="background:#000;">
+			<include file="Public/header"/>
+		</header>
+<!--=== End Header ===-->
+
+		<!-- Left panel : Navigation area -->
+		<aside id="left-panel" style="min-height: 1650px; background: rgb(228, 238, 245);">
+		    <include file="Public/left"/>
+
+		</aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+        
+
+<!-- RIBBON -->
+<div id="ribbon">
+                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="&lt;i class=&#39;text-warning fa fa-warning&#39;&gt;&lt;/i&gt; Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+					<li><i class="fa fa-md fa-fw fa-home"></i>{$Think.lang.public-main}</li><li>{$Think.lang.menu-base}</li><li class="active">{$Think.lang.menu-base-editprofile}</li>
+				</ol>
+				<!-- end breadcrumb -->
+</div>
+<hr>
+<!-- END RIBBON -->
+
+<!-- MAIN CONTENT -->
+<div id="content">
+<!-- MAIN top -->  
+                <div class="row">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+						<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-user"></i>{$Think.lang.menu-base-editprofile}</h1>
+					</div>
+					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+					</div>
+				</div>
+<!--END MAIN top -->
+<!--top alert 
+                <div class="row">
+                    <div class="col-sm-12">
+                       <div class="well well-light">
+								<a class="close" data-dismiss="alert" href="#">×</a>
+								<h4 class="alert-heading"><i class="fa-fw fa  fa-exclamation-triangle"></i>注意</h4>
+								<p></p>
+					    </div>
+                    </div>
+                </div>  
+<!--end top alert-->
+					<!-- START ROW -->
+					<div class="row">
+						<!-- NEW COL START -->
+						<article class="col-sm-12 col-md-12 col-lg-12">
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget jarviswidget-color-blue" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-link"></i> </span>
+									<h2>{$Think.lang.user-invite-link}</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+                                        <div class="row padding-10">
+										  <div class="col-md-2">
+											  <notempty name="Member['picture']">
+												  <img src="{$Member['picture']}" class="rounded img-responsive">
+												  <else/>
+												  <img src="__PUBLIC__/Home/Images/dummyUser.jpg" class="rounded img-responsive">
+											  </notempty>
+
+										  </div>
+										  <div class="col-md-10">
+								          {$Think.lang.user-link}:<a href="{$Url}{:U('Home/Main/downline_tree')}"><h3>{$Url}{:U('Home/Main/downline_tree')}</h3></a><a class="btn btn-primary" href="{$Url}{:U('Home/Main/downline_tree')}">{$Think.lang.user-reg}</a>
+										  <!--
+								          您的宣传地址:<a href=""><h3>cn.digitglobal.limited/lf5411</h3></a><a class="btn btn-primary" href="">请注册新会员，您将成为推荐人。</a>
+										  -->
+										  </div>
+								        </div>
+					
+					
+					                </div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+							<!-- end widget -->
+				
+						</article>
+						<!-- END COL -->
+                    </div>
+					<!-- END ROW -->
+
+
+					<!-- START ROW -->
+					<div class="row">
+                        
+                        						<!-- NEW COL START -->
+						<article class="col-sm-12 col-md-6 col-lg-6">
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget jarviswidget-color-blue" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-file"></i> </span>
+									<h2>{$Think.lang.user-avatar}</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+                                        <form class="smart-form" method="post"  action="{:U('Home/Main/pictureMember')}" enctype="multipart/form-data" autocomplete="off">
+                                         <fieldset>
+										        <section>
+													<label class="label">{$Think.lang.user-upload-image}</label>
+													<div class="input input-file">
+														<span class="button"><input type="file" name="picture" onchange="this.parentNode.nextSibling.value = this.value">{$Think.lang.user-file}</span><input type="text" readonly="">
+													</div>
+												</section>
+												
+                                         </fieldset>
+										 <footer>
+												<input type="submit" value="{$Think.lang.user-save}" class="btn btn-primary">
+										</footer>
+										</form>
+					
+					
+					                </div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+							<!-- end widget -->
+				
+						</article>
+						<!-- END COL -->
+
+						<!-- NEW COL START -->
+						<article class="col-sm-12 col-md-6 col-lg-6">
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget jarviswidget-color-blue" id="wid-id-2" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+									<h2>{$Think.lang.user-auto-buy}</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+                                        <form class="smart-form" action="{:U('Home/Main/setPriceLevel')}" method="post">
+                                         <fieldset>
+										        <section>
+													<div class="inline-group" >
+														<volist name="PriceLevelList" id="pll">
+															<label class="radio"><input type="radio" name="price" value="{$pll['price']}" <if condition="$pll['id'] eq $Member['price_level']">checked="checked"</if> ><i class="radio_set"></i>${$pll['price']}</label>
+														</volist>
+													</div>
+												</section>
+												
+                                         </fieldset>
+										 <footer>
+												<input type="submit" class="btn btn-primary" value="{$Think.lang.user-save}">
+											</footer>
+									</form>
+					
+					
+					                </div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+							<!-- end widget -->
+				
+						</article>
+						<!-- END COL -->
+						</div>
+					    <!-- END ROW -->
+
+
+					<!-- START ROW -->
+					<div class="row">
+					    <div class="col-sm-12 col-md-6 col-lg-6">
+
+						<!-- NEW COL START -->
+						<article>
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget jarviswidget-color-blue" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-user"></i> </span>
+									<h2>{$Think.lang.user-change}</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+                                        <form class="smart-form"  action="{:U('Home/Main/saveEditprofile')}" name="basicForm" method="post" novalidate="novalidate">
+                                         <fieldset>
+										        <section>
+													<label class="label">{$Think.lang.user-surname}</label>
+													<label class="input">
+														<input type="text" class="input-sm" name="surname" value="{$Member['surname']}">
+													</label>
+												</section>
+
+												<section>
+													<label class="label">{$Think.lang.user-name}</label>
+													<label class="input">
+														<input type="text" class="input-sm" name="name" value="{$Member['name']}">
+													</label>
+												</section>
+
+												<section>
+													<label class="label">{$Think.lang.user-country}</label>
+													<label class="select">
+														<select name="country">
+															<option value="">{$Think.lang.public-select}</option>
+															<volist name="CountryList" id="cl">
+																<option value="{$cl['id']}" <if condition="$cl['id'] eq $Member['country']">selected="selected"</if> >{$cl['cn_name']}</option>
+															</volist>
+														</select> <i></i> </label>
+												</section>
+												<section>
+													<label class="label">{$Think.lang.user-telephone}</label>
+													<label class="input">
+														<input type="text" class="input-sm" name="telephone" value="{$Member['telephone']}">
+													</label>
+												</section>
+
+												<section>
+													<label class="label">{$Think.lang.user-email}</label>
+													<label class="input">
+														<input type="text" class="input-sm" name="email" value="{$Member['email']}">
+													</label>
+												</section>
+
+												<section>
+													<label class="label">{$Think.lang.user-area}</label>
+													<label class="input">
+														<input type="text" class="input-sm" name="area" value="{$Member['area']}">
+													</label>
+												</section>
+
+												<section>
+													<label class="label">{$Think.lang.user-address}</label>
+													<label class="input">
+														<input type="text" class="input-sm" name="address" value="{$Member['address']}">
+													</label>
+													<label class="input">
+														<input type="text" class="input-sm" name="address_two" value="{$Member['address_two']}">
+													</label>
+												</section>
+
+												<section>
+													<label class="label">{$Think.lang.user-birthday}</label>
+													<label class="input">
+														<input type="text" class="input-sm Wdate" name="birthday" onclick="WdatePicker()" value="{$Member['birthday']}" readonly="readonly">
+													</label>
+												</section>
+
+												<section>
+													<label class="label">{$Think.lang.user-passport}</label>
+													<label class="input">
+														<input type="text" class="input-sm" name="passport" value="{$Member['passport']}">
+													</label>
+												</section>
+
+                                                <div class="row">
+												<section class="col col-9">
+													<label class="label">{$Think.lang.user-code}</label>
+													<label class="input">
+														<input type="text" class="input-sm" name="code" value="">
+													</label>
+												</section>
+
+												<section class="col col-3">
+												    <label class="label">{$Think.lang.user-code-email}</label>
+													<label class="input">
+													<button class="btn btn-default btn-sm sendcode" type="button" type_id="3">{$Think.lang.user-send}</button>&nbsp;<button class="btn btn-default btn-sm sendcode" type="button" type_id="3">{$Think.lang.user-send}2</button>
+													</label>
+												</section>
+
+												</div>
+                                         </fieldset>
+										 <footer>
+												<input type="submit" value="{$Think.lang.user-save}" class="btn btn-primary">
+											</footer>
+									</form>
+					
+					
+					                </div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+							<!-- end widget -->
+				
+						</article>
+						<!-- END COL -->
+
+
+						</div>
+
+
+						<div class="col-sm-12 col-md-6 col-lg-6">
+
+
+						<!-- NEW COL START -->
+						<article>
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget jarviswidget-color-blue" id="wid-id-6" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-lock"></i> </span>
+									<h2>{$Think.lang.user-change-login}</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+                                        <form class="smart-form" action="{:U('Home/Main/passEditprofile')}" method="post" novalidate="novalidate">
+                                         <fieldset>
+										        <section>
+													<label class="label">{$Think.lang.user-old-pass}</label>
+													<label class="input">
+														<input type="password" class="input-sm" name="userpass" value="">
+													</label>
+												</section>
+
+												<section>
+													<label class="label">{$Think.lang.user-new-pass}</label>
+													<label class="input">
+														<input type="password" class="input-sm" name="newpass" value="">
+													</label>
+												</section>
+
+												<section>
+													<label class="label">{$Think.lang.user-re-pass}</label>
+													<label class="input">
+														<input type="password" class="input-sm" name="newrepass" value="">
+													</label>
+												</section>
+
+												<div class="row">
+												<section class="col col-9">
+													<label class="label">{$Think.lang.user-code}</label>
+													<label class="input">
+														<input type="text" class="input-sm" name="code" value="">
+													</label>
+												</section>
+
+												<section class="col col-3">
+												    <label class="label">{$Think.lang.user-code-email}</label>
+													<label class="input">
+														<button class="btn btn-default btn-sm sendcode" type="button" type_id="2">{$Think.lang.user-send}</button>&nbsp;<button class="btn btn-default btn-sm sendcode" type="button" type_id="2">{$Think.lang.user-send}2</button>
+													</label>
+												</section>
+
+												</div>
+												
+												
+                                         </fieldset>
+										 <footer>
+											 	<input type="hidden" name="language" value="{$language}">
+												<input type="submit" value="{$Think.lang.user-save}" class="btn btn-primary">
+											</footer>
+									</form>
+					
+					
+					                </div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+							<!-- end widget -->
+				
+						</article>
+						<!-- END COL -->
+
+
+						<!-- NEW COL START -->
+						<article>
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget jarviswidget-color-blue" id="wid-id-7" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-lock"></i> </span>
+									<h2>{$Think.lang.user-change-pay}</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+                                        <form class="smart-form" action="{:U('Home/Main/payMember')}" method="post" novalidate="novalidate">
+                                         <fieldset>
+										        <section>
+													<label class="label">{$Think.lang.user-old-pay}</label>
+													<label class="input">
+														<input type="password" class="input-sm" name="paypass" value="">
+													</label>
+												</section>
+
+												<section>
+													<label class="label">{$Think.lang.user-new-pay}</label>
+													<label class="input">
+														<input type="password" class="input-sm" name="newpaypass" value="">
+													</label>
+												</section>
+
+												<section>
+													<label class="label">{$Think.lang.user-re-pay}</label>
+													<label class="input">
+														<input type="password" class="input-sm" name="repaypass" value="">
+													</label>
+												</section>
+                                                
+												<div class="row">
+												<section class="col col-9">
+													<label class="label">{$Think.lang.user-code}</label>
+													<label class="input">
+														<input type="text" class="input-sm" name="code" value="">
+													</label>
+												</section>
+
+												<section class="col col-3">
+												    <label class="label">{$Think.lang.user-code-email}</label>
+													<label class="input">
+													<button class="btn btn-default btn-sm sendcode" type="button" type_id="1">{$Think.lang.user-send}</button>&nbsp;<button class="btn btn-default btn-sm sendcode" type="button" type_id="1">{$Think.lang.user-send}2</button>
+													</label>
+												</section>
+
+												<section class="col col-9">
+													<a href="#popup" role="button" class="btn btn-primary btn-xs" data-toggle="modal" data-load-remote="" data-remote-target="#popup .modal-content">{$Think.lang.login-find}</a>
+												</section>
+
+												</div>
+												
+                                         </fieldset>
+										 <footer>
+											 	<input type="hidden" name="language" value="{$language}">
+												<input type="submit" value="{$Think.lang.user-save}" class="btn btn-primary">
+											</footer>
+									</form>
+					
+					
+					                </div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+							<!-- end widget -->
+				
+						</article>
+						<!-- END COL -->
+
+
+                    </div>
+					</div><!-- END ROW -->
+
+</div><!--END MAIN CONTENT -->
+
+<!-- main VIEW -->
+<div class="modal fade" id="password_find" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.main VIEW -->
+
+</div>
+		<!-- END MAIN PANEL -->
+
+		<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+		Note: These tiles are completely responsive,
+		you can add as many as you like
+		-->
+<include file="Public/top"/>
+        
+<!-- END SHORTCUT AREA -->
+
+ 
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+	  <div class="modal-content">
+
+		  <div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			  <h3 class="modal-title">查找交易密码</h3>
+		  </div>
+		  <!-- /modal-header -->
+		  <div class="modal-body">
+			  <form action="{:U('Home/Mail/findPass')}" method="post" class="smart-form client-form" novalidate="novalidate">
+				  <header style="background:none; display:none;">
+					  <h4 id="result_pass"></h4>
+				  </header>
+				  <fieldset>
+					  <section>
+						  <label class="label">您的登陆用户名</label>
+						  <label class="input"><i class="icon-prepend fa fa-user"></i><i class="icon-append fa fa-check"></i>
+							  <input type="text" name="username" value="">
+						  </label>
+					  </section>
+					  <section>
+						  <label class="label">您的邮箱地址</label>
+						  <label class="input"><i class="icon-prepend fa fa-envelope-o"></i><i class="icon-append fa fa-check"></i>
+							  <input type="text" name="email" value="">
+						  </label>
+					  </section>
+
+					  <div class="row">
+						  <section class="col col-9">
+							  <label class="label">请输入认证号</label>
+							  <label class="input">
+								  <input type="text" class="input-sm" name="code" value="">
+							  </label>
+						  </section>
+
+						  <section class="col col-3">
+							  <label class="label">认证号发送到邮箱</label>
+							  <label class="input">
+								  <button class="btn btn-default btn-sm sendcode" type="button" type_id="4" style="width:50px;">发送</button>
+							  </label>
+						  </section>
+					  </div>
+				  </fieldset>
+				  <footer style="background:none;">
+					  <input type="hidden" name="language" value="{$language}">
+					  <input type="submit" value="查找" class="btn btn-primary">
+					  <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+				  </footer>
+			  </form>
+		  </div><!-- /modal-body -->
+	  </div>
+  </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e -->
+
+<!-- JavaScript -->
+
+<!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+<script>
+	$(function(){
+		//nav active setting
+		$("nav > ul > li.active").removeClass("active");
+		$("nav > ul > li.open").removeClass("open");
+		$("nav > ul > li:eq(1) > ul > li:eq(0)").addClass("active");
+	});
+</script>
+<!-- MAIN APP JS FILE -->
+<!--common-->
+<script>
+	$(function(){
+		//all page common code!!!!! import
+		pageSetUp();
+	});
+</script>
+<!--[if IE 7]>
+<script>ie_error('IE7');</script>
+<![endif]-->
+<!--[if IE 8]>
+<script>ie_error('IE8');</script>
+<![endif]-->
+
+<script>
+$(document).ready(function() {
+
+
+        //popup show
+          $('[data-load-remote]').on('click',function(e) {
+          e.preventDefault();
+          var $this = $(this);
+          var remote = $this.data('load-remote');
+	      var remote_value = $this.data('load-remote-value');
+          if(remote) {
+            $($this.data('remote-target')).load(remote,remote_value);
+          }
+
+          });
+
+		 //reload detected
+		 $('body').on('hidden.bs.modal', '.modal', function () {
+		  	$(this).removeData('bs.modal');
+		 });
+		 $(".sendcode").click(function(){
+			 var type = $(this).attr("type_id");
+			 $(this).attr("disabled",true);
+			 $.post("{:U('Home/Mail/index')}",{"type":type},function(data){
+				if(data){
+					alert("发送成功");
+				}else{
+					alert("发送失败");
+				}
+				$(".sendcode").attr("disabled",false);
+			 });
+		 });
+});
+</script>   
+
+
+<div id="divSmallBoxes"></div><div id="divMiniIcons"></div><div id="divbigBoxes"></div>
+</body>
+</html>

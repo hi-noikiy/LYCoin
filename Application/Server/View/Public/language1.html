@@ -1,0 +1,43 @@
+<div class="container">
+	<notempty name="DgcMember">
+	<!-- right -->
+	<ul class="top-links list-inline pull-right">
+		<li class="text-welcome">Welcome to Digit Coin, <strong>{$DgcMember['username']}</strong></li>
+		<li>
+			<a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href=""><i class="fa fa-user hidden-xs"></i> MY ACCOUNT</a>
+			<ul class="dropdown-menu pull-right">
+				<li><a tabindex="-1" href="{:U('Server/Index/change_pass',array('language'=>$language))}"><i class="fa fa-lock"></i> CHANGE PASSWORD</a></li>
+				<li class="divider"></li>
+				<li><a tabindex="-1" href="{:U('Server/Index/out',array('language'=>$language))}"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
+			</ul>
+		</li>
+	</ul>		
+	</notempty>
+	<!-- left -->
+	<ul class="top-links list-inline" style="background-color:#D9534F">
+		<li>
+			<a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">
+				<eq name="language" value="en-us">{$Think.lang.en}</eq>
+				<eq name="language" value="ko-kr">{$Think.lang.kr}</eq>
+				<eq name="language" value="zh-cn">{$Think.lang.ch}</eq>
+				<eq name="language" value="ja-jp">{$Think.lang.jp}</eq>
+			</a>
+			<ul class="dropdown-langs dropdown-menu">
+				<li <eq name="language" value="en-us">class="active"</eq>>
+					<a href="{:U('Server/Index/index',array('language'=>'en-us'))}">{$Think.lang.en}</a>
+				</li>
+				<li <eq name="language" value="ko-kr">class="active"</eq>>
+					<a href="{:U('Server/Index/index',array('language'=>'ko-kr'))}">{$Think.lang.kr}</a>
+				</li>
+				<li <eq name="language" value="zh-cn">class="active"</eq>>
+					<a href="{:U('Server/Index/index',array('language'=>'zh-cn'))}">{$Think.lang.ch}</a>
+				</li>
+				<li <eq name="language" value="ja-jp">class="active"</eq>>
+					<a href="{:U('Server/Index/index',array('language'=>'ja-jp'))}">{$Think.lang.jp}</a>
+				</li>
+			</ul>
+		</li>
+		
+	</ul>
+
+</div>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://www.k82.info/register.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+                <title>{$Think.config.DEFAULT_WEB_TITLE}</title>
+                <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/login/bootstrap.min.css">
+                <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/login/iconfont.css">
+                <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/login/page.css">
+                <script src="__PUBLIC__/Home/login/jquery-1.11.3.min.js"></script>
+                <script src="__PUBLIC__/Home/login/translation.js"></script>
+                <link href="__PUBLIC__/Home/login/layer.css" type="text/css" rel="styleSheet" id="layermcss"></head>
+
+        <body class="bgw">
+                <header>
+                        <a class="header-hd" href="javascript:void(0);" onclick="history.go(-1);">
+                                <i class="iconfont icon-back"></i>
+                        </a>
+                        <div class="header-bd">{$Think.lang.huiyuanzhuce}</div>
+                </header>
+                <div class="container">
+                        <div class="m20 form-normal">
+                                <form action="{:U('Home/Index/register')}" method="post" name="theForm" id="theForm" novalidate="novalidate">
+                                        <div class="form-row">
+                                                <div class="form-row-hd" >{$Think.lang.youxiang}</div>
+                                                <div class="form-row-bd">
+                                                        <input type="text" class="form-control error" id="userName" name="email" placeholder="{$Think.lang.youxiang}">
+                                                </div>
+                                        </div>
+                                        <div class="form-row">
+                                                <div class="form-row-hd" >{$Think.lang.mima}</div>
+                                                <div class="form-row-bd">
+                                                        <input type="password" class="form-control" id="password" name="userpass" placeholder="{$Think.lang.mima}">
+                                                </div>
+                                        </div>
+                                        <div class="form-row">
+                                                <div class="form-row-hd">{$Think.lang.mimaqueren}</div>
+                                                <div class="form-row-bd">
+                                                        <input type="password" class="form-control valid" id="repassword" name="repass" placeholder="{$Think.lang.mimaqueren}">
+                                                </div>
+                                        </div>
+<!--                                        <div class="form-row">
+                                                <div class="form-row-hd">{$Think.lang.shoujihaoma}</div>
+                                                <div class="form-row-bd">
+                                                        <input type="text" class="form-control" id="mobile" name="telephone" placeholder="{$Think.lang.shoujihaoma}">
+                                                </div>
+                                        </div>-->
+                                        <div class="form-row">
+                                                <div class="form-row-hd" >{$Think.lang.jiaoyimima}</div>
+                                                <div class="form-row-bd">
+                                                        <input type="password" class="form-control" id="password" name="paypass" placeholder="{$Think.lang.jiaoyimima}">
+                                                </div>
+                                        </div>
+                                        <div class="form-row">
+                                                <div class="form-row-hd">{$Think.lang.querenjiaoyimima}</div>
+                                                <div class="form-row-bd">
+                                                        <input type="password" class="form-control valid" id="repassword" name="repaypass" placeholder="{$Think.lang.querenjiaoyimima}">
+                                                </div>
+                                        </div>
+<div class="form-row">
+                                                <div class="form-row-hd">{$Think.lang.shoujihaoma}</div>
+                                                <div class="form-row-bd">
+                                                        <input type="text" class="form-control" id="mobile" name="telephone" placeholder="{$Think.lang.shoujihaoma}">
+                                                </div>
+                                        </div>
+                                        <div class="form-row">
+                                                <div class="form-row-hd">{$Think.lang.zhenshixingming}</div>
+                                                <div class="form-row-bd">
+                                                        <input type="text" class="form-control" id="mobile" name="username" value="{$Member['username']}" placeholder="{$Think.lang.zhenshixingming}">
+                                                </div>
+                                        </div>
+                                        <div class="form-row">
+                                                <div class="form-row-hd">{$Think.lang.han28}</div>
+                                                <div class="form-row-bd">
+                                                        <input type="text" class="form-control" id="mobile" name="passport" value="{$Member['username']}" placeholder="{$Think.lang.han28}">
+                                                </div>
+                                        </div>
+                                        <div class="form-row">
+                                                <div class="form-row-hd">{$Think.lang.tuijianrenyouxiang}</div>
+                                                <div class="form-row-bd">
+                                                        <input type="text" class="form-control" id="mobile" name="femail" value="{$femail}" placeholder="{$Think.lang.tuijianrenyouxiang}">
+                                                </div>
+                                        </div>
+
+                                        <div class="mt30">
+                                                <button class="btn btn-round btn-block btn-primary" type="submit">{$Think.lang.tijiao}</button>
+                                        </div>
+                                </form>
+                        </div>
+                </div>
+
+                <script src="__PUBLIC__/Home/login/page.js"></script>
+                <script src="__PUBLIC__/Home/login/layer.js"></script>
+                <script src="__PUBLIC__/Home/login/jquery.validate.min.js"></script>
+                <script src="__PUBLIC__/Home/login/jquery.validate.messages_zh.js"></script>
+
+
+
+        </body></html>

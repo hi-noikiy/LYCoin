@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html style="" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths js flexbox canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba no-hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]--><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>邦诚集团</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="__PUBLIC__/Home/front/bootstrap.css">
+        <link rel="stylesheet" href="__PUBLIC__/Home/front/coming-soon-social.css">
+        <link rel="stylesheet" href="__PUBLIC__/Home/front/main.css">
+        <script src="__PUBLIC__/Home/front/jquery.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/Home/front/layer.js"></script>
+        <!-- <script type="text/javascript" src="/bitStyle/js/jquery.js"></script> -->
+
+        <!-- <script type="text/javascript" src="/bitStyle/js/layer.js"></script> -->
+
+
+        <!-- <script type="text/javascript" src="/bitStyle/js/jquery.cookie.js"></script> -->
+
+        <script src="__PUBLIC__/Home/front/modernizr-2.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+
+
+        <img  style="border:2px solid gold" alt="full screen background image" src="__PUBLIC__/Home/front/launch-bg.jpg" class="full-screen-background">
+
+        <div class="coming-soon-content">
+            <h3 style="font-size: 2.5em;"><img src="__PUBLIC__/Home/Images/logo.png" alt="Multipurpose Twitter Bootstrap Template" ><br>全球专业服务平台<br></h3>
+
+            <div class="coming-soon-subscribe container">
+                <div class="row">
+                    <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3">
+                        <form class="" id="" action="" method="post" onkeydown="if (event.keyCode == 13) {
+                                    return false;
+                                }">
+                            <div class="input-group">
+                                <input id="yanzhengma" name="yanzhengma" class="form-control input-lg" placeholder="请输入验证码" required="" type="password">
+                                <span class="input-group-btn">
+                                    <input id="login_btn" name="login_btn" class="btn btn-lg" value="提  交" onclick="login()" type="button">
+
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                     <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3"  style="font-size: 5em;">
+                         &nbsp;
+                    </div>
+                    <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3"  style="font-size: 5em;">
+                         &nbsp;
+                    </div>
+                    <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3"  style="font-size: 5em;">
+                         &nbsp;
+                    </div>
+                    <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3"  style="font-size: 5em;">
+                         &nbsp;
+                    </div>
+                    <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3"  style="font-size: 5em;">
+                         &nbsp;
+                    </div>
+                    <div class="col-lg-12 col-sm-12" style="font-size: 1.4em;color:white">
+The integration of Vietnam Bangcheng Group is in the same important status in integration as bitcoin in virtual cion
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            function login() {
+                //$('button#login_btn').attr('disabled','disabled');
+                var url = "{:U('Home/Index/frontcl')}";
+                var yanzhengma = $("#yanzhengma").val();
+                $.post(url, {yanzhengma: yanzhengma}, function(data) {
+                    if (data.sf) {
+                        window.location.href = "{:U('Home/Index/home')}";
+
+                    } else {
+                        document.location.href = "{:U('Home/Index/index')}";
+                    }
+                }, 'json');
+            }
+            $(document).ready(function($) {
+                $('#yanzhengma').focus();
+            });
+        </script>
+
+
+        <!-- Javascripts -->
+        <!-- <script src="/bjl/jquery.htm"></script> -->
+        <!-- <script>window.jQuery || document.write('<script src="js/jquery-1.9.1.min.js"><\/script>')</script><script src="/bjl/jquery-1.js"></script> -->
+        <script src="__PUBLIC__/Home/front/bootstrap.js"></script>
+
+
+
+
+
+    </body></html>

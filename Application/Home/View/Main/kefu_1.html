@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+        <head>
+        <include file="Public/head1"/>
+</head>
+<body>
+        <form name="packageForm" action="{:U('Home/Main/kefu')}" method="post" class="smart-form client-form"   enctype="multipart/form-data" >
+                <!--项目详情-->
+                <div class="projectd_f">
+                        <div class="projectd_f_in">
+                                <a href="javascript:;" onClick="javascript :history.back(-1);"><img src="__PUBLIC__/Home/shouji/images/jian.png"/></a>
+                                {$Think.lang.a77}
+                        </div>
+                </div>
+                <!--2占固定定位的块-->
+                <div class="occupy_f2"></div>
+                <!--项目名字-->
+<!--                <div class="project_name_f">
+                        <div class="project_name_f_in">
+                                {$Think.lang.taocanmingcheng}：{$PackageType['title']} {$Think.lang.jine}：{$PackageType['price']}
+                                <input type="hidden" name="package_id" value="{$PackageType['id']}">
+
+                        </div>
+                </div>-->
+                <!--简单描述-->
+                <div class="sxdymy_f">
+                        <div class="sxdymy_f_in">
+                                <ul>
+                                        <li>
+                                                <span>{$Think.lang.biaoti}</span>
+                                               <input  placeholder='{$Think.lang.qingshurubiaoti}'  type="text" name="title" value="" style=' color: #999;
+                                                       display: block;
+                                                       float: right;
+                                                       font-size: 14px;
+                                                       font-style: normal;
+                                                       height: 42px;
+                                                       line-height: 42px;'>
+                                        </li>
+                                     
+                                        <li>
+                                                <span>{$Think.lang.neirong}</span>
+                                                
+                                        </li>
+<textarea  placeholder='{$Think.lang.qingshuruneirongshuoming}'  type="text" name="content" value="" style=' color: #999;
+                                                       display: block;
+                                                       float: right;
+                                                       font-size: 14px;
+                                                       font-style: normal;
+                                                       height: 100px;
+                                                       width:99%;
+                                                       border:1px solid #b2b2b2;'>
+                                                </textarea>
+                                        <li>
+                                                <span>{$Think.lang.shangchuanjietu}1</span>
+                                                <input type="file" name="img1" onchange="this.parentNode.nextSibling.value = this.value"   style=' color: #999;
+                                                       display: block;
+                                                       float: right;
+                                                       font-size: 13px;
+                                                       font-style: normal;
+                                                       height: 42px;
+                                                       line-height: 42px;width: 103px;'>
+                                        </li>
+                                        <li>
+                                                <span>{$Think.lang.shangchuanjietu}2</span>
+                                                <input type="file" name="img2" onchange="this.parentNode.nextSibling.value = this.value"   style=' color: #999;
+                                                       display: block;
+                                                       float: right;
+                                                       font-size: 13px;
+                                                       font-style: normal;
+                                                       height: 42px;
+                                                       line-height: 42px;width: 103px;'>
+                                        </li>
+                                         <li>
+                                                <span>{$Think.lang.shangchuanjietu}3</span>
+                                                <input type="file" name="img3" onchange="this.parentNode.nextSibling.value = this.value"   style=' color: #999;
+                                                       display: block;
+                                                       float: right;
+                                                       font-size: 13px;
+                                                       font-style: normal;
+                                                       height: 42px;
+                                                       line-height: 42px;width: 103px;'>
+                                        </li>
+                                </ul>
+                        </div>
+                </div>
+                
+                <!--立即投标-->
+                <input type='submit' value='{$Think.lang.tijiao}' style='background: #81603b none repeat scroll 0 0;
+    border-radius: 6px;
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    margin: 12px auto 0;
+    text-align: center;
+    width: 94%;'>
+                <!--<a href="#" class="woxzjtl_f">立即投标</a>-->
+        </form>
+        <a href="{:U('Home/Main/kefulist')}" style='background: #81603b none repeat scroll 0 0;
+    border-radius: 6px;
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    margin: 12px auto 0;
+    text-align: center;
+    width: 94%;'>{$Think.lang.chakanfankuijilu}</a>
+<include file="Public/footer"/>
+</body>
+</html>

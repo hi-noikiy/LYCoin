@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+    <head>
+    <include file="Public/head"/>
+</head>
+<body>
+    <!--===header start===-->
+    <!-- HEADER -->
+    <header style="background:#000;">
+        <include file="Public/header"/>
+    </header>
+    <div id="main" role="main">
+
+
+        <!-- MAIN CONTENT -->
+        <div id="content">
+            <!-- MAIN top -->  
+<!--            <div class="row" style="margin-top:-37px;">
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <h1 class="page-title txt-color-blueDark" style='color: goldenrod'><i class="fa-fw fa fa-shopping-cart"></i>{$settings.name}</h1>
+                </div>
+
+            </div>-->
+            <div class="row">
+                
+                <div class="col-sm-12"  >
+                    <div class="well well-light"  style="background:transparent;background-color:rgba(0,0,0,0.3);border: 1px dashed gold;">
+                        
+                        <h2  style="color:gold">
+                            <b>
+                                {$Think.lang.duchangsi} </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {$Think.lang.wodetouzi} :<b>{$member.pan4}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a  class="btn " href="{:U('Home/Main/tzpan4')}" style="font-size: 16px;background: gold">{$Think.lang.touzifutou}</a>
+<!--                            <b>
+                                {$Think.lang.duchangsi} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  class="btn btn-primary" href="{:U('Home/Main/tzpan4')}" style="font-size: 18px;">{$Think.lang.touzifutou}</a>
+
+                             
+                            </b>-->
+                        </h2>
+<!--                        <h3>{$Think.lang.wodetouzi} :<b>{$member.pan4}</b>
+                        </h3>-->
+<!--                        <h2>当日分红比例 : <b>{$settings.todayfh}</b></h2>-->
+                    </div>
+                    
+                    
+                     <script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+
+                    <div id="container" style="min-width:400px;height:300px;width:100%;background: white;"></div>
+                    
+                    <script  type="text/javascript">
+                        $(function() {
+
+                            Highcharts.setOptions({
+                                timezoneOffset: -8
+                            });
+                            
+//                            $.ajax({type : "POST",dataType : "JSON",url : "{:U('Home/Ajax/getHeight')}",success : function(coin_height_data) {
+//                            $.getJSON("{:U('Home/Ajax/getfenhong')}", function(data) {
+//                                alert(data);
+                                $('#container').highcharts({
+                                    chart: {
+                                        zoomType: 'x'
+                                    },
+                                    title: {
+                                        text: '{$Think.lang.duchangsi}{$Think.lang.fenhongzoushitu}'
+                                    },
+                                    subtitle: {
+                                        text: document.ontouchstart === undefined ?
+                                                 '{$Think.lang.shubiaotuodong}' : '{$Think.lang.shoushisuofang}'
+                                    },
+                                   xAxis: {
+
+                            categories: [{$x}]
+                            },
+                                   tooltip: {
+                            valueSuffix: '%'
+                            },
+                                    yAxis: {
+                            title: {
+                            text: '{$Think.lang.fenhong}%'
+                            },
+                                    plotLines: [{
+                                    value: 0,
+                                            width: 1,
+                                            color: '#808080'
+                                    }]
+                            },
+                                    legend: {
+                                        enabled: false
+                                    },
+                                    plotOptions: {
+                                        area: {
+                                            fillColor: {
+                                                linearGradient: {
+                                                    x1: 0,
+                                                    y1: 0,
+                                                    x2: 0,
+                                                    y2: 1
+                                                },
+                                                stops: [
+                                                    [0, Highcharts.getOptions().colors[0]],
+                                                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                                ]
+                                            },
+                                            marker: {
+                                                radius: 2
+                                            },
+                                            lineWidth: 1,
+                                            states: {
+                                                hover: {
+                                                    lineWidth: 1
+                                                }
+                                            },
+                                            threshold: null
+                                        }
+                                    },
+                                   series: [{
+                            name: '{$Think.lang.rifenhong}',
+                                    data: [{$y}]
+                            }]
+                                });
+                        });
+
+                    </script>
+
+                    <div class="table-responsive mt20">
+
+                        <table id="dt_basic" class="table table-striped table-bordered table-hover">
+                            <caption style="font-size: 20px;color:gold;text-align: left;">{$Think.lang.fenhongjilu}</caption>
+                            <thead>
+                                <tr   class="danger">
+                                     <th class="text-center" style="background:gold">{$Think.lang.bianhao}</th>
+                                    <th class="text-center" style="background:gold">{$Think.lang.public-date}</th>
+                                    <th class="text-center" style="background:gold">{$Think.lang.jiangjinjine}</th>
+                                    <th class="text-center" style="background:gold">{$Think.lang.youxiang}</th>
+                                    <th class="text-center" style="background:gold">{$Think.lang.xiacifenhong}</th>
+                                    <!--<th class="text-center" style="background:gold">备注</th>-->
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="touzi_list" id="oil">
+                                <tr   class="active">
+                                    <td class="text-center" width="5%">{$count-$key}</td>
+                                    <td class="text-center" width="10%">{$oil['ctime']}</td>
+                                    <td class="text-center">{$oil['money']}</td>
+                                    <td class="text-center">{$oil['email']}</td>
+                                    <td class="text-center">{$oil['utime']}</td>
+<!--                                    <td class="text-center">
+                                        {$oil['note']}
+
+                                    </td>-->
+
+                                </tr>
+                            </volist>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="9">
+                                        <notempty name="count_status">
+                                        <div class="pagination pull-right page">
+                                            {$page}
+                                        </div>
+                                        <else/>
+                                        <ul class="pagination pull-right">
+                                            <li class="first disabled"><a href="#">{$Think.lang.public-index-page}</a></li>
+                                            <li class="prev disabled"><a href="#">{$Think.lang.public-pre-page}</a></li>
+                                            <li class="active"><a href="#">1</a></li>
+                                            <li class="next disabled"><a href="#">{$Think.lang.public-next-page}</a></li>
+                                            <li class="last disabled"><a href="#">{$Think.lang.public-last-page}</a></li>
+                                        </ul>
+                                    </notempty>
+
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div> 
+                </div>
+
+
+            </div>
+<include file="Public/foot"/>
+        </div>
+
+
+    </div>
+</div>
+<!--<include file="Public/top"/>-->
+
+<!-- END SHORTCUT AREA -->
+<!-- JavaScript -->
+
+<!-- JQUERY SCRIPT -->
+<!--<include file="Public/script"/>-->
+
+
+<script>
+    $(function() {
+        //nav active setting
+
+        $("nav > ul > li.active").removeClass("active");
+        $("nav > ul > li.open").removeClass("open");
+        $("nav > ul > li:eq(6) > ul > li:eq(0)").addClass("active");
+
+
+    });
+</script>
+<!-- MAIN APP JS FILE -->
+<!--common-->
+<script>
+    $(function() {
+        //all page common code!!!!! import  
+        pageSetUp();
+
+    });
+</script>
+<!--[if IE 7]>
+<script>ie_error('IE7');</script>
+<![endif]-->
+<!--[if IE 8]>
+<script>ie_error('IE8');</script>
+<![endif]-->
+<script>
+
+</script>
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div><!-- /.modal-content:e -->
+    </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e -->
+
+
+
+<script>
+    $(document).ready(function() {
+
+
+        //popup show
+        $('[data-load-remote]').on('click', function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            var remote = $this.data('load-remote');
+            var remote_value = $this.data('load-remote-value');
+            if (remote) {
+                $($this.data('remote-target')).load(remote, remote_value);
+            }
+
+        });
+
+        //reload detected
+        $('body').on('hidden.bs.modal', '.modal', function() {
+            $(this).removeData('bs.modal');
+        });
+
+    });
+</script>
+
+
+<div id="divSmallBoxes"></div><div id="divMiniIcons"></div><div id="divbigBoxes"></div>
+<script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+<script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+<script src="https://img.hcharts.cn/highcharts/themes/grid-light.js"></script>  
+</body>
+</html>

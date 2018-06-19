@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en"><!--<![endif]-->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="description" content="{$Think.config.DEFAULT_WEB_DESCRIPTION}">
+        <meta name="keywords" content="{$Think.config.DEFAULT_WEB_KEYWORDS}" />
+        <meta name="author" content="">
+        <title>{$Think.config.DEFAULT_WEB_TITLE}</title>
+
+        <!-- Main styles -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/bootstrap.min.css">
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/style.css">
+        <!-- Animations -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/animate.css">
+        <!-- Font Awesome icons -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/font-awesome.min.css">
+        <!-- Video -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/video-js.min.css">
+        <!-- Magnific Popup core CSS file -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/magnific-popup.min.css">
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/typicons.min.css">
+        <link href="__PUBLIC__/Home/Css/googlefont.css" rel="stylesheet" type="text/css">
+        <!-- pop -->
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/pop.css">
+        <link rel="shortcut icon" href="__PUBLIC__/Public/images/favicon.ico">
+        <link rel="icon" href="__PUBLIC__/Public/images/favicon.ico" type="image/x-icon">
+        
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>-->
+            <script src="__PUBLIC__/Home/Js/jquery-1.10.2-min.js"></script>
+            <!--<script src="__PUBLIC__/Home/Js/respond.min.js"></script>-->
+        <!--<![endif]-->
+    </head>
+
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+        <header style="background:#000;">
+            <include file="Public/header"/>
+        </header>
+        <header style='padding: 0px;'>
+           
+            <img class='lunbo img-responsive' src="/Public/Home/Images/banner.jpg" >
+            
+            <!-- end .introContent -->
+        </header>
+<!--        <script>
+            $(function() {
+                function show() {
+                   var back = $('.lunbo').attr('src'); 
+                   var num=back.substr(-5,1);
+                   if(num==1){
+                       $('.lunbo').attr('src','/Public/Home/Images/main_bg02.jpg'); 
+//                       $('.intro').css('backgroundImage',"url('/Public/Home/Images/main_bg02.jpg')");
+                   }
+                   if(num==2){
+                       $('.lunbo').attr('src','/Public/Home/Images/main_bg03.jpg'); 
+//                       $('.intro').css('backgroundImage',"url('/Public/Home/Images/main_bg03.jpg')");
+                   }
+                   if(num==3){
+                       $('.lunbo').attr('src','/Public/Home/Images/main_bg01.jpg'); 
+//                       $('.intro').css('backgroundImage',"url('/Public/Home/Images/main_bg01.jpg')");
+                   }
+                }
+                setInterval(show, 3000);// 注意函数名没有引号和括弧！ 
+// 使用setInterval("show()",3000);会报“缺少对象” 
+            });
+        </script>-->
+        <section class="work" id="work"   style="background:url(__PUBLIC__/Home/Images/timg.jpg)">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="section-headings">
+                            <h2>{$Think.lang.jituanjianjie}</h2>
+                        </div><!--end section-headings -->
+                    </div>
+                </div><!-- end .row -->
+                <div class="row">
+                    <div class="col-sm-4 features-box features-box-gray wow fadeInUp animated" style="visibility: visible;">
+                        <div class="features-box-icon">
+                            <!-- <span aria-hidden="true" class="typcn typcn-eye-outline"></span> -->
+                            <span aria-hidden="true"><img src="__PUBLIC__/Home/Images/icon_1_1.png" alt="" style="height:81px;"></span>
+                        </div>
+                        <h3>{$Think.lang.zichanzhengquehua}</h3>
+                        <p style="text-align: left;">
+                         {$Think.lang.gywm}</p>
+                    </div>
+                    <div class="col-sm-4 features-box wow fadeInDown animated" style="visibility: visible;">
+                        <div class="features-box-icon">
+                            <!-- <span aria-hidden="true" class="typcn typcn-eye-outline"></span> -->
+                            <span aria-hidden="true"><img src="__PUBLIC__/Home/Images/icon_1_2.png" alt=""></span>
+                        </div>
+                        <h3>{$Think.lang.chengxinwenben}</h3>
+                        <p  style="text-align: left;">{$Think.lang.cxwb}</p>
+                    </div>
+                    <div class="col-sm-4 features-box features-box-gray wow fadeInUp animated" style="visibility: visible;">
+                        <div class="features-box-icon">
+                            <!-- <span aria-hidden="true" class="typcn typcn-eye-outline"></span> -->
+                            <span aria-hidden="true"><img src="__PUBLIC__/Home/Images/icon_1_3.png" alt=""></span>
+                        </div>
+                        <h3>{$Think.lang.kehufuwu}</h3>
+                        <p  style="text-align: left;">{$Think.lang.khfw}</p>
+                    </div>
+                </div>
+            </div><!-- end .container -->
+        </section><!-- end section.work -->
+
+<!--        <section class="about" id="about" style="background: black;">
+            <div class="how-it-works-container section-container section-container-image-bg" style="position: relative; z-index: 0; background: black;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="section-headings">
+                            <h2>{$Think.lang.index-directions-title}</h2>
+                            <h4 style="color: #fff;">
+                                {$Think.lang.index-directions-content}
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 how-it-works-box wow fadeInUp animated" style="visibility: visible;">
+                        <div class="how-it-works-box-icon">
+                            <span aria-hidden="true" class="fa fa-dollar"></span> 
+                            <span aria-hidden="true"><img src="__PUBLIC__/Home/Images/icon_2_1.png" alt=""></span>
+                            <span aria-hidden="true" class="how-it-works-step">1</span>
+                        </div>
+                        <h3>{$Think.lang.index-directions-1}</h3>
+                    </div>
+                    <div class="col-sm-4 how-it-works-box wow fadeInDown animated" style="visibility: visible;">
+                        <div class="how-it-works-box-icon">
+                            <span aria-hidden="true" class="fa fa-desktop"></span> 
+                            <span aria-hidden="true"><img src="__PUBLIC__/Home/Images/icon_2_2.png" alt=""></span>
+                            <span aria-hidden="true" class="how-it-works-step">2</span>
+                        </div>
+                        <h3>{$Think.lang.index-directions-2}</h3>
+                    </div>
+                    <div class="col-sm-4 how-it-works-box wow fadeInDown animated" style="visibility: visible;">
+                        <div class="how-it-works-box-icon">
+                            <span aria-hidden="true" class="fa fa-exchange"></span> 
+                            <span aria-hidden="true"><img src="__PUBLIC__/Home/Images/icon_2_3.png" alt=""></span>
+                            <span aria-hidden="true" class="how-it-works-step">3</span>
+                        </div>
+                        <h3>{$Think.lang.index-directions-3}</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 how-it-works-box wow fadeInUp animated" style="visibility: visible;">
+                        <div class="how-it-works-box-icon">
+                            <span aria-hidden="true" class="fa fa-building"></span> 
+                            <span aria-hidden="true"><img src="__PUBLIC__/Home/Images/icon_2_4.png" alt=""></span>
+                            <span aria-hidden="true" class="how-it-works-step">4</span>
+                        </div>
+                        <h3>{$Think.lang.index-directions-4}</h3>
+                    </div>
+                    <div class="col-sm-4 how-it-works-box wow fadeInDown animated" style="visibility: visible;">
+                        <div class="how-it-works-box-icon">
+                            <span aria-hidden="true" class="fa fa-cloud"></span> 
+                            <span aria-hidden="true"><img src="__PUBLIC__/Home/Images/icon_2_5.png" alt=""></span>
+                            <span aria-hidden="true" class="how-it-works-step">5</span>
+                        </div>
+                        <h3>{$Think.lang.index-directions-5}</h3>
+                    </div>
+                    <div class="col-sm-4 how-it-works-box wow fadeInDown animated" style="visibility: visible;">
+                        <div class="how-it-works-box-icon">
+                            <span aria-hidden="true" class="fa fa-sitemap"></span> 
+                            <span aria-hidden="true"><img src="__PUBLIC__/Home/Images/icon_2_6.png" alt=""></span>
+                            <span aria-hidden="true" class="how-it-works-step">6</span>
+                        </div>
+                        <h3>{$Think.lang.index-directions-6}</h3>
+                    </div>
+                </div>
+
+            </div>
+            <div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 769px; width: 1903px; z-index: -999998; position: absolute;"><img src="__PUBLIC__/Home/Images/1.jpg" style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1903px; height: 1140.81px; max-height: none; max-width: none; z-index: -999999; left: 0px; top: -185.904px;"></div>
+            </div>
+        </section>
+
+
+        <section class="services" id="services"  style="background:black;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="section-headings">
+                            <h2>{$Think.lang.index-Vision-title}</h2>
+                            <h4>
+                                {$Think.lang.index-Vision-content}
+                            </h4>
+                        </div>
+                    </div>
+                    <ul>
+
+                        <li class="col-xs-12 col-md-6">
+                            <div class="service imgResize">
+                                <span><img src="__PUBLIC__/Home/Images/icon_3_1.png" alt="#" class="img-responsive"></span>
+                                <h3>{$Think.lang.index-Vision-left}</h3>
+                                <p class="wow fadeIn animated" data-wow-duration="1s" data-wow-delay=".5s" style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;-webkit-animation-delay: .5s; -moz-animation-delay: .5s; animation-delay: .5s;">
+                                    {$Think.lang.index-Vision-left-content}
+                                </p>
+                            </div> 
+                        </li>
+
+                        <li class="col-xs-12 col-md-6">
+                            <div class="service imgResize">
+                                <span><img src="__PUBLIC__/Home/Images/icon_3_2.png" alt="#" class="img-responsive"></span>
+                                <h3>{$Think.lang.index-Vision-right}</h3>
+                                <p class="wow fadeIn animated" data-wow-duration="1s" data-wow-delay=".5s" style="visibility: visible;-webkit-animation-duration: 1s; -moz-animation-duration: 1s; animation-duration: 1s;-webkit-animation-delay: .5s; -moz-animation-delay: .5s; animation-delay: .5s;">
+                                    {$Think.lang.index-Vision-right-content}
+                                </p>
+                            </div>
+                        </li>
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </section>-->
+
+        <!--        
+                                <section class="contact">
+                                        <div class="overlay"></div>
+                                        <div class="container">
+                                                <div class="row">
+                                                        <div class="col-xs-12">
+                                                                <div class="section-headings">
+                                                                        <h2>getting in touch</h2>
+                                                                        <h4>
+                                                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, ea, provident eum voluptatum qui dignissimos.
+                                                                        </h4>
+                                                                </div>
+                                                        </div>
+                                                
+                                                        <div class="col-xs-12">
+                                                                <form class="form" id="contact-form" role="form" method="post">
+                
+                                                                        <div class="form-group">
+                                                                            <label for="name" class="control-label">Name</label>
+                                                                            <div>
+                                                                              <input type="text" class="form-control requiredField" id="name" name="name" placeholder="Name">
+                                                                            </div>
+                                                                        </div>
+                
+                                                                        <div class="form-group">
+                                                                            <label for="email" class="control-label">Email</label>
+                                                                            <div>
+                                                                              <input type="email" class="form-control requiredField" id="email" name="email" placeholder="Email">
+                                                                            </div>
+                                                                        </div>
+                
+                                                                        <div class="form-group">
+                                                                            <label>Message</label>
+                                                                            <textarea class="form-control" id="message" placeholder="Message" name="message" rows="5"></textarea>
+                                                                        </div>
+                
+                                                                        <div class="form-group">
+                                                                            <div>
+                                                                              <button type="submit" id="submit" class="btn btn-round-inverse" >Send</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                                <p id="error" data-alert class="alert alert-danger">Please fill in all data correctly.</p>
+                                                                                <p id="thanks" data-alert class="alert alert-success">Thanks. We'll get back to you as soon as possible.</p>
+                                                                                <p id="timedout" data-alert class="alert alert-danger">The connection to the server timed out.</p>
+                                                                                <p id="state" data-alert class="alert alert-danger"></p>
+                                                                        </div>
+                                                                </form>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </section>
+        -->
+<!--    <if condition="$Think.config.DEFAULT_WEB_SET_NOTICE eq 1">
+         Modal 
+        <style>
+            .modal .modal-dialog {
+                width: 50%;
+            }
+            .modal-dialog .modal-body {
+                overflow-y: auto;
+            }
+        </style>
+        <div class="modal fade" id="noticePopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">{$Think.config.DEFAULT_WEB_NOTICE_TITLE}</h4>
+                    </div>
+                    <div class="modal-body">
+                        {$Think.config.DEFAULT_WEB_NOTICE}
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </if>-->
+
+    <!-- Javascript -->
+    <script src="__PUBLIC__/Home/Js/jquery-1.10.2-min.js"></script>
+    <script src="__PUBLIC__/Home/Js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/smooth-scroll.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/waypoints.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/waypoints-sticky.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/wow.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/placeholders.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/jquery.magnific-popup.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/custom.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/Home/Js/jquery.backstretch.min.js"></script>
+    <if condition="$Think.config.DEFAULT_WEB_SET_NOTICE eq 1">
+        <script>
+            $(function() {
+                $('#noticePopup').modal({
+                    backdrop: 'static',
+                    show: true
+                });
+
+
+            });
+        </script>
+
+    </if>
+    <include file="Public/foot"/>
+</body>
+</html>

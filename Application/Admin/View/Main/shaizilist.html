@@ -1,0 +1,343 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+    <head>
+        <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta http-equiv="Content-Language" content="zh-cn">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                    <meta name="description" content="Xenon Boostrap Admin Panel" />
+                    <meta name="author" content="" />
+
+                    <title>后台管理系统</title>
+
+                    <link rel="stylesheet" href="__PUBLIC__/Admin/Css/fonts/linecons/css/linecons.css">
+                        <link rel="stylesheet" href="__PUBLIC__/Admin/Css/fonts/fontawesome/css/font-awesome.min.css">
+                            <link rel="stylesheet" href="__PUBLIC__/Admin/Css/bootstrap.css">
+                                <link rel="stylesheet" href="__PUBLIC__/Admin/Css/xenon-core.css">
+                                    <link rel="stylesheet" href="__PUBLIC__/Admin/Css/xenon-forms.css">
+                                        <link rel="stylesheet" href="__PUBLIC__/Admin/Css/xenon-components.css">
+                                            <link rel="stylesheet" href="__PUBLIC__/Admin/Css/xenon-skins.css">
+                                                <link rel="stylesheet" href="__PUBLIC__/Admin/Css/custom.css">
+
+                                                    <script src="__PUBLIC__/Admin/Js/jquery-1.11.1.min.js"></script>
+                                                    <notempty name="model">
+                                                        <script>
+                                                            $(document).ready(function() {
+                                                                jQuery('#modal-6').modal('show', {backdrop: 'static'});
+                                                                        < if condition = "$model eq 4" >
+                                                                        setTimeout(function() {
+                                                                            $('#modal-6').modal("hide");
+                                                                        }, 1000);
+                                                                        < /if>
+                                                            });
+                                                        </script>
+                                                    </notempty>
+                                                    <script>
+                                                        $(document).ready(function() {
+                                                            $(".iswitch").click(function() {
+                                                                location.href = $(this).parent().attr("href");
+                                                            });
+                                                        });
+                                                    </script>
+                                                    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+                                                    <!--[if lt IE 9]>
+                                                            <script src="__PUBLIC__/Admin/Js/html5shiv.min.js"></script>
+                                                            <script src="__PUBLIC__/Admin/Js/respond.min.js"></script>
+                                                    <![endif]-->
+
+
+                                                    </head>
+                                                    <body class="page-body">
+
+                                                        <div class="settings-pane">
+                                                            <include file="Main:top" />	
+                                                        </div>	
+                                                        <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
+                                                            <!-- Add "fixed" class to make the sidebar fixed always to the browser viewport. -->
+                                                            <!-- Adding class "toggle-others" will keep only one menu item open at a time. -->
+                                                            <!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
+                                                            <div class="sidebar-menu toggle-others fixed collapsed">
+
+                                                                <div class="sidebar-menu-inner">	
+                                                                    <include file="Main:left" />
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="main-content">
+
+                                                                <!-- User Info, Notifications and Menu Bar -->
+                                                                <include file="Main:title" />
+                                                                <div class="page-title">
+
+                                                                    <div class="title-env">
+                                                                        <h1 class="title">投注记录</h1>
+
+                                                                    </div>
+
+                                                                    <div class="breadcrumb-env">
+
+                                                                        <ol class="breadcrumb bc-1">
+                                                                            <li>
+                                                                                <a href="{:U('Admin/Main/index')}"><i class="fa-home"></i>首页</a>
+                                                                            </li>
+                                                                            <li>
+
+                                                                                <a href="javascript:;">投注记录</a>
+                                                                            </li>
+                                                                            <li class="active">
+
+                                                                                <strong>第{$id}期</strong>
+                                                                            </li>
+                                                                        </ol>
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <!-- Table Styles -->
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+
+                                                                        <div class="panel panel-default">
+                                                                            <div class="panel-heading">
+                                                                                <h3 class="panel-title">第{$id}期投注记录</h3>
+
+                                                                            </div>
+
+                                                                            <div class="panel-body panel-border">
+
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-12">
+
+                                                                                        <!-- Table Model 2 -->
+                                                                                        <!-- <strong>Table Model 2</strong> -->
+                                                                                        <table class="table table-bordered table-striped" id="example-2">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>大</th>
+                                                                                                    <th>小</th>
+                                                                                                    <th>单</th>
+                                                                                                    <th>双</th>
+                                                                                                    <th>对1</th>
+                                                                                                    <th>对2</th>
+                                                                                                    <th>对3</th>
+                                                                                                    <th>对4</th>
+                                                                                                    <th>对5</th>
+                                                                                                    <th>对6</th>
+                                                                                                    <th>和2</th>
+                                                                                                    <th>和3</th>
+                                                                                                    <th>和4</th>
+                                                                                                    <th>和5</th>
+                                                                                                    <th>和6</th>
+                                                                                                    <th>和7</th>
+                                                                                                    <th>和8</th>
+                                                                                                    <th>和9</th>
+                                                                                                    <th>和10</th>
+                                                                                                    <th>和11</th>
+                                                                                                    <th>和12</th>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                </tr>
+                                                                                            </thead>
+
+                                                                                            <tbody class="middle-align">
+
+
+                                                                                                <tr>
+                                                                                                    <td>{$sum[1]}</td>
+                                                                                                    <td>{$sum[2]}</td>
+                                                                                                    <td>{$sum[3]}</td>
+                                                                                                    <td>{$sum[4]}</td>
+                                                                                                    <td>{$sum[5]}</td>
+                                                                                                    <td>{$sum[6]}</td>
+                                                                                                    <td>{$sum[7]}</td>
+                                                                                                    <td>{$sum[8]}</td>
+                                                                                                    <td>{$sum[9]}</td>
+                                                                                                    <td>{$sum[10]}</td>
+                                                                                                    <td>{$sum[11]}</td>
+                                                                                                    <td>{$sum[12]}</td>
+                                                                                                    <td>{$sum[13]}</td>
+                                                                                                    <td>{$sum[14]}</td>
+                                                                                                    <td>{$sum[15]}</td>
+                                                                                                    <td>{$sum[16]}</td>
+                                                                                                    <td>{$sum[17]}</td>
+                                                                                                    <td>{$sum[18]}</td>
+                                                                                                    <td>{$sum[19]}</td>
+                                                                                                    <td>{$sum[20]}</td>
+                                                                                                    <td>{$sum[21]}</td>
+                                                                                                    
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>									<table class="table table-bordered table-striped" id="example-2">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>期号</th>
+                                                                                                    <th>用户</th>
+                                                                                                    <th>投注时间</th>
+                                                                                                    <th>投注方式</th>
+                                                                                                    <th>投注钱包</th>
+                                                                                                    <th>投注金额</th>
+                                                                                                </tr>
+                                                                                            </thead>
+
+                                                                                            <tbody class="middle-align">
+
+                                                                                                <volist name="NewsList" id="ne">
+                                                                                                    <tr>
+                                                                                                        <td>{$ne['sid']}</td>
+                                                                                                        <td>{$ne['email']}</td>
+                                                                                                        <td>{$ne['ctime']}</td>
+
+                                                                                                        <td>
+                                                                                                            <if condition="$ne.touzhu eq 1">
+                                                                                                                买大
+                                                                                                                <elseif condition="$ne.touzhu eq 2" />
+                                                                                                                买小
+                                                                                                                <elseif condition="$ne.touzhu eq 3" />
+                                                                                                                买单
+                                                                                                                <elseif condition="$ne.touzhu eq 4" />
+                                                                                                                买双
+                                                                                                                <elseif condition="$ne.touzhu eq 5" />
+                                                                                                                对一
+                                                                                                                <elseif condition="$ne.touzhu eq 6" />
+                                                                                                                对二
+                                                                                                                <elseif condition="$ne.touzhu eq 7" />
+                                                                                                                对三
+                                                                                                                <elseif condition="$ne.touzhu eq 8" />
+                                                                                                                对四
+                                                                                                                <elseif condition="$ne.touzhu eq 9" />
+                                                                                                                对五
+                                                                                                                <elseif condition="$ne.touzhu eq 10" />
+                                                                                                                对六
+                                                                                                                <elseif condition="$ne.touzhu eq 11" />
+                                                                                                                定位数2
+                                                                                                                <elseif condition="$ne.touzhu eq 12" />
+                                                                                                                定位数3
+                                                                                                                <elseif condition="$ne.touzhu eq 13" />
+                                                                                                                定位数4
+                                                                                                                <elseif condition="$ne.touzhu eq 14" />
+                                                                                                                定位数5
+                                                                                                                <elseif condition="$ne.touzhu eq 15" />
+                                                                                                                定位数6
+                                                                                                                <elseif condition="$ne.touzhu eq 16" />
+                                                                                                                定位数7
+                                                                                                                <elseif condition="$ne.touzhu eq 17" />
+                                                                                                                定位数8
+                                                                                                                <elseif condition="$ne.touzhu eq 18" />
+                                                                                                                定位数9
+                                                                                                                <elseif condition="$ne.touzhu eq 19" />
+                                                                                                                定位数10
+                                                                                                                <elseif condition="$ne.touzhu eq 20" />
+                                                                                                                定位数11
+                                                                                                                <elseif condition="$ne.touzhu eq 21" />
+                                                                                                                定位数12
+
+
+                                                                                                            </if>
+                                                                                                        </td>
+
+
+
+                                                                                                        <td>
+
+                                                                                                            <if condition="$ne.qianbao eq 1">
+                                                                                                                本金钱包
+                                                                                                                <elseif condition="$ne.qianbao eq 2" />
+                                                                                                                分红钱包
+                                                                                                                <elseif condition="$ne.qianbao eq 3" />
+                                                                                                                奖金钱包
+                                                                                                                <elseif condition="$ne.qianbao eq 4" />
+                                                                                                                体验钱包
+                                                                                                                <elseif condition="$ne.qianbao eq 5" />
+                                                                                                                解冻钱包
+                                                                                                            </if>
+                                                                                                        </td>
+
+                                                                                                        <td>{$ne['money']}</td>
+
+
+                                                                                                    </tr>
+                                                                                                </volist>
+
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                        <div class="row">
+                                                                                            <div class="col-xs-6">
+                                                                                                <div class="dataTables_info" ></div>
+                                                                                            </div>
+                                                                                            <div style="float:right;">
+                                                                                                <div class="page">
+                                                                                                    {$page}
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Main Footer -->
+                                                                <!-- Choose between footer styles: "footer-type-1" or "footer-type-2" -->
+                                                                <!-- Add class "sticky" to  always stick the footer to the end of page (if page contents is small) -->
+                                                                <!-- Or class "fixed" to  always fix the footer to the end of page -->
+                                                                <footer class="main-footer sticky footer-type-1">			
+                                                                    <include file="Main:foot" />			
+                                                                </footer>
+                                                            </div>
+
+
+                                                            <!-- start: Chat Section -->
+                                                            <include file="Main:right" />
+                                                            <!-- end: Chat Section -->
+
+
+                                                        </div>
+
+
+                                                        <!-- Modal 6 (Long Modal)-->
+                                                        <div class="modal fade" id="modal-6">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <if condition="$model eq 4">
+                                                                        <div>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                            <h4>
+                                                                                <font color="#2c2e2f"><strong>操作成功</strong></font>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <else/>
+                                                                        <div>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                            <h4>
+                                                                                <font color="red"><strong>操作失败！</strong></font>
+                                                                            </h4>
+                                                                        </div>
+                                                                    </if>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Modal 6 (Long Modal)-->
+
+
+
+                                                        <!-- Bottom Scripts -->
+                                                        <script src="__PUBLIC__/Admin/Js/bootstrap.min.js"></script>
+                                                        <script src="__PUBLIC__/Admin/Js/TweenMax.min.js"></script>
+                                                        <script src="__PUBLIC__/Admin/Js/resizeable.js"></script>
+                                                        <script src="__PUBLIC__/Admin/Js/joinable.js"></script>
+                                                        <script src="__PUBLIC__/Admin/Js/xenon-api.js"></script>
+                                                        <script src="__PUBLIC__/Admin/Js/xenon-toggles.js"></script>
+
+
+                                                        <!-- JavaScripts initializations and stuff -->
+                                                        <script src="__PUBLIC__/Admin/Js/xenon-custom.js"></script>
+
+                                                    </body>
+                                                    </html>

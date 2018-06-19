@@ -1,0 +1,78 @@
+<!-- JAVASCRIPT FILES -->
+<script type="text/javascript" src="__PUBLIC__/Server/Js/jquery-2.1.4.min.js"></script>
+<!-- BOOTSTRAP JS -->
+
+<script type="text/javascript" src="__PUBLIC__/Server/Js/scripts.js"></script>
+
+<!-- REVOLUTION SLIDER -->
+<script type="text/javascript" src="__PUBLIC__/Server/Js/jquery.themepunch.tools.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Server/Js/jquery.themepunch.revolution.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Server/Js/demo.revolution_slider.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/Server/Js/jquery.validation.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Server/Js/smoothscroll.js"></script>
+
+
+<if condition="$Think.config.DEFAULT_WEB_CENTER_SET_OPEN eq 1">
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup_dashboard" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+  <div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+				×
+			</button>
+			<h4 class="modal-title" id="myModalLabel">DIGIT COIN Notice!!</h4>
+		</div>
+		<div class="modal-body">
+				{$Think.config.DEFAULT_WEB_CENTER_NOTICE}	
+			</div>
+
+		</div>
+		<div class="modal-footer">
+			<div class="pull-left">
+			<a class="txt-color-redLight" href="" data-slide="prev" style="font-size:25px"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
+			<a class="txt-color-redLight" href="" data-slide="next" style="font-size:25px"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
+			</div>
+			<input type="checkbox" id="chkbox" value="checkbox">&nbsp;&nbsp;今日不再打开!&nbsp;&nbsp;
+			<button type="button" class="btn btn-default" onclick="closeWin('popup_dashboard', 'chkbox', 'maindiv');">
+				Close
+			</button>
+			
+		</div>
+	</div><!-- /.modal-content:e -->
+  </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e --> 
+<script type="text/javascript">
+<!--
+function setCookie( name, value, expiredays ) {
+	var todayDate = new Date();
+		todayDate.setDate( todayDate.getDate() + expiredays );
+		document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+}
+function closeWin(div, chk, cookname) {
+	if ( document.getElementById(chk).checked ){
+		setCookie(cookname, "done", 1);
+	}
+	$('#popup_dashboard').modal('hide');
+	
+}
+
+window.onload = function() {
+   cookiedata = document.cookie
+   D_POPUP = 1;
+   /* popup1 */
+   if ( cookiedata.indexOf("maindiv=done") < 0 && D_POPUP > 0 ){   
+   /*show*/  
+   $('#popup_dashboard').modal('show');
+   } else {
+   /*hidden*/  
+   $('#popup_dashboard').modal('hide');
+   }
+
+   $("#popup_dashboard").find("img").addClass("img-responsive");
+ 
+}
+//-->
+</script>
+</if>

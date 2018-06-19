@@ -1,0 +1,20 @@
+<include file="Public/indexhead"/>
+
+<!--banner-->
+<div class="jzcfgl_banner w1213 wrap">
+        <div class="page_banner_box w1080 wrap">
+                <p class="new_banner_yw">News Center</p>
+                <p class="new_banner_zw"><span>{$Think.lang.han139}</span></p>                
+        </div>
+</div>
+<!--banner-->
+<div class=" w1213 wrap">
+        <div class="about_service w1080 wrap" >
+                <h1 style="text-align: center;margin-bottom: 30px;font-size: 20px;">{$detail.title}</h1>
+                <hr>
+                {$detail.content|htmlspecialchars_decode}
+                <div class="clear"></div>
+        </div>
+</div>
+<!--内容区-->
+<include file="Public/indexfoot"/>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+<head>
+	<include file="Public/head"/>
+</head>
+<body class="smart-style-1 desktop-detected" style="min-height: 871px;">
+<!--===header start===-->
+		<!-- HEADER -->
+						<header id="header" style="background:#000;">
+			<include file="Public/header"/>
+		</header>
+<!--=== End Header ===-->
+
+		<!-- Left panel : Navigation area -->
+		<aside id="left-panel" style="min-height: 871px; background: rgb(228, 238, 245);">
+		    <include file="Public/left"/>
+
+		</aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+        
+
+<!-- RIBBON -->
+<div id="ribbon">
+                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="&lt;i class=&#39;text-warning fa fa-warning&#39;&gt;&lt;/i&gt; Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+					<li><i class="fa fa-md fa-fw fa-home"></i>{$Think.lang.public-main}</li><li>{$Think.lang.menu-comm}</li><li class="active">{$Think.lang.menu-commission2}</li>
+				</ol>
+				<!-- end breadcrumb -->
+</div>
+<!-- END RIBBON -->
+<!-- MAIN CONTENT -->
+<div id="content">
+<!-- MAIN top -->  
+              <div class="row">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+						<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-star"></i>{$Think.lang.menu-commission2}</h1>
+					</div>
+					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+						<ul id="sparks" class="">
+						    <li class="sparks-info">
+								<h1><b>Until valid date</b></h1>
+							</li>
+							<li class="sparks-info">
+								<h5> Day <span class="txt-color-blue text-center"><b id="day-set">--</b></span></h5>
+							</li>
+							<li class="sparks-info">
+								<h5> Hours <span class="txt-color-blue text-center"><b id="time-set">--</b></span></h5>
+							</li>
+							<li class="sparks-info">
+								<h5> Minutes <span class="txt-color-purple text-center"><b id="min-set">--</b></span></h5>
+							</li>
+							<li class="sparks-info">
+								<h5> Seconds <span class="txt-color-greenDark text-center"><b id="sec-set">--</b></span></h5>
+							</li>
+						</ul>
+					</div>
+			  </div>
+<!--END MAIN top -->
+<!--top alert 
+                <div class="row">
+                    <div class="col-sm-12">
+                       <div class="well well-light">
+								<a class="close" data-dismiss="alert" href="">×</a>
+								<h4 class="alert-heading"><i class="fa-fw fa  fa-exclamation-triangle"></i>注意</h4>
+								<p>--</p>
+					    </div>
+                    </div>
+                </div>  
+
+
+end top alert-->
+
+                                <!-- START ROW -->
+					<div class="row">
+                        <!-- NEW COL START -->
+						<article class="col-sm-12 col-md-12 col-lg-12">
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget jarviswidget-color-blue" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-star"></i> </span>
+									<h2>{$Think.lang.menu-commission2}</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+
+										<div class="table-responsive mt20">
+										
+										<table id="dt_basic" class="table table-striped table-bordered table-hover">
+											<thead>
+												<tr>
+													<th></th>
+													<th class="text-center">1 {$Think.lang.bonus-level}</th>
+													<th class="text-center">2 {$Think.lang.bonus-level}</th>
+													<th class="text-center">3 {$Think.lang.bonus-level}</th>
+													<th class="text-center">4 {$Think.lang.bonus-level}</th>
+													<th class="text-center">5 {$Think.lang.bonus-level}</th>
+													<th class="text-center">6 {$Think.lang.bonus-level}</th>
+												</tr>
+											</thead>
+                                            
+											<tbody>
+											 <tr>
+                                                <td class="text-center"><b>{$Think.lang.upgrage-package-1}</b></td>
+												<td class="text-center">10%</td>
+												<td class="text-center">x</td>
+												<td class="text-center">x</td>
+												<td class="text-center">x</td>
+												<td class="text-center">x</td>
+												<td class="text-center">x</td>
+                                             </tr>
+											 <tr>
+                                                <td class="text-center"><b>{$Think.lang.upgrage-package-2}</b></td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+												<td class="text-center">x</td>
+												<td class="text-center">x</td>
+												<td class="text-center">x</td>
+												<td class="text-center">x</td>
+                                             </tr>
+											 <tr>
+                                                <td class="text-center"><b>{$Think.lang.upgrage-package-3}</b></td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+												<td class="text-center">x</td>
+												<td class="text-center">x</td>
+                                                <td class="text-center">x</td>
+                                             </tr>
+											 <tr>
+                                                <td class="text-center"><b>{$Think.lang.upgrage-package-4}</b></td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+												<td class="text-center">x</td>
+												<td class="text-center">x</td>
+                                             </tr>
+											 <tr>
+                                                <td class="text-center"><b>{$Think.lang.upgrage-package-5}</b></td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+												<td class="text-center">x</td>
+                                             </tr>
+											 <tr>
+                                                <td class="text-center"><b>{$Think.lang.upgrage-package-6}</b></td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+												<td class="text-center">10%</td>
+                                             </tr>
+											</tbody>
+										</table>
+                                        </div>
+
+
+
+					
+					
+					                </div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+							<!-- end widget -->
+				
+						</article>
+						<!-- END COL -->
+
+
+						<!-- NEW COL START -->
+						<article class="col-sm-12 col-md-12 col-lg-12">
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget jarviswidget-color-blue" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-star"></i> </span>
+									<h2>{$Think.lang.menu-commission2}</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+									    <div class="widget-body-toolbar">
+											<!--search-->
+											<form name="searchForm" id="searchForm" method="get" action="Images/DIGIT COIN.html" class="form-inline">
+										<fieldset>
+										<table style="width:100%;" border="0" cellspacing="0" cellpadding="2">
+										<colgroup><col width="90%"><col width="10%"></colgroup>
+										  <tbody><tr>
+										    <td>
+											</td>
+											<td align="right">
+											<div class="form-group">
+											<select class="form-control input-sm" name="page_set" id="page_set" onchange="javascript:document.searchForm.submit(this);">
+															<option value="10">10</option>
+															<option value="30">30</option>
+															<option value="50">50</option>
+															<option value="100">100</option>
+										     </select>
+											 </div>
+											</td>
+										  </tr>
+										</tbody></table>
+										</fieldset>
+					                    </form>
+											<!--/search-->
+												
+				
+										</div>
+
+										<div class="table-responsive mt20">
+										
+										<table id="dt_basic" class="table table-striped table-bordered table-hover">
+											<thead>
+												<tr>
+													<th class="text-center" width="15%">{$Think.lang.public-date}</th>
+													<th class="text-center" width="10%">1 {$Think.lang.bonus-level}</th>
+													<th class="text-center" width="10%">2 {$Think.lang.bonus-level}</th>
+													<th class="text-center" width="10%">3 {$Think.lang.bonus-level}</th>
+													<th class="text-center" width="10%">4 {$Think.lang.bonus-level}</th>
+													<th class="text-center" width="10%">5 {$Think.lang.bonus-level}</th>
+													<th class="text-center" width="10%">6 {$Think.lang.bonus-level}</th>
+													<th class="text-center" width="10%">{$Think.lang.public-all-price}</th>
+													<th class="text-center" width="5%">{$Think.lang.bonus-details}</th>
+												</tr>
+											</thead>
+                                            
+											<tbody>
+                                             	
+											 <tr>
+												 <td class="text-center padding-20"><php>echo date("d/m/y H:i:s A",strtotime($NewTime));</php></td>
+												 <td class="text-center padding-20">{$Price1}</td>
+												 <td class="text-center padding-20">{$Price2}</td>
+												 <td class="text-center padding-20">{$Price3}</td>
+												 <td class="text-center padding-20">{$Price4}</td>
+												 <td class="text-center padding-20">{$Price5}</td>
+												 <td class="text-center padding-20">{$Price6}</td>
+												 <td class="text-center padding-20">{$SumPrice}</td>
+												 <td class="text-center padding-20"><a class="label bg-color-blueDark txt-color-white pull-right" href="#popup" data-toggle="modal" data-load-remote="{:U('Home/Main/pop_detail_bonus3')}" data-load-remote-value="{:U('Home/Main/pop_detail_bonus3')}" data-remote-target="#popup .modal-content">{$Think.lang.bonus-details}</a></td>
+											 </tr>
+
+											</tbody>
+                                            <tfoot>
+											   <tr>
+			                                     <td colspan="9">
+													 <ul class="pagination pull-right">
+														 <li class="first disabled"><a href="#">{$Think.lang.public-index-page}</a></li>
+														 <li class="prev disabled"><a href="#">{$Think.lang.public-pre-page}</a></li>
+														 <li class="active"><a href="#">1</a></li>
+														 <li class="next disabled"><a href="#">{$Think.lang.public-next-page}</a></li>
+														 <li class="last disabled"><a href="#">{$Think.lang.public-last-page}</a></li>
+													 </ul>
+
+												 </td>
+		                                       </tr>
+	                                        </tfoot>
+										</table>
+                                        </div>
+
+
+
+					
+					
+					                </div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+							<!-- end widget -->
+				
+						</article>
+						<!-- END COL -->
+
+					</div>
+
+					<!-- END ROW -->
+
+
+</div><!--END MAIN CONTENT -->
+</div>
+		<!-- END MAIN PANEL -->
+
+		<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+		Note: These tiles are completely responsive,
+		you can add as many as you like
+		-->
+<include file="Public/top"/>
+        
+<!-- END SHORTCUT AREA -->
+    <!-- JavaScript -->
+    
+    <!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+
+
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div><!-- /.modal-content:e -->
+  </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e -->
+
+<script type="text/javascript">
+
+	var date;
+	date = new Date();
+	date.setHours(0);
+	date.setMinutes(0);
+	date.setSeconds(0);
+
+	date.setDate(date.getDate() + 1);
+	var time2 = date.getTime(); // 내일 0시 0분 으로 설정
+
+	// 오늘과 내일을 미리 구하기 때문에 자정을 넘어갈 경우 이 소스는 오작동 할 수 있습니다.
+	// 위 날짜 구하는 부분이 계속 호출되도록 하면됩니다.
+
+
+	// 남은 시간 카운터
+	function remain(){
+		var now = new Date();
+		var gap = Math.round((time2 - now.getTime()) / 1000);
+
+		var D = Math.floor(gap / 86400);
+		var H = Math.floor((gap - D * 86400) / 3600 % 3600);
+		var M = Math.floor((gap - H * 3600) / 60 % 60);
+		var S = Math.floor((gap - M * 60) % 60);
+
+		$("#time-set").text(H+1);
+		$("#min-set").text(M);
+		$("#sec-set").text(S);
+		$("#day-set").text(D);
+	}
+
+	remain();
+	setInterval(remain, 1000);
+
+</script>
+<script>
+$(document).ready(function() {
+
+
+        //popup show
+          $('[data-load-remote]').on('click',function(e) {
+          e.preventDefault();
+          var $this = $(this);
+          var remote = $this.data('load-remote');
+	      var remote_value = $this.data('load-remote-value');
+          if(remote) {
+            $($this.data('remote-target')).load(remote,remote_value);
+          }
+
+          });
+
+ //reload detected
+ $('body').on('hidden.bs.modal', '.modal', function () {
+  $(this).removeData('bs.modal');
+});
+
+});
+</script>   
+
+
+<div id="divSmallBoxes"></div><div id="divMiniIcons"></div><div id="divbigBoxes"></div></body></html>

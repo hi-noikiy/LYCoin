@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+<head>
+	<include file="Public/head"/>
+</head>
+<body class="smart-style-1">
+<!--===header start===-->
+		<!-- HEADER -->
+				<header id="header" style="background:#000;">
+			<include file="Public/header"/>
+		</header>
+<!--=== End Header ===-->
+
+		<!-- Left panel : Navigation area -->
+		<aside id="left-panel" style="background:#e4eef5;">
+		    <include file="Public/left"/>
+
+		</aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+
+<!-- RIBBON -->
+<div id="ribbon">
+                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="&lt;i class=&#39;text-warning fa fa-warning&#39;&gt;&lt;/i&gt; Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+					<li><i class="fa fa-md fa-fw fa-home"></i>{$Think.lang.public-main}</li><li>{$Think.lang.menu-deposit}</li><li class="active">{$Think.lang.menu-deposit_bitcoin}</li>
+				</ol>
+				<!-- end breadcrumb -->
+</div>
+<hr>
+<!-- END RIBBON -->
+
+<!-- MAIN CONTENT -->
+<div id="content">
+<!-- MAIN top -->  
+                <div class="row">
+					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+						<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-dollar"></i>{$Think.lang.menu-deposit_bitcoin}</h1>
+					</div>
+				</div>
+<!--END MAIN top -->
+<!--top alert 
+                <div class="row">
+                    <div class="col-sm-12">
+                       <div class="well well-light">
+								<a class="close" data-dismiss="alert" href="">×</a>
+								<h4 class="alert-heading"><i class="fa-fw fa  fa-exclamation-triangle"></i>注意</h4>
+								<p></p>
+
+					    </div>
+                    </div>
+                </div>  
+<!--end top alert-->
+
+                <!-- START ROW -->
+					<div class="row">
+                        <!-- NEW COL START -->
+						<article class="col-sm-12 col-md-12 col-lg-12">
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget jarviswidget-color-blue" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-dollar"></i> </span>
+									<h2>将Bitcoin实时传送至公司</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+									    <form class="smart-form" name="senddirectForm" id="senddirectForm" method="post">
+										<input type="hidden" name="D_UID" id="D_UID" value="lf5411">
+										<input type="hidden" name="D_BIT_RATE" id="D_BIT_RATE" value="">
+										<input type="hidden" name="D_BITCOIN" id="D_BITCOIN" value="">
+										<input type="hidden" name="D_COM_ADDRESS" id="D_COM_ADDRESS" value="">
+										<input type="hidden" name="D_TYPE" id="D_TYPE" value="1">
+                                         <fieldset>
+										        <div class="row">
+												<section class="col col-3">
+													<label class="label">发送人</label>
+												</section>
+										        <section class="col col-9">
+													<label class="input">
+														  {$Think.lang.login-username}:{$Member['username']}&nbsp;&nbsp;姓名:{$Member['surname']}{$Member['name']}
+													</label>
+												</section>
+												</div>
+
+												<div class="row">
+												<section class="col col-3">
+													<label class="label">我的 Bitcoin钱包地址</label>
+												</section>
+										        <section class="col col-9">
+														   <strong></strong><br>
+                                                           <a href="javascript:;" target="_blank">确认可传送的Bitcoin数量</a>
+												</section>
+												</div>
+
+												<div class="row">
+												<section class="col col-3">
+													<label class="label">BTC数量</label>
+												</section>
+										        <section class="col col-9">
+														    <strong> <span id="bit_rate"></span>$/1BTC</strong><br><br>
+															<!--
+                                                            <label class="col col-3 input">
+															        <input type="text" class="input-sm" id="D_CASH" name="D_CASH" placeholder="CASH" value="">
+															</label>
+															<label class="col col-3 input">
+														             <input type="text" class="input-sm" id="D_BTC" name="D_BTC" placeholder="BTC" value="">
+													        </label>
+															-->
+
+															
+
+												</section>
+												</div>
+
+												<div class="row">
+												<section class="col col-3">
+													<label class="label">公司 Bitcoin钱包地址</label>
+												</section>
+										        <section class="col col-9">
+														   <!--<h3>18x3SqQuQvRFpRVcTuXH6cBNSQxSCk2new</h3>-->
+
+                                                           
+												</section>
+												</div>
+
+												
+                                        </fieldset>
+										<footer>
+										<!--
+												<button type="submit" class="btn btn-primary">
+													输入处理 
+												</button>
+											-->
+									    </footer>
+										</form>
+                                        
+					
+					
+					                </div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+							<!-- end widget -->
+				
+						</article>
+						<!-- END COL -->
+
+
+						<!-- NEW COL START -->
+						<article class="col-sm-12 col-md-12 col-lg-12">
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget jarviswidget-color-blue" id="wid-id-2" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-dollar"></i> </span>
+									<h2>Bitcoin交易明细</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+
+										<div class="table-responsive mt20">
+										
+										<table id="dt_basic" class="table table-striped table-bordered table-hover">
+											<thead>
+												<tr>
+													<th>{$Think.lang.public-id}</th>
+													<th>{$Think.lang.public-date}</th>
+													<th>输入BTC</th>
+													<th>将要处理的$明细</th>
+                                                    <th>进账 $</th>
+													<th>进账时间</th>
+													
+												</tr>
+											</thead>
+											<tbody>
+											
+											 <tr><td colspan="6" class="text-center padding-20">{$Think.lang.public-content}</td></tr>
+                                             
+											</tbody>
+											<tfoot>
+												<tr>
+			                                     <td colspan="6">
+
+														<ul class="pagination pull-right">
+															<li class="first disabled"><a href="#">{$Think.lang.public-index-page}</a></li>
+															<li class="prev disabled"><a href="#">{$Think.lang.public-pre-page}</a></li>
+															<li class="active"><a href="#">1</a></li>
+															<li class="next disabled"><a href="#">{$Think.lang.public-next-page}</a></li>
+															<li class="last disabled"><a href="#">{$Think.lang.public-last-page}</a></li>
+														</ul>
+
+												 </td>
+		                                       </tr>
+                                            </tfoot>
+										</table>
+                                        </div>
+
+
+
+					
+					
+					                </div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+							<!-- end widget -->
+				
+						</article>
+						<!-- END COL -->
+
+					</div>
+
+					<!-- END ROW -->
+
+
+
+
+
+</div><!--END MAIN CONTENT -->
+</div>
+		<!-- END MAIN PANEL -->
+
+		<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+		Note: These tiles are completely responsive,
+		you can add as many as you like
+		-->
+		<div id="shortcut">
+			<ul>
+			    <li>
+					<a href="" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-home fa-4x"></i> <span>主菜单</span> </span> </a>
+				</li>
+				<li>
+					<a href="" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-sign-in fa-4x"></i> <span>新会员注册</span> </span> </a>
+				</li>
+				<li>
+					<a href="" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>个人信息</span> </span> </a>
+				</li>
+                
+                <li>
+					<a href="" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-shopping-cart fa-4x"></i> <span>购买套餐</span> </span> </a>
+				</li>
+                <li>
+					<a href="" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-sitemap fa-4x"></i> <span>赞助组织图</span> </span> </a>
+				</li>
+                <li>
+					<a href="" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-dollar fa-4x"></i> <span>钱包</span> </span> </a>
+				</li>
+                
+                <!--li>
+					<a href="" class="jarvismetro-tile big-cubes bg-color-pinkDark"> <span class="iconbox"> <i class="fa fa-desktop fa-4x"></i> <span></span> </span> </a>
+				</li-->
+				
+			</ul>
+		</div>
+        
+<!-- END SHORTCUT AREA -->
+    <!-- JavaScript -->
+    
+<include file="Public/script"/>
+
+
+<script>
+   $(function(){
+	 //nav active setting
+	 
+	 $("nav > ul > li.active").removeClass("active");
+	 $("nav > ul > li.open").removeClass("open");
+     $("nav > ul > li:eq(2) > ul > li:eq(0)").addClass("active");
+	 
+	   
+    });
+</script>
+		<!-- MAIN APP JS FILE -->
+        <!--common-->
+   <script>
+   $(function(){
+	 //all page common code!!!!! import  
+	 pageSetUp();
+	   
+    });
+   </script>        
+        
+        
+        <!--[if IE 7]>
+        <script>ie_error('IE7');</script>     
+		<![endif]-->
+        <!--[if IE 8]>
+        <script>ie_error('IE8');</script>     
+		<![endif]-->
+ 
+        
+        
+
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div><!-- /.modal-content:e -->
+  </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e --> 
+
+
+<script>
+$(document).ready(function() {
+
+
+        //popup show
+          $('[data-load-remote]').on('click',function(e) {
+          e.preventDefault();
+          var $this = $(this);
+          var remote = $this.data('load-remote');
+	      var remote_value = $this.data('load-remote-value');
+          if(remote) {
+            $($this.data('remote-target')).load(remote,remote_value);
+          }
+
+          });
+
+ //reload detected
+ $('body').on('hidden.bs.modal', '.modal', function () {
+  $(this).removeData('bs.modal');
+});
+
+});
+</script>   
+
+
+</body></html>

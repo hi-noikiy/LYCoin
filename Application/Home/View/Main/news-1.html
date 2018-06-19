@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+    <head>
+    <include file="Public/head"/>
+</head>
+<body>
+    <!--===header start===-->
+    <!-- HEADER -->
+    <header style="background:#000;">
+        <include file="Public/header"/>
+    </header>
+    <!--=== End Header ===-->
+
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+
+
+        
+
+        <!-- MAIN CONTENT -->
+        <div id="content">
+            <!-- MAIN top -->  
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <h1 class="page-title" style="color:gold"><i class="fa-fw fa fa-volume-up"></i> {$Think.lang.menu-news}</h1>
+                </div>
+            </div>
+            <!--END MAIN top -->
+
+            <!--top alert-->
+
+            <!--top alert end-->
+            <div class="well well-light">
+                <!--search-->
+                <div class="row mb20">
+                    <div class="col-sm-12">
+                        <form name="searchForm" method="post" action="{:U('Home/Main/news')}" class="form-inline">
+                            <fieldset>
+                                <table style="width:100%;" border="0" cellspacing="0" cellpadding="2">
+                                    <colgroup><col width="90%"><col width="10%"></colgroup>
+                                    <tbody><tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <select class="form-control input-sm" name="title">
+                                                        <option value="">{$Think.lang.public-select}</option>
+                                                        <option value="title" <eq name="title" value="title">selected="selected"</eq>>{$Think.lang.public-suject}</option>
+                                                        <option value="content" <eq name="title" value="content">selected="selected"</eq>>{$Think.lang.public-date}</option>
+                                                        <option value="writer" <eq name="title" value="writer">selected="selected"</eq>>{$Think.lang.public-writer}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input class="form-control input-sm" name="text" type="text" placeholder="" value="{$text}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" class="btn bg-color-blueDark txt-color-white btn-sm" value="{$Think.lang.public-search}">
+                                                    <a class="btn btn-default btn-sm" href=""><i class="fa fa-refresh"></i></a>
+                                                </div>
+                                            </td>
+                                            <td align="right">
+                                                <div class="form-group">
+                                                    <select class="form-control input-sm" name="page_set" onchange="javascript:document.searchForm.submit(this);">
+                                                        <option value="10" <eq name="page_set" value="10">selected="selected"</eq>>10</option>
+                                                        <option value="30" <eq name="page_set" value="30">selected="selected"</eq>>30</option>
+                                                        <option value="50" <eq name="page_set" value="50">selected="selected"</eq>>50</option>
+                                                        <option value="100" <eq name="page_set" value="100">selected="selected"</eq>>100</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                            </fieldset>
+                        </form>
+
+                    </div>
+                </div>
+                <!--search end-->
+
+
+
+
+                <div class="table-responsive">
+                    <table id="list_basic" class="table table-bordered table-hover bg-color-white">
+                        <colgroup><col width="5%"><col width="65%"><col width="10%"><col width="10%"></colgroup>
+                        <thead>
+                            <tr>
+                                <th>{$Think.lang.bianhao}</th>
+                                <th class="text-center">{$Think.lang.public-suject}</th>
+                                <th>{$Think.lang.public-date}</th>
+                                <th>{$Think.lang.public-writer}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <notempty name="NewsList">
+                            <volist name="NewsList" id="nl">
+                                <tr><td>{$count-$key-$page_set*($p-1)}</td>
+                                    <td>
+                                        <table style="width:100%;">
+                                            <tr><td><strong>{$nl['title']}</strong></td></tr>
+                                            <tr><td>{$nl['content']}</td></tr>
+                                        </table>
+                                    </td>
+                                    <td>{$nl['addtime']|mb_substr=0,10,'utf-8'}</td>
+                                    <td>{$nl['writer']}</td>
+                            </volist>
+                            <else/>
+                            <tr><td colspan="4" class="text-center padding-20">{$Think.lang.public-content}</td></tr>
+                        </notempty>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                        <notempty name="count_status">
+                            <div class="pagination pull-right page">
+                                {$page}
+                            </div>
+                            <else/>
+                            <ul class="pagination pull-right">
+                                <li class="first disabled"><a href="#">{$Think.lang.public-index-page}</a></li>
+                                <li class="prev disabled"><a href="#">{$Think.lang.public-pre-page}</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li class="next disabled"><a href="#">{$Think.lang.public-next-page}</a></li>
+                                <li class="last disabled"><a href="#">{$Think.lang.public-last-page}</a></li>
+                            </ul>
+                        </notempty>
+                        </td>
+                        </tr>
+                        </tfoot>
+
+                    </table>
+                </div>
+
+            </div>
+			<include file="Public/foot"/>
+        </div>				
+    </div>
+    <!--END MAIN CONTENT -->
+
+    <!-- END MAIN PANEL -->
+
+    <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+    Note: These tiles are completely responsive,
+    you can add as many as you like
+    -->
+
+
+    <!-- END SHORTCUT AREA -->
+    <!-- JavaScript -->
+
+    <!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+
+<script>
+    $(function() {
+        //nav active setting
+
+        $("nav > ul > li").removeClass("active");
+        $("nav > ul > li:eq(7)").addClass("active");
+
+
+    });
+</script>
+
+
+<!-- MAIN APP JS FILE -->
+<!--common-->
+<script>
+    $(function() {
+        //all page common code!!!!! import  
+        pageSetUp();
+
+    });
+</script>        
+
+
+<!--[if IE 7]>
+<script>ie_error('IE7');</script>     
+        <![endif]-->
+<!--[if IE 8]>
+<script>ie_error('IE8');</script>     
+        <![endif]-->
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div><!-- /.modal-content:e -->
+    </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e -->
+
+
+<script>
+    $(document).ready(function() {
+
+
+        //popup show
+        $('[data-load-remote]').on('click', function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            var remote = $this.data('load-remote');
+            var remote_value = $this.data('load-remote-value');
+            if (remote) {
+                $($this.data('remote-target')).load(remote, remote_value);
+            }
+
+        });
+
+        //reload detected
+        $('body').on('hidden.bs.modal', '.modal', function() {
+            $(this).removeData('bs.modal');
+        });
+
+    });
+</script>
+
+
+<div id="divSmallBoxes"></div><div id="divMiniIcons"></div><div id="divbigBoxes"></div>
+</body>
+</html>

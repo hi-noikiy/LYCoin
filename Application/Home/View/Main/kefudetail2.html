@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+        <head>
+        <include file="Public/head1"/>
+</head>
+<body>
+        <form name="packageForm" action="{:U('Home/Main/kefu')}" method="post" class="smart-form client-form"   enctype="multipart/form-data" >
+                <!--项目详情-->
+                <div class="projectd_f">
+                        <div class="projectd_f_in">
+                                <a href="javascript:;" onClick="javascript :history.back(-1);"><img src="__PUBLIC__/Home/shouji/images/jian.png"/></a>
+                                {$Think.lang.a77}
+                        </div>
+                </div>
+                <!--2占固定定位的块-->
+                <div class="occupy_f2"></div>
+                <!--项目名字-->
+<!--                <div class="project_name_f">
+                        <div class="project_name_f_in">
+                                {$Think.lang.taocanmingcheng}：{$PackageType['title']} {$Think.lang.jine}：{$PackageType['price']}
+                                <input type="hidden" name="package_id" value="{$PackageType['id']}">
+
+                        </div>
+                </div>-->
+                <!--简单描述-->
+                <div class="sxdymy_f">
+                        <div class="sxdymy_f_in">
+                                <ul>
+                                        <li>
+                                                <span>{$Think.lang.biaoti}</span>
+                                               <i>{$detail['title']}</i>
+                                        </li>
+                                     
+                                        <li>
+                                                <span>{$Think.lang.neirong}</span>
+                                                
+                                        </li>
+<textarea   type="text" name="content"  style=' color: #999;
+                                                       display: block;
+                                                       float: right;
+                                                       font-size: 14px;
+                                                       font-style: normal;
+                                                       height: 100px;
+                                                       width:99%;
+                                                       border:1px solid #b2b2b2;'>{$detail['content']}
+                                                </textarea>
+                                        <if condition="$detail['rctime'] neq ''">
+                                                <li>
+                                                <span>{$Think.lang.kefuhuifu}</span>
+                                                
+                                        </li>
+<textarea   type="text" name="content"  style=' color: #999;
+                                                       display: block;
+                                                       float: right;
+                                                       font-size: 14px;
+                                                       font-style: normal;
+                                                       height: 100px;
+                                                       width:99%;
+                                                       border:1px solid #b2b2b2;'>{$detail['rcontent']}
+                                                </textarea>
+                                        </if>
+                                </ul>
+                        </div>
+                </div>
+                
+<include file="Public/footer"/>
+</body>
+</html>

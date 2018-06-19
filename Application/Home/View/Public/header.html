@@ -1,0 +1,119 @@
+<header class="user-header" style="width:100%;height:46px;position:fixed;top:0;left:0;z-index: 10">
+        <div class="header-hd">
+                <div class="header-lang">
+                        <p class="header-lang-badge" onclick="showLang();">{$Think.lang.yuyan}</p>
+                        <ul class="header-lang-list" id="header-lang-list">
+                                 <li   onClick='location.href="{:U('Home/main/qianbao',array('language'=>'khmer'))}"'>
+                                        <img src="__PUBLIC__/Home/login/flag-b5.png"  height="18">
+                                        <span style="white-space:nowrap;">{$Think.lang.kh}</span>
+                                </li>
+                                <li  onClick='location.href="{:U('Home/main/qianbao',array('language'=>'en-us'))}"'>
+                                        <img src="__PUBLIC__/Home/login/flag-b2.png"  height="18">
+                                        <span  style="white-space:nowrap;">{$Think.lang.en}</span>
+                                </li>
+                                <li onClick='location.href="{:U('Home/main/qianbao',array('language'=>'zh-cn'))}"'>
+                                        <img src="__PUBLIC__/Home/login/flag-b1.png"  height="18">
+                                        <span  style="white-space:nowrap;">{$Think.lang.ch}</span>
+                                </li>
+                                
+                               
+                        </ul>
+                </div>
+        </div>
+        <div class="header-bd fb">
+                <span class="f18">{$Think.config.DEFAULT_WEB_TITLE}</span>
+        </div>
+        <div class="header-ft">
+                <div class="header-menu">
+                        <p class="header-menu-badge" onclick="showMenu();"><i class="iconfont icon-menu"></i></p>
+
+                        <ul class="header-menu-list" id="header-menu-list">
+                                <!--<li><a href="{:U('Home/Index/index',array('language'=>$language))}"><i class="glyphicon glyphicon-home"></i> <span>{$Think.lang.shouye}</span></a></li>-->
+                                <li><a href="{:U('Home/Main/qianbao',array('language'=>$language))}"><i class="fa fa-suitcase" style="padding: 0 10px;"></i> <span>{$Think.lang.han111}</span></a></li>
+                                <!--<li><a href="{:U('Home/Main/pan',array('language'=>$language))}"><i class="glyphicon glyphicon-th-list"></i> <span>{$Think.lang.han112}</span></a></li>-->
+                                <li><a href="{:U('Home/Main/pan',array('language'=>$language))}"><i class="fa fa-money"  style="padding: 0 10px;"></i> <span>{$Think.lang.han112}</span></a></li>
+                                <li><a href="{:U('Home/Main/chongzhi',array('language'=>$language))}"><i class="glyphicon glyphicon-align-left"></i> <span>{$Think.lang.han113}</span></a></li>
+                                <li><a href="{:U('Home/Main/tixian',array('language'=>$language))}"><i class="glyphicon glyphicon-align-right"></i> <span>{$Think.lang.han114}</span></a></li>
+                                <li><a href="{:U('Home/Main/zhuanzhang',array('language'=>$language))}"><i class="glyphicon glyphicon-refresh"></i> <span>{$Think.lang.han115}</span></a></li>
+                                
+                            
+                                  <li><a href="{:U('Home/Main/editprofile',array('language'=>$language))}"><i class="glyphicon glyphicon-user"></i> <span>{$Think.lang.han116}</span></a></li>
+                                       <li><a href="{:U('Home/Main/news',array('language'=>$language))}"><i class="glyphicon glyphicon-tasks"></i> <span>{$Think.lang.han120}</span></a></li>
+                                   <li><a href="{:U('Home/Main/kefu',array('language'=>$language))}"><i class="glyphicon glyphicon-file"></i> <span>{$Think.lang.han121}</span></a></li>
+                                    <li><a href="{:U('Home/Index/out',array('language'=>$language))}"><i class="glyphicon glyphicon-log-out"></i> <span>{$Think.lang.tuichu}</span></a></li>
+<!--                                     <li><a href="{:U('Home/Main/zhuanzhang',array('language'=>$language))}"><i class="iconfont icon-out"></i> <span>{$Think.lang.han115}</span></a></li>
+                                      <li><a href="{:U('Home/Main/zhuanzhang',array('language'=>$language))}"><i class="iconfont icon-out"></i> <span>{$Think.lang.han115}</span></a></li>-->
+                        </ul>
+
+                </div>
+        </div>
+</header>
+
+<!--<script src="__PUBLIC__/Home/login/translation.js"></script>-->
+<script>
+        var headerMenuList = [{
+        'icon': '<i class="iconfont icon-user"></i>',
+                'url': 'http://www.k82.info/index.htm',
+                'text': '主页'
+                }];
+        jQuery(function(){
+//        initHeaderMenu("#header-menu-list", headerMenuList); //初始化头部菜单
+
+        jQuery("#header-lang-list li").on("click", function(){
+        hideLang();
+        });
+        });
+        function initHeaderMenu(obj, list){  //初始化头部菜单
+        var headerList = '';
+        for (i in list){
+        headerList += '<li>'
+                + '<a href="' + list[i].url + '">' + list[i].icon + ' <span lang zh="' + list[i].text + '">' + list[i].text + '</span></a>'
+                + '</li>';
+        }
+        jQuery(obj).append(headerList);
+        doTranslate(); //执行翻译
+        }
+
+        function showLang(){
+        jQuery("#header-lang-list").slideDown(100);
+        }
+        function hideLang(){
+        jQuery("#header-lang-list").slideUp(100);
+        }
+        function showMenu(){
+        jQuery(".header-menu-badge").toggleClass("active");
+        jQuery("#header-menu-list").slideToggle(100);
+        }
+
+//        function changeLanguage(lang){
+//        setCookie("lang=" + lang + "; path=/;");
+//        window.location.reload();
+//        }
+</script>
+
+<!--<nav class="navbar navbar-default" role="navigation">  
+    <div class="container-fluid">  
+        header section   
+        <div class="navbar-header">  
+            <button type="button" class="navbar-toggle"   
+                    data-toggle="collapse"   
+                    data-target=".navbar-ex1-collapse">  
+                <span class="sr-only">Toggle navigation</span>  
+                <span class="icon-bar"></span>  
+                <span class="icon-bar"></span>  
+                <span class="icon-bar"></span>  
+            </button>  
+            <a class="navbar-brand" href="#">Brand Name</a>  
+        </div>  
+         menu section   
+        <div class="collapse navbar-collapse navbar-ex1-collapse">  
+            <ul class="nav navbar-nav navbar-right">  
+                <li><a href="# ">Home</a></li>  
+                <li><a href="# ">About</a></li>  
+                <li><a href="#">Products</a></li>  
+                <li><a href="#">Blog</a></li>  
+                <li><a href="#">Support</a></li>  
+            </ul>  
+        </div>  
+    </div>  
+</nav>  -->

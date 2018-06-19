@@ -1,0 +1,61 @@
+<div id="logo-group" style="background:#000 !important;">
+	<!-- PLACE YOUR LOGO HERE --> 
+	<span id="logo"><a href=""> <img src="{$Think.config.DEFAULT_WEB_LOGO}" alt="DIGIT COIN"></a> </span>
+	<!-- END LOGO PLACEHOLDER -->
+
+
+</div>
+<div class="pull-left">
+    
+</div>
+<!-- pulled right: nav area -->
+<div class="pull-right">
+
+	<!-- collapse menu button -->
+	<div id="hide-menu" class="btn-header pull-right">
+		<span> <a id="Collapse_Menu" href="" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+	</div>
+	<!-- end collapse menu -->
+
+	<!-- logout button -->
+	<div id="logout" class="btn-header transparent pull-right">
+		<span><a id="logout_btn" href="{:U('Home/Index/out')}" title="{$Think.lang.public-out}?"><i class="fa fa-sign-out"></i></a> </span>
+	</div>
+	
+	<!-- end logout button -->
+	
+	<!-- multiple lang dropdown : find all flags in the image folder -->
+
+	<ul class="header-dropdown-list hidden-xs">
+		<li>
+			<a href="" class="dropdown-toggle" data-toggle="dropdown"> 
+			<span>
+				<eq name="language" value="en-us">{$Think.lang.en}</eq>
+				<eq name="language" value="ko-kr">{$Think.lang.kr}</eq>
+				<eq name="language" value="zh-cn">{$Think.lang.ch}</eq>
+				<eq name="language" value="ja-jp">{$Think.lang.jp}</eq>
+			</span> 
+			
+			<i class="fa fa-angle-down"></i> </a>
+			<ul class="dropdown-menu pull-right">
+				<li <eq name="language" value="en-us">class="active"</eq>>
+					<a href="{:U('Home/Index/index',array('language'=>'en-us'))}">{$Think.lang.en}</a>
+				</li>
+				<li <eq name="language" value="ko-kr">class="active"</eq>>
+					<a href="{:U('Home/Index/index',array('language'=>'ko-kr'))}">{$Think.lang.kr}</a>
+				</li>
+				<li <eq name="language" value="zh-cn">class="active"</eq>>
+					<a href="{:U('Home/Index/index',array('language'=>'zh-cn'))}">{$Think.lang.ch}</a>
+				</li>
+				<li <eq name="language" value="ja-jp">class="active"</eq>>
+					<a href="{:U('Home/Index/index',array('language'=>'ja-jp'))}">{$Think.lang.jp}</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<!-- end multiple lang -->
+
+</div>
+<!-- end pulled right: nav area -->
+
+

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en"><!--<![endif]-->
+    <head>
+    <include file="Public/head"/>
+</head>
+<body class="smart-style-1">
+    <!--===header start===-->
+    <!-- HEADER -->
+    <header id="header" style="background:#000;">
+        <include file="Public/header"/>
+    </header>
+    <!--=== End Header ===-->
+
+    <!-- Left panel : Navigation area -->
+    <aside id="left-panel" style="min-height: 871px; background: rgb(228, 238, 245);">
+        <include file="Public/left"/>
+
+    </aside>
+    <!-- END NAVIGATION -->
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+
+
+        <!-- RIBBON -->
+        <div id="ribbon">
+            <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+            <!-- breadcrumb -->
+            <ol class="breadcrumb">
+                <li><i class="fa fa-md fa-fw fa-home"></i>{$Think.lang.public-main}</li><li>{$Think.lang.menu-comm}</li><li class="active">奖金统计</li>
+            </ol>
+            <!-- end breadcrumb -->
+        </div>
+        <!-- END RIBBON -->
+        <!-- MAIN CONTENT -->
+        <div id="content">
+            <!-- MAIN top -->  
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-star"></i>奖金统计</h1>
+                </div>
+            </div>
+            <!--END MAIN top -->
+            <!--top alert
+                            <div class="row">
+                                <div class="col-sm-12">
+                                   <div class="well well-light">
+                                                                            <a class="close" data-dismiss="alert" href="#">×</a>
+                                                                            <h4 class="alert-heading"><i class="fa-fw fa  fa-exclamation-triangle"></i>注意</h4>
+                                                                            <p>--</p>
+                                                        </div>
+                                </div>
+                            </div>  
+            
+            
+            end top alert-->
+            <!-- widget grid -->
+            <section id="widget-grid" class="">
+
+                <!-- row -->
+                <div class="row">
+                    <article class="col-sm-12">
+                        <!-- new widget -->
+                        <div class="jarviswidget jarviswidget-color-blueDark " id="wid-id-1" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                            <!-- widget options:
+                            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                            data-widget-colorbutton="false"
+                            data-widget-editbutton="false"
+                            data-widget-togglebutton="false"
+                            data-widget-deletebutton="false"
+                            data-widget-fullscreenbutton="false"
+                            data-widget-custombutton="false"
+                            data-widget-collapsed="true"
+                            data-widget-sortable="false"
+
+                            -->
+                            <header>
+                                <span class="widget-icon"> <i class="glyphicon glyphicon-stats"></i> </span>
+                                <h2>{$Think.lang.bonus-statistics}</h2>
+
+                                <ul class="nav nav-tabs pull-right in" id="myTab">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#s1"><i class="fa fa-star"></i> <span class="hidden-mobile hidden-tablet">{$Think.lang.menu-comm}</span></a>
+                                    </li>
+                                </ul>
+
+                            </header>
+
+                            <!-- widget div-->
+                            <div class="no-padding">
+                                <!-- widget edit box -->
+                                <div class="jarviswidget-editbox">
+                                </div>
+                                <!-- end widget edit box -->
+
+                                <div class="widget-body">
+                                    <!-- content -->
+                                    <div id="myTabContent" class="tab-content">
+                                        <div class="tab-pane fade active in padding-10 no-padding-bottom" id="s1">
+<!--                                            <div class="widget-body-toolbar bg-color-white smart-form" id="rev-toggles">
+                                                <div id="B_CHART_TAB" class="btn-group btn-group-sm">
+                                                    <button id="B_DAY" type="button" class="btn btn-default">{$Think.lang.bonus-day}</button>
+                                                    <button id="B_WEEK" type="button" class="btn btn-default">{$Think.lang.bonus-week}</button>
+                                                    <button id="B_MONTH" type="button" class="btn btn-default">{$Think.lang.bonus-month}</button>
+                                                    <button id="B_YEAR" type="button" class="btn btn-default">{$Think.lang.bonus-year}</button>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="padding-10">
+                                                <div id="bchart" class="chart-large has-legend-unique">
+
+                                                </div>
+                                            </div>-->
+
+                                            <div class="show-stat-microcharts">
+                                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                                    <span class="show-cb-title">{$Think.lang.menu-commission}</span>
+                                                    <h4 class="pull-right"><strong>${$subDvInfo}</strong></h4>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                                    <span class="show-cb-title">{$Think.lang.menu-commission1}</span>
+                                                    <h4 class="pull-right"><strong>${$subRecom}</strong></h4>
+
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                                    <span class="show-cb-title">{$Think.lang.menu-commission2}</span>
+                                                    <h4 class="pull-right"><strong>${$subPrice}</strong></h4>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <!-- end s1 tab pane -->
+                                    </div>
+
+                                    <!-- end content -->
+                                </div>
+
+                            </div>
+                            <!-- end widget div -->
+                        </div>
+                        <!-- end widget -->
+
+                    </article>
+<!--                    <article class="col-md-12">
+                         new widget 
+                        <div class="jarviswidget jarviswidget-color-blueDark " id="wid-id-2" data-widget-colorbutton="false">
+
+                             widget options:
+                            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                            data-widget-colorbutton="false"
+                            data-widget-editbutton="false"
+                            data-widget-togglebutton="false"
+                            data-widget-deletebutton="false"
+                            data-widget-fullscreenbutton="false"
+                            data-widget-custombutton="false"
+                            data-widget-collapsed="true"
+                            data-widget-sortable="false"
+
+                            
+                            <header>
+                                <span class="widget-icon"> <i class="fa fa-calendar"></i> </span>
+                                <h2>{$Think.lang.bonus-calendar}</h2>
+                                <div class="widget-toolbar">
+                                     add: non-hidden - to disable auto hide 
+                                    <div class="btn-group">
+                                        <button class="btn dropdown-toggle btn-xs btn-default" data-toggle="dropdown">
+                                            Showing <i class="fa fa-caret-down"></i>
+                                        </button>
+                                        <ul class="dropdown-menu js-status-update pull-right">
+                                            <li>
+                                                <a href="javascript:void(0);" id="mt">Month</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" id="ag">Agenda</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" id="td">Today</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </header>
+
+                             widget div
+                            <div>
+                                 widget edit box 
+                                <div class="jarviswidget-editbox">
+
+                                    <input class="form-control" type="text">
+
+                                </div>
+                                 end widget edit box 
+
+                                <div class="widget-body no-padding">
+                                     content goes here 
+                                    <div class="widget-body-toolbar">
+
+                                        <div id="calendar-buttons">
+
+                                            <div class="btn-group">
+                                                <a href="javascript:void(0)" class="btn btn-default btn-xs" id="btn-prev"><i class="fa fa-chevron-left"></i></a>
+                                                <a href="javascript:void(0)" class="btn btn-default btn-xs" id="btn-next"><i class="fa fa-chevron-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="calendar"></div>
+
+                                     end content 
+                                </div>
+
+                            </div>
+                             end widget div 
+                        </div>
+                         end widget    
+                    </article>-->
+
+                </div><!--END row-->           
+            </section> 
+        </div><!--END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN PANEL -->
+
+    <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+    Note: These tiles are completely responsive,
+    you can add as many as you like
+    -->
+<include file="Public/top"/>
+
+
+<!-- END SHORTCUT AREA -->
+<!-- JavaScript -->
+
+<!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+<script src="__PUBLIC__/Home/Js/jquery.flot.cust.js"></script>
+<script src="__PUBLIC__/Home/Js/jquery.flot.resize.js"></script>
+<script src="__PUBLIC__/Home/Js/jquery.flot.tooltip.js"></script>
+<!-- Full Calendar -->
+<script src="__PUBLIC__/Home/Js/jquery.fullcalendar.min.js"></script>
+<script src="__PUBLIC__/Home/Js/jquery.simplyscroll.js"></script>
+
+
+<script>
+    $(function() {
+        //nav active setting
+
+        $("nav > ul > li.active").removeClass("active");
+        $("nav > ul > li.open").removeClass("open");
+        $("nav > ul > li:eq(4) > ul > li:eq(3)").addClass("active");
+
+
+    });
+</script>
+
+<script>
+    $(function() {
+        //all page common code!!!!! import  
+        pageSetUp();
+
+    });
+</script>        
+
+
+<!--[if IE 7]>
+<script>ie_error('IE7');</script>     
+        <![endif]-->
+<!--[if IE 8]>
+<script>ie_error('IE8');</script>     
+        <![endif]-->
+<script>
+    $(document).ready(function() {
+
+
+        $("#B_CHART_TAB button").removeClass("active");
+        $("#B_DAY").addClass("active");
+        B_CHART_VIEW("D");
+
+        $("#B_CHART_TAB button").click(function() {
+            $("#B_CHART_TAB button").removeClass("active");
+            $(this).addClass("active");
+
+            var chart_id = $(this).attr("id");
+            if (!!chart_id) {
+                if (chart_id == "B_DAY") {
+                    B_CHART_VIEW("D");
+
+                }
+                if (chart_id == "B_WEEK") {
+                    B_CHART_VIEW("W");
+
+                }
+                if (chart_id == "B_MONTH") {
+                    B_CHART_VIEW("M");
+
+                }
+                if (chart_id == "B_YEAR") {
+                    B_CHART_VIEW("Y");
+
+                }
+            }
+        });
+
+
+
+
+
+    });
+
+
+    function B_CHART_VIEW(D_TYPE) {
+        var D_UID = "flt888888a";
+        var parameters = "D_UID=" + D_UID + "&D_TYPE=" + D_TYPE;
+        //ajax
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            data: parameters,
+            url: "{:U('Home/Ajax/ajax_b_chart')}",
+            success: function(data) {
+                B_FuncCallback(data);
+            },
+            error: function() {
+                //alert("ERROR!");
+            }
+        });
+
+    }
+    function B_FuncCallback(data) {
+        var D_UID;
+        var D_TYPE;
+        var RESULT;
+        var B_DATA1;
+        var B_DATA2;
+        var B_DATA3;
+        var DATE_TYPE;
+        if (!!data) {
+            RESULT = data.RESULT
+            D_UID = data.D_UID
+            D_TYPE = data.D_TYPE
+            B_DATA1 = data.B_DATA1
+            B_DATA2 = data.B_DATA2
+            B_DATA3 = data.B_DATA3
+            DATE_TYPE = data.DATE_TYPE
+        }
+
+        if (RESULT == 0) {
+
+
+            data = [{
+                    label: "赞助奖金",
+                    data: B_DATA1,
+                    lines: {
+                        show: true,
+                        lineWidth: 1,
+                        fill: true,
+                        fillColor: {
+                            colors: [{
+                                    opacity: 0.1
+                                }, {
+                                    opacity: 0.13
+                                }]
+                        }
+                    },
+                    points: {
+                        show: true
+                    }
+                }, {
+                    label: "推荐奖金",
+                    data: B_DATA2,
+                    lines: {
+                        show: true,
+                        lineWidth: 1,
+                        fill: true,
+                        fillColor: {
+                            colors: [{
+                                    opacity: 0.1
+                                }, {
+                                    opacity: 0.13
+                                }]
+                        }
+                    },
+                    points: {
+                        show: true
+                    }
+                }, {
+                    label: "匹配奖金",
+                    data: B_DATA3,
+                    lines: {
+                        show: true,
+                        lineWidth: 1,
+                        fill: true,
+                        fillColor: {
+                            colors: [{
+                                    opacity: 0.1
+                                }, {
+                                    opacity: 0.13
+                                }]
+                        }
+                    },
+                    points: {
+                        show: true
+                    }
+                }];
+
+
+            var options = {
+                grid: {
+                    hoverable: true
+                },
+                colors: ["#FFCC00", "#ff0000", "#219529"],
+                tooltip: true,
+                tooltipOpts: {
+                    //content : item.series.label+" : $",
+                    defaultTheme: false
+                },
+                xaxis: {
+                    ticks: DATE_TYPE
+
+                },
+                yaxes: {
+                }
+            };
+
+
+
+            $.plot($("#bchart"), data, options);
+
+
+            // END TAB 2 
+        }
+
+
+    }
+</script>
+<script>
+    $(document).ready(function() {
+
+
+
+
+
+        if ($("#calendar").length) {
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+
+            var calendar = $('#calendar').fullCalendar({
+                editable: false,
+                draggable: false,
+                selectable: false,
+                selectHelper: false,
+                unselectAuto: false,
+                disableResizing: false,
+                header: {
+                    left: 'title', //,today
+                    center: 'prev, next, today',
+                    right: 'month, agendaWeek, agenDay' //month, agendaDay,
+                },
+                select: function(start, end, allDay) {
+                    var title = prompt('Event Title:');
+                    if (title) {
+                        calendar.fullCalendar('renderEvent', {
+                            title: title,
+                            start: start,
+                            end: end,
+                            allDay: allDay
+                        }, true // make the event "stick"
+                                );
+                    }
+                    calendar.fullCalendar('unselect');
+                },
+                eventSources: [
+                    // your event source
+                    {
+                        url: "{:U('Home/Ajax/ajax_b_calendar')}"
+                    }
+
+                    // any other sources...
+
+                ],
+                eventRender: function(event, element, icon) {
+                    if (!event.description == "") {
+                        element.find('.fc-event-title').append("<br/><span class='ultra-light'>" + event.description + "</span>");
+                    }
+                    if (!event.icon == "") {
+                        element.find('.fc-event-title').append("<i class='air air-top-right fa " + event.icon + " '></i>");
+                    }
+                }
+            });
+
+        }
+        ;
+
+        /* hide default buttons */
+        $('.fc-header-right, .fc-header-center').hide();
+
+        // calendar prev
+        $('#calendar-buttons #btn-prev').click(function() {
+            $('.fc-button-prev').click();
+            return false;
+        });
+
+        // calendar next
+        $('#calendar-buttons #btn-next').click(function() {
+            $('.fc-button-next').click();
+            return false;
+        });
+
+        // calendar today
+        $('#calendar-buttons #btn-today').click(function() {
+            $('.fc-button-today').click();
+            return false;
+        });
+
+        // calendar month
+        $('#mt').click(function() {
+            $('#calendar').fullCalendar('changeView', 'month');
+        });
+
+        // calendar agenda week
+        $('#ag').click(function() {
+            $('#calendar').fullCalendar('changeView', 'agendaWeek');
+        });
+
+        // calendar agenda day
+        $('#td').click(function() {
+            $('#calendar').fullCalendar('changeView', 'agendaDay');
+        });
+
+
+    });
+</script>
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div><!-- /.modal-content:e -->
+    </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e --> 
+
+
+<script>
+    $(document).ready(function() {
+
+
+        //popup show
+        $('[data-load-remote]').on('click', function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            var remote = $this.data('load-remote');
+            var remote_value = $this.data('load-remote-value');
+            if (remote) {
+                $($this.data('remote-target')).load(remote, remote_value);
+            }
+
+        });
+
+        //reload detected
+        $('body').on('hidden.bs.modal', '.modal', function() {
+            $(this).removeData('bs.modal');
+        });
+
+    });
+</script>   
+</body>
+</html>

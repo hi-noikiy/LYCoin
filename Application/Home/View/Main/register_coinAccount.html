@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+<head>
+	<include file="Public/head"/>
+</head>
+<body class="smart-style-1 desktop-detected" style="min-height: 871px;">
+<!--===header start===-->
+		<!-- HEADER -->
+				<header id="header" style="background:#000;">
+			<include file="Public/header"/>
+		</header>
+<!--=== End Header ===-->
+
+		<!-- Left panel : Navigation area -->
+		<aside id="left-panel" style="min-height: 871px; background: rgb(228, 238, 245);">
+		    <include file="Public/left"/>
+		</aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+        
+
+
+<!-- RIBBON -->
+<div id="ribbon">
+                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="&lt;i class=&#39;text-warning fa fa-warning&#39;&gt;&lt;/i&gt; Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+					<li><i class="fa fa-md fa-fw fa-home"></i>{$Think.lang.public-main}</li><li>{$Think.lang.menu-base}</li><li class="active">{$Think.lang.menu-base-register_coinAccount}</li>
+				</ol>
+				<!-- end breadcrumb -->
+</div>
+
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+
+<!-- MAIN top -->  
+                <div class="row">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+						<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-user"></i>{$Think.lang.menu-base-register_coinAccount}</h1>
+					</div>
+					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+					</div>
+				</div>
+<!--END MAIN top -->
+<!--top alert 
+                <div class="row">
+                    <div class="col-sm-12">
+                       <div class="well well-light">
+								<a class="close" data-dismiss="alert" href="">×</a>
+								<h4 class="alert-heading"><i class="fa-fw fa  fa-exclamation-triangle"></i>注意</h4>
+								<p></p>
+					    </div>
+                    </div>
+                </div>  
+<!--end top alert-->
+
+
+					<!-- START ROW -->
+					<div class="row">
+					    <div class="col-sm-12 col-md-6 col-lg-6">
+
+						<!-- NEW COL START -->
+						<article>
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget jarviswidget-color-blue" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-user"></i> </span>
+									<h2>{$Think.lang.user-information}</h2>
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+                                        <form class="smart-form" name="setcoinaccountForm" action="{:U('Home/Main/register_coin')}" method="post" novalidate="novalidate">
+                                         <fieldset>
+                                                <section>
+													<label class="label">{$Think.lang.login-username}</label>
+													<label class="input">
+														<input type="text" class="input-sm" name="D_CID" value="{$Member['username']}" readonly="true">
+													</label>
+												</section>
+												<section>
+													<label class="label">{$Think.lang.login-userpass}</label>
+													<label class="input">
+														<input type="password" class="input-sm" id="D_CPASS" name="password" value="">
+													</label>
+												</section>
+												<section>
+													<label class="label">{$Think.lang.login-reuserpass}</label>
+													<label class="input">
+														<input type="password" class="input-sm" id="D_CPASS_RE" name="repassword" value="">
+													</label>
+												</section>
+												
+												<section>
+													<label class="label">{$Think.lang.user-telephone}</label>
+													<label class="input">
+														<!--<input type="text" class="input-sm" id="D_CHP" name="D_CHP" value="" data-mask="+99 99-9999-9999" data-mask-placeholder= "X">-->
+														<input type="text" class="input-sm" name="telephone" value="{$Member['telephone']}" readonly="true">
+														<span class="help-block">{$Think.lang.user-telephone-remark}</span>
+													</label>
+												</section>
+												<section>
+													<label class="label">{$Think.lang.user-email}</label>
+													<label class="input">
+														<input type="text" class="input-sm" id="email" name="email" value="{$Member['email']}" readonly="true">
+													</label>
+												</section>
+                                                <div class="row">
+												<section class="col col-9">
+													<label class="label">{$Think.lang.user-code}</label>
+													<label class="input">
+														<input type="text" class="input-sm" id="code" name="code" value="">
+													</label>
+												</section>
+
+												<section class="col col-3">
+												    <label class="label">{$Think.lang.user-code-email}</label>
+													<label class="input">
+													<button class="btn btn-default btn-sm sendcode" type="button" type_id="6">{$Think.lang.user-send}</button>
+													<button class="btn btn-default btn-sm sendcode" type="button" type_id="6">{$Think.lang.user-send}2</button>
+													</label>
+												</section>
+												</div>
+                                         </fieldset>
+										 <footer>
+											 	<input type="hidden" name="language" value="{$language}">
+												<input type="submit" class="btn btn-primary" value="{$Think.lang.public-reg}">
+
+											
+										</footer>
+									</form>
+					
+					
+					                </div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+							<!-- end widget -->
+				
+						</article>
+						<!-- END COL -->
+
+						
+
+						</div>
+
+
+						<div class="col-sm-12 col-md-6 col-lg-6">
+
+						<!-- NEW COL START -->
+						<article>
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget jarviswidget-color-blue" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-dollar"></i> </span>
+									<h2>{$Think.lang.bitcoin-address-info}</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+                                        <form class="smart-form" name="setbitcoinForm" id="setbitcoinForm" method="post" novalidate="novalidate">
+										<input type="hidden" name="D_UID" id="D_UID" value="lf5411">
+										<input type="hidden" name="D_CID" id="D_CID" value="lf5411">
+										<input type="hidden" id="D_BITCOIN" name="D_BITCOIN" value="">
+                                         <fieldset>
+                                                <section>
+													<label class="label">{$Think.lang.bitcoin-address-id} : </label>
+													<label class="label"><h3>{$Member['username']}</h3></label>
+										
+													<label class="label"><p id="bit_address">{$Think.lang.bitcoin-address-remark}</p></label>
+										
+												</section>
+												
+                                         </fieldset>
+										 <footer>
+										        
+												<button type="submit" class="btn btn-primary">
+													{$Think.lang.public-reg}
+												</button>
+												
+										  </footer>
+									</form>
+					
+					
+					                </div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+							<!-- end widget -->
+				
+						</article>
+						<!-- END COL -->
+
+						<!-- NEW COL START -->
+						<article>
+				
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget jarviswidget-color-blue" id="wid-id-2" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+								<!-- widget options:
+								usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+				
+								data-widget-colorbutton="false"
+								data-widget-editbutton="false"
+								data-widget-togglebutton="false"
+								data-widget-deletebutton="false"
+								data-widget-fullscreenbutton="false"
+								data-widget-custombutton="false"
+								data-widget-collapsed="true"
+								data-widget-sortable="false"
+				
+								-->
+								<header>
+									<span class="widget-icon"> <i class="fa fa-dollar"></i> </span>
+									<h2>{$Think.lang.digitcoin-address-info}</h2>
+				
+								</header>
+				
+								<!-- widget div-->
+								<div>
+				
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+				
+									</div>
+									<!-- end widget edit box -->
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+                                        <form class="smart-form" name="setdgccoinForm" id="setdgccoinForm" method="post" novalidate="novalidate">
+                                         <fieldset>
+
+												<section>
+													<label class="label">{$Think.lang.digitcoin-address-info} : </label>
+													<label class="label"><h3>{$Member['username']}</h3></label>
+										
+													<label class="label"><p id="dgc_address">{$Think.lang.digitcoin-address-info}</p></label>
+										
+												</section>
+												
+                                         </fieldset>
+										 <footer>
+										        
+												<button type="submit" class="btn btn-primary">
+													{$Think.lang.public-reg}
+												</button>
+												
+										  </footer>
+									</form>
+					
+					
+					                </div>
+									<!-- end widget content -->
+				
+								</div>
+								<!-- end widget div -->
+				
+							</div>
+							<!-- end widget -->
+				
+						</article>
+						<!-- END COL -->
+
+
+						
+                        </div>
+					</div><!-- END ROW -->
+
+
+
+
+
+  
+
+</div><!--END MAIN CONTENT -->
+</div>
+		<!-- END MAIN PANEL -->
+
+		<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+		Note: These tiles are completely responsive,
+		you can add as many as you like
+		-->
+<include file="Public/top"/>
+        
+<!-- END SHORTCUT AREA -->
+    <!-- JavaScript -->
+    
+    <!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+
+<script>
+   $(function(){
+	 //nav active setting
+	 
+	 $("nav > ul > li.active").removeClass("active");
+	 $("nav > ul > li.open").removeClass("open");
+     $("nav > ul > li:eq(1) > ul > li:eq(2)").addClass("active");
+	 
+	   
+    });
+</script>
+		<!-- MAIN APP JS FILE -->
+        <!--common-->
+   <script>
+   $(function(){
+	 //all page common code!!!!! import  
+	 pageSetUp();
+	   
+    });
+   </script>        
+        
+        
+        <!--[if IE 7]>
+        <script>ie_error('IE7');</script>     
+		<![endif]-->
+        <!--[if IE 8]>
+        <script>ie_error('IE8');</script>     
+		<![endif]-->
+ 
+        
+       
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div><!-- /.modal-content:e -->
+  </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e --> 
+
+
+<script>
+$(document).ready(function() {
+
+
+        //popup show
+          $('[data-load-remote]').on('click',function(e) {
+          e.preventDefault();
+          var $this = $(this);
+          var remote = $this.data('load-remote');
+	      var remote_value = $this.data('load-remote-value');
+          if(remote) {
+            $($this.data('remote-target')).load(remote,remote_value);
+          }
+
+          });
+
+		 //reload detected
+		 $('body').on('hidden.bs.modal', '.modal', function () {
+		 	$(this).removeData('bs.modal');
+		 });
+		$(".sendcode").click(function(){
+			var type = $(this).attr("type_id");
+			$(this).attr("disabled",true);
+			$.post("{:U('Home/Mail/index')}",{"type":type},function(data){
+				if(data){
+					alert("{$Think.lang.public-success}");
+				}else{
+					alert("{$Think.lang.public-error}");
+				}
+				$(".sendcode").attr("disabled",false);
+			});
+		});
+
+});
+</script>   
+
+
+<div id="divSmallBoxes"></div><div id="divMiniIcons"></div><div id="divbigBoxes"></div></body></html>

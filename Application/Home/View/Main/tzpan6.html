@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+    <head>
+    <include file="Public/head"/>
+</head>
+<body >
+    <!--===header start===-->
+    <!-- HEADER -->
+    <header style="background:#000;">
+        <include file="Public/header"/>
+    </header>
+    <!--=== End Header ===-->
+
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+
+
+ 
+
+        <!-- MAIN CONTENT -->
+        <div id="content">
+            <!-- MAIN top -->  
+           
+            <!--END MAIN top -->
+            <!--top alert 
+                            <div class="row">
+                                <div class="col-sm-12">
+                                   <div class="well well-light">
+                                                                            <a class="close" data-dismiss="alert" href="">×</a>
+                                                                            <h4 class="alert-heading"><i class="fa-fw fa  fa-exclamation-triangle"></i>注意</h4>
+                                                                            <p>--</p>
+            
+                                                        </div>
+                                </div>
+                            </div>  
+            <!--end top alert-->
+
+            <!-- START ROW -->
+            <div class="row">
+                <!-- NEW COL START -->
+                <article class="col-sm-12 col-md-12 col-lg-12">
+
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-color-yellow" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+                        <header  style="background: goldenrod"> 
+                            <span class="widget-icon"> <i class="fa fa-user"></i> </span>
+                            <h2>{$Think.lang.duchangliutouzi}</h2>
+
+                        </header>
+
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+                            <!-- end widget edit box -->
+                            <!-- widget content -->
+                            <div class="widget-body no-padding">
+                                <form class="smart-form" name="depositForm" action="{:U('Home/Main/tzpan6')}" method="post" novalidate="novalidate">
+                                    <fieldset>
+                                        <section>
+                                            <label class="label">{$Think.lang.youxiang}</label>
+                                            <label class="input">
+                                                <input type="text" disabled class="input-sm" id="email" name="email" value="{$Member['email']}">
+                                            </label>
+                                        </section>
+                                        <section>
+                                            <label class="label">{$Think.lang.touzijine}（<font color='red'>{$Think.lang.zhanghukeyong}{$Think.lang.bangchengjifen}:{$Member['benjin']}</font>）</label>
+                                            <label class="input">
+                                                <input type="text" class="input-sm" id="money" name="money">
+                                            </label>
+                                        </section>
+                                        <section>
+                                            <label class="label">{$Think.lang.jiaoyimima}</label>
+                                            <label class="input">
+                                                <input type="password" class="input-sm" name="paypass">
+                                            </label>
+                                        </section>
+                                    </fieldset>
+                                    <footer>
+                                        <button style="background: goldenrod;border:1px solid goldenrod" type="submit" id="submit" class="btn btn-primary">
+                                            {$Think.lang.queding}
+                                        </button>
+                                    </footer>
+                                </form>
+
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
+                    <!-- end widget -->
+
+                </article>
+                <!-- END COL -->
+
+                
+<include file="Public/foot"/>
+            </div>
+
+            <!-- END ROW -->
+
+
+
+
+
+        </div><!--END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN PANEL -->
+
+    <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+    Note: These tiles are completely responsive,
+    you can add as many as you like
+    -->
+<include file="Public/top"/>
+
+<!-- END SHORTCUT AREA -->
+<!-- JavaScript -->
+
+<!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+
+<script>
+    $(function() {
+        //nav active setting
+
+        $("nav > ul > li.active").removeClass("active");
+        $("nav > ul > li.open").removeClass("open");
+        $("nav > ul > li:eq(2) > ul > li:eq(2)").addClass("active");
+
+
+    });
+</script>
+<!-- MAIN APP JS FILE -->
+<!--common-->
+<script>
+    $(function() {
+        //all page common code!!!!! import  
+        pageSetUp();
+
+    });
+</script>        
+
+
+<!--[if IE 7]>
+<script>ie_error('IE7');</script>     
+        <![endif]-->
+<!--[if IE 8]>
+<script>ie_error('IE8');</script>     
+        <![endif]-->
+
+
+
+
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div><!-- /.modal-content:e -->
+    </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e --> 
+
+
+<script>
+    $(document).ready(function() {
+
+
+        //popup show
+        $('[data-load-remote]').on('click', function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            var remote = $this.data('load-remote');
+            var remote_value = $this.data('load-remote-value');
+            if (remote) {
+                $($this.data('remote-target')).load(remote, remote_value);
+            }
+
+        });
+        $("#price").blur(function() {
+            if ($(this).val() != "") {
+                $(".msg").remove();
+                $(this).parent().parent().find("label").removeClass("state-error");
+                var t = $(this).val();
+                var z = /^[0-9]*$/;
+                if (!z.test(t)) {
+                    $(this).parent().parent().find("label").addClass("state-error");
+                    $(this).parent().after("<em  class='msg'>请输入数字.</em>");
+                }
+            } else {
+                $(this).val("1");
+            }
+
+        });
+
+        //reload detected
+        $('body').on('hidden.bs.modal', '.modal', function() {
+            $(this).removeData('bs.modal');
+        });
+
+    });
+</script>   
+
+
+<div id="divSmallBoxes"></div><div id="divMiniIcons"></div><div id="divbigBoxes"></div></body></html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+<head>
+	<include file="Public/head"/>
+</head>
+<body class="smart-style-1 desktop-detected" style="min-height: 871px;">
+<!--===header start===-->
+		<!-- HEADER -->
+				<header id="header" style="background:#000;">
+			<include file="Public/header"/>
+		</header>
+<!--=== End Header ===-->
+
+		<!-- Left panel : Navigation area -->
+		<aside id="left-panel" style="min-height: 871px; background: rgb(228, 238, 245);">
+		   <include file="Public/left"/>
+
+		</aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+        
+
+<!-- RIBBON -->
+<div id="ribbon">
+                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="&lt;i class=&#39;text-warning fa fa-warning&#39;&gt;&lt;/i&gt; Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+					<li><i class="fa fa-md fa-fw fa-home"></i>主页</li><li>我的组织图</li><li class="active">推荐组织图</li>
+				</ol>
+				<!-- end breadcrumb -->
+</div>
+<hr>
+<!-- END RIBBON -->
+<!-- MAIN CONTENT -->
+<div id="content">
+<!-- MAIN top -->  
+              <div class="row">
+					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+						<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-sitemap"></i>推荐组织图</h1>
+					</div>
+			  </div>
+<!--END MAIN top --> 
+
+                <div class="row">
+                    <div class="col-sm-12">
+					  <div class="well well-light">              
+										<div id="TREE_TAB" class="btn-group btn-group-sm">
+                                                            <button id="OPEN_T" type="button" class="btn btn-default active"><i class="fa fa-plus margin-right-10"></i>全部打开</button>
+                                                            <button id="CLOSE_T" type="button" class="btn btn-default"><i class="fa fa-minus margin-right-10"></i>全部关闭</button>
+															<span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_0.png" width="35" class="margin-right-10">待激活会员</span>
+															<span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_1.png" width="35" class="margin-right-10">一星</span>
+															<span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_2.png" width="35" class="margin-right-10">二星</span>
+															<span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_3.png" width="35" class="margin-right-10">三星</span>
+															<span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_4.png" width="35" class="margin-right-10">四星</span>
+															<span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_5.png" width="35" class="margin-right-10">五星</span>
+															<span class="margin-left-10"><img src="__PUBLIC__/Home/Images/C_6.png" width="35" class="margin-right-10">六星</span>
+                                          </div>
+														
+
+
+
+										<div class="tree">
+											<ul role="tree">
+                                             
+												<li class="parent_li" role="treeitem" id="lf5411">
+													<span>
+														 <volist name="PackageTypeList" id="ptl" empty="无套餐数据">
+															 <if condition="$ptl['id'] eq $Member['package_type']"><img src="__PUBLIC__/Home/Images/C_{$ptl['id']}.png" class="margin-right-10" width="50px"></if>
+														 </volist>
+														<img src="__PUBLIC__/Home/Images/036.png" class="mr10" width="50px">
+														<a href="">{$Member['username']} <i class="fa fa-lg fa-minus-circle margin-left-20"></i></a>
+													</span>
+                                                    <ul role="group">
+														<volist name="List" id="li">
+															<li>
+															<span>
+																 <volist name="PackageTypeList" id="ptl" empty="无套餐数据">
+																	 <if condition="$ptl['id'] eq $li['package_type']"><img src="__PUBLIC__/Home/Images/C_{$ptl['id']}.png" class="margin-right-10" width="50px"></if>
+																 </volist>
+																<img src="__PUBLIC__/Home/Images/036.png" width="40px" class="margin-right-10">{$li['username']}
+															</span>
+																<ul role="group">
+																	<volist name="li['child']" id="li2">
+																	<li>
+																	<span>
+																		 <volist name="PackageTypeList" id="ptl" empty="无套餐数据">
+																			 <if condition="$ptl['id'] eq $li2['package_type']"><img src="__PUBLIC__/Home/Images/C_{$ptl['id']}.png" class="margin-right-10" width="50px"></if>
+																		 </volist>
+																		<img src="__PUBLIC__/Home/Images/036.png" width="40px" class="margin-right-10">{$li2['username']}
+																	</span>
+																	</li>
+																	</volist>
+																</ul>
+															</li>
+														</volist>
+
+													</ul>
+												</li>
+                                            
+											</ul>
+										</div><!--.tree-->
+				        </div>             
+                    </div>
+                </div>  
+
+</div><!--END MAIN CONTENT -->
+</div>
+		<!-- END MAIN PANEL -->
+
+		<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+		Note: These tiles are completely responsive,
+		you can add as many as you like
+		-->
+<include file="Public/top"/>
+        
+<!-- END SHORTCUT AREA -->
+    <!-- JavaScript -->
+    
+    <!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+
+<script>
+   $(function(){
+	 //nav active setting
+	 
+	 $("nav > ul > li.active").removeClass("active");
+	 $("nav > ul > li.open").removeClass("open");
+     $("nav > ul > li:eq(3) > ul > li:eq(1)").addClass("active");
+	 
+	   
+    });
+</script>
+		<!-- MAIN APP JS FILE -->
+        <!--common-->
+   <script>
+   $(function(){
+	 //all page common code!!!!! import  
+	 pageSetUp();
+	   
+    });
+   </script>        
+        
+        
+        <!--[if IE 7]>
+        <script>ie_error('IE7');</script>     
+		<![endif]-->
+        <!--[if IE 8]>
+        <script>ie_error('IE8');</script>     
+		<![endif]-->
+
+
+<script>
+
+	$(function(){
+		$("#OPEN_T").click(function(){
+			$("button").removeClass("active");
+			$(this).addClass("active");
+			$(".tree ul li").show("fast");
+			$(".tree ul li:has(ul) span").find('i').removeClass().addClass('fa fa-lg fa-minus-circle margin-left-20');
+		});
+
+		$("#CLOSE_T").click(function(){
+			$("button").removeClass("active");
+			$(this).addClass("active");
+			$(".tree > ul ul li").hide("fast");
+			$(".tree ul li:has(ul) span").find('i').removeClass().addClass('fa fa-lg fa-plus-circle margin-left-20');
+		});
+
+	});
+</script>
+
+
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div><!-- /.modal-content:e -->
+  </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e --> 
+
+
+<script>
+$(document).ready(function() {
+
+
+        //popup show
+          $('[data-load-remote]').on('click',function(e) {
+          e.preventDefault();
+          var $this = $(this);
+          var remote = $this.data('load-remote');
+	      var remote_value = $this.data('load-remote-value');
+          if(remote) {
+            $($this.data('remote-target')).load(remote,remote_value);
+          }
+
+          });
+
+ //reload detected
+ $('body').on('hidden.bs.modal', '.modal', function () {
+  $(this).removeData('bs.modal');
+});
+
+});
+</script>   
+
+
+<div id="divSmallBoxes"></div><div id="divMiniIcons"></div><div id="divbigBoxes"></div></body></html>

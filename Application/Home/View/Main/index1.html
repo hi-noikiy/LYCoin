@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+<head>
+	<include file="Public/head"/>
+</head>
+<body class="smart-style-1 desktop-detected" style="min-height: 871px;">
+<!--===header start===-->
+		<!-- HEADER -->
+		<header id="header" style="background:#000;">
+			<include file="Public/header"/>
+		</header>
+<!--=== End Header ===-->
+
+		<!-- Left panel : Navigation area -->
+		<aside id="left-panel" style="min-height: 1144px; background: rgb(228, 238, 245);">
+		    <include file="Public/left"/>
+
+		</aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+        
+
+<!-- RIBBON -->
+<div id="ribbon">
+                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="&lt;i class=&#39;text-warning fa fa-warning&#39;&gt;&lt;/i&gt; Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+					<li><i class="fa fa-md fa-fw fa-home"></i>{$Think.lang.public-main}</li><li class="active">{$Think.lang.menu-main}</li>
+				</ol>
+				<!-- end breadcrumb -->
+</div>
+<!-- END RIBBON -->
+
+<!-- MAIN CONTENT -->
+<div id="content" class="bg_dash">
+
+<div class="row">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+						<h1 class="page-title txt-color-black bold"><i class="fa-fw fa fa-home"></i>{$Think.lang.menu-main}</h1>
+					</div>
+					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+						<ul id="sparks" class="">
+						    <li class="sparks-info">
+								<h1><b>Until next bonus round.</b></h1>
+							</li>
+							<li class="sparks-info">
+								<h5> Hours <span class="txt-color-blue text-center"><b id="time-set">14</b></span></h5>
+							</li>
+							<li class="sparks-info">
+								<h5> Minutes <span class="txt-color-purple text-center"><b id="min-set">51</b></span></h5>
+							</li>
+							<li class="sparks-info">
+								<h5> Seconds <span class="txt-color-greenDark text-center"><b id="sec-set">31</b></span></h5>
+							</li>
+						</ul>
+					</div>
+
+</div>
+
+<!-- begin row -->
+			<div class="row">
+			    <!-- begin col-2 -->
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg1-orange">
+						<div class="stats-icon"><i class="fa fa-circle-o"></i></div>
+						<div class="stats-info" style="display:block; width:80%;">
+							<h4>Limin Coin</h4>
+							<p class="font-md">{$Think.lang.public-all-price} : <span class="pull-right bold">{$sub_digit}</span></p>
+							<p class="font-md">{$Think.lang.index-wait-cold}: <span class="pull-right bold">{$cold_digit_coin}</span></p>
+							<p class="font-md">{$Think.lang.index-out-cold} : <span class="pull-right bold">{$free_digit_coin}</span></p>
+							
+						</div>
+						<div class="stats-link">
+							<a href="{:U('Home/Main/digitcoin_wallet')}">{$Think.lang.index-view-detail} <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- end col-2 -->
+				<!-- begin col-2 -->
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg1-orange">
+						<div class="stats-icon"><i class="fa fa-dollar"></i></div>
+						<div class="stats-info" style="display:block; width:80%;">
+							<h4>{$Think.lang.index-s-cash}</h4>
+							<p class="font-md">{$Think.lang.index-new-scash} : <span class="pull-right bold">{$s_price}</span></p>
+							<p class="font-md">{$Think.lang.index-new-bcash} : <span class="pull-right bold">{$b_price}</span></p>
+							<p class="font-md">{$Think.lang.index-cash-all} : <span class="pull-right bold">{$sub_price}</span></p>
+						</div>
+						<div class="stats-link">
+							<a href="{:U('Home/Main/cash_wallet')}">{$Think.lang.index-view-detail} <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- end col-2 -->
+				<!--
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg1-orange">
+						<div class="stats-icon"><i class="fa fa-dollar"></i></div>
+						<div class="stats-info" style="display:block; width:80%;">
+							<h4>B-现金钱包</h4>
+							<p class="font-md">合计 : <span class="pull-right bold">24.00</span></p>
+							<p class="font-md">收入 : <span class="pull-right bold">224.00</span></p>
+							<p class="font-md">支出 : <span class="pull-right bold">200.00</span></p>	
+						</div>
+						<div class="stats-link">
+							<a href="">详细查看 <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				 -->
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg1-orange">
+						<div class="stats-icon"><i class="fa fa-dollar"></i></div>
+						<div class="stats-info" style="display:block; width:80%;">
+							<h4>{$Think.lang.menu-stock_wallet}</h4>
+							<p class="font-md">{$Think.lang.public-all-price} : <span class="pull-right bold">{$g_price}</span></p>
+							<p class="font-md">{$Think.lang.public-tran-in} : <span class="pull-right bold">{$g_price}</span></p>
+							<p class="font-md">{$Think.lang.public-tran-out} : <span class="pull-right bold">0.00</span></p>
+						</div>
+						<div class="stats-link">
+							<a href="{:U('Home/Main/stock_wallet')}">{$Think.lang.index-view-detail} <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+
+				<!-- begin col-2 -->
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg1-orange">
+						<div class="stats-icon"><i class="fa fa-dollar"></i></div>
+						<div class="stats-info" style="display:block; width:80%;">
+							<h4>{$Think.lang.menu-mandatory_wallet}</h4>
+							<p class="font-md">{$Think.lang.public-tran-in} : <span class="pull-right bold">{$r_price}</span></p>
+							<p class="font-md">{$Think.lang.public-tran-in} : <span class="pull-right bold">{$r_price}</span></p>
+							<p class="font-md">{$Think.lang.public-tran-out} : <span class="pull-right bold">0.00</span></p>
+						</div>
+						<div class="stats-link">
+							<a href="{:U('Home/Main/mandatory_wallet')}">{$Think.lang.index-view-detail} <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- end col-2 -->
+
+				<!-- begin col-3 -->
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg1-green">
+						<div class="stats-icon"><i class="fa fa-group"></i></div>
+						<div class="stats-info">
+							<h4>{$Think.lang.index-directly-sponsored}</h4>
+							<p class="taho bold">{$CountMember}</p>
+						</div>
+						<div class="stats-link">
+							<a href="{:U('Home/Main/direct_tree')}">{$Think.lang.index-view-detail} <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+
+				<!-- begin col-3 -->
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg1-green">
+						<div class="stats-icon"><i class="fa fa-star"></i></div>
+						<div class="stats-info">
+							<h4>{$Think.lang.index-bonus-today}</h4>
+							<p class="taho bold">{$NewInfo}</p>
+						</div>
+						<div class="stats-link">
+							<a href="{:U('Home/Main/commission')}">{$Think.lang.index-view-detail} <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+
+				<!-- begin col-3 -->
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg1-green">
+						<div class="stats-icon"><i class="fa fa-star"></i></div>
+						<div class="stats-info">
+							<h4>{$Think.lang.index-total-bonus}</h4>
+							<p class="taho bold">{$AllInfo}</p>
+						</div>
+						<div class="stats-link">
+							<a href="{:U('Home/Main/commission')}">{$Think.lang.index-view-detail} <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+
+				<!-- begin col-3 -->
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg1-green">
+						<div class="stats-icon"><i class="fa fa-sitemap"></i></div>
+						<div class="stats-info">
+							<h4>{$Think.lang.index-my-rank}</h4>
+							<p class="taho bold">
+								<notempty name="Member['package_type']">
+									<volist name="PackageList" id="ptl" empty="无套餐数据">
+										<if condition="$ptl['id'] eq $Member['package_type']"><if condition="$language neq 'zh-cn'">{$ptl['en_title']}<else/>{$ptl['title']}</if></if>
+									</volist>
+									<else/>
+									{$Think.lang.tree-sponsor-member}
+								</notempty>
+
+							</p>
+						</div>
+						<div class="stats-link">
+							<a href="{:U('Home/Main/upgrade_package')}">{$Think.lang.index-view-detail} <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+
+				<!-- begin col-3 -->
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg1-red">
+						<div class="stats-icon"><i class="fa fa-arrow-left"></i></div>
+						<div class="stats-info">
+							<h4>{$Think.lang.index-points-left}</h4>
+							<p class="taho bold">{$LeftBvPriceInfo}</p>
+						</div>
+						<div class="stats-link">
+							<a href="{:U('Home/Main/downline_tree')}">{$Think.lang.index-view-detail} <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+
+				<!-- begin col-3 -->
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg1-red">
+						<div class="stats-icon"><i class="fa fa-arrow-left"></i></div>
+						<div class="stats-info">
+							<h4>{$Think.lang.index-left-balance}</h4>
+							<p class="taho bold">{$MemberBv_L}</p>
+						</div>
+						<div class="stats-link">
+							<a href="{:U('Home/Main/downline_tree')}">{$Think.lang.index-view-detail} <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+
+				<!-- begin col-3 -->
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg1-red">
+						<div class="stats-icon"><i class="fa fa-arrow-right"></i></div>
+						<div class="stats-info">
+							<h4>{$Think.lang.index-points-right}</h4>
+							<p class="taho bold">{$RightBvPriceInfo}</p>
+						</div>
+						<div class="stats-link">
+							<a href="{:U('Home/Main/downline_tree')}">{$Think.lang.index-view-detail} <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+
+				<!-- begin col-3 -->
+				<div class="col-md-3 col-sm-6">
+					<div class="widget widget-stats bg1-red">
+						<div class="stats-icon"><i class="fa fa-arrow-right"></i></div>
+						<div class="stats-info">
+							<h4>{$Think.lang.index-right-balance}</h4>
+							<p class="taho bold">{$MemberBv_R}</p>
+						</div>
+						<div class="stats-link">
+							<a href="{:U('Home/Main/downline_tree')}">{$Think.lang.index-view-detail} <i class="fa fa-arrow-circle-o-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+			</div>
+			<!-- end row -->
+
+
+				<!-- widget grid -->
+				<section id="widget-grid" class="">
+
+					<!-- row -->
+					<div class="row">
+			   
+                <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">{$Think.lang.index-new-member}</div>
+                        <div class="panel-body no-padding">
+						    <div class="simply-scroll simply-scroll-container">
+								<div class="simply-scroll-clip">
+									<ul id="scroller" class="simply-scroll-list" style="width: 12876px;">
+										<volist name="MemberList" id="ml">
+											<li class="flag-list no-padding">
+												<notempty name="ml['country_picture']"><img src="{$ml['country_picture']}" width="75px" style="margin-top:10px;"><else/><img src="__PUBLIC__/Public/Images/loading.gif" width="75px" style="margin-top:10px;"></notempty>
+												<div class="margin-right-20">
+													<span class="username"><php>$len = strlen($ml['username']); echo substr_replace($ml['username'],'***',$len-3,$len);</php></span><br>
+													{$ml['cn_name']}
+													
+												</div>
+											</li>
+										</volist>
+									</ul>
+								</div>
+							</div>
+
+                        </div>
+                </div>
+				</div>
+
+
+
+
+
+
+
+
+			   <article class="col-md-6 sortable-grid ui-sortable">
+			    
+               <div class="jarviswidget jarviswidget-color-blueDark  jarviswidget-sortable" id="wid-id-2" data-widget-editbutton="false" role="widget" style="">
+								<header role="heading"><div class="jarviswidget-ctrls" role="menu">   <a href="" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse"><i class="fa fa-minus "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-resize-full "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a></div><div class="widget-toolbar" role="menu"><a data-toggle="dropdown" class="dropdown-toggle color-box selector" href="javascript:void(0);"></a><ul class="dropdown-menu arrow-box-up-right color-select pull-right"><li><span class="bg-color-green" data-widget-setstyle="jarviswidget-color-green" rel="tooltip" data-placement="left" data-original-title="Green Grass"></span></li><li><span class="bg-color-greenDark" data-widget-setstyle="jarviswidget-color-greenDark" rel="tooltip" data-placement="top" data-original-title="Dark Green"></span></li><li><span class="bg-color-greenLight" data-widget-setstyle="jarviswidget-color-greenLight" rel="tooltip" data-placement="top" data-original-title="Light Green"></span></li><li><span class="bg-color-purple" data-widget-setstyle="jarviswidget-color-purple" rel="tooltip" data-placement="top" data-original-title="Purple"></span></li><li><span class="bg-color-magenta" data-widget-setstyle="jarviswidget-color-magenta" rel="tooltip" data-placement="top" data-original-title="Magenta"></span></li><li><span class="bg-color-pink" data-widget-setstyle="jarviswidget-color-pink" rel="tooltip" data-placement="right" data-original-title="Pink"></span></li><li><span class="bg-color-pinkDark" data-widget-setstyle="jarviswidget-color-pinkDark" rel="tooltip" data-placement="left" data-original-title="Fade Pink"></span></li><li><span class="bg-color-blueLight" data-widget-setstyle="jarviswidget-color-blueLight" rel="tooltip" data-placement="top" data-original-title="Light Blue"></span></li><li><span class="bg-color-teal" data-widget-setstyle="jarviswidget-color-teal" rel="tooltip" data-placement="top" data-original-title="Teal"></span></li><li><span class="bg-color-blue" data-widget-setstyle="jarviswidget-color-blue" rel="tooltip" data-placement="top" data-original-title="Ocean Blue"></span></li><li><span class="bg-color-blueDark" data-widget-setstyle="jarviswidget-color-blueDark" rel="tooltip" data-placement="top" data-original-title="Night Sky"></span></li><li><span class="bg-color-darken" data-widget-setstyle="jarviswidget-color-darken" rel="tooltip" data-placement="right" data-original-title="Night"></span></li><li><span class="bg-color-yellow" data-widget-setstyle="jarviswidget-color-yellow" rel="tooltip" data-placement="left" data-original-title="Day Light"></span></li><li><span class="bg-color-orange" data-widget-setstyle="jarviswidget-color-orange" rel="tooltip" data-placement="bottom" data-original-title="Orange"></span></li><li><span class="bg-color-orangeDark" data-widget-setstyle="jarviswidget-color-orangeDark" rel="tooltip" data-placement="bottom" data-original-title="Dark Orange"></span></li><li><span class="bg-color-red" data-widget-setstyle="jarviswidget-color-red" rel="tooltip" data-placement="bottom" data-original-title="Red Rose"></span></li><li><span class="bg-color-redLight" data-widget-setstyle="jarviswidget-color-redLight" rel="tooltip" data-placement="bottom" data-original-title="Light Red"></span></li><li><span class="bg-color-white" data-widget-setstyle="jarviswidget-color-white" rel="tooltip" data-placement="right" data-original-title="Purity"></span></li><li><a href="javascript:void(0);" class="jarviswidget-remove-colors" data-widget-setstyle="" rel="tooltip" data-placement="bottom" data-original-title="Reset widget color to default">Remove</a></li></ul></div>
+									<span class="widget-icon"> <i class="fa fa-user"></i> </span>
+									<h2>{$Think.lang.index-registed-members}</h2>
+									<div class="widget-toolbar" role="menu">
+										<a href="{:U('Home/Main/register')}" class="btn btn-default">{$Think.lang.index-more}</a>
+									</div>
+								<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+
+								<!-- widget div-->
+								<div role="content">
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<div>
+											<label>Title:</label>
+											<input type="text">
+										</div>
+									</div>
+									<!-- end widget edit box -->
+
+									<div class="widget-body no-padding">
+										<!-- content goes here -->
+                                        <table class="table table-bordered">
+											<thead>
+                                                    <tr><th class="text-center" width="30%">{$Think.lang.public-date}</th>
+													<th class="text-center" width="40%">{$Think.lang.public-user}</th>
+													<th class="text-center">{$Think.lang.index-send-price}</th>
+											</tr></thead>
+                                            <tbody>
+												<tr><td colspan="3" class="text-center padding-20">{$Think.lang.public-content}</td></tr>
+                                              </tbody>
+                                          </table>      
+										<!-- end content -->
+
+									</div>
+
+								</div>
+								<!-- end widget div -->
+							</div></article>
+
+
+
+			   <article class="col-md-6 sortable-grid ui-sortable">
+			    
+               <div class="jarviswidget jarviswidget-color-blueDark  jarviswidget-sortable" id="wid-id-3" data-widget-editbutton="false" role="widget" style="">
+								<header role="heading"><div class="jarviswidget-ctrls" role="menu">   <a href="" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse"><i class="fa fa-minus "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-resize-full "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a></div><div class="widget-toolbar" role="menu"><a data-toggle="dropdown" class="dropdown-toggle color-box selector" href="javascript:void(0);"></a><ul class="dropdown-menu arrow-box-up-right color-select pull-right"><li><span class="bg-color-green" data-widget-setstyle="jarviswidget-color-green" rel="tooltip" data-placement="left" data-original-title="Green Grass"></span></li><li><span class="bg-color-greenDark" data-widget-setstyle="jarviswidget-color-greenDark" rel="tooltip" data-placement="top" data-original-title="Dark Green"></span></li><li><span class="bg-color-greenLight" data-widget-setstyle="jarviswidget-color-greenLight" rel="tooltip" data-placement="top" data-original-title="Light Green"></span></li><li><span class="bg-color-purple" data-widget-setstyle="jarviswidget-color-purple" rel="tooltip" data-placement="top" data-original-title="Purple"></span></li><li><span class="bg-color-magenta" data-widget-setstyle="jarviswidget-color-magenta" rel="tooltip" data-placement="top" data-original-title="Magenta"></span></li><li><span class="bg-color-pink" data-widget-setstyle="jarviswidget-color-pink" rel="tooltip" data-placement="right" data-original-title="Pink"></span></li><li><span class="bg-color-pinkDark" data-widget-setstyle="jarviswidget-color-pinkDark" rel="tooltip" data-placement="left" data-original-title="Fade Pink"></span></li><li><span class="bg-color-blueLight" data-widget-setstyle="jarviswidget-color-blueLight" rel="tooltip" data-placement="top" data-original-title="Light Blue"></span></li><li><span class="bg-color-teal" data-widget-setstyle="jarviswidget-color-teal" rel="tooltip" data-placement="top" data-original-title="Teal"></span></li><li><span class="bg-color-blue" data-widget-setstyle="jarviswidget-color-blue" rel="tooltip" data-placement="top" data-original-title="Ocean Blue"></span></li><li><span class="bg-color-blueDark" data-widget-setstyle="jarviswidget-color-blueDark" rel="tooltip" data-placement="top" data-original-title="Night Sky"></span></li><li><span class="bg-color-darken" data-widget-setstyle="jarviswidget-color-darken" rel="tooltip" data-placement="right" data-original-title="Night"></span></li><li><span class="bg-color-yellow" data-widget-setstyle="jarviswidget-color-yellow" rel="tooltip" data-placement="left" data-original-title="Day Light"></span></li><li><span class="bg-color-orange" data-widget-setstyle="jarviswidget-color-orange" rel="tooltip" data-placement="bottom" data-original-title="Orange"></span></li><li><span class="bg-color-orangeDark" data-widget-setstyle="jarviswidget-color-orangeDark" rel="tooltip" data-placement="bottom" data-original-title="Dark Orange"></span></li><li><span class="bg-color-red" data-widget-setstyle="jarviswidget-color-red" rel="tooltip" data-placement="bottom" data-original-title="Red Rose"></span></li><li><span class="bg-color-redLight" data-widget-setstyle="jarviswidget-color-redLight" rel="tooltip" data-placement="bottom" data-original-title="Light Red"></span></li><li><span class="bg-color-white" data-widget-setstyle="jarviswidget-color-white" rel="tooltip" data-placement="right" data-original-title="Purity"></span></li><li><a href="javascript:void(0);" class="jarviswidget-remove-colors" data-widget-setstyle="" rel="tooltip" data-placement="bottom" data-original-title="Reset widget color to default">Remove</a></li></ul></div>
+									<span class="widget-icon"> <i class="fa fa-user"></i> </span>
+									<h2>{$Think.lang.index-downline-members}</h2>
+									<div class="widget-toolbar" role="menu">
+										<a href="{:U('Home/Main/downline_tree')}" class="btn btn-default">{$Think.lang.index-more}</a>
+									</div>
+								<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+
+								<!-- widget div-->
+								<div role="content">
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<div>
+											<label>Title:</label>
+											<input type="text">
+										</div>
+									</div>
+									<!-- end widget edit box -->
+
+									<div class="widget-body no-padding">
+										<!-- content goes here -->
+                                        <table class="table table-bordered">
+											<thead>
+                                                    <tr><th class="text-center" width="20%">{$Think.lang.public-date}</th>
+													<th class="text-center" width="20%">{$Think.lang.public-user}</th>
+													<th class="text-center" width="20%">{$Think.lang.public-package}</th>
+													<th class="text-center" width="20%">{$Think.lang.index-position}</th>
+													<th class="text-center" width="20%">{$Think.lang.index-level}</th>
+											</tr></thead>
+                                            <tbody>
+											<notempty name="PMemberList">
+												<volist name="PMemberList" id="pml">
+													<tr>
+														<td class="text-center"><php>echo date("d/m/y H:s:i A",strtotime($pml['addtime']));</php></td>
+														<td class="text-center">{$pml['username']}</td>
+														<td class="text-center">
+															<if condition="$pml['package_type'] eq 0">Executive</if>
+															<volist name="PackageList" id="pl">
+																<if condition="$pl['id'] eq $pml['package_type']">{$pl['en_title']}</if>
+															</volist>
+														</td>
+														<td class="text-center"><if condition="$pml['position']">R<else/>L</if></td>
+														<td class="text-center">{$pml['package_type']}</td>
+													</tr>
+												</volist>
+												<else/>
+												<tr><td colspan="3" class="text-center padding-20">{$Think.lang.public-content}</td></tr>
+											</notempty>
+                                              
+                                              </tbody>
+                                          </table>      
+										<!-- end content -->
+
+									</div>
+
+								</div>
+								<!-- end widget div -->
+							</div></article>
+			   
+
+
+
+			   <article class="col-md-12 sortable-grid ui-sortable">
+			    
+               <div class="jarviswidget jarviswidget-color-blueDark  jarviswidget-sortable" id="wid-id-4" data-widget-editbutton="false" role="widget" style="">
+								<header role="heading"><div class="jarviswidget-ctrls" role="menu">   <a href="" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse"><i class="fa fa-minus "></i></a> <a href="" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-resize-full "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a></div><div class="widget-toolbar" role="menu"><a data-toggle="dropdown" class="dropdown-toggle color-box selector" href="javascript:void(0);"></a><ul class="dropdown-menu arrow-box-up-right color-select pull-right"><li><span class="bg-color-green" data-widget-setstyle="jarviswidget-color-green" rel="tooltip" data-placement="left" data-original-title="Green Grass"></span></li><li><span class="bg-color-greenDark" data-widget-setstyle="jarviswidget-color-greenDark" rel="tooltip" data-placement="top" data-original-title="Dark Green"></span></li><li><span class="bg-color-greenLight" data-widget-setstyle="jarviswidget-color-greenLight" rel="tooltip" data-placement="top" data-original-title="Light Green"></span></li><li><span class="bg-color-purple" data-widget-setstyle="jarviswidget-color-purple" rel="tooltip" data-placement="top" data-original-title="Purple"></span></li><li><span class="bg-color-magenta" data-widget-setstyle="jarviswidget-color-magenta" rel="tooltip" data-placement="top" data-original-title="Magenta"></span></li><li><span class="bg-color-pink" data-widget-setstyle="jarviswidget-color-pink" rel="tooltip" data-placement="right" data-original-title="Pink"></span></li><li><span class="bg-color-pinkDark" data-widget-setstyle="jarviswidget-color-pinkDark" rel="tooltip" data-placement="left" data-original-title="Fade Pink"></span></li><li><span class="bg-color-blueLight" data-widget-setstyle="jarviswidget-color-blueLight" rel="tooltip" data-placement="top" data-original-title="Light Blue"></span></li><li><span class="bg-color-teal" data-widget-setstyle="jarviswidget-color-teal" rel="tooltip" data-placement="top" data-original-title="Teal"></span></li><li><span class="bg-color-blue" data-widget-setstyle="jarviswidget-color-blue" rel="tooltip" data-placement="top" data-original-title="Ocean Blue"></span></li><li><span class="bg-color-blueDark" data-widget-setstyle="jarviswidget-color-blueDark" rel="tooltip" data-placement="top" data-original-title="Night Sky"></span></li><li><span class="bg-color-darken" data-widget-setstyle="jarviswidget-color-darken" rel="tooltip" data-placement="right" data-original-title="Night"></span></li><li><span class="bg-color-yellow" data-widget-setstyle="jarviswidget-color-yellow" rel="tooltip" data-placement="left" data-original-title="Day Light"></span></li><li><span class="bg-color-orange" data-widget-setstyle="jarviswidget-color-orange" rel="tooltip" data-placement="bottom" data-original-title="Orange"></span></li><li><span class="bg-color-orangeDark" data-widget-setstyle="jarviswidget-color-orangeDark" rel="tooltip" data-placement="bottom" data-original-title="Dark Orange"></span></li><li><span class="bg-color-red" data-widget-setstyle="jarviswidget-color-red" rel="tooltip" data-placement="bottom" data-original-title="Red Rose"></span></li><li><span class="bg-color-redLight" data-widget-setstyle="jarviswidget-color-redLight" rel="tooltip" data-placement="bottom" data-original-title="Light Red"></span></li><li><span class="bg-color-white" data-widget-setstyle="jarviswidget-color-white" rel="tooltip" data-placement="right" data-original-title="Purity"></span></li><li><a href="javascript:void(0);" class="jarviswidget-remove-colors" data-widget-setstyle="" rel="tooltip" data-placement="bottom" data-original-title="Reset widget color to default">Remove</a></li></ul></div>
+									<span class="widget-icon"> <i class="fa fa-shopping-cart"></i> </span>
+									<h2>{$Think.lang.index-package-states}</h2>
+									<div class="widget-toolbar" role="menu">
+										<a href="{:U('Home/Main/upgrade_package')}" class="btn btn-default">{$Think.lang.index-more}</a>
+									</div>
+								<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+
+								<!-- widget div-->
+								<div role="content">
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<div>
+											<label>Title:</label>
+											<input type="text">
+										</div>
+									</div>
+									<!-- end widget edit box -->
+
+									<div class="widget-body no-padding">
+										<!-- content goes here -->
+                                        <table class="table table-bordered">
+											<thead>
+                                                    <tr><th class="text-center" width="20%">{$Think.lang.public-date}</th>
+													<th class="text-center" width="20%">{$Think.lang.public-package}</th>
+													<th class="text-center" width="20%">{$Think.lang.public-price}</th>
+													<th class="text-center" width="20%">BV</th>
+													<th class="text-center" width="20%">LIMIN COIN</th>
+											</tr></thead>
+                                            <tbody>
+												<volist name="OrderInfoRelation" id="oir">
+													<tr>
+														<td class="text-center"><php>echo date("d/m/y H:s:i A",strtotime($oir['addtime']));</php></td>
+														<td class="text-center">
+																<if condition="$oir['package_id'] egt 6"><img src="__PUBLIC__/Home/Images/C_6.png" class="margin-right-20" width="35px"><else/><img src="__PUBLIC__/Home/Images/C_{$oir['package_id']}.png" class="margin-right-20" width="35px"></if><b>{$oir['package_title_en']}</b>
+														</td>
+														<td class="text-right">{$oir['price']|number_format}</td>
+														<td class="text-right">{$oir['bv_price']|number_format}</td>
+														<td class="text-right">{$oir['digit_price']|number_format}</td>
+													</tr>
+												</volist>
+                                             
+                                              </tbody>
+                                          </table>      
+										<!-- end content -->
+
+									</div>
+
+								</div>
+								<!-- end widget div -->
+							</div></article>			   
+			   
+      
+</div><!--END row-->           
+</section>                          
+<!--END WIDGET GRID-->
+
+</div><!--END MAIN CONTENT -->
+				<if condition="($Think.config.DEFAULT_WEB_HOME_SET_NOTICE eq 1) and ($Notice neq 1)">
+				<div class="modal fade" id="popup_dashboard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									×
+								</button>
+								<h4 class="modal-title" id="myModalLabel">LIMIN COIN Notice!!</h4>
+							</div>
+							<div class="modal-body">
+
+									<div id="myCarousel-2" class="carousel slide">
+									<div class="carousel-inner">
+
+
+										<div class="item active">
+											<div class="alert alert-block alert-danger">
+												<h4 class="alert-heading">{$Think.config.DEFAULT_WEB_HOME_NOTICE_TITLE}</h4>
+												{$Think.config.DEFAULT_WEB_HOME_NOTICE_TIME}
+											</div>
+											<div>
+											{$Think.config.DEFAULT_WEB_HOME_NOTICE}
+											</div>
+											<br>
+										</div>																	
+
+                                </div>
+								<br>
+								<br>
+                                
+                                </div>
+
+							</div>
+							<div class="modal-footer">
+							    <div class="pull-left">
+							    <a class="txt-color-redLight" href="" data-slide="prev" style="font-size:25px"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
+								<a class="txt-color-redLight" href="" data-slide="next" style="font-size:25px"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
+								</div>
+							    <input type="checkbox" id="chkbox" value="checkbox">&nbsp;&nbsp;今日不再打开!&nbsp;&nbsp;
+								<button type="button" class="btn btn-default" onclick="closeWin('popup_dashboard', 'chkbox', 'maindiv');">
+									Close
+								</button>
+								
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+				</if>
+
+</div>
+		<!-- END MAIN PANEL -->
+
+		<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+		Note: These tiles are completely responsive,
+		you can add as many as you like
+		-->
+<include file="Public/top"/>
+        
+<!-- END SHORTCUT AREA -->
+    <!-- JavaScript -->
+    
+    <!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+
+<script>
+   $(function(){
+	 //nav active setting
+	 
+     $("nav > ul > li").removeClass("active");
+	 $("nav > ul > li:eq(0)").addClass("active");
+	 
+	   
+    });
+</script>
+		<!-- MAIN APP JS FILE -->
+        <!--common-->
+   <script>
+   $(function(){
+	 //all page common code!!!!! import  
+	 pageSetUp();
+	   
+    });
+   </script>        
+        
+        
+        <!--[if IE 7]>
+        <script>ie_error('IE7');</script>     
+		<![endif]-->
+        <!--[if IE 8]>
+        <script>ie_error('IE8');</script>     
+		<![endif]-->
+ 
+        
+        
+
+<!-- Flot Chart Plugin: Flot Engine, Flot Resizer, Flot Tooltip -->
+		<script src="__PUBLIC__/Home/Js/jquery.simplyscroll.js"></script>
+<script type="text/javascript">
+<!--
+function setCookie( name, value, expiredays ) {
+    var todayDate = new Date();
+        todayDate.setDate( todayDate.getDate() + expiredays );
+        document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+}
+function closeWin(div, chk, cookname) {
+    if ( document.getElementById(chk).checked ){
+        setCookie(cookname, "done", 1);
+    }
+    $('#popup_dashboard').modal('hide');
+    
+}
+
+window.onload = function() {
+   cookiedata = document.cookie
+   D_POPUP = 1;
+   /* popup1 */
+   if ( cookiedata.indexOf("maindiv=done") < 0 && D_POPUP > 0 ){   
+   /*show*/  
+   $('#popup_dashboard').modal('show');
+   } else {
+   /*hidden*/  
+   $('#popup_dashboard').modal('hide');
+   }
+
+   $("#popup_dashboard").find("img").addClass("img-responsive");
+ 
+}
+//-->
+</script>
+
+<script>
+$(document).ready(function() {
+$("#scroller").simplyScroll({
+            pauseOnHover: false,
+            speed: 1
+});
+});
+
+
+</script>
+<script type="text/javascript">
+ 
+    var date;
+    date = new Date();
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+ 
+    date.setDate(date.getDate() + 1);
+    var time2 = date.getTime(); // 내일 0시 0분 으로 설정
+ 
+    // 오늘과 내일을 미리 구하기 때문에 자정을 넘어갈 경우 이 소스는 오작동 할 수 있습니다.
+    // 위 날짜 구하는 부분이 계속 호출되도록 하면됩니다.
+ 
+ 
+    // 남은 시간 카운터
+    function remain(){
+        var now = new Date();
+        var gap = Math.round((time2 - now.getTime()) / 1000);
+ 
+        var D = Math.floor(gap / 86400);
+        var H = Math.floor((gap - D * 86400) / 3600 % 3600);
+        var M = Math.floor((gap - H * 3600) / 60 % 60);
+        var S = Math.floor((gap - M * 60) % 60);
+ 
+        $("#time-set").text(H+1);
+		$("#min-set").text(M);
+		$("#sec-set").text(S);
+    }
+ 
+    remain();
+    setInterval(remain, 1000);
+ 
+</script>
+
+		
+
+<!--COMMON POPUP--> 
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div><!-- /.modal-content:e -->
+  </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e --> 
+
+
+<script>
+$(document).ready(function() {
+
+		$("#chkbox").click(function(){
+			$.post("./index.php?m=Home&c=Main&a=notice",function(data){
+			});
+		});
+        //popup show
+          $('[data-load-remote]').on('click',function(e) {
+          e.preventDefault();
+          var $this = $(this);
+          var remote = $this.data('load-remote');
+	      var remote_value = $this.data('load-remote-value');
+          if(remote) {
+            $($this.data('remote-target')).load(remote,remote_value);
+          }
+
+          });
+
+ //reload detected
+ $('body').on('hidden.bs.modal', '.modal', function () {
+  $(this).removeData('bs.modal');
+});
+
+
+
+});
+</script>   
+
+
+<div id="divSmallBoxes"></div><div id="divMiniIcons"></div><div id="divbigBoxes"></div>
+</body>
+</html>

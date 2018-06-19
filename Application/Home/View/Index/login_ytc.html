@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en" style="background: none;"><!--<![endif]-->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="description" content="{$Think.config.DEFAULT_WEB_DESCRIPTION}">
+        <meta name="keywords" content="{$Think.config.DEFAULT_WEB_KEYWORDS}" />
+        <link rel="shortcut icon" href="__PUBLIC__/Public/images/favicon.ico">
+        <link rel="icon" href="__PUBLIC__/Public/images/favicon.ico" type="image/x-icon">
+        <title>{$Think.config.DEFAULT_WEB_TITLE}</title>
+
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/bootstrap.min.css">
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/backoffice_css.css">
+
+        <link rel="stylesheet" href="__PUBLIC__/Home/Css/font-awesome.min.css">
+
+        <style>
+            ::-webkit-input-placeholder {
+                color: black;
+            }
+            :-moz-placeholder {/* Firefox 18- */
+                color: black;
+            }
+            ::-moz-placeholder{/* Firefox 19+ */
+                color: black;
+            }
+            :-ms-input-placeholder {
+                color: black;
+            }
+        </style>
+    </head>
+
+    <body style="background: none;" >
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3"><img class="img-responsive center-block" src="__PUBLIC__/Home/Images/logo.png"></div>
+                <!--<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3"><img src="__PUBLIC__/Home/Images/20.png" class="pull-right"></div>-->
+
+                <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+
+
+                    <div class="well no-padding text-left" style="background:none;border-radius:10px">
+                        <form name="login-form" class="smart-form client-form" action="{:U('Home/Index/login')}" method="post" >
+                                <input type="text" hidden name="language" value="{$language}">
+                            <header>            
+                                <h2 style="color:#F8C84E;">{$Think.lang.denglu}</h2>
+                            </header>
+                            <fieldset>		
+                                <section>
+                                    <!--<label class="label" style="color:#F8C84Eenrod;">{$Think.lang.youxiang}</label>-->
+                                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                                        <input type="text" name="email" id="username" placeholder="{$Think.lang.youxiang}">
+                                        <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>&nbsp;&nbsp;{$Think.lang.shuruyouxiang}</b></label>
+                                </section>
+                                <section>
+                                    <!--<label class="label" style="color:#F8C84Eenrod;">{$Think.lang.mima}</label>-->
+                                    <label class="input"> <i class="icon-append fa fa-globe"></i>
+                                        <input type="password" name="userpass" id="password"   placeholder="{$Think.lang.mima}">
+                                        <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i>&nbsp;&nbsp;{$Think.lang.shurumima}</b> </label>
+                                </section>
+                                <section>
+                                    <!--<label class="label" style="color:#F8C84Eenrod;">{$Think.lang.yanzhengma}</label>-->
+                                    <label class="input">
+                                        <input    placeholder="{$Think.lang.yanzhengma}" type="text" id="code" name="code" style="float: left;width: 150px;"><img src="{:U('Home/Index/selfverify')}"  width='130' height='30'  id='verify-img' onclick="this.src = this.src + '&' + Math.random()" >
+                                    </label>
+                                </section>
+                                <section>
+
+                                    <div class="note">
+                                        <!--<a href="mqqwpa://im/chat?chat_type=wpa&uin=169832240&version=1&src_type=web&web_src=yuanjinjituan.cn" role="button" class="btn btn-primary btn-xs"  style="background: none;color:#F8C84E;border-radius: 3px;border:1px solid white" >{$Think.lang.wangjimima}</a>-->
+                                        <a href="#password_find" role="button" class="btn btn-primary btn-xs" data-toggle="modal" data-remote-target="#password_find .modal-content">{$Think.lang.login-find}</a>
+                                    </div>
+
+                                </section>
+
+                                <section>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="auto_login" id="auto_login">
+                                        <i></i>{$Think.lang.jizhumima}</label>
+                                </section>
+                            </fieldset>
+                            <footer>
+                                <input type="button" onclick="javascript:location = '{:U('Home/Index/register',array('language'=>$language))}'" class="btn btn-default" value="&nbsp;&nbsp;&nbsp;&nbsp;{$Think.lang.zhuce}&nbsp;&nbsp;&nbsp;" style="background: #527CC8;color:white;border-radius: 3px;border:1px solid white">
+                                <input type="button" class="btn btn-primary" value="&nbsp;&nbsp;&nbsp;{$Think.lang.denglu}&nbsp;&nbsp;&nbsp;" id="login_form"  style="background: #DA1E36;color:white;border-radius: 3px;border:1px solid white">
+                            </footer>
+
+                        </form>
+
+                    </div>
+                    <!--                    <p class="font-xs margin-top-5">
+                                            {$Think.lang.yuenan}
+                                        </p>-->
+                </div>					
+            </div>                  
+        </div>
+
+                <div class="modal fade" id="password_find" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3 class="modal-title">{$Think.lang.login-find}</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form name="addForm" action="{:U('Home/Index/repass',array('language'=>$language))}"  method="post" class="smart-form client-form" novalidate="novalidate">
+                                    <header style="background:none; display:none;">
+                                        <h4 id="result_pass"></h4>
+                                    </header>
+                                    <fieldset>
+                                        <section>
+                                            <label class="label">{$Think.lang.zhenshixingming}</label>
+                                            <label class="input"><i class="icon-prepend fa fa-user"></i><i class="icon-append fa fa-check"></i>
+                                                <input type="text" name="user_name" id="user_name" value="">
+                                            </label>
+                                        </section>
+                                        <section>
+                                            <label class="label">{$Think.lang.youxiangdizhi}</label>
+                                            <label class="input"><i class="icon-prepend fa fa-envelope-o"></i><i class="icon-append fa fa-check"></i>
+                                                <input type="text" name="user_email" id="user_email" value="">
+                                            </label>
+                                        </section>
+        
+                                        <div class="row">
+                                            <section class="col col-9">
+                                                <label class="label">{$Think.lang.shururenzhengma}</label>
+                                                <label class="input">
+                                                    <input type="text" class="input-sm" id="code" name="code" value="">
+                                                </label>
+                                            </section>
+        
+                                            <section class="col col-3">
+                                                <label class="label">{$Think.lang.fasongrenzhengma}</label>
+                                                <label class="input">
+                                                    <button class="btn btn-default btn-sm sendcode" type="button" type_id="5" style="width:50px;">{$Think.lang.fasong}</button>
+        
+                                                </label>
+                                            </section>
+                                        </div>
+                                    </fieldset>
+                                    <footer style="background:none;">
+                                        <input type="submit" value="{$Think.lang.chazhao}" id="sumbit" class="btn btn-primary">
+                                        <input type="button" class="btn btn-default" data-dismiss="modal" value="{$Think.lang.quxiao}">
+                                    </footer>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <script src="__PUBLIC__/Home/Js/jquery-1.10.2-min.js"></script>
+        <script src="__PUBLIC__/Home/Js/bootstrap.min.js"></script>
+        <script src="__PUBLIC__/Home/Js/jquery.validate.min.js"></script>
+        <script>
+                                    function keyLogin()
+                                    {
+                                        if (event.keyCode == 13)
+                                        {
+                                            event.returnValue = false;
+                                            event.cancel = true;
+                                            $("#login_form").click();
+                                        }
+                                    }
+        </script>
+        <script>
+            $(document).ready(function () {
+                $("#sumbit").focus();
+                $("#login_form").click(function () {
+                    $(".msg").remove();
+                    $("#username").parent().parent().find("label").removeClass("state-error");
+                    $("#password").parent().parent().find("label").removeClass("state-error");
+                    if ($("#username").val() == "" || $("#password").val() == "") {
+                        if ($("#username").val() == "") {
+                            $("#username").parent().parent().find("label").addClass("state-error");
+                            $("#username").parent().after("<em  class='msg'>Please enter the ID</em>");
+                        }
+                        if ($("#password").val() == "") {
+                            $("#password").parent().parent().find("label").addClass("state-error");
+                            $("#password").parent().after("<em  class='msg'>Please enter the password.</em>");
+                        }
+                        return false;
+                    }
+                    $.post("{:U('Home/Ajax/login')}", {"email": $("#username").val(), "userpass": $("#password").val(), "code": $("#code").val()}, function (data) {
+                        data=eval('('+data+')');
+                        if (data["result"]) {
+                            alert(data["message"]);
+                            $("form[name='login-form']").submit();
+                        } else {
+                            alert(data["message"]);
+                        }
+                    });
+                });
+                $(".sendcode").click(function () {
+
+                    $("#user_email").parent().parent().find("label").removeClass("state-error");
+                    $("#user_name").parent().parent().find("label").removeClass("state-error");
+                    $(".msg").remove();
+                    if ($("#user_name").val() == "") {
+                        $("#user_name").parent().parent().find("label").addClass("state-error");
+                        $("#user_name").parent().after("<em  class='msg'>{$Think.lang.shuruxingming}</em>");
+                        return false;
+                    }
+                    if ($("#user_email").val() == "") {
+                        $("#user_email").parent().parent().find("label").addClass("state-error");
+                        $("#user_email").parent().after("<em  class='msg'>{$Think.lang.shuruyouxiang}</em>");
+                        return false;
+                    }
+                    var search_str = /^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+.[a-zA-Z]{2,3}$/ig;
+                    var email_val = $("#user_email").val();
+                    if (!search_str.test(email_val)) {
+                        $("#user_email").parent().parent().find("label").addClass("state-error");
+                        $("#user_email").parent().after("<em  class='msg'>{$Think.lang.youxiangyaoqiu}</em>");
+                        return false;
+                    }
+                    $(this).attr("disabled", true);
+                    $.post("{:U('Home/Index/send_email')}", {"type": $(this).attr("type_id"), "user_email": $("#user_email").val(), "user_name": $("#user_name").val()}, function (data) {
+                        if (data) {
+                            alert("{$Think.lang.fasongchenggong}");
+                        } else {
+                            alert("{$Think.lang.fasongshibai}");
+                        }
+                        $(".sendcode").attr("disabled", false);
+                    });
+                });
+                $("#lang").change(function () {
+                    var type = $(this).val();
+                    if (type == 'en-us') {
+                        location.href = "{:U('Home/Index/login',array('language'=>'en-us'))}";
+                    } else if (type == 'ko-kr') {
+                        location.href = "{:U('Home/Index/login',array('language'=>'ko-kr'))}";
+                    } else if (type == 'zh-cn') {
+                        location.href = "{:U('Home/Index/login',array('language'=>'zh-cn'))}";
+                    } else if (type == 'ja-jp') {
+                        location.href = "{:U('Home/Index/login',array('language'=>'ja-jp'))}";
+                    }
+                });
+            });
+        </script>
+    <include file="Public/foot"/>
+</body>
+</html>

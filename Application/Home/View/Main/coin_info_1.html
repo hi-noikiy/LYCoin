@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+
+<head>
+    <include file="Public/head"/>
+</head>
+<body class="smart-style-1">
+<!--===header start===-->
+<!-- HEADER -->
+<header id="header" style="background:#000;">
+    <include file="Public/header"/>
+</header>
+<!--=== End Header ===-->
+
+<!-- Left panel : Navigation area -->
+<aside id="left-panel" style="min-height: 871px; background: rgb(228, 238, 245);">
+    <include file="Public/left"/>
+</aside>
+<!-- END NAVIGATION -->
+
+<!-- MAIN PANEL -->
+<div id="main" role="main">
+
+
+    <!-- RIBBON -->
+    <div id="ribbon">
+        <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+        <!-- breadcrumb -->
+        <ol class="breadcrumb">
+            <li><i class="fa fa-md fa-fw fa-home"></i>{$Think.lang.public-main}</li><li>{$Think.lang.menu-coin}</li><li class="active">{$Think.lang.menu-coin_info}</li>
+        </ol>
+        <!-- end breadcrumb -->
+    </div>
+    <!-- END RIBBON -->
+    <!-- MAIN CONTENT -->
+    <div id="content">
+        <!-- MAIN top -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-exchange"></i>{$Think.lang.menu-coin_info}</h1>
+            </div>
+
+        </div>
+        <!--END MAIN top -->
+        <div class="row">
+            <div class="col-md-12">
+                <div id="container1" style="min-width: 300px; height: 200px; margin: 0 auto"></div>
+
+            </div>
+        </div>
+        <div class="row margin-top-20">
+            <div class="col-md-12">
+                <div id="container" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
+
+            </div>
+        </div>
+
+
+
+
+
+    </div><!--END MAIN CONTENT -->
+</div>
+<!-- END MAIN PANEL -->
+
+<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+Note: These tiles are completely responsive,
+you can add as many as you like
+-->
+
+
+<include file="Public/top"/>
+
+<!-- END SHORTCUT AREA -->
+<!-- JavaScript -->
+
+<!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+
+<script>
+    $(function(){
+        //nav active setting
+
+        $("nav > ul > li.active").removeClass("active");
+        $("nav > ul > li.open").removeClass("open");
+        $("nav > ul > li:eq(9) > ul > li:eq(1)").addClass("active");
+
+
+    });
+</script>
+<!-- MAIN APP JS FILE -->
+
+<!--common-->
+<script>
+    $(function(){
+        //all page common code!!!!! import
+        pageSetUp();
+
+    });
+</script>
+
+
+<!--[if IE 7]>
+<script>ie_error('IE7');</script>
+<![endif]-->
+<!--[if IE 8]>
+<script>ie_error('IE8');</script>
+<![endif]-->
+
+
+
+
+<script type="text/javascript">
+    COIN_HEIGHT();
+    COIN_WIDTH();
+    function COIN_HEIGHT() {
+        //ajax
+        $.ajax({
+            type : "POST",
+            dataType : "JSON",
+            data : "",
+            url : "{:U('Home/Ajax/getHeight')}",
+            success : function(coin_height_data) {
+                //chart start
+                $('#container').highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: '{$Think.lang.menu-coin_info}'
+                    },
+                    subtitle: {
+                        text: 'LiminCoin Quote Infomation.'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        labels: {
+                            rotation: -45,
+                            style: {
+                                fontSize: '13px',
+                                fontFamily: 'Verdana, sans-serif'
+                            }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        max: 100,
+                        title: {
+                            text: '销售量（%)'
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        pointFormat: 'Quote: <b>{point.y:.1f} %</b>'
+                    },
+                    series: [{
+                        name: 'Quote',
+                        data: coin_height_data,
+                        dataLabels: {
+                            enabled: true,
+                            rotation: -90,
+                            color: '#FFFFFF',
+                            align: 'right',
+                            format: '{point.y:.1f}', // one decimal
+                            y: 10, // 10 pixels down from the top
+                            style: {
+                                fontSize: '13px',
+                                fontFamily: 'Verdana, sans-serif'
+                            }
+                        }
+                    }]
+                });
+                //chart end
+            },
+            error : function() {
+                alert("ERROR!");
+            }
+        });
+
+    }
+
+    function COIN_WIDTH() {
+        //ajax
+        $.ajax({
+            type : "POST",
+            dataType : "JSON",
+            data : "",
+            url : "{:U('Home/Ajax/getWidth')}",
+            success : function(coin_width_data) {
+                //chart start
+                $('#container1').highcharts({
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: '{$Think.lang.digitCoin-progress}'
+                    },
+                    xAxis: {
+                        categories: ['LiminCoin']
+                    },
+                    yAxis: {
+                        min: 0,
+                        max: 100,
+                        title: {
+                            text: '{$Think.lang.digitCoin-current}'
+                        }
+                    },
+                    legend: {
+                        reversed: true
+                    },
+                    plotOptions: {
+                        series: {
+                            stacking: 'normal'
+                        }
+                    },
+                    series: [{
+                        name: 'LiminCoin',
+                        data: coin_width_data
+                    }]
+                });
+                //chart end
+            },
+            error : function() {
+                alert("ERROR!");
+            }
+        });
+
+    }
+
+</script>
+
+
+<script src="__PUBLIC__/Home/Js/highcharts.js"></script>
+
+<!--COMMON POPUP-->
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div><!-- /.modal-content:e -->
+    </div><!-- /.modal-dialog:e -->
+</div><!-- /.modal:e -->
+
+
+<script>
+    $(document).ready(function() {
+
+
+        //popup show
+        $('[data-load-remote]').on('click',function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            var remote = $this.data('load-remote');
+            var remote_value = $this.data('load-remote-value');
+            if(remote) {
+                $($this.data('remote-target')).load(remote,remote_value);
+            }
+
+        });
+
+        //reload detected
+        $('body').on('hidden.bs.modal', '.modal', function () {
+            $(this).removeData('bs.modal');
+        });
+
+    });
+</script>
+</body>
+</html>

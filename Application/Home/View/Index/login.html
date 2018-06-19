@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://www.k82.info/user/login.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+                <title>{$Think.config.DEFAULT_WEB_TITLE}</title>
+                <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/login/bootstrap.min.css">
+                <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/login/iconfont.css">
+                <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/login/page.css">
+                <script src="__PUBLIC__/Home/login/jquery-1.11.3.min.js"></script>
+                <script src="__PUBLIC__/Home/login/translation.js"></script>
+                <link href="__PUBLIC__/Home/login/layer.css" type="text/css" rel="styleSheet" id="layermcss"></head>
+
+        <body>
+                <div class="login-cover">
+                        <img class="login-cover-img" src="__PUBLIC__/Home/login/7e985903-6aa1-415b-a1bd-a0f813dc6c70.jpg" width="750" height="1600">
+                </div>
+                <div class="container">
+                        <div class="login-hd tc">
+                                <img class="login-hd-img" src="__PUBLIC__/Home/login/logo.png" width="120" height="120">
+                        </div>
+                        <div class="login-bd">
+                                <form action="{:U('Home/Index/login')}" method="post" name="theForm" id="theForm" novalidate="novalidate" >
+                                        <div class="form-group">
+                                                <label for="username" class="form-group-hd">
+                                                        <i class="iconfont icon-user"></i>
+                                                </label>
+                                                <input type="text" class="form-control valid" id="username" name="email" placeholder="{$Think.lang.shuruyouxiang}" >
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="password" class="form-group-hd">
+                                                        <i class="iconfont icon-password"></i>
+                                                </label>
+                                                <input type="password" class="form-control valid" id="password" name="userpass" placeholder="{$Think.lang.shurumima}">
+                                        </div>
+                                        <button class="btn btn-round btn-block" type="submit" >{$Think.lang.denglu}</button>
+                                </form>
+                                <div class="clearfix mt20">
+                                        <a class="fl text-white" href="{:U('Home/Index/zhaohuimima',array('language'=>$language))}" >{$Think.lang.login-find}</a>
+                                        <a class="fr text-white" href="{:U('Home/Index/register',array('language'=>$language))}" >{$Think.lang.zhuce}</a>
+                                </div>
+                        </div>
+                        <div class="login-ft tc">
+                                <div class="clearfix">
+
+                                        <img src="__PUBLIC__/Home/login/flag-b5.png" width="26"  onClick='location.href = "{:U('Home/index/login',array('language'=>'khmer'))}"'>
+                                             <img src="__PUBLIC__/Home/login/flag-b2.png" width="26"  onClick='location.href = "{:U('Home/index/login',array('language'=>'en-us'))}"'>
+                                             <img src="__PUBLIC__/Home/login/flag-b1.png" width="26"  onClick='location.href = "{:U('Home/index/login',array('language'=>'zh-cn'))}"'>
+
+                                             <!--<img src="__PUBLIC__/Home/login/flag-b4.png" width="26" onclick="changeLanguage(&#39;jpn&#39;);">-->
+                                </div>
+                                <p class="mt5">
+                                        <span class="f16">{$Think.lang.a42}</span>
+                                </p>
+                        </div>
+                </div>
+
+                <script src="__PUBLIC__/Home/login/page.js"></script>
+                <script src="__PUBLIC__/Home/login/layer.js"></script>
+                <script src="__PUBLIC__/Home/login/jquery.validate.min.js"></script>
+
+                <script>
+                                                     $(document).ready(function () {
+                                                     $("#sumbit").focus();
+                                                     $("#login_form").click(function () {
+                                                     $(".msg").remove();
+                                                     $("#username").parent().parent().find("label").removeClass("state-error");
+                                                     $("#password").parent().parent().find("label").removeClass("state-error");
+                                                     if ($("#username").val() == "" || $("#password").val() == "") {
+                                                     if ($("#username").val() == "") {
+                                                     $("#username").parent().parent().find("label").addClass("state-error");
+                                                     $("#username").parent().after("<em  class='msg'>Please enter the ID</em>");
+                                                     }
+                                                     if ($("#password").val() == "") {
+                                                     $("#password").parent().parent().find("label").addClass("state-error");
+                                                     $("#password").parent().after("<em  class='msg'>Please enter the password.</em>");
+                                                     }
+                                                     return false;
+                                                     }
+                                                     $.post("{:U('Home/Ajax/login')}", {"email": $("#username").val(), "userpass": $("#password").val(), "code": $("#code").val()}, function (data) {
+                                                     data = eval('(' + data + ')');
+                                                     if (data["result"]) {
+                                                     alert(data["message"]);
+                                                     $("form[name='login-form']").submit();
+                                                     } else {
+                                                     alert(data["message"]);
+                                                     }
+                                                     });
+                                                     });
+                                                     $(".sendcode").click(function () {
+
+                                                     $("#user_email").parent().parent().find("label").removeClass("state-error");
+                                                     $("#user_name").parent().parent().find("label").removeClass("state-error");
+                                                     $(".msg").remove();
+                                                     if ($("#user_name").val() == "") {
+                                                     $("#user_name").parent().parent().find("label").addClass("state-error");
+                                                     $("#user_name").parent().after("<em  class='msg'>{$Think.lang.shuruxingming}</em>");
+                                                     return false;
+                                                     }
+                                                     if ($("#user_email").val() == "") {
+                                                     $("#user_email").parent().parent().find("label").addClass("state-error");
+                                                     $("#user_email").parent().after("<em  class='msg'>{$Think.lang.shuruyouxiang}</em>");
+                                                     return false;
+                                                     }
+                                                     var search_str = /^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+.[a-zA-Z]{2,3}$/ig;
+                                                     var email_val = $("#user_email").val();
+                                                     if (!search_str.test(email_val)) {
+                                                     $("#user_email").parent().parent().find("label").addClass("state-error");
+                                                     $("#user_email").parent().after("<em  class='msg'>{$Think.lang.youxiangyaoqiu}</em>");
+                                                     return false;
+                                                     }
+                                                     $(this).attr("disabled", true);
+                                                     $.post("{:U('Home/Index/send_email')}", {"type": $(this).attr("type_id"), "user_email": $("#user_email").val(), "user_name": $("#user_name").val()}, function (data) {
+                                                     if (data) {
+                                                     alert("{$Think.lang.fasongchenggong}");
+                                                     } else {
+                                                     alert("{$Think.lang.fasongshibai}");
+                                                     }
+                                                     $(".sendcode").attr("disabled", false);
+                                                     });
+                                                     });
+                                                     $("#lang").change(function () {
+                                                     var type = $(this).val();
+                                                     if (type == 'en-us') {
+                                                     location.href = "{:U('Home/Index/login',array('language'=>'en-us'))}";
+                                                     } else if (type == 'ko-kr') {
+                                                     location.href = "{:U('Home/Index/login',array('language'=>'ko-kr'))}";
+                                                     } else if (type == 'zh-cn') {
+                                                     location.href = "{:U('Home/Index/login',array('language'=>'zh-cn'))}";
+                                                     } else if (type == 'ja-jp') {
+                                                     location.href = "{:U('Home/Index/login',array('language'=>'ja-jp'))}";
+                                                     }
+                                                     });
+                                                     });
+                </script>
+
+        </body></html>

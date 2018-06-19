@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+        <head>
+        <include file="Public/head"/>
+</head>
+<body>
+        <!--===header start===-->
+        <!-- HEADER -->
+                <include file="Public/header"/>
+
+        <!-- MAIN PANEL -->
+        <div id="main" role="main">
+
+                <div id="content" class="bg_dash">
+                        <div class="row">
+                                <!-- begin col-2 -->
+                                <div class="col-md-1 col-sm-12">
+                                </div>
+                                <div class="col-md-10 col-sm-12 "><div class="widget widget-stats" style="background:transparent;background-color:#8B4512;text-align: center;font-weight: 700;font-size: 18px;">
+                                        LYCoin {$Think.lang.a36}：{$settings['jiage']}{$Think.lang.a20}
+                                </div></div>
+                                <div class="col-md-1 col-sm-12">
+                                </div>
+                        </div>
+                        <div class="row">
+                                <!-- begin col-2 -->
+                                <div class="col-md-1 col-sm-12">
+                                </div>
+<!--                                <div class="col-md-5 col-sm-12">
+                                        <div class="widget widget-stats" style="background:transparent;background-color:#003366;">
+                                                <div class="stats-icon"><i class="fa fa-circle-o"></i></div>
+                                                <div class="stats-info" style="display:block; width:80%;">
+                                                        <h3 style="color:gold;font-size: 18px;line-height: 25px;">{$Think.lang.xingming}：{$member['username']} <br> {$Think.lang.youxiang}：{$member['email']}
+                                                        </h3>
+                                                </div>
+                                        </div>
+                                </div>-->
+<div class="col-md-5 col-sm-12">
+                                        <div class="widget widget-stats" style="background:transparent;background-color:#FE5200;">
+                                                <div class="stats-icon"><i class="fa fa-users"></i></div>
+                                                <div class="stats-info" style="display:block; width:80%;">
+                                                        <h5  style="color:white;font-size: 18px;line-height: 25px;">
+                                                              {$Think.lang.youxiang}{$Think.lang.zhanghu}：{$member['email']} <br> {$Think.lang.han82}：{$zhitui}  <br>{$Think.lang.han83}：{$zhituitouzi}
+                                                                <!--{$Think.lang.han84}：{$tuandui}  {$Think.lang.han85}：{$tuanduitouzi}<br>-->
+
+                                                                <!--{$Think.lang.han86}：{$tuanduizong}  {$Think.lang.han87}：{$xiaoqu}-->
+
+                                                        </h5>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-5 col-sm-12">
+                                        <div class="widget widget-stats" style="background:transparent;background-color:#FE5200;">
+                                                <div class="stats-icon"><i class="fa fa-users " ></i></div>
+                                                <div class="stats-info" style="display:block; width:80%;">
+                                                        <h5  style="color:white;font-size: 18px;line-height: 25px;">
+                                                                <!--{$Think.lang.han82}：{$zhitui}  {$Think.lang.han83}：{$zhituitouzi}<br>-->
+                                                            {$Think.lang.han86}：{$tuanduizong}  <br>   {$Think.lang.han84}：{$tuandui} <br> {$Think.lang.han85}：{$tuanduitouzi}
+
+                                                                <!--{$Think.lang.han86}：{$tuanduizong}  {$Think.lang.han87}：{$xiaoqu}-->
+
+                                                        </h5>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="col-md-1 col-sm-12">
+                                </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-md-1 col-sm-12">
+                                </div>
+                                <div class="col-md-5 col-sm-12" >
+                                        <div class="widget widget-stats"  style="background:transparent;background-color:#518BD5;">
+                                                <div class="stats-icon"><i class="fa fa-database"></i></div>
+                                                <div class="stats-info" style="display:block; width:80%;">
+                                                        <h4  style="color:white;">{$Think.lang.han88}</h4>
+                                                        <p class="font-md"  style="color:white;"><span class=" bold">{$member['benjin']}</span></p>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="col-md-5 col-sm-12">
+                                        <div class="widget widget-stats"  style="background:transparent;background-color:#518BD5;">
+                                                <div class="stats-icon"><i class="fa fa-database"></i></div>
+                                                <div class="stats-info" style="display:block; width:80%;">
+                                                        <h4  style="color:white;">{$Think.lang.han89}</h4>
+                                                        <p class="font-md "  style="color:white;"><span class=" bold">{$member['futou']}</span></p>
+                                                </div>
+                                        </div>
+                                </div>
+
+
+                                <div class="col-md-1 col-sm-12">
+                                </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-md-1 col-sm-12">
+                                </div>
+                                <div class="col-md-5 col-sm-12">
+                                        <div class="widget widget-stats"  style="background:transparent;background-color:#518BD5;">
+                                                 <div class="stats-icon"><i class="fa fa-spinner"></i></div>
+                                                <div class="stats-info" style="display:block; width:80%;">
+                                                        <h4  style="color:white;">{$Think.lang.han90}</h4>
+                                                        <p class="font-md"  style="color:white;margin-bottom: -6.2px;"><span class=" bold">{$jingtai?$jingtai:0}</span></p>
+                                                </div>
+                                                <div class="stats-link">
+                                                        <a href="{:U('Home/Main/lixi',array('language'=>$language))}"   style="color:gold;">{$Think.lang.chakanmingxi} <i class="fa fa-arrow-circle-o-right"></i></a>
+                                                </div>
+                                        </div>
+
+                                </div>
+
+                                <div class="col-md-5 col-sm-12">
+                                        <div class="widget widget-stats" style="background:transparent;background-color:#518BD5;line-height: 18.2px;">
+                                                <div class="stats-icon"><i class="fa fa-spinner fa-pulse"></i></div>
+                                                <div class="stats-info" style="display:block; width:80%;">
+                                                        <h4  style="color:white;">{$Think.lang.han91}</h4>
+                                                        <p class="font-md"  style="color:white;"><span class=" bold">{$dongtai?$dongtai:0}</span></p>
+
+                                                </div>
+                                                <div class="stats-link">
+                                                        <a href="{:U('Home/Main/jiangjin',array('language'=>$language))}"   style="color:gold;">{$Think.lang.chakanmingxi} <i class="fa fa-arrow-circle-o-right"></i></a>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                        <div class="row">
+                                <div class="col-md-1 col-sm-12">
+                                </div>
+                                <div class="col-md-5 col-sm-12">
+                                        <div class="widget widget-stats"  style="background:transparent;background-color:#518BD5;">
+                                                 <div class="stats-icon"><i class="fa fa-heart"></i></div>
+                                                <div class="stats-info" style="display:block; width:80%;">
+                                                        <h4  style="color:white;">{$Think.lang.han122}</h4>
+                                                        <p class="font-md"  style="color:white;margin-bottom: -6.2px;"><span class=" bold">{$xiaohui?$xiaohui:0}</span></p>
+                                                        <!--<p class="font-md">{$Think.lang.index-cash-all} : <span class="pull-right bold">{$sub_price}</span></p>-->
+                                                </div>
+                                                <div class="stats-link">
+                                                        <a href="{:U('Home/Main/xiaohui',array('language'=>$language))}"   style="color:gold;">{$Think.lang.chakanmingxi} <i class="fa fa-arrow-circle-o-right"></i></a>
+                                                </div>
+                                        </div>
+
+                                </div>
+
+                                <div class="col-md-5 col-sm-12">
+                                        <div class="widget widget-stats" style="background:transparent;background-color:#518BD5;line-height: 18.2px;">
+                                                <div class="stats-icon"><i class="fa fa-random"></i></div>
+                                                <div class="stats-info" style="display:block; width:80%;">
+                                                        <h4  style="color:white;">{$Think.lang.han123}</h4>
+                                                        <p class="font-md"  style="color:white;"><span class=" bold">{$fengding?$fengding:0}</span></p>
+                                                        <!--<p class="font-md"> : <span class="pull-right bold">{$free_digit_coin}</span></p>-->
+
+                                                </div>
+                                                <div class="stats-link">
+                                                        <a href="{:U('Home/Main/fengding',array('language'=>$language))}"   style="color:gold;">{$Think.lang.chakanmingxi} <i class="fa fa-arrow-circle-o-right"></i></a>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                        <!--            <div class="row">
+                                        <div class="col-md-1 col-sm-12">
+                                        </div>
+                                        <div class="col-md-5 col-sm-6 col-xs-6">
+                                            <div class="widget widget-stats" style="background:transparent;background-color:#9ACEDE;line-height: 20px;">
+                                                <div class="stats-info" style="display:block; width:80%;">
+                                                    <h4  style="color:white;">复投钱包</h4>
+                                                    <p class="font-md"  style="color:white;">{$member['futou']}</p>
+                                                    <p class="font-md"> : <span class="pull-right bold">{$free_digit_coin}</span></p>
+                        
+                                                </div>
+                                                <div class="stats-link">
+                                                    <a href="{:U('Home/Main/futou')}"   style="color:gold;">{$Think.lang.chakanmingxi} <i class="fa fa-arrow-circle-o-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>-->
+
+
+                        <include file="Public/foot"/>
+
+
+                </div><!--END MAIN CONTENT -->
+
+        </div>
+<include file="Public/top"/>
+<include file="Public/script"/>
+
+
+<script>
+        $(function () {
+                //nav active setting
+
+                $("nav > ul > li").removeClass("active");
+                $("nav > ul > li:eq(0)").addClass("active");
+
+
+        });
+</script>
+<!-- MAIN APP JS FILE -->
+<!--common-->
+<script>
+        $(function () {
+                //all page common code!!!!! import  
+                pageSetUp();
+
+        });
+</script>        
+
+
+<!--[if IE 7]>
+<script>ie_error('IE7');</script>     
+        <![endif]-->
+<!--[if IE 8]>
+<script>ie_error('IE8');</script>     
+        <![endif]-->
+
+
+
+
+<!-- Flot Chart Plugin: Flot Engine, Flot Resizer, Flot Tooltip -->
+<script src="__PUBLIC__/Home/Js/jquery.simplyscroll.js"></script>
+
+
+<script>
+        $(document).ready(function () {
+                $("#scroller").simplyScroll({
+                        pauseOnHover: false,
+                        speed: 1
+                });
+        });
+
+
+</script>
+<script type="text/javascript">
+
+        var date;
+        date = new Date();
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+
+        date.setDate(date.getDate() + 1);
+        var time2 = date.getTime(); // 내일 0시 0분 으로 설정
+
+        // 오늘과 내일을 미리 구하기 때문에 자정을 넘어갈 경우 이 소스는 오작동 할 수 있습니다.
+        // 위 날짜 구하는 부분이 계속 호출되도록 하면됩니다.
+
+
+        // 남은 시간 카운터
+        function remain() {
+                var now = new Date();
+                var gap = Math.round((time2 - now.getTime()) / 1000);
+
+                var D = Math.floor(gap / 86400);
+                var H = Math.floor((gap - D * 86400) / 3600 % 3600);
+                var M = Math.floor((gap - H * 3600) / 60 % 60);
+                var S = Math.floor((gap - M * 60) % 60);
+
+                $("#time-set").text(H + 1);
+                $("#min-set").text(M);
+                $("#sec-set").text(S);
+        }
+
+        remain();
+        setInterval(remain, 1000);
+
+</script>
+
+</body>
+</html>

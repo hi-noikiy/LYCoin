@@ -1,0 +1,110 @@
+<div class="modal-content">
+	<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					 <h3 class="modal-title">{$Think.lang.cash-move}</h3>
+	</div><!--modal-header:e-->
+	<div class="modal-body">
+	<form name="transferForm" action="{:U('Home/Main/pop_transfer')}" method="post" class="smart-form" novalidate="novalidate">
+
+	<fieldset>
+							<div class="row">
+							<section class="col col-6">
+											<label class="label">{$Think.lang.pop-new-s}</label>
+											<label class="input"><i class="icon-append fa fa-check"></i>
+												<input type="text" name="s_price" id="s_price" <if condition="$PriceInfo[0]['s_price']">value="{$PriceInfo[0]['s_price']}"<else/>value="0.00"</if> readonly="readonly">
+											</label>
+							</section>
+							<section class="col col-6">
+											<label class="label">{$Think.lang.pop-new-b}</label>
+											<label class="input"><i class="icon-append fa fa-check"></i>
+												<input type="text" name="b_price" id="b_price" <if condition="$PriceBInfo[0]['b_price']">value="{$PriceBInfo[0]['b_price']}"<else/>value="0.00"</if> readonly="readonly">
+											</label>
+							</section>
+							</div>
+							<div class="row">
+							<section class="col col-6">
+											<label class="label">{$Think.lang.pop-out-s}</label>
+											<label class="input"><i class="icon-append fa fa-check"></i>
+												<input type="text" name="out_s_price" id="out_s_price" value="0">
+											</label>
+							</section>
+							<section class="col col-6">
+											<label class="label">{$Think.lang.pop-out-b}</label>
+											<label class="input"><i class="icon-append fa fa-check"></i>
+												<input type="text" name="out_b_price" id="out_b_price" value="0">
+											</label>
+							</section>
+							</div>
+							
+							<section>
+											<label class="label">{$Think.lang.pop-in-username}</label>
+											<label class="input"><i class="icon-append fa fa-check"></i>
+												<input type="text" name="username" id="username" value="">
+											</label>
+							</section>
+							
+							<section>
+											<label class="label">{$Think.lang.pop-user-pass}</label>
+											<label class="input"><i class="icon-append fa fa-check"></i>
+												<input type="password" name="paypass" id="paypass" value="">
+											</label>
+							</section>
+
+
+
+	</fieldset>  
+
+							
+							<footer>
+										<button type="button" class="btn btn-default" data-dismiss="modal">{$Think.lang.login-out}</button>
+										<button type="submit" id="submit" class="btn bg-color-red txt-color-white">{$Think.lang.index-send-price}</button>
+										
+							</footer>
+					 </form>
+
+	</div><!--modal-body:e-->
+</div>
+<script>
+	$(document).ready(function(){
+		$("#username").blur(function(){
+			$(".msg").remove();
+			$("#username").parent().parent().find("label").removeClass("state-error");
+			if($("#username").val()!=""){
+				$.post("{:U('Home/Ajax/getCheckname')}",{"username":$("#username").val()},function(data){
+					if(data["result"]){
+						$("#username").parent().parent().find("label").addClass("state-success");
+					}else{
+						$("#username").parent().parent().find("label").addClass("state-error");
+						$("#username").parent().after("<em  class='msg'>没有输入的帐号或错误的信息.</em>");
+					}
+				});
+			}
+		});
+		$("#submit").click(function(){
+			$(".msg").remove();
+			$("#username").parent().parent().find("label").removeClass("state-error");
+			$("#paypass").parent().parent().find("label").removeClass("state-error");
+			if($("#username").val()==""||$("#paypass").val()==""){
+				if($("#username").val()==""){
+					$("#username").parent().parent().find("label").addClass("state-error");
+					$("#username").parent().after("<em  class='msg'>请输入收款用户名.</em>");
+				}
+				if($("#paypass").val()==""){
+					$("#paypass").parent().parent().find("label").addClass("state-error");
+					$("#paypass").parent().after("<em  class='msg'>请输入交易密码.</em>");
+				}
+				return false;
+			}else{
+				$("form[name='transferForm']").submit();
+			}
+		});
+		$("#out_s_price,#out_b_price").click(function(){
+			$(this).val("");
+		});
+		$("#out_s_price,#out_b_price").blur(function(){
+			if($(this).val()==""){
+				$(this).val(0);
+			}
+		});
+	});
+</script>

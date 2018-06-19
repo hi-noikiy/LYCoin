@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+    <head>
+    <include file="Public/head"/>
+</head>
+<body >
+    <!--===header start===-->
+    <!-- HEADER -->
+        <include file="Public/header"/>
+    <!--=== End Header ===-->
+
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+
+
+
+
+        <!-- MAIN CONTENT -->
+        <div id="content">
+            <div class="row">
+                <!-- NEW COL START -->
+                <div class="col-sm-12 col-md-1"></div>
+                <article class="col-sm-12 col-md-10">
+
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-color-yellow" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+                        <header style="background: #518BD5">
+                            <span class="widget-icon"> <i class="fa fa-user"></i> </span>
+                            <h2>{$Think.lang.han137}</h2>
+
+                        </header>
+
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+                            <!-- end widget edit box -->
+                            <!-- widget content -->
+                            <div class="widget-body no-padding">
+                                <form class="smart-form" name="depositForm" action="{:U('Home/Main/kefu')}" method="post" novalidate="novalidate"   enctype="multipart/form-data">
+                                    <fieldset>
+                                        <section>
+                                            <label class="label">{$Think.lang.han128}</label>
+                                            <label class="input">
+                                                <input  class="input-sm"   type="text"  value="{$detail['title']}" disabled>
+                                            </label>
+                                        </section>
+                                        <section>
+                                            <label class="label">{$Think.lang.han130}</label>
+                                            <label class="input">
+                                                <textarea disabled  class="col-sm-12" type="text">{$detail['content']}</textarea>
+                                            </label>
+                                        </section>
+                                            <div class="clearfix"></div>
+                                            <section>
+                                            <label class="label">{$Think.lang.han138}</label>
+                                            <label class="input">
+                                                <textarea disabled  class="col-sm-12"  type="text">{$detail['rcontent']}</textarea>
+                                            </label>
+                                        </section>
+                                            
+                                    </fieldset>
+                                </form>
+
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
+                    <!-- end widget -->
+
+                </article>
+                <!-- END COL -->
+<div class="col-sm-12 col-md-1"></div>
+                
+
+            </div>
+                
+<include file="Public/foot"/>
+            <!-- END ROW -->
+
+
+
+
+
+        </div><!--END MAIN CONTENT -->
+    </div>
+    <!-- END MAIN PANEL -->
+
+    <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+    Note: These tiles are completely responsive,
+    you can add as many as you like
+    -->
+<include file="Public/top"/>
+
+<!-- END SHORTCUT AREA -->
+<!-- JavaScript -->
+
+<!-- JQUERY SCRIPT -->
+<include file="Public/script"/>
+
+
+<script>
+    $(function () {
+        //nav active setting
+
+        $("nav > ul > li.active").removeClass("active");
+        $("nav > ul > li.open").removeClass("open");
+        $("nav > ul > li:eq(2) > ul > li:eq(2)").addClass("active");
+
+
+    });
+</script>
+<!-- MAIN APP JS FILE -->
+<!--common-->
+<script>
+    $(function () {
+        //all page common code!!!!! import  
+        pageSetUp();
+
+    });
+</script>    
+
+
+
+</body></html>

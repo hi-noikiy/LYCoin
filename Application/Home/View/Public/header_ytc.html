@@ -1,0 +1,111 @@
+
+
+<div class="navbar navbar-inverse " id='diannaoshouye'  role="navigation" >
+
+    <div class="container" >
+        <div class="navbar-header">
+            <button type="buttion" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
+                <span class="sr-only">YTCoin </span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+
+            </button>
+            <img src="__PUBLIC__/Home/Images/logo.png"  class='img-responsive' style="margin-left: -55px;">
+        </div>
+        <div class="navbar-collapse collapse" >
+            <ul class="nav navbar-nav" style="margin-top: 40px;float: right;">
+                <if condition ="$member['email'] neq ''">
+                    <li><a href="{:U('Home/Index/index',array('language'=>$language))}" style="color:#F8C84E;font-size: 18px;;font-weight: 700">{$Think.lang.shouye}</a></li>
+                    <li><a href="{:U('Home/Main/qianbao',array('language'=>$language))}"  style="color:#F8C84E;font-size: 18px;;font-weight: 700"> {$Think.lang.han111}</a></li>
+                    <li><a href="{:U('Home/Main/pan',array('language'=>$language))}"  style="color:#F8C84E;font-size: 18px;;font-weight: 700"> {$Think.lang.han112}</a></li>
+                    <li><a href="{:U('Home/Main/chongzhi',array('language'=>$language))}"  style="color:#F8C84E;font-size: 18px;;font-weight: 700"> {$Think.lang.han113}</a></li>
+                    <li><a href="{:U('Home/Main/tixian',array('language'=>$language))}"  style="color:#F8C84E;font-size: 18px;;font-weight: 700"> {$Think.lang.han114}</a></li>
+                     
+                    <li><a href="{:U('Home/Main/zhuanzhang',array('language'=>$language))}"  style="color:#F8C84E;font-size: 18px;;font-weight: 700"> {$Think.lang.han115}</a></li>
+                    
+
+                    <li><a href="{:U('Home/Main/editprofile',array('language'=>$language))}"  style="color:#F8C84E;font-size: 18px;font-weight: 700"> {$Think.lang.han116}</a></li>
+                    <li><a href="{:U('Home/Main/news',array('language'=>$language))}"  style="color:#F8C84E;font-size: 18px;;font-weight: 700">{$Think.lang.han120}</a></li>
+                    <li><a href="{:U('Home/Main/kefu',array('language'=>$language))}"  style="color:#F8C84E;font-size: 18px;;font-weight: 700">{$Think.lang.han121}</a></li>
+                    <li><a href="{:U('Home/Index/out',array('language'=>$language))}"  style="color:#F8C84E;font-size: 18px;font-weight: 700"> {$Think.lang.tuichu}</a></li>
+
+                    <else/>   
+                    <li><a href="{:U('Home/Index/login',array('language'=>$language))}"  style="color:#F8C84E;font-size: 18px;;font-weight: 700"> {$Think.lang.denglu}</a></li>
+                    <li><a href="{:U('Home/Index/register',array('language'=>$language))}"  style="color:#F8C84E;font-size: 18px;;font-weight: 700"> {$Think.lang.zhuce}</a></li>
+                </if>
+                <!--                      <li><a  style="height:30px;width: 40px;" href="{:U('Home/Index/home',array('language'=>'zh-cn'))}"><img src="__PUBLIC__/Home/Images/036.png" style="height:20px;"  class='img-responsive' ></a></li>
+                                <li><a  style="height:30px;width: 40px;" href="{:U('Home/Index/home',array('language'=>'en-us'))}"><img src="__PUBLIC__/Home/Images/211.png" style="height:20px;"  class='img-responsive' ></a></li>
+                                <li><a  style="height:30px;width: 40px;" href="{:U('Home/Index/home',array('language'=>'ko-kr'))}"><img src="__PUBLIC__/Home/Images/216.png" style="height:20px;"  class='img-responsive' ></a></li>
+                                <li><a  style="height:30px;width: 40px;" href="{:U('Home/Index/home',array('language'=>'ja-jp'))}"><img src="__PUBLIC__/Home/Images/231.jpg" style="height:20px;"  class='img-responsive' ></a></li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    .sssddd{
+        background-color:#F8C84E;font-weight: 700;color:white;width: 24%;margin-bottom:5px;
+    }
+</style>
+<div id="shoujiyemian" style="background-color:#FEFBD2">
+
+    <div class="container" >
+        <img src="__PUBLIC__/Home/Images/logo.png"  class='img-responsive'>
+        
+    </div>
+<div >
+            <if condition ="$member['email'] neq ''">
+                <a href="{:U('Home/Index/index',array('language'=>$language))}" class='btn sssddd' >{$Think.lang.shouye}</a>
+                <a href="{:U('Home/Main/qianbao',array('language'=>$language))}"  class='btn sssddd'  > {$Think.lang.han111}</a>
+                <a href="{:U('Home/Main/pan',array('language'=>$language))}"  class='btn sssddd'  > {$Think.lang.han112}</a>
+<a href="{:U('Home/Main/chongzhi',array('language'=>$language))}"  class='btn sssddd'  > {$Think.lang.han113}</a>
+<a href="{:U('Home/Main/tixian',array('language'=>$language))}"  class='btn sssddd'  > {$Think.lang.han114}</a>
+<a href="{:U('Home/Main/zhuanzhang',array('language'=>$language))}"  class='btn sssddd'  > {$Think.lang.han115}</a>
+                <a href="{:U('Home/Main/editprofile',array('language'=>$language))}"    class='btn sssddd'  > {$Think.lang.han116}</a>
+                <li><a href="{:U('Home/Main/news',array('language'=>$language))}"  style="color:#F8C84E;font-size: 18px;;font-weight: 700">  {$Think.lang.han120}</a></li>
+                <li><a href="{:U('Home/Main/kefu',array('language'=>$language))}"  style="color:#F8C84E;font-size: 18px;;font-weight: 700">  {$Think.lang.han121}</a></li>
+                <a href="{:U('Home/Index/out',array('language'=>$language))}"   class='btn sssddd'  > {$Think.lang.tuichu}</a>
+
+                
+            </if>
+        </div>
+</div>
+<script type="text/javascript">
+        //平台、设备和操作系统
+        var system = {
+            win: false,
+            mac: false,
+            xll: false,
+            ipad:false
+        };
+        //检测平台
+        var p = navigator.platform;
+        system.win = p.indexOf("Win") == 0;
+        system.mac = p.indexOf("Mac") == 0;
+        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+        system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false;
+        //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面
+        if (system.win || system.mac || system.xll||system.ipad) {
+            var label1 = document.getElementById("shoujiyemian");
+label1.style.display="none";
+var label1 = document.getElementById("diannaoshouye");
+label1.style.display="block";
+
+//            alert(2222);
+//$('.shoujiyemian').hide();
+//      $('.diannaoshouye').show();
+        } else {
+             var label1 = document.getElementById("shoujiyemian");
+label1.style.display="block";
+var label1 = document.getElementById("diannaoshouye");
+label1.style.display="none";
+//$('.shoujiyemian').show();
+//      $('.diannaoshouye').hide();
+//            window.location.href = "http://www.jdpatro.com/3g/";
+        }
+</script>
+
+

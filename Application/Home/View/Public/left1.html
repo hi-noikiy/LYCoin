@@ -1,0 +1,143 @@
+<!-- User info -->
+<div class="login-info">
+	<span> <!-- User image size is adjusted inside CSS, it should stay as it --> <notempty name="User['picture']"><img src="{$User['picture']}" alt="me" class="online"><else/><img src="__PUBLIC__/Home/Images/dummyUser.jpg" alt="me" class="online"></notempty> <a href="javascript:void(0);" id="show-shortcut">{$User['username']}</a> </span>
+</div>
+<!-- end user info -->
+<nav>
+
+	<ul style="">
+		<li>
+			<a href="{:U('Home/Main/index',array('language'=>$language))}"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">{$Think.lang.menu-main}</span></a>
+		</li>
+		<li <in name="Action" value="editprofile,register_coinAccount">class="open_action"</in> >
+			<a href="javascript:;"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">{$Think.lang.menu-base}</span></a>
+			<ul>
+				<li <eq name="Action" value="editprofile">class="active"</eq>>
+					<a href="{:U('Home/Main/editprofile',array('language'=>$language))}">{$Think.lang.menu-base-editprofile}</a>
+				</li>
+				<li>
+					<!--<a href="">新会员注册</a>-->
+					<a href="{:U('Home/Main/register',array('language'=>$language))}">{$Think.lang.menu-base-register}</a>
+				</li>
+				<!-- <li <eq name="Action" value="register_coinAccount">class="active"</eq>>
+					<a href="{:U('Home/Main/register_coinAccount',array('language'=>$language))}">{$Think.lang.menu-base-register_coinAccount}</a>
+				</li> -->
+				
+			</ul>
+		</li>
+		<li <in name="Action" value="deposit_bitcoin,deposit_cash">class="open_action"</in>>
+			<a href="javascript:;"><i class="fa fa-lg fa-fw fa-dollar"></i> <span class="menu-item-parent">{$Think.lang.menu-deposit}</span></a>
+			<ul>
+				<!-- <li <eq name="Action" value="deposit_bitcoin">class="active"</eq>>
+					<a href="{:U('Home/Main/deposit_bitcoin',array('language'=>$language))}">{$Think.lang.menu-deposit_bitcoin}</a>
+				</li> -->
+				<!--
+				<li>
+					<a href="">Digitcoin 存款</a>
+				</li>
+				-->
+				<li <eq name="Action" value="deposit_cash">class="active"</eq>>
+					<a href="{:U('Home/Main/deposit_cash',array('language'=>$language))}">{$Think.lang.menu-deposit_cash}</a>
+				</li>
+				
+			</ul>
+		</li>
+		
+		<li <in name="Action" value="downline_tree,direct_tree,team_sales_volume">class="open_action"</in> >
+			<a href="javascript:;"><i class="fa fa-lg fa-fw fa-sitemap"></i> <span class="menu-item-parent">{$Think.lang.menu-tree}</span></a>
+			<ul>
+				<li <eq name="Action" value="downline_tree">class="active"</eq>>
+					<a href="{:U('Home/Main/downline_tree',array('language'=>$language))}">{$Think.lang.menu-downline_tree}</a>
+				</li>
+				<li <eq name="Action" value="direct_tree">class="active"</eq>>
+					<a href="{:U('Home/Main/direct_tree',array('language'=>$language))}">{$Think.lang.menu-direct_tree}</a>
+				</li>
+				<li <eq name="Action" value="team_sales_volume">class="active"</eq>>
+					<a href="{:U('Home/Main/team_sales_volume',array('language'=>$language))}">{$Think.lang.menu-team_sales_volume}</a>
+				</li>
+			   
+			</ul>
+		</li>
+		<li <in name="Action" value="commission,commission1,commission2,bonusStatistics">class="open_action"</in>>
+			<a href="javascript:;"><i class="fa fa-lg fa-fw fa-star"></i> <span class="menu-item-parent">{$Think.lang.menu-comm}</span></a>
+			<ul>
+				<li <eq name="Action" value="commission">class="active"</eq>>
+					<a href="{:U('Home/Main/commission',array('language'=>$language))}">{$Think.lang.menu-commission}</a>
+				</li>
+				<li <eq name="Action" value="commission1">class="active"</eq>>
+					<a href="{:U('Home/Main/commission1',array('language'=>$language))}">{$Think.lang.menu-commission1}</a>
+				</li>
+				<li <eq name="Action" value="commission2">class="active"</eq>>
+					<a href="{:U('Home/Main/commission2',array('language'=>$language))}">{$Think.lang.menu-commission2}</a>
+				</li>
+				<li <eq name="Action" value="bonusStatistics">class="active"</eq>>
+					<a href="{:U('Home/Main/bonusStatistics',array('language'=>$language))}">{$Think.lang.menu-bonusStatistics}</a>
+				</li>
+			</ul>
+		</li>
+		<li <in name="Action" value="cash_wallet,bcash_wallet,mandatory_wallet,stock_wallet,digitcoin_wallet,digitcoin_wallet_over">class="open_action"</in> >
+			<a href="javascript:;"><i class="fa fa-lg fa-fw fa-dollar"></i> <span class="menu-item-parent">{$Think.lang.menu-wallet}</span></a>
+			<ul>
+				<li <eq name="Action" value="cash_wallet">class="active"</eq>>
+					<a href="{:U('Home/Main/cash_wallet',array('language'=>$language))}">{$Think.lang.menu-cash_wallet}</a>
+				</li>
+				<li  <eq name="Action" value="bcash_wallet">class="active"</eq> >
+					<a href="{:U('Home/Main/bcash_wallet',array('language'=>$language))}">{$Think.lang.menu-bcash_wallet}</a>
+				</li>
+				<li <eq name="Action" value="mandatory_wallet">class="active"</eq>>
+					<a href="{:U('Home/Main/mandatory_wallet',array('language'=>$language))}">{$Think.lang.menu-mandatory_wallet}</a>
+				</li>
+				<li <eq name="Action" value="stock_wallet">class="active"</eq>>
+					<a href="{:U('Home/Main/stock_wallet',array('language'=>$language))}">{$Think.lang.menu-stock_wallet}</a>
+				</li>
+				<li <eq name="Action" value="digitcoin_wallet">class="active"</eq>>
+					<a href="{:U('Home/Main/digitcoin_wallet',array('language'=>$language))}">{$Think.lang.menu-digitcoin_wallet}</a>
+				</li>
+				<li <eq name="Action" value="digitcoin_wallet_over">class="active"</eq>>
+					<a href="{:U('Home/Main/digitcoin_wallet_over',array('language'=>$language))}">{$Think.lang.menu-digitcoin_wallet_over}</a>
+				</li>
+				
+			</ul>
+		</li>
+		<li <in name="Action" value="upgrade_package,upgrade_search">class="open_action"</in>>
+			<a href="javascript:;"><i class="fa fa-lg fa-fw fa-shopping-cart"></i> <span class="menu-item-parent">{$Think.lang.menu-upgrade}</span></a>
+			<ul>
+				<li <eq name="Action" value="upgrade_package">class="active"</eq>>
+					<a href="{:U('Home/Main/upgrade_package',array('language'=>$language))}">{$Think.lang.menu-upgrade_package}</a>
+				</li>
+				<li <eq name="Action" value="upgrade_search">class="active"</eq>>
+					<a href="{:U('Home/Main/upgrade_search',array('language'=>$language))}">{$Think.lang.menu-upgrade_search}</a>
+				</li>
+			</ul>
+			
+		</li>
+		<li>
+			<a href="{:U('Home/Main/news',array('language'=>$language))}"><i class="fa fa-lg fa-fw fa-volume-up"></i> <span class="menu-item-parent">{$Think.lang.menu-news}</span></a>
+			
+		</li>
+		<li>
+			<a href="{:U('Home/Main/information',array('language'=>$language))}"><i class="fa fa-lg fa-fw fa-download"></i> <span class="menu-item-parent">{$Think.lang.menu-information}</span></a>
+			
+		</li>
+		<!--li>
+			<a href=""><i class="fa fa-lg fa-fw fa-question"></i> <span class="menu-item-parent">FAQ</span></a>
+			
+		</li-->
+		<li <in name="Action" value="coin_info">class="open_action"</in>>
+			<a href="javascript:;"><i class="fa fa-lg fa-fw fa-exchange"></i> <span class="menu-item-parent">{$Think.lang.menu-coin}</span></a>
+			<ul>
+				<li>
+					<a href="{$Think.config.DEFAULT_WEB_URL}" target="_blank">{$Think.lang.menu-info}</a>
+				</li>
+				<li <eq name="Action" value="coin_info">class="active"</eq>>
+					<a href="{:U('Home/Main/coin_info',array('language'=>$language))}" >{$Think.lang.menu-coin_info}</a>
+				</li>
+			</ul>
+			
+		</li>
+		<!--popup set-->
+		
+		
+	</ul>
+</nav>
+<span class="minifyme"><i class="fa fa-arrow-circle-left hit"></i></span>

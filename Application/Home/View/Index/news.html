@@ -1,0 +1,26 @@
+<include file="Public/indexhead"/>
+
+<!--banner-->
+<div class="jzcfgl_banner w1213 wrap">
+        <div class="page_banner_box w1080 wrap">
+                <p class="new_banner_yw">News Center</p>
+                <p class="new_banner_zw"><span>{$Think.lang.han139}</span></p>                
+        </div>
+</div>
+<!--banner-->
+<div class=" w1213 wrap">
+        <div class="about_service w1080 wrap">
+                <notempty name="NewsList">
+                        <volist name="NewsList" id="nl">
+                                <li style="list-style:none;line-height: 40px;height: 40px;"><a style="font-size: 18px;float: left;" href="{:U('Home/Index/newsdetail',array('id'=>$nl['id']))}">{$nl['title']}</a><span  style="font-size: 16px;float: right;color: #666;">{$nl['addtime']}</span></li>
+                                <div style="clear: both"></div>
+                        </volist>
+                </notempty>
+<div style="line-height: 40px;font-size: 16px;text-align: center;">
+                                {$page}
+                            </div>
+                <div class="clear"></div>
+        </div>
+</div>
+<!--内容区-->
+<include file="Public/indexfoot"/>

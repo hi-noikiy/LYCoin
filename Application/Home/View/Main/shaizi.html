@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+    <head>
+    <include file="Public/head"/>
+</head>
+<body>
+    <!--===header start===-->
+    <!-- HEADER -->
+    <header style="background:#000;">
+        <include file="Public/header"/>
+        <>
+    </header>
+    <!--=== End Header ===-->
+
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+
+        <div id="content" class="bg_dash">
+
+            <div class="row">
+                <div class=" col-md-1 col-lg-1"></div>
+                <div class="col-sm-11 col-md-11  col-lg-11">
+                    <h1 class="page-title txt-color-black bold" style='color:gold'>   投注（<a class="btn btn-primary" href="{:U('Home/Main/shaizilist')}" style="background: goldenrod;border:1px solid goldenrod">投注记录</a>）</h1>
+                </div>
+
+            </div>
+            <!-- begin row -->
+
+            <div class="row">
+                <div class=" col-md-1 col-lg-1"></div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <form name="withdrawal-form" action="{:U('Home/Main/shaizi')}" method="post" novalidate="novalidate">
+
+                        <div class="form-group" style="text-align: center">
+                            <label style="color:gold;font-size: 24px;font-weight: 700;">第{$shaizi['id']}期</label>
+                        </div>
+                        <div class="form-group">
+                            <if condition="$shaizi.iskaishi eq 1">
+                                <label class="kai1" style="color:gold;font-size: 18px;font-weight: 700">距离投注结束还剩<span class="lasttime" style='color:red;font-size: 22px;'>{$shaizi['lasttime']}</span>秒</label>
+                                <elseif  condition="$shaizi.iskaishi eq 2"/>
+                                <label  class="kai2" style="color:gold;font-size: 18px;font-weight: 700">停止投注 等待开奖</label>
+                                <elseif  condition="$shaizi.iskaishi eq 3"/>
+                                <label  class="kai3" style="color:gold;font-size: 18px;font-weight: 700">本期已结束 开奖号码（{$shaizi['shai1']}、{$shaizi['shai2']}） 等待下一期</label>
+                                <else/>
+                                <label  class="kai4" style="color:gold;font-size: 18px;font-weight: 700">还未开始,请稍后再来</label>
+                            </if>
+                        </div>
+                        <div class="form-group">
+                            <label style="color:gold;font-size: 16px;">选择抽奖钱包</label><br>
+                            <span class="btn  tiyan qb" style="background:red">体验钱包（{$mem['tiyanjin']?$mem['tiyanjin']:0}）</span>
+                            <span class="btn  benjin qb" style="background:goldenrod">本金钱包（{$mem['benjin']?$mem['benjin']:0}）</span>
+                            <span class="btn  fenhong qb" style="background:goldenrod">分红钱包（{$mem['fenhong']?$mem['fenhong']:0}）</span>
+                            <span class="btn  jiangjin qb" style="background:goldenrod">奖金钱包（{$mem['jiangjin']?$mem['jiangjin']:0}）</span>
+                            <span class="btn  jiedong qb" style="background:goldenrod">解冻钱包（{$mem['jiedong']?$mem['jiedong']:0}）</span>
+                            <input type="hidden" name="qianbao" id="qianbao" value="4">
+                            <!--                            <select id="qianbao" class="form-control" name="qianbao">
+                                                            <option value="0">选择抽奖钱包</option>
+                                                            <option value="4">体验钱包可用 {$mem['tiyanjin']?$mem['tiyanjin']:0} {$Think.lang.bangchengjifen}</option>
+                                                            <option value="1">本金钱包可用 {$mem['benjin']?$mem['benjin']:0} {$Think.lang.bangchengjifen}</option>
+                                                            <option value="2">分红钱包可用  {$mem['fenhong']?$mem['fenhong']:0} {$Think.lang.bangchengjifen}</option>
+                                                            <option value="3">奖金钱包可用 {$mem['jiangjin']?$mem['jiangjin']:0}  {$Think.lang.bangchengjifen}</option>
+                            
+                                                        </select>-->
+
+                        </div>
+                        <script src="__PUBLIC__/Home/Js/jquery-1.10.2-min.js"></script>
+                        <script>
+                            $(function() {
+                                $('.tiyan').click(function() {
+                                    $('.qb').css('background', 'goldenrod');
+                                    $(this).css('background', 'red');
+                                    $('#qianbao').val('4')
+                                })
+                                $('.benjin').click(function() {
+                                    $('.qb').css('background', 'goldenrod');
+                                    $(this).css('background', 'red');
+                                    $('#qianbao').val('1')
+                                })
+                                $('.fenhong').click(function() {
+                                    $('.qb').css('background', 'goldenrod');
+                                    $(this).css('background', 'red');
+                                    $('#qianbao').val('2')
+                                })
+                                $('.jiangjin').click(function() {
+                                    $('.qb').css('background', 'goldenrod');
+                                    $(this).css('background', 'red');
+                                    $('#qianbao').val('3')
+                                })
+                                $('.jiedong').click(function() {
+                                    $('.qb').css('background', 'goldenrod');
+                                    $(this).css('background', 'red');
+                                    $('#qianbao').val('5')
+                                })
+                            })
+                        </script>
+
+                        <div class="form-group">
+                            <label style="color:gold;font-size: 16px;">选择投注方案</label><br>
+                            <span class="btn  daxiao tz" style="background:red">猜大小</span>
+                            <span class="btn  danshuang tz" style="background:goldenrod">猜单双</span>
+                            <span class="btn  duizi tz" style="background:goldenrod">对对赢</span>
+                            <span class="btn  qiuhe tz" style="background:goldenrod">定位数</span>
+                            <br><br>
+                            <span class="btn xx mm  tz1" style="background:red">大</span>
+                            <span class="btn xx mm tz2" style="background:gold">小</span>
+
+                            <span class="btn ss mm tz3" style="background:red;display: none">单</span>
+                            <span class="btn ss mm tz4" style="background:gold;display: none">双</span>
+
+                            <span class="btn yy mm tz5" style="background:red;display: none">一对1</span>
+                            <span class="btn yy mm tz6" style="background:gold;display: none">一对2</span>
+                            <span class="btn yy mm tz7" style="background:gold;display: none">一对3</span>
+                            <span class="btn yy mm tz8" style="background:gold;display: none">一对4</span>
+                            <span class="btn yy mm tz9" style="background:gold;display: none">一对5</span>
+                            <span class="btn yy mm tz10" style="background:gold;display: none">一对6</span>
+
+                            <span class="btn ww mm tz11" style="background:red;display: none">2</span>
+                            <span class="btn ww mm tz12" style="background:gold;display: none">3</span>
+                            <span class="btn ww mm tz13" style="background:gold;display: none">4</span>
+                            <span class="btn ww mm tz14" style="background:gold;display: none">5</span>
+                            <span class="btn ww mm tz15" style="background:gold;display: none">6</span>
+                            <span class="btn ww mm tz16" style="background:gold;display: none">7</span>
+                            <span class="btn ww mm tz17" style="background:gold;display: none">8</span>
+                            <span class="btn ww mm tz18" style="background:gold;display: none">9</span>
+                            <span class="btn ww mm tz19" style="background:gold;display: none">10</span>
+                            <span class="btn ww mm tz20" style="background:gold;display: none">11</span>
+                            <span class="btn ww mm tz21" style="background:gold;display: none">12</span>
+                            <input type="hidden" id="touzhu" name="touzhu" value="1">
+                            <script>
+                                $(function() {
+                                    $('.daxiao').click(function() {
+                                        $('.tz').css('background', 'goldenrod');
+                                        $(this).css('background', 'red');
+                                        $('.mm').css('display', 'none');
+                                        $('.xx').css('display', 'inline');
+                                        $('.tz1').css('background', 'red');
+                                        $('#touzhu').val('1');
+                                    })
+                                    $('.danshuang').click(function() {
+                                        $('.tz').css('background', 'goldenrod');
+                                        $(this).css('background', 'red');
+                                        $('.mm').css('display', 'none');
+                                        $('.ss').css('display', 'inline');
+                                        $('.tz3').css('background', 'red');
+                                        $('#touzhu').val('3');
+                                    })
+                                    $('.duizi').click(function() {
+                                        $('.tz').css('background', 'goldenrod');
+                                        $(this).css('background', 'red');
+                                        $('.mm').css('display', 'none');
+                                        $('.yy').css('display', 'inline');
+                                        $('.tz5').css('background', 'red');
+                                        $('#touzhu').val('5');
+                                    })
+                                    $('.qiuhe').click(function() {
+                                        $('.tz').css('background', 'goldenrod');
+                                        $(this).css('background', 'red');
+                                        $('.mm').css('display', 'none');
+                                        $('.ww').css('display', 'inline');
+                                        $('.tz11').css('background', 'red');
+                                        $('#touzhu').val('11');
+                                    })
+                                    $('.tz1').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('1');
+                                    })
+                                    $('.tz2').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('2');
+                                    })
+                                    $('.tz3').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('3');
+                                    })
+                                    $('.tz4').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('4');
+                                    })
+                                    $('.tz5').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('5');
+                                    })
+                                    $('.tz6').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('6');
+                                    })
+                                    $('.tz7').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('7');
+                                    })
+                                    $('.tz8').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('8');
+                                    })
+                                    $('.tz9').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('9');
+                                    })
+                                    $('.tz10').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('10');
+                                    })
+                                    $('.tz11').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('11');
+                                    })
+                                    $('.tz12').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('12');
+                                    })
+                                    $('.tz13').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('13');
+                                    })
+                                    $('.tz14').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('14');
+                                    })
+                                    $('.tz15').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('15');
+                                    })
+                                    $('.tz16').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('16');
+                                    })
+                                    $('.tz17').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('17');
+                                    })
+                                    $('.tz18').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('18');
+                                    })
+                                    $('.tz19').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('19');
+                                    })
+                                    $('.tz20').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('20');
+                                    })
+                                    $('.tz21').click(function() {
+                                        $('.mm').css('background', 'gold');
+                                        $(this).css('background', 'red');
+                                        $('#touzhu').val('21');
+                                    })
+
+                                })
+                            </script>
+                            <!--                            <select id="qianbao" class="form-control" name="touzhu">
+                                                            <option value="0">选择投注方案</option>
+                                                            <option value="1">大小投注---大---赔率1:{$settings['daxiao']}</option>
+                                                            <option value="2">大小投注---小---赔率1:{$settings['daxiao']}</option>
+                                                            <option value="3">单双投注---单---赔率1:{$settings['danshuang']}</option>
+                                                            <option value="4">单双投注---双---赔率1:{$settings['danshuang']}</option>
+                                                            <option value="5">对对投注---1---赔率1:{$settings['maidui']}</option>
+                                                            <option value="6">对对投注---2---赔率1:{$settings['maidui']}</option>
+                                                            <option value="7">对对投注---3---赔率1:{$settings['maidui']}</option>
+                                                            <option value="8">对对投注---4---赔率1:{$settings['maidui']}</option>
+                                                            <option value="9">对对投注---5---赔率1:{$settings['maidui']}</option>
+                                                            <option value="10">对对投注---6---赔率1:{$settings['maidui']}</option>
+                                                            <option value="11">求和投注---2---赔率1:{$settings['qiuhe']}</option>
+                                                            <option value="12">求和投注---3---赔率1:{$settings['qiuhe']}</option>
+                                                            <option value="13">求和投注---4---赔率1:{$settings['qiuhe']}</option>
+                                                            <option value="14">求和投注---5---赔率1:{$settings['qiuhe']}</option>
+                                                            <option value="15">求和投注---6---赔率1:{$settings['qiuhe']}</option>
+                                                            <option value="16">求和投注---7---赔率1:{$settings['qiuhe']}</option>
+                                                            <option value="17">求和投注---8---赔率1:{$settings['qiuhe']}</option>
+                                                            <option value="18">求和投注---9---赔率1:{$settings['qiuhe']}</option>
+                                                            <option value="19">求和投注---10---赔率1:{$settings['qiuhe']}</option>
+                                                            <option value="20">求和投注---11---赔率1:{$settings['qiuhe']}</option>
+                                                            <option value="21">求和投注---12---赔率1:{$settings['qiuhe']}</option>
+                                                        </select>-->
+                        </div>
+                        <input type="hidden" class="form-control" name="sid" value="{$shaizi['id']}">
+                        <div class="form-group">
+                            <label style="color:gold;font-size: 16px;">输入投注积分</label>
+                            <input type="text" class="form-control" name="money">
+                        </div>
+                        <div class="box-footer nopadding">
+                            <input type="submit" id="submit"  style="background: goldenrod;border:1px solid goldenrod" class="btn btn-primary btn-block" value="{$Think.lang.tijiao}">
+
+                        </div>
+                    </form>
+                    <style type="text/css">
+                        .demo{width:650px; height:420px; margin:0px auto; position:relative; }
+                        .wrap{width:200px; height:100px; margin:0px auto;  z-index:1000;}
+                        #msg{display:none;width:50px; height:20px; padding:4px; background:#ffc; border:1px solid #fc9; text-align:center; color:#f30; font-size:18px; position:absolute; z-index:1001; right:-20px; top:-10px}
+                        .dice{width:90px; height:90px; display:block; float:left; background:url(__PUBLIC__/Home/Css/shaizi/dice.png) no-repeat;}
+                        #dice_mask{width:200px; height:100px; background:#fff; opacity:0; position:absolute; top:0; left:0; z-index:999}
+                        .dice_1{background-position:-5px -4px}
+                        .dice_2{background-position:-5px -107px}
+                        .dice_3{background-position:-5px -212px}
+                        .dice_4{background-position:-5px -317px}
+                        .dice_5{background-position:-5px -427px}
+                        .dice_6{background-position:-5px -535px}
+                        .dice_t{background-position:-5px -651px}
+                        .dice_s{background-position:-5px -763px}
+                        .dice_e{background-position:-5px -876px}
+                    </style>
+                    <script type="text/javascript" src="__PUBLIC__/Home/Css/shaizi/jquery.js "></script>
+                    <if  condition="($shaizi.iskaishi eq 2) or ($shaizi.iskaishi eq 1)">
+                        <script>
+                                var dingshi = setInterval(function() {
+                                    //                    alert(1111);
+                                    $("#prize li .mask").remove();
+                                    $(".wrap").append("<div id='dice_mask'></div>");//加遮罩
+                                    var dice1 = $("#dice1");
+                                    var dice2 = $("#dice2");
+                                    $.getJSON("{:U('Home/Main/dicess')}", function(json) {
+                                        if (json[0] != 0) {
+                                            var num1 = json[0];
+                                            var num2 = json[1];
+                                            diceroll(dice1, num1);//掷色子1动画
+                                            diceroll(dice2, num2);//掷色子2动画
+
+                                            clearInterval(dingshi);
+                                            $('.kai1').text('本期已结束，开奖号码' + num1 + "、" + num2);
+                                            $('.kai2').text('本期已结束，开奖号码' + num1 + "、" + num2);
+                                            $('.kai3').text('本期已结束，开奖号码' + num1 + "、" + num2);
+                                            $('.kai4').text('本期已结束，开奖号码' + num1 + "、" + num2);
+                                        }
+                                    })
+
+                                }, 20000);
+
+                        </script>
+                    </if>
+                    <script type="text/javascript">
+                        function diceroll(dice, num) {
+                            dice.attr("class", "dice");//清除上次动画后的点数
+                            dice.css('cursor', 'default');
+                            dice.animate({left: '+2px'}, 100, function() {
+                                dice.addClass("dice_t");
+                            }).delay(200).animate({top: '-2px'}, 100, function() {
+                                dice.removeClass("dice_t").addClass("dice_s");
+                            }).delay(200).animate({opacity: 'show'}, 600, function() {
+                                dice.removeClass("dice_s").addClass("dice_e");
+                            }).delay(100).animate({left: '-2px', top: '2px'}, 100, function() {
+                                dice.removeClass("dice_e").addClass("dice_" + num);
+                                dice.css('cursor', 'pointer');
+                            });
+                        }
+                    </script>
+                    <div class="wrap">
+
+                        <div id="dice">
+                            <if condition="$shaizi.shai1 eq ''">
+                                <span class="dice dice_1" id="dice1"></span>
+                                <else/>
+                                <span class="dice dice_{$shaizi['shai1']}" id="dice1"></span>
+                            </if>   
+                            <if condition="$shaizi.shai2 eq ''">
+                                <span class="dice dice_6" id="dice2"></span>
+                                <else/>
+                                <span class="dice dice_{$shaizi['shai2']}" id="dice2"></span>
+                            </if>
+                        </div>
+                    </div>
+                    <div class="widget widget-stats" style="background-color: goldenrod">
+                        <div class="stats-info" style="display:block; width:100%;">
+                            <p style="font-size:16px;">
+                                投注说明<br>
+                                <!--系统每天返10个邦诚体验积分，仅用于体验本游戏；<br>-->
+                                一：大小2-6为小，7-12为大，买中赔{$settings.daxiao}倍<br>
+                                二：单1、3、5、7、9、11；双2、4、8、10、12，买中赔{$settings.danshuang}倍<br>
+                                三：对对赢：比如两个1，买中赔{$settings.maidui}倍<br>
+                                四：定位数：两个筛子买一个数字是指两个筛子点数相加的和，数字为2-12其中任意一个，买中赔{$settings.qiuhe}倍
+
+<!--                                投注方式：大小、单双、对对赢、定位数；<br>
+                                大小的赔率为  1：{$settings.daxiao};<br>
+                                单双的赔率为  1：{$settings.danshuang};<br>
+                                对对赢的赔率为  1：{$settings.maidui}。<br>
+                                定位数的赔率为  1：{$settings.qiuhe}。<br>-->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-sm-12 col-md-4 col-lg-4">
+
+                    <div class="table-responsive mt20">
+
+                        <table id="dt_basic" class="table table-striped table-bordered table-hover">
+                            <caption style="font-size: 20px;color:white;text-align: left;">往期开奖记录</caption>
+                            <thead>
+                                <tr   class="danger">
+                                    <th class="text-center">期数</th>
+                                    <th class="text-center">点数一</th>
+                                    <th class="text-center">点数二</th>
+                                    <th class="text-center">大小</th>
+                                    <th class="text-center">单双</th>
+                                    <th class="text-center">对对赢</th>
+                                    <th class="text-center">定位数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="touzi_list" id="oil">
+                                <tr   class="active">
+                                    <td class="text-center">{$oil['id']}</td>
+                                    <td class="text-center">{$oil['shai1']}</td>
+                                    <td class="text-center">{$oil['shai2']}</td>
+                                    <td class="text-center">{$oil['daxiao']}</td>
+                                    <td class="text-center">{$oil['danshuang']}</td>
+
+                                    <td class="text-center">{$oil['maidui']}</td>
+                                    <td class="text-center">{$oil['he']}</td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="9">
+                            <notempty name="count_status">
+                                <div class="pagination pull-right page">
+                                    {$page}
+                                </div>
+                                <else/>
+                                <ul class="pagination pull-right">
+                                    <li class="first disabled"><a href="#">{$Think.lang.public-index-page}</a></li>
+                                    <li class="prev disabled"><a href="#">{$Think.lang.public-pre-page}</a></li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li class="next disabled"><a href="#">{$Think.lang.public-next-page}</a></li>
+                                    <li class="last disabled"><a href="#">{$Think.lang.public-last-page}</a></li>
+                                </ul>
+                            </notempty>
+
+                            </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div> 
+                </div>
+<div class=" col-md-1 col-lg-1"></div>
+            </div>
+
+
+            <div class="table-responsive mt20">
+
+                <!--<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/Css/shaizi/main.css" />-->
+
+
+                <include file="Public/foot"/>
+            </div><!--END MAIN CONTENT -->
+
+        </div>
+        <include file="Public/top"/>
+
+        <include file="Public/script"/>
+        <script>
+            $(function() {
+                //nav active setting
+
+                $("nav > ul > li").removeClass("active");
+                $("nav > ul > li:eq(0)").addClass("active");
+
+
+            });
+        </script>
+
+
+
+        <script src="__PUBLIC__/Home/Js/jquery.simplyscroll.js"></script>
+        <!--<script type="text/javascript" src="__PUBLIC__/Home/Dzp/jquery-1.8.3.js"></script>-->
+        <script type="text/javascript" src="__PUBLIC__/Home/Dzp/jQueryRotate.2.2.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/Home/Dzp/jquery.easing.min.js"></script>
+        <script>
+
+            //            var timer =$('.lasttime').text();
+            var setTime;
+            $(document).ready(function() {
+                var time = parseInt($(".lasttime").text());
+                setTime = setInterval(function() {
+                    if (time <= 0) {
+                        clearInterval(setTime);
+                        $('.kai1').text('停止投注，等待开奖');
+                        $('.kai2').text('停止投注，等待开奖');
+                        $('.kai3').text('停止投注，等待开奖');
+                        $('.kai4').text('停止投注，等待开奖');
+                        return;
+                    }
+                    time--;
+                    $(".lasttime").text(time);
+                }, 1000);
+            });
+
+        </script>
+</body>
+</html>

@@ -1,0 +1,530 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title">{$Think.lang.pop-reg-user}</h3>
+    </div><!--modal-header:e-->
+    <div class="modal-body">
+        <form name="registerForm" method="post" action="{:U('Home/Main/addMember')}" class="smart-form client-form" novalidate="novalidate" onsubmit="return checkForm()">
+            <fieldset>
+                <div class="row">
+                    <section class="col col-4">
+                        <label class="label">{$Think.lang.login-username}</label>
+                    </section>
+                    <section class="col col-8">
+                        <label class="input"><i class="icon-append fa fa-check"></i>
+                            <input type="text" name="username" id="username" value="">
+                        </label>
+                    </section>
+                </div>
+
+                <div class="row">
+                    <section class="col col-4">
+                        <label class="label">{$Think.lang.login-userpass}</label>
+                    </section>
+                    <section class="col col-8">
+                        <label class="input" ><i class="icon-append fa fa-check"></i>
+                            <input type="password" name="userpass" id="userpass" value="">
+                        </label>
+                    </section>
+                </div>
+
+                <div class="row">
+                    <section class="col col-4">
+                        <label class="label">{$Think.lang.login-reuserpass}</label>
+                    </section>
+                    <section class="col col-8">
+                        <label class="input"><i class="icon-append fa fa-check"></i>
+                            <input type="password" name="reuserpass" id="reuserpass" value="">
+                        </label>
+                    </section>
+                </div>
+
+                <div class="row">
+                    <section class="col col-4">
+                        <label class="label">{$Think.lang.user-surname}</label>
+                    </section>
+                    <section class="col col-8">
+                        <label class="input"><i class="icon-append fa fa-check"></i>
+                            <input type="text" name="surname" id="surname" value="">
+                        </label>
+                    </section>
+                </div>
+
+                <div class="row">
+                    <section class="col col-4">
+                        <label class="label">{$Think.lang.user-name}</label>
+                    </section>
+                    <section class="col col-8">
+                        <label class="input"><i class="icon-append fa fa-check"></i>
+                            <input type="text" name="name" id="name" value="">
+                        </label>
+                    </section>
+                </div>
+
+
+                <div class="row">
+                    <section class="col col-4">
+                        <label class="label">{$Think.lang.user-email}</label>
+                    </section>
+                    <section class="col col-8">
+                        <label class="input"><i class="icon-append fa fa-check"></i>
+                            <input type="text" name="email" id="email" value="">
+                        </label>
+                    </section>
+                </div>
+
+                <div class="row">
+                    <section class="col col-4">
+                        <label class="label">{$Think.lang.user-telephone}</label>
+                    </section>
+                    <section class="col col-8">
+                        <label class="input">
+                            <input type="text" name="telephone" id="telephone" value="">
+                        </label>
+                    </section>
+                </div>
+
+
+                <div class="row">
+                    <section class="col col-4">
+                        <label class="label">{$Think.lang.user-country}</label>
+                    </section>
+                    <section class="col col-8">
+                        <label class="select">
+                            <select name="country" id="country" class="input-sm">
+                                <option value="">{$Think.lang.public-select}</option>
+                                <volist name="CountryList" id="cl">
+                                    <option value="{$cl['id']}">{$cl['cn_name']}</option>
+                                </volist>
+
+                            </select> <i></i> </label>
+                    </section>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="row">
+                    <section class="col col-4">
+                        <label class="label">{$Think.lang.pop-r-username}</label>
+                    </section>
+                    <section class="col col-8">
+                        <label class="input"><i class="icon-append fa fa-check"></i>
+                            <input type="text" id="r_seach" value="{$User['username']}">
+                            <input type="hidden" name="r_id" value="{$User['id']}" id="r_id">
+                        </label>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="col col-4">
+                        <label class="label">{$Think.lang.pop-r-user} </label>
+                    </section>
+                    <section class="col col-8">
+                        <label class="input"><i class="icon-append fa fa-check"></i>
+                            <input type="text" name="r_name" value="{$User['surname']}{$User['name']}" id="r_name" readonly="true">
+                        </label>
+                    </section>
+                </div>
+            </fieldset>
+            <header>
+                {$Think.lang.pop-upgrade}
+            </header>
+            <fieldset>
+                <div class="row">
+                    <section class="col col-4">
+                        <label class="label">{$Think.lang.pop-new-s}</label>
+                    </section>
+                    <section class="col col-8">
+                        <label class="label"><b>$<if condition="$PriceInfo[0]['s_price']">{$PriceInfo[0]["s_price"]}<else/>0.00</if></b></label>
+                    </section>
+                    <section class="col col-4">
+                        <label class="label">{$Think.lang.pop-new-b}</label>
+                    </section>
+                    <section class="col col-8">
+                        <label class="label"><b>$<if condition="$PriceBInfo[0]['b_price']">{$PriceBInfo[0]["b_price"]}<else/>0.00</if></b></label>
+                    </section>
+                </div>
+
+                <section>
+                    <label class="label">{$Think.lang.pop-upgrade-title}</label>
+                    <div class="inline-group">
+                        <label class="radio">
+                            <input type="radio" name="pay_type" checked="checked" value="1">
+                            <i></i>{$Think.lang.pop-price-s}</label>
+                        <label class="radio">
+                            <input type="radio" name="pay_type" value="2">
+                            <i></i>{$Think.lang.pop-price-b}</label>
+                        <label class="radio">
+                            <input type="radio" name="pay_type" value="3">
+                            <i></i>{$Think.lang.pop-price-s} + {$Think.lang.pop-price-b}</label>
+                    </div>
+                </section>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>{$Think.lang.public-package}</th>
+                        <th>{$Think.lang.public-price}</th>
+                        <th>BV</th>
+                        <th>LMC</th>
+                        <th>{$Think.lang.pop-select}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="PackageTypeList" id="ptl">
+                        <tr>
+                            <switch name="ptl['id']">
+                                <case value="1"><td class="bg-color-purple txt-color-white text-center" width="30%"><if condition="$language neq 'zh-cn'">{$ptl['en_title']}<else/>{$ptl['title']}</if></td></case>
+                                <case value="2"><td class="bg-color-orange txt-color-white text-center" width="30%"><if condition="$language neq 'zh-cn'">{$ptl['en_title']}<else/>{$ptl['title']}</if></td></case>
+                                <case value="3"><td class="bg-color-greenLight txt-color-white text-center" width="30%"><if condition="$language neq 'zh-cn'">{$ptl['en_title']}<else/>{$ptl['title']}</if></td></case>
+                                <case value="4"><td class="bg-color-blue txt-color-white text-center" width="30%"><if condition="$language neq 'zh-cn'">{$ptl['en_title']}<else/>{$ptl['title']}</if></td></case>
+                                <case value="5"><td class="bg-color-red txt-color-white text-center" width="30%"><if condition="$language neq 'zh-cn'">{$ptl['en_title']}<else/>{$ptl['title']}</if></td></case>
+                                <case value="6"><td class="bg-color-darken txt-color-white text-center" width="30%"><if condition="$language neq 'zh-cn'">{$ptl['en_title']}<else/>{$ptl['title']}</if></td></case>
+                                <default />
+                                <case value="6"><td class="bg-color-darken txt-color-white text-center" width="30%"><if condition="$language neq 'zh-cn'">{$ptl['en_title']}<else/>{$ptl['title']}</if></td></case>
+                            </switch>
+
+                            <td class="text-right" width="17%">${$ptl['price']}</td>
+                            <td class="text-right" width="17%">{$ptl['bv_price']}</td>
+                            <td class="text-right" width="17%">{$ptl['dgc_price']}</td>
+                            <td>
+                                <section>
+                                    <label class="checkbox">
+                                        <input class="text-center" type="checkbox" name="package_type" value="{$ptl['id']}"  price="{$ptl['price']}" bv_price="{$ptl['bv_price']}" >
+                                        <i></i> <span class="text-msg"></span>
+                                    </label>
+                                </section>
+
+                            </td>
+                        </tr>
+                    </volist>
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="3">
+                            {$Think.lang.upgrage-package-price}
+                        </td>
+                        <td colspan="2">
+                            <section>
+                                <label class="input"> <i class="icon-prepend fa fa-dollar"></i>
+                                    <input type="text" name="price" id="price" value="0" readonly="">
+                                </label>
+                            </section>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3">
+                            {$Think.lang.pop-t-username}
+                        </td>
+                        <td colspan="2">
+                            <section>
+                                <label class="input"> <i class="icon-prepend fa fa-user"></i>
+                                    <input type="text" name="p_name" value="{$Member['username']}" readonly="true">
+                                    <input type="hidden" name="p_id" id="p_id" value="{$Member['id']}" readonly="true">
+                                </label>
+                                <!--<span class="help-block" id="S_NAME_H"> <b>{$Member['username']}</b></span>-->
+                            </section>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            {$Think.lang.pop-t-position}
+                        </td>
+                        <td colspan="2">
+                            <section>
+                                <label class="input"> <i class="icon-prepend fa fa-user"></i>
+                                    <input type="text" name="position" id="position" <if condition="$Position">value="R"<else/>value="L"</if> readonly="">
+                                </label>
+                            </section>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </fieldset>
+            <footer>
+				<input type="hidden" name="language" value="{$language}">
+                <input type="hidden" name="position_sit" value="{$position_sit}">
+                <button type="button" class="btn btn-default" onclick="" data-dismiss="modal">{$Think.lang.login-out}</button>
+                <input type="submit" value="{$Think.lang.public-reg}" class="btn bg-color-red txt-color-white">
+            </footer>
+        </form>
+
+    </div><!--modal-body:e-->
+
+</div>
+<script>
+    $(document).ready(function(){
+        $("#username").blur(function(){
+            var object = $(this).parent();
+            $(object).parent().find("label").removeClass("state-success");
+            $(object).parent().find("label").removeClass("state-error");
+            $(".msg").remove();
+            if($("#username").val()!=""){
+                if($("#username").val().length<4){
+                    $(object).parent().find("label").addClass("state-error");
+                    $(object).after("<em  class='msg'>{$Think.lang.user-check-length}</em>");
+                    return false;
+                }
+            }else{
+                $(object).parent().find("label").addClass("state-error");
+                $(object).after("<em  class='msg'>{$Think.lang.user-empty}</em>");
+                return false;
+            }
+            $.post("{:U('Home/Ajax/getUsername')}",{"username":$(this).val()},function(data){
+                if(data){
+                    if(data['result']){
+                        $(object).parent().find("label").addClass("state-success");
+                        return true;
+                    }else{
+                        $(object).parent().find("label").addClass("state-error");
+                        $(object).after("<em  class='msg'>"+data['message']+"</em>");
+                        return false;
+                    }
+
+                }else{
+                    alert("数据错误！无数据返回!");
+                    return false;
+                }
+            });
+        });
+        $("#r_seach").blur(function(){
+            $(".msgr").remove();
+            $("#r_name,#r_id").val("");
+            var obj = $(this).parent();
+            $(this).parent().parent().find("label").removeClass("state-error");
+            $.post("{:U('Home/Ajax/getUser')}",{"username":$(this).val()},function(data){
+                if(data['result']){
+                    $("#r_id").val(data['data'].id);
+                    $("#r_name").val(data['data'].surname+data['data'].name);
+                }else{
+                    $(obj).parent().find("label").addClass("state-error");
+                    $(obj).after("<em  class='msgr'>未找到该用户</em>");
+                    $("#r_name").val("");
+                    return false;
+                }
+            });
+        })
+        $("#userpass").blur(function(){
+            $(".msguserpass").remove();
+            var userpass = $("#userpass").parent();
+            $(userpass).parent().find("label").removeClass("state-success");
+            $(userpass).parent().find("label").removeClass("state-error");
+            if($("#userpass").val()!=""){
+                if($("#userpass").val().length<4){
+                    $(userpass).parent().find("label").addClass("state-error");
+                    $(userpass).after("<em  class='msguserpass'>{$Think.lang.user-pass-length}</em>");
+                    return false;
+                }else{
+                    $(userpass).parent().find("label").addClass("state-success");
+                    return true;
+                }
+            }else{
+                $(userpass).parent().find("label").addClass("state-error");
+                $(userpass).after("<em  class='msguserpass'>{$Think.lang.pass-empty}</em>");
+                return false;
+            }
+        });
+        $("#reuserpass").blur(function(){
+            $(".msgreuserpass").remove();
+            var reuserpass = $("#reuserpass").parent();
+            $(reuserpass).parent().find("label").removeClass("state-success");
+            $(reuserpass).parent().find("label").removeClass("state-error");
+            if($("#reuserpass").val()!=""){
+                if($("#reuserpass").val().length<4){
+                    $(reuserpass).parent().find("label").addClass("state-error");
+                    $(reuserpass).after("<em  class='msgreuserpass'>{$Think.lang.user-repass-length}</em>");
+                    return false;
+                }else{
+                    if($("#reuserpass").val()!=$("#userpass").val()){
+                        $(reuserpass).parent().find("label").addClass("state-error");
+                        $(reuserpass).after("<em  class='msgreuserpass'>{$Think.lang.user-pass}</em>");
+                        return false;
+                    }else{
+                        $(reuserpass).parent().find("label").addClass("state-success");
+                        return true;
+                    }
+                }
+            }else{
+                $(reuserpass).parent().find("label").addClass("state-error");
+                $(reuserpass).after("<em  class='msgreuserpass'>{$Think.lang.repass-empty}</em>");
+                return false;
+            }
+        });
+        $("#email").blur(function(){
+            $(".msgemail").remove();
+            var object = $(this).parent();
+            var obj = $(this).parent().parent().find("label");
+            var search_str = /^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+.[a-zA-Z]{2,3}$/ig;
+            var email_val = $("#email").val();
+            if(search_str.test(email_val)){
+                $(obj).removeClass("state-error");
+                $(obj).addClass("state-success");
+                return true;
+            }else{
+                $(obj).removeClass("state-success");
+                $(obj).addClass("state-error");
+                $(object).after("<em  class='msgemail'>{$Think.lang.email-check}</em>");
+                return false;
+            }
+        });
+        $("#surname").blur(function(){
+            var object = $(this).parent();
+            var obj = $(this).parent().parent().find("label");
+            $(".msgsurname").remove();
+            $(obj).removeClass("state-success");
+            $(obj).removeClass("state-error");
+            if($(this).val()!=""){
+                $(obj).addClass("state-success");
+                return true;
+            }else{
+                $(obj).addClass("state-error");
+                $(object).after("<em  class='msgsurname'>{$Think.lang.surname-empty}</em>");
+                return false;
+            }
+        });
+        $("#name").blur(function(){
+            var object = $(this).parent();
+            var obj = $(this).parent().parent().find("label");
+            $(".msgname").remove();
+            $(obj).removeClass("state-success");
+            $(obj).removeClass("state-error");
+            if($(this).val()!=""){
+                $(obj).addClass("state-success");
+                return true;
+            }else{
+                $(obj).addClass("state-error");
+                $(object).after("<em  class='msgname'>{$Think.lang.name-empty}</em>");
+                return false;
+            }
+        });
+        $("#country").blur(function(){
+            var object = $(this).parent();
+            var obj = $(this).parent().parent().find("label");
+            $(".msgcountry").remove();
+            $(obj).removeClass("state-success");
+            $(obj).removeClass("state-error");
+            if($(this).val()!=""){
+                $(obj).addClass("state-success");
+                return true;
+            }else{
+                $(obj).addClass("state-error");
+                $(object).after("<em class='msgcountry'>{$Think.lang.country-empty}</em>");
+                return false;
+            }
+        });
+        $(".text-center").click(function(){
+            if($(this).parent().find(".text-msg").html().length>0){
+                $("#price").val("0");
+                $(".text-center").attr("disabled",false);
+                $(this).parent().find(".text-msg").html("");
+            }else{
+                var pay_type = $('.radio input:radio:checked').val();
+                if(pay_type==1){
+                    $("#price").val($(this).attr("price"));
+                }else if(pay_type==2){
+                    $("#price").val($(this).attr("bv_price"));
+                }else{
+                    $("#price").val($(this).attr("price"));
+                }
+                $(this).parent().find(".text-msg").html("{$Think.lang.login-out}");
+                $(".text-center").attr("disabled",true);
+                $(this).attr("disabled",false);
+                $(this).attr("readyonly",true);
+            }
+        });
+        $(".text-msg").click(function(){
+            $(".text-center").attr("disabled",false);
+        });
+
+    });
+    function checkForm(){
+        $(".msg").remove();
+        if($("#username").val()==""){
+            $("#username").parent().parent().find("label").addClass("state-error");
+            $("#username").parent().after("<em  class='msg'>{$Think.lang.user-empty}</em>");
+            return false;
+        }else{
+            $.post("{:U('Home/Ajax/getUsername')}",{"username":$("#username").val()},function(data){
+                if(data){
+                    if(data['result']){
+                        $("#username").parent().parent().find("label").addClass("state-success");
+                    }else{
+                        $("#username").parent().parent().find("label").addClass("state-error");
+                        $("#username").parent().after("<em  class='msg'>"+data['message']+"</em>");
+                        return false;
+                    }
+
+                }else{
+                    alert("数据错误！无数据返回!");
+                    return false;
+                }
+            });
+        }
+        $(".msgpass").remove();
+        if($("#userpass").val()!=""){
+            if($("#userpass").val().length<4){
+                $("#userpass").parent().parent().find("label").addClass("state-error");
+                $("#userpass").parent().after("<em  class='msgpass'>{$Think.lang.user-pass-length}</em>");
+                return false;
+            }
+        }else{
+            $("#userpass").parent().parent().find("label").addClass("state-error");
+            $("#userpass").parent().after("<em  class='msgpass'>{$Think.lang.pass-empty}</em>");
+            return false;
+        }
+        $(".msgreuserpass").remove();
+        if($("#reuserpass").val()!=""){
+            if($("#reuserpass").val().length<4){
+                $("#reuserpass").parent().parent().find("label").addClass("state-error");
+                $("#reuserpass").parent().after("<em  class='msgreuserpass'>{$Think.lang.user-repass-length}</em>");
+                return false;
+            }
+        }else{
+            $("#reuserpass").parent().parent().find("label").addClass("state-error");
+            $("#reuserpass").parent().after("<em  class='msgreuserpass'>{$Think.lang.repass-empty}</em>");
+            return false;
+        }
+        $(".msgsurname").remove();
+        if($("#surname").val()==""){
+            $("#surname").parent().parent().find("label").addClass("state-error");
+            $("#surname").parent().after("<em  class='msgsurname'>{$Think.lang.surname-empty}</em>");
+            return false;
+        }
+        $(".msgname").remove();
+        if($("#name").val()==""){
+            $("#name").parent().parent().find("label").addClass("state-error");
+            $("#name").parent().after("<em  class='msgname'>{$Think.lang.name-empty}</em>");
+            return false;
+        }
+        $(".msgemail").remove();
+        if($("#email").val()==""){
+            $("#email").parent().parent().find("label").addClass("state-error");
+            $("#email").parent().after("<em  class='msgemail'>{$Think.lang.email-empty}</em>");
+            return false;
+        }
+        $(".msgcountry").remove();
+        if($("#country").val()==""){
+            $("#country").parent().parent().find("label").addClass("state-error");
+            $("#country").parent().after("<em  class='msgcountry'>{$Think.lang.country-empty}</em>");
+            return false;
+        }
+        if($(".msg").length>0){
+            return false;
+        }
+        if($(".msgpass").length>0){
+            return false;
+        }
+        if($(".msgname").length>0){
+            return false;
+        }
+        if($(".msgemail").length>0){
+            $("#msgemail").parent().parent().find("label").addClass("state-error");
+            $("#msgemail").parent().after("<em  class='msg'>{$Think.lang.email-empty}</em>");
+            return false;
+        }
+        if(typeof($('.checkbox input:checkbox:checked').val())=="undefined"){
+            alert("You haven't selected a package！");
+            return false;
+        }
+        return true;
+    }
+</script>

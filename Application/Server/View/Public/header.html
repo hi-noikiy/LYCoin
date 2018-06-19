@@ -1,0 +1,146 @@
+<header id="topNav " >
+    <div class="container" id="diannaoshouye">
+
+        
+        <a class="logo pull-left" href="">
+            <img src="__PUBLIC__/Server/Images/logo_light.png" alt="" /> <!-- light logo -->
+            <img src="__PUBLIC__/Server/Images/logo_dark.png" alt="" /> <!-- dark logo -->
+        </a>
+
+        <!-- 
+                Top Nav 
+                
+                AVAILABLE CLASSES:
+                submenu-dark = dark sub menu
+        -->
+        <div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
+            <nav class="nav-main">
+                <ul id="topMain" class="nav nav-pills nav-main">
+                    <li><!-- HOME -->
+                        <a href="{:U('Server/Index/index',array('language'=>$language))}"  style="color:#F8C84E;font-size: 16px;font-weight: 700">{$Think.lang.shouye}</a>										
+                    </li>
+<!--                    <li>
+                        <a href="{:U('Server/Index/about_digitcoin',array('language'=>$language))}">{$Think.lang.server-what}</a>										
+                    </li>
+                    <li>
+                        <a href="{:U('Server/Index/information_dgc',array('language'=>$language))}">{$Think.lang.server-information}</a>										
+                    </li>
+                    <li>
+                        <a href="{:U('Server/Index/pay_dgc',array('language'=>$language))}">{$Think.lang.server-pay}</a>
+                    </li>-->
+                    <li>
+                        <a href="{:U('Server/Index/chongzhi',array('language'=>$language))}"  style="color:#F8C84E;font-size: 16px;;font-weight: 700">元宝实况</a>
+                    </li>
+                    <li>
+                        <a href="{:U('Server/Index/guamai',array('language'=>$language))}"  style="color:#F8C84E;font-size: 16px;;font-weight: 700">挂卖中心</a>
+                    </li>
+                    <li>
+                        <a href="{:U('Server/Index/pop_register_bank',array('language'=>$language))}"  style="color:#F8C84E;font-size: 16px;;font-weight: 700">个人资料</a>
+                    </li>
+                    <li>
+                        <a href="{:U('Server/Index/rujin',array('language'=>$language))}"  style="color:#F8C84E;font-size: 16px;;font-weight: 700">元宝购买</a>
+                    </li>
+                    <li>
+                        <a href="{:U('Server/Index/jiaoyisuo',array('language'=>$language))}"  style="color:#F8C84E;font-size: 16px;;font-weight: 700">提币</a>
+                    </li>
+<!--                    <li>
+                        <a href="{:U('Server/Index/chujin',array('language'=>$language))}"  style="color:#F8C84E;font-size: 16px;;font-weight: 700">{$Think.lang.tixian}</a>
+                    </li>-->
+                    <li>
+                        <!--<a href="{:U('Server/Index/zhuanzhang',array('language'=>$language))}"   style="color:#F8C84E;font-size: 16px;;font-weight: 700">{$Think.lang.zhuanzhang}</a>-->
+                    </li>
+                    <li>
+                        <!--<a href="{:U('Server/Index/duihuan',array('language'=>$language))}"  style="color:#F8C84E;font-size: 16px;;font-weight: 700">{$Think.lang.choumaduihuan}</a>-->
+                    </li>
+<!--                    <li>
+                        <a href="{:U('Server/Index/center_news',array('language'=>$language))}">{$Think.lang.server-center}</a>
+                    </li>-->
+                    <notempty name="DgcMember">
+                        <li>
+                            <a href="{:U('Server/Index/out',array('language'=>$language))}"  style="color:#F8C84E;font-size: 16px;;font-weight: 700">{$Think.lang.tuichu}</a>
+                        </li>
+                        <else/>
+                        <li>
+                            <a href="{:U('Server/Index/login',array('language'=>$language))}"  style="color:#F8C84E;font-size: 16px;;font-weight: 700">{$Think.lang.denglu}</a>
+                        </li>					
+                    </notempty>
+<!--<li><a  style="height:30px;width: 40px;" href="{:U('Home/Index/index',array('language'=>'zh-cn'))}"><img src="__PUBLIC__/Home/Images/036.png" style="height:20px;"  class='img-responsive' ></a></li>
+                <li><a  style="height:30px;width: 40px;" href="{:U('Home/Index/index',array('language'=>'en-us'))}"><img src="__PUBLIC__/Home/Images/211.png" style="height:20px;"  class='img-responsive' ></a></li>
+                <li><a  style="height:30px;width: 40px;" href="{:U('Home/Index/index',array('language'=>'ko-kr'))}"><img src="__PUBLIC__/Home/Images/216.png" style="height:20px;"  class='img-responsive' ></a></li>
+                <li><a  style="height:30px;width: 40px;" href="{:U('Home/Index/index',array('language'=>'ja-jp'))}"><img src="__PUBLIC__/Home/Images/231.jpg" style="height:20px;"  class='img-responsive' ></a></li>-->
+                </ul>
+
+            </nav>
+        </div>
+
+    </div>
+</header>
+
+
+
+<style>
+    .sssddd{
+        background-color:#F8C84E;font-weight: 700;color:white;width: 32%;margin-bottom:5px;
+    }
+</style>
+<div id="shoujiyemian" style="background-color:#FEFBD2;position: relative;top:-40px;">
+
+    <div class="container" >
+        <img src="__PUBLIC__/Server/Images/logo_dark.png"  class='img-responsive'>
+        
+    </div>
+<div >
+            <notempty name="DgcMember">
+                <!--<a href="{:U('Server/Index/index',array('language'=>$language))}" class='btn sssddd' >{$Think.lang.shouye}</a>-->
+                <a href="{:U('Server/Index/guamai',array('language'=>$language))}" style="margin-bottom:5px;"  class='btn sssddd' > 挂卖中心</a>
+                <a href="{:U('Server/Index/chongzhi',array('language'=>$language))}" style="margin-bottom:5px;"   class='btn sssddd'  > 元宝实况</a>
+                
+
+                <a href="{:U('Server/Index/pop_register_bank',array('language'=>$language))}"  style="margin-bottom:5px;"   class='btn sssddd'  >个人资料</a>
+                <a href="{:U('Server/Index/rujin',array('language'=>$language))}"   style="margin-bottom:5px;"   class='btn sssddd'  >元宝购买</a>
+                <!--<a href="{:U('Server/Index/chujin',array('language'=>$language))}"   style="margin-bottom:5px;"   class='btn sssddd'  >提现</a>-->
+                <a href="{:U('Server/Index/jiaoyisuo',array('language'=>$language))}"   style="margin-bottom:5px;"   class='btn sssddd'  >提币</a>
+
+                <a href="{:U('Server/Index/out',array('language'=>$language))}"   style="margin-bottom:5px;"   class='btn sssddd'  > 退出</a>
+
+                
+            </notempty>
+        </div>
+</div>
+
+
+
+<script type="text/javascript">
+        //平台、设备和操作系统
+        var system = {
+            win: false,
+            mac: false,
+            xll: false,
+            ipad:false
+        };
+        //检测平台
+        var p = navigator.platform;
+        system.win = p.indexOf("Win") == 0;
+        system.mac = p.indexOf("Mac") == 0;
+        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+        system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false;
+        //跳转语句，如果是手机访问就自动跳转到wap.baidu.com页面
+        if (system.win || system.mac || system.xll||system.ipad) {
+            var label1 = document.getElementById("shoujiyemian");
+label1.style.display="none";
+var label1 = document.getElementById("diannaoshouye");
+label1.style.display="block";
+
+//            alert(2222);
+//$('.shoujiyemian').hide();
+//      $('.diannaoshouye').show();
+        } else {
+             var label1 = document.getElementById("shoujiyemian");
+label1.style.display="block";
+var label1 = document.getElementById("diannaoshouye");
+label1.style.display="none";
+//$('.shoujiyemian').show();
+//      $('.diannaoshouye').hide();
+//            window.location.href = "http://www.jdpatro.com/3g/";
+        }
+</script>
